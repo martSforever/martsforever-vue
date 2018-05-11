@@ -1,0 +1,10 @@
+/*从上滑下的显示动画：to-bottom*/
+.to-bottom-enter-active, .to-bottom-leave-active {
+  transition: all .5s;
+  transform-origin top
+  transform scaleY(1);
+}
+
+.to-bottom-enter, .to-bottom-leave-to {
+  transform scaleY(0);
+}

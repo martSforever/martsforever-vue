@@ -10,10 +10,13 @@
   }
 </script>
 
-<style>
+<style scoped lang="stylus">
   #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    fill-window();
+    background: -webkit-radial-gradient(circle,bg-color,bg-deep-color); /* Safari 5.1 - 6.0 */
+    background: -o-radial-gradient(circle,bg-color,bg-deep-color); /* Opera 11.6 - 12.0 */
+    background: -moz-radial-gradient(circle,bg-color,bg-deep-color); /* Firefox 3.6 - 15 */
+    background: radial-gradient(circle,bg-color,bg-deep-color);
+    //background: radial-gradient(circle,bg-deep-color,bg-color);
   }
 </style>
