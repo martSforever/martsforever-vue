@@ -2,9 +2,18 @@
   <div class="app-head">
     <transition name="to-bottom">
       <div class="app-head-content" v-if="show">
-        <div class="left">left</div>
-        <div class="center">center</div>
-        <div class="right">right</div>
+        <div class="left">
+          <img :src="logo" class="logo-img">
+        </div>
+        <div class="center">
+          <div class="search-wrapper">
+            <input value="ssss" class="search-input" placeholder="Please enter key..."/>
+          </div>
+        </div>
+        <div class="right">
+          <img :src="avatar" class="avatar">
+          <p>{{user.name}}</p>
+        </div>
       </div>
     </transition>
   </div>
@@ -15,7 +24,12 @@
     name: "app-head",
     data() {
       return {
-        show: false
+        show: false,
+        logo: require(`src/base/image/base/logo.png`),
+        avatar: require('src/base/image/bus/user/avatat.jpg'),
+        user: {
+          name: '韦胜健'
+        }
       }
     },
     mounted() {
@@ -34,19 +48,57 @@
       top: 0
       left: 0
       right: 0
+      border-bottom border-bottom-line;
+      box-sizing border-box
       .left, .center, .right {
         display inline-block
         height 100%
-        font-size font-sm
       }
       .left {
         width 156px
+        display inline-flex
+        align-items: center
+        cursor pointer
+        .logo-img {
+          width 100%
+          height auto
+        }
       }
       .center {
         flex 1
+        display flex
+        align-items center
+        justify-content center
+        .search-wrapper {
+          width fit-content
+          display inline-block
+          .search-input {
+            color font-color-light
+            height 24px
+            width 256px
+            border solid 2px font-color-cyan
+            padding: 0 36px 0 12px
+            border-radius 24px
+            outline none
+          }
+        }
       }
       .right {
         width 256px
+        display flex
+        align-items center
+        justify-content center
+        color font-color-light
+        p {
+          font-weight bold
+          letter-spacing 2px
+        }
+        .avatar {
+          height 32px
+          width 32px
+          border-radius 50%
+          margin-right 12px
+        }
       }
     }
 
