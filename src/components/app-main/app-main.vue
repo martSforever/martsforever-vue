@@ -1,10 +1,13 @@
 <template>
   <div class="app-main">
-    <app-head></app-head>
+    <app-head @on-logo-over="showMenu"/>
     <div class="content">
-      <a-splitter ref="aSplitter" left-width="300px">
-        <div slot="left">
-          this is left
+      <a-splitter ref="menu" left-width="200px">
+        <div slot="left" @mouseleave="hideMenu" class="menu-wrapper">
+          <app-left-menu/>
+          <div>
+            hahaha
+          </div>
         </div>
         <div slot="content">
           <keep-alive>
@@ -19,14 +22,24 @@
 <script>
   import AppHead from "./app-head";
   import ASplitter from "../../base/components/a-splitter/a-splitter";
+  import AppLeftMenu from "./app-left-menu";
 
   export default {
     name: "app-main",
     components: {
+      AppLeftMenu,
       ASplitter,
       AppHead
     },
-    methods: {}
+    methods: {
+      showMenu() {
+        this.$refs.menu.showLeft();
+      },
+      hideMenu() {
+        console.log('hideMenu');
+        this.$refs.menu.showCenter();
+      }
+    }
   }
 </script>
 
@@ -39,6 +52,9 @@
       bottom: 0
       left: 0
       right: 0
+    }
+    .menu-wrapper {
+      $fill-parent();
     }
   }
 </style>

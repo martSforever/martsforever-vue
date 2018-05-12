@@ -2,7 +2,7 @@
   <div class="app-head">
     <transition name="to-bottom">
       <div class="app-head-content" v-if="show">
-        <div class="left" @click="goHome">
+        <div class="left" @click="goHome" @mouseover="onLogoOver">
           <img :src="logo" class="logo-img">
         </div>
         <div class="center">
@@ -39,6 +39,9 @@
     methods: {
       goHome() {
         this.$router.push('/');
+      },
+      onLogoOver(e) {
+        this.$emit('on-logo-over');
       },
     }
   }
