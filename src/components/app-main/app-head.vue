@@ -7,12 +7,13 @@
         </div>
         <div class="center">
           <div class="search-wrapper">
-            <input value="ssss" class="search-input" placeholder="Please enter key..."/>
+            <input class="search-input" placeholder="Please enter key..."/>
+            <p class="icon"><i class="fa fa-search"></i></p>
           </div>
         </div>
         <div class="right">
           <img :src="avatar" class="avatar">
-          <p>{{user.name}}</p>
+          <p>{{user.name}} <i class="fa fa-angle-double-down"></i></p>
         </div>
       </div>
     </transition>
@@ -42,13 +43,13 @@
   .app-head {
     .app-head-content {
       display flex
-      height head-height
+      height $head-height
       background-color: rgba(255, 255, 255, 0.1);
       position absolute
       top: 0
       left: 0
       right: 0
-      border-bottom border-bottom-line;
+      border-bottom $border-bottom-line;
       box-sizing border-box
       .left, .center, .right {
         display inline-block
@@ -72,14 +73,20 @@
         .search-wrapper {
           width fit-content
           display inline-block
+          position relative
           .search-input {
-            color font-color-light
+            color $font-color-light
             height 24px
             width 256px
-            border solid 2px font-color-cyan
+            border solid 2px $font-color-cyan
             padding: 0 36px 0 12px
             border-radius 24px
             outline none
+          }
+          .icon {
+            position absolute
+            right 0
+            color $font-color
           }
         }
       }
@@ -88,7 +95,9 @@
         display flex
         align-items center
         justify-content center
-        color font-color-light
+        color $font-color-light
+        cursor pointer
+
         p {
           font-weight bold
           letter-spacing 2px

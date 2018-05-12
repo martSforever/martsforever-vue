@@ -23,7 +23,7 @@
     fill-window();
     .content {
       position absolute;
-      top: head-height
+      top: $head-height
     }
   }
 </style>
