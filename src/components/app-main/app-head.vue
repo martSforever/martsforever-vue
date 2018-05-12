@@ -2,7 +2,7 @@
   <div class="app-head">
     <transition name="to-bottom">
       <div class="app-head-content" v-if="show">
-        <div class="left">
+        <div class="left" @click="goHome">
           <img :src="logo" class="logo-img">
         </div>
         <div class="center">
@@ -35,6 +35,11 @@
     },
     mounted() {
       this.show = true;
+    },
+    methods: {
+      goHome() {
+        this.$router.push('/');
+      },
     }
   }
 </script>
@@ -78,7 +83,9 @@
             color $font-color-light
             height 24px
             width 256px
-            border solid 2px  $font-color
+            border solid 2px
+            border-color $font-color-red
+            $prefix(box-shadow, 0 0 8px $font-color-red);
             padding: 0 36px 0 12px
             border-radius 24px
             outline none;

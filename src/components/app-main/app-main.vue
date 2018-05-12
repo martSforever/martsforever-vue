@@ -24,6 +24,9 @@
     .content {
       position absolute;
       top: $head-height
+      bottom: 0
+      left: 0
+      right: 0
     }
   }
 </style>
