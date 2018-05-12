@@ -1,7 +1,7 @@
 <template>
   <div class="app-left-menu">
     <div class="menu-header">
-      <p>主菜单</p>
+      <a-title><p>主菜单</p></a-title>
     </div>
     <div class="menu-body">
       this is body
@@ -13,7 +13,10 @@
 </template>
 
 <script>
+  import ATitle from "../../base/components/a-title/a-title";
+
   export default {
+    components: {ATitle},
     name: "app-left-menu"
   }
 </script>
