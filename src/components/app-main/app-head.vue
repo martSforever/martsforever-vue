@@ -7,8 +7,8 @@
         </div>
         <div class="center">
           <div class="search-wrapper">
-            <input class="search-input" placeholder="Please enter key..."/>
-            <p class="icon"><i class="fa fa-search"></i></p>
+            <input class="search-input" placeholder="Search anywhare..."/>
+            <i class="fa fa-search"></i>
           </div>
         </div>
         <div class="right">
@@ -78,14 +78,23 @@
             color $font-color-light
             height 24px
             width 256px
-            border solid 2px $font-color-cyan
+            border solid 2px  $font-color
             padding: 0 36px 0 12px
             border-radius 24px
-            outline none
+            outline none;
+            $transition-all();
+            &:focus {
+              border-color $font-color-cyan
+              $prefix(box-shadow, 0 0 8px $font-color-cyan);
+            }
           }
-          .icon {
+          .fa {
             position absolute
-            right 0
+            top: 0
+            right 12px
+            height 100%
+            display flex
+            align-items center
             color $font-color
           }
         }
@@ -97,6 +106,8 @@
         justify-content center
         color $font-color-light
         cursor pointer
+        $transition-all();
+        $active-on-click();
 
         p {
           font-weight bold
@@ -107,6 +118,9 @@
           width 32px
           border-radius 50%
           margin-right 12px
+        }
+        &:hover {
+          $prefix(background-color, $bg-deep-color);
         }
       }
     }

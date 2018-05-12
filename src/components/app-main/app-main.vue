@@ -20,7 +20,7 @@
 
 <style scoped lang="stylus">
   .app-main {
-    fill-window();
+    $fill-window();
     .content {
       position absolute;
       top: $head-height
