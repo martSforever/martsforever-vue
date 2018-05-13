@@ -1,8 +1,6 @@
 <template xmlns:v-effect="http://www.w3.org/1999/xhtml">
   <div class="app-developer">
     this is developer page
-    <label class="wahah" v-effect @click="sayHello">hello</label>
-    <label class="wahah" v-effect:deep @click="sayHello">hello</label>
   </div>
 </template>
 
@@ -18,6 +16,7 @@
       }
     },
     mounted() {
+      console.log(this.$router);
     },
     methods: {
       sayHello() {

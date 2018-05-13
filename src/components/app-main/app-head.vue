@@ -11,7 +11,7 @@
             <i class="fa fa-search"></i>
           </div>
         </div>
-        <div class="right">
+        <div class="right" v-effect>
           <img :src="avatar" class="avatar">
           <p>{{user.name}} <i class="fa fa-angle-double-down"></i></p>
         </div>
