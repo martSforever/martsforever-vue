@@ -2,16 +2,20 @@
   <div class="app-left-menu">
     <div class="menu-header">
       <a-title><p>主菜单</p></a-title>
+      <!--<button @click="add">add{{menuList.length}}</button>-->
     </div>
     <div class="menu-body">
-      <div v-for="row in [1,2,3,4,5,6,7,8]">
-        <ul>
-          <li v-for="(item,index) in menuList" class="menu-item">
-            <a-iconfront :icon="item.icon" class="menu-icon"/>
-            <label>{{item.name}}</label>
-          </li>
-        </ul>
-      </div>
+      <a-scrollbar :data="rows">
+        <div v-for="row in rows">
+          <ul>
+            <li v-for="(item,index) in menuList" class="menu-item">
+              <!--{{row}}-->
+              <a-iconfront :icon="item.icon" class="menu-icon"/>
+              <label>{{item.name}}</label>
+            </li>
+          </ul>
+        </div>
+      </a-scrollbar>
     </div>
     <div class="menu-footer">
       this is footer
@@ -22,26 +26,33 @@
 <script>
   import ATitle from "../../base/components/a-title/a-title";
   import AIconfront from "../../base/components/a-iconfront/a-iconfront";
+  import AScrollbar from "../../base/components/a-scrollbar/a-scrollbar";
 
   export default {
     components: {
+      AScrollbar,
       AIconfront,
       ATitle
     },
     name: "app-left-menu",
     data() {
       return {
-        menuList: []
+        menuList: [],
+        rows: [1, 2, 3, 4, 5, 6, 7, 8],
       }
     },
     created() {
-      this.menuList = this.menuList.concat([
-        {name: '系统管理', icon: 'settingicon', url: ''},
-        {name: '开发测试', icon: 'development', url: ''},
-        {name: '用户管理', icon: 'users', url: ''},
-        {name: '示例', icon: 'example', url: ''},
-      ])
+      this.menuList.push({name: '系统管理', icon: 'settingicon', url: ''});
+      this.menuList.push({name: '开发测试', icon: 'development', url: ''});
+      this.menuList.push({name: '用户管理', icon: 'users', url: ''});
+      this.menuList.push({name: '示例', icon: 'example', url: ''});
     },
+    methods: {
+      add() {
+        // this.menuList.push({name: '系统管理', icon: 'settingicon', url: ''});
+        this.rows.push(this.rows.length + 1);
+      },
+    }
   }
 </script>
 
@@ -65,7 +76,8 @@
     .menu-body {
       flex: 1
       font-size $font-mid
-      overflow-y auto
+
+      overflow-y hidden
       .menu-item {
         height 32px
         padding: 0 25px
