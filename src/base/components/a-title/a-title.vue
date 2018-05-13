@@ -10,7 +10,7 @@
 
   export default {
     components: {AIconfront},
-    name: "a-title"
+    name: "a-title",
   }
 </script>
 
