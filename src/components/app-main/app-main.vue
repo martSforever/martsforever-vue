@@ -1,5 +1,6 @@
 <template>
   <div class="app-main">
+    <canvas class="canvas" ref="bgCanvasDom"></canvas>
     <app-head @on-logo-over="showMenu"/>
     <div class="content">
       <a-splitter ref="menu" left-width="200px">
@@ -23,6 +24,7 @@
   import AppHead from "./app-head";
   import ASplitter from "../../base/components/a-splitter/a-splitter";
   import AppLeftMenu from "./app-left-menu";
+  import canvasbg from 'src/base/script/canvas-bg.js';
 
   export default {
     name: "app-main",
@@ -39,8 +41,9 @@
         this.$refs.menu.showCenter();
       }
     },
-    mounted(){
+    mounted() {
       this.hideMenu();
+      canvasbg(this.$refs.bgCanvasDom, 'circleStar');
     },
   }
 </script>
@@ -56,6 +59,10 @@
       right: 0
     }
     .menu-wrapper {
+      $fill-parent();
+    }
+    .canvas {
+      position absolute
       $fill-parent();
     }
   }

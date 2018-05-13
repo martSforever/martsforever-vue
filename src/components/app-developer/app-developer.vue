@@ -16,7 +16,7 @@
       }
     },
     mounted() {
-      console.log(this.$router);
+      console.log(window);
     },
     methods: {
       sayHello() {
