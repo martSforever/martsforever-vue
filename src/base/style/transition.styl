@@ -11,11 +11,10 @@
 
 /*从右滑左的显示动画:to-left*/
 .to-left-enter-active, to-left-leave-active {
-  transition: all .4s;
+  transition: all .5s cubic-bezier(.55, 0, .1, 1);
   transform translate3d(0, 0, 0);
 }
 
-.to-left-enter, .to-left-leave-to {
-  transition: all .4s;
+.to-left-enter {
   transform translate3d(100%, 0, 0);
 }

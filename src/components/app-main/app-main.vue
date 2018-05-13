@@ -10,10 +10,12 @@
             hahaha
           </div>
         </div>
-        <div slot="content">
-          <keep-alive>
-            <router-view/>
-          </keep-alive>
+        <div slot="content" class="route-view-wrapper">
+          <transition name="to-left">
+            <keep-alive>
+              <router-view class="router-view"/>
+            </keep-alive>
+          </transition>
         </div>
       </a-splitter>
     </div>
@@ -24,7 +26,7 @@
   import AppHead from "./app-head";
   import ASplitter from "../../base/components/a-splitter/a-splitter";
   import AppLeftMenu from "./app-left-menu";
-  import canvasbg from 'src/base/script/canvas-bg.js';
+  import CanvasBg from 'src/base/script/canvas-bg.js';
 
   export default {
     name: "app-main",
@@ -43,7 +45,7 @@
     },
     mounted() {
       this.hideMenu();
-      canvasbg(this.$refs.bgCanvasDom, 'circleStar');
+      CanvasBg.initialize(this.$refs.bgCanvasDom);
     },
   }
 </script>
@@ -57,6 +59,12 @@
       bottom: 0
       left: 0
       right: 0
+      .route-view-wrapper {
+        $fill-parent();
+      }
+      .route-view {
+        $fill-parent();
+      }
     }
     .menu-wrapper {
       $fill-parent();

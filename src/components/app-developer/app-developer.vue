@@ -27,11 +27,7 @@
 </script>
 
 <style scoped lang="stylus">
-  .wahah {
-    height 300px
-    width 300px
-    display inline-block
-    background-color blueviolet
-    cursor auto
+  .app-developer{
+    $fill-parent();
   }
 </style>

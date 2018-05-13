@@ -28,7 +28,6 @@
       display inline-block
     }
     .title-icon {
-      font-size 24px
       color $font-color-red
     }
   }

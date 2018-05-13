@@ -1,14 +1,14 @@
 <template>
   <div class="app-left-menu" v-effect>
     <div class="menu-header">
-      <a-title><p>主菜单</p></a-title>
+      <a-title class="menu-title"><p>主菜单</p></a-title>
       <!--<button @click="add">add{{menuList.length}}</button>-->
     </div>
     <div class="menu-body">
       <a-scrollbar :data="rows">
         <div v-for="row in rows">
           <ul>
-            <li v-for="(item,index) in menuList" class="menu-item">
+            <li v-for="(item,index) in menuList" class="menu-item" @click="gotoMenu(item)">
               <!--{{row}}-->
               <a-iconfront :icon="item.icon" class="menu-icon"/>
               <label>{{item.name}}</label>
@@ -42,15 +42,19 @@
       }
     },
     created() {
-      this.menuList.push({name: '系统管理', icon: 'settingicon', url: ''});
-      this.menuList.push({name: '开发测试', icon: 'development', url: ''});
-      this.menuList.push({name: '用户管理', icon: 'users', url: ''});
-      this.menuList.push({name: '示例', icon: 'example', url: ''});
+      this.menuList.push({name: '背景设置', icon: 'settingicon', url: '/appBackground'});
+      this.menuList.push({name: '系统管理', icon: 'settingicon', url: '/systemManage'});
+      this.menuList.push({name: '开发测试', icon: 'development', url: '/developer'});
+      this.menuList.push({name: '用户管理', icon: 'users', url: '/userManager'});
+      this.menuList.push({name: '示例', icon: 'example', url: '/example'});
     },
     methods: {
       add() {
         // this.menuList.push({name: '系统管理', icon: 'settingicon', url: ''});
         this.rows.push(this.rows.length + 1);
+      },
+      gotoMenu(item) {
+        this.$router.push(item.url);
       },
     }
   }
@@ -59,6 +63,12 @@
 <style scoped lang="stylus">
   .app-left-menu {
     $fill-parent();
+    .menu-header {
+      .menu-title {
+        font-size 18px
+        font-weight bold
+      }
+    }
     border-right solid 1px $font-color-deep
     box-sizing border-box
     padding: 12px 0px

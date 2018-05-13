@@ -1,4 +1,17 @@
-export default function (canvas, type) {
+export default {
+  initialize(canvas) {
+    if (!localStorage.APP_SETTING) {
+      localStorage.APP_SETTING = JSON.stringify({
+        bgType: 'dotsAndLine'
+      });
+    }
+    let appSetting = JSON.parse(localStorage.APP_SETTING);
+    console.log(appSetting);
+    loadBg(canvas, appSetting.bgType);
+  },
+}
+
+function loadBg(canvas, type) {
   !type && (type = 'dotsAndLine');
   types[type](canvas);
 }
