@@ -36,11 +36,11 @@
         this.$refs.menu.showLeft();
       },
       hideMenu() {
-        // this.$refs.menu.showCenter();
+        this.$refs.menu.showCenter();
       }
     },
     mounted(){
-      this.showMenu();
+      this.hideMenu();
     },
   }
 </script>

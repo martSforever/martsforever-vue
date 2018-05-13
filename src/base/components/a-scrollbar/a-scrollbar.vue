@@ -63,7 +63,6 @@
     },
     watch: {
       data(newVal, oldVal) {
-        console.log(newVal, oldVal);
         this._initialize();
       }
     },
@@ -99,7 +98,6 @@
         let showHeight = this.$refs.scrollbarContent.offsetHeight;
         let actualHeight = this.$refs.scrollbarContent.scrollHeight;
         let ret = showHeight * showHeight / actualHeight;
-        console.log(ret);
         return ret;
       },
       _contentVScroll(e) {

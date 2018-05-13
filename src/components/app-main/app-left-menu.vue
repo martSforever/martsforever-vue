@@ -1,5 +1,5 @@
 <template>
-  <div class="app-left-menu">
+  <div class="app-left-menu"  v-effect>
     <div class="menu-header">
       <a-title><p>主菜单</p></a-title>
       <!--<button @click="add">add{{menuList.length}}</button>-->
