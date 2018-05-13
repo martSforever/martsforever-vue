@@ -36,7 +36,6 @@
         this.$refs.menu.showLeft();
       },
       hideMenu() {
-        console.log('hideMenu');
         this.$refs.menu.showCenter();
       }
     }
