@@ -64,7 +64,7 @@
       width calc(100% - 48px);
       border-radius 6px
       .example-list {
-        padding: 12px 0
+        padding: 24px 0
         background-color rgba(255, 255, 255, 0.1);
         display flex
         flex-direction row
@@ -73,6 +73,7 @@
         .example-item {
           width: 255px
           height: 255px
+          padding: 0 12px
           .img {
             $fill-parent();
             $prefix(border-radius, 6px);
