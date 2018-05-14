@@ -7,6 +7,8 @@ import AppSystem from 'src/components/app-setting/app-system.vue';
 import AppUser from 'src/components/app-user/app-user.vue';
 import AppExample from 'src/components/app-example/app-example.vue';
 
+import AIconExample from 'src/example/a-icon/a-icon-example.vue';
+
 Vue.use(Router);
 
 export default new Router({
@@ -29,7 +31,11 @@ export default new Router({
         {
           path: '/developer',
           name: 'AppDeveloper',
-          component: AppDeveloper
+          component: AppDeveloper,
+          children: [
+            {path: '/', redirect: '/aIconExample'},
+            {path: '/aIconExample', component: AIconExample, name: 'AIconExample'}
+          ]
         },
         {
           path: '/appBackground',

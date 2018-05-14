@@ -1,15 +1,12 @@
 <template>
   <div class="a-title">
-    <a-iconfront icon="line" class="title-icon"/>
     <slot></slot>
   </div>
 </template>
 
 <script>
-  import AIconfront from "../a-iconfront/a-iconfront";
 
   export default {
-    components: {AIconfront},
     name: "a-title",
   }
 </script>

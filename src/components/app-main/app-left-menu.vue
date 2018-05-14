@@ -10,7 +10,7 @@
           <ul>
             <li v-for="(item,index) in menuList" class="menu-item" @click="gotoMenu(item)">
               <!--{{row}}-->
-              <a-iconfront :icon="item.icon" class="menu-icon"/>
+              <!--<a-iconfront :icon="item.icon" class="menu-icon"/>-->
               <label>{{item.name}}</label>
             </li>
           </ul>
@@ -25,13 +25,11 @@
 
 <script>
   import ATitle from "../../base/components/a-title/a-title";
-  import AIconfront from "../../base/components/a-iconfront/a-iconfront";
   import AScrollbar from "../../base/components/a-scrollbar/a-scrollbar";
 
   export default {
     components: {
       AScrollbar,
-      AIconfront,
       ATitle
     },
     name: "app-left-menu",
