@@ -20,3 +20,13 @@
   opacity: 0
   transform translate3d(30%, 0, 0);
 }
+
+/*淡入动画:fade-in*/
+.fade-in-enter-active, fade-in-leave-active {
+  transition: all .5s cubic-bezier(.55, 0, .1, 1);
+  opacity 1
+}
+
+.fade-in-enter {
+  opacity: 0
+}
