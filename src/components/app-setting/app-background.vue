@@ -3,7 +3,11 @@
     <a-title class="title">设置背景</a-title>
     <div class="content">
       <div class="example-list">
-        <div class="example-item" v-for="item in examples" @click="changeBg(item)"><img :src="item.img" v-effect></div>
+        <div class="example-item" v-for="item in examples" @click="changeBg(item)"><img :src="item.img" v-effect
+                                                                                        class="img"></div>
+      </div>
+      <div>
+        <button @click="loadBg">确定</button>
       </div>
     </div>
   </div>
@@ -24,13 +28,24 @@
           {name: '点与线', img: require('src/base/image/bg-example/bg4.png'), type: 'starrySky'},
           {name: '点与线', img: require('src/base/image/bg-example/bg5.png'), type: 'hexagon'},
           {name: '点与线', img: require('src/base/image/bg-example/bg6.png'), type: 'circleStar'},
-        ]
+        ],
+        currentType: '',
+        selectType: '',
       }
+    },
+    created() {
+      let appSetting = JSON.parse(window.localStorage.APP_SETTING);
+      let type = appSetting.bgType;
+      this.currentType = type ? type : 'dotsAndLine';
+      this.selectType = this.currentType;
     },
     methods: {
       changeBg(item) {
+        this.selectType = item.type;
+      },
+      loadBg() {
         let appSetting = JSON.parse(window.localStorage.APP_SETTING);
-        appSetting.bgType = item.type;
+        appSetting.bgType = this.selectType;
         window.localStorage.APP_SETTING = JSON.stringify(appSetting);
         window.location.reload();
       }
@@ -46,20 +61,23 @@
       font-size 32px !important
     }
     .content {
-      padding 12px
+      width calc(100% - 48px);
+      border-radius 6px
       .example-list {
+        padding: 12px 0
+        background-color rgba(255, 255, 255, 0.1);
         display flex
         flex-direction row
         align-items center
         justify-content space-around
-        flex-wrap nowrap
         .example-item {
           width: 255px
           height: 255px
-          margin-right 12px
-          img {
+          .img {
             $fill-parent();
             $prefix(border-radius, 6px);
+            position relative
+            top: 1px
           }
         }
       }

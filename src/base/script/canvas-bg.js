@@ -6,7 +6,6 @@ export default {
       });
     }
     let appSetting = JSON.parse(localStorage.APP_SETTING);
-    console.log(appSetting);
     loadBg(canvas, appSetting.bgType);
   },
 }
