@@ -1,10 +1,24 @@
 <template>
   <div class="a-button-example">
-    <a-button fa="fa-address-book">fa button</a-button>
-    <a-button iconfont="line">iconfont button</a-button>
-    <a-button iconfont="line" :loading="isLoading">loading button</a-button>
-    <a-button fa="fa-file" :disabled="disabled" @click="sayHello">disabled button</a-button>
-    <a-button fa="fa-file" :disabled="!disabled" @click="sayHello">not disabled button</a-button>
+    <div class="btn-wrapper">
+      <a-button fa="fa-address-book">fa button</a-button>
+      <a-button iconfont="line">iconfont button</a-button>
+      <a-button iconfont="line" :loading="isLoading">loading button</a-button>
+      <a-button fa="fa-file" :disabled="disabled" @click="sayHello">disabled button</a-button>
+      <a-button fa="fa-file" :disabled="!disabled" @click="sayHello">not disabled button</a-button>
+    </div>
+    <div class="btn-wrapper">
+      <a-button type="primary">primary</a-button>
+      <a-button type="ghost">ghost</a-button>
+      <a-button type="dashed">dashed</a-button>
+      <a-button type="text">text</a-button>
+    </div>
+    <div class="btn-wrapper">
+      <a-button type="info">info</a-button>
+      <a-button type="success">success</a-button>
+      <a-button type="warning">warning</a-button>
+      <a-button type="error">error</a-button>
+    </div>
   </div>
 </template>
 
@@ -33,5 +47,9 @@
 </script>
 
 <style scoped lang="stylus">
-
+    .a-button-example{
+      .btn-wrapper{
+        margin-bottom 12px
+      }
+    }
 </style>

@@ -156,7 +156,7 @@
       .a-scroll-bar-h-indicator {
         width 100%
         position relative
-        $prefix(box-shadow, 0 0 8px $font-color-red);
+        $prefix(box-shadow, 0 0 8px $text-color-main);
       }
     }
   }

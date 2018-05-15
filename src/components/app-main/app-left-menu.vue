@@ -1,7 +1,7 @@
 <template>
   <div class="app-left-menu" v-effect>
     <div class="menu-header">
-      <a-title class="menu-title"><p>主菜单</p></a-title>
+      <a-title class="menu-title"><a-icon iconfont="line"/><p>主菜单</p></a-title>
       <!--<button @click="add">add{{menuList.length}}</button>-->
     </div>
     <div class="menu-body">
@@ -26,9 +26,11 @@
 <script>
   import ATitle from "../../base/components/a-title/a-title";
   import AScrollbar from "../../base/components/a-scrollbar/a-scrollbar";
+  import AIcon from "../../base/components/a-icon/a-icon";
 
   export default {
     components: {
+      AIcon,
       AScrollbar,
       ATitle
     },
@@ -66,8 +68,12 @@
         font-size 18px
         font-weight bold
       }
+      .iconfont{
+        color $text-color-main
+        font-size 24px
+      }
     }
-    border-right solid 1px $font-color-deep
+    border-right solid 1px $text-color-deep
     box-sizing border-box
     padding: 12px 0px
     display flex
@@ -78,12 +84,12 @@
       align-items center
       justify-content: flex-start
       flex-direction row
-      font-size $font-big
+      font-size $font-size-large
       font-weight bold
     }
     .menu-body {
       flex: 1
-      font-size $font-mid
+      font-size $font-size-base
 
       overflow-y hidden
       .menu-item {

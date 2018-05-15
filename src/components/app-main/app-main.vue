@@ -55,7 +55,7 @@
     $fill-window();
     .content {
       position absolute;
-      top: $head-height
+      top: $app-head-height
       bottom: 0
       left: 0
       right: 0

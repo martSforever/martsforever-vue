@@ -85,7 +85,7 @@
 <style scoped lang="stylus">
   .a-btn {
     background transparent
-    color $font-color-light
+    color $text-color-light
     border: solid 1px rgba(255, 255, 255, 0.1);
     padding 6px 12px
     outline none

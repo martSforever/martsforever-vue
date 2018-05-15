@@ -51,7 +51,7 @@
   .app-head {
     .app-head-content {
       display flex
-      height $head-height
+      height $app-head-height
       background-color: rgba(255, 255, 255, 0.1);
       position absolute
       top: 0
@@ -83,19 +83,19 @@
           display inline-block
           position relative
           .search-input {
-            color $font-color-light
+            color $text-color-light
             height 24px
             width 256px
             border solid 2px
-            border-color $font-color-red
-            $prefix(box-shadow, 0 0 8px $font-color-red);
+            border-color $text-color-main
+            $prefix(box-shadow, 0 0 8px $text-color-main);
             padding: 0 36px 0 12px
             border-radius 24px
             outline none;
             $transition-all();
             &:focus {
-              border-color $font-color-cyan
-              $prefix(box-shadow, 0 0 8px $font-color-cyan);
+              border-color $text-color-main2
+              $prefix(box-shadow, 0 0 8px $text-color-main2);
             }
           }
           .fa {
@@ -105,7 +105,7 @@
             height 100%
             display flex
             align-items center
-            color $font-color
+            color $text-color
           }
         }
       }
@@ -114,7 +114,7 @@
         display flex
         align-items center
         justify-content center
-        color $font-color-light
+        color $text-color-light
         cursor pointer
         $transition-all();
         $active-on-click();

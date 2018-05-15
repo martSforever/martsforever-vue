@@ -25,7 +25,7 @@
       display inline-block
     }
     .title-icon {
-      color $font-color-red
+      color $text-color-main
     }
   }
 </style>
