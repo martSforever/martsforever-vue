@@ -19,18 +19,18 @@
     },
     props: {
       fa: String,
-      iconfront: String,
+      iconfont: String,
       size: [Number, String],
       color: String
     },
     computed: {
       icon() {
         if (!!this.fa) return this.fa;
-        if (!!this.iconfront) return this.iconfront;
+        if (!!this.iconfont) return this.iconfont;
       },
       type() {
         if (!!this.fa) return 'a-fa';
-        if (!!this.iconfront) return 'a-iconfont';
+        if (!!this.iconfont) return 'a-iconfont';
       },
       styles() {
         let style = {};

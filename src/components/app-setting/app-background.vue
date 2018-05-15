@@ -57,7 +57,7 @@
   .app-background {
     padding 24px
     $fill-parent();
-    .title, .iconfront {
+    .title, .iconfont {
       font-size 32px !important
     }
     .content {

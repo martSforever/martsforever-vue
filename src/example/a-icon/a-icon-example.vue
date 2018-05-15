@@ -2,7 +2,7 @@
   <div class="a-icon-example">
     <div class="icon-wrapper">
       111
-      <a-icon iconfront="line" size="44" color="blue"/>
+      <a-icon iconfont="line" size="44" color="blue"/>
       222
       <a-icon fa="fa-address-book" size="44" color="red"/>
       333
