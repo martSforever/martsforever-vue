@@ -4,6 +4,8 @@
     :class="classes"
     :disabled="disabled"
     v-effect
+    ref="btn"
+    :style="styles"
     @click="handleClick">
     <a-icon iconfont="loading" v-if="loading" :class="{'a-load-loop':loading}"/>
     <a-icon :iconfont="iconfont" :fa="fa" v-if="(!!iconfont || !!fa) && !loading"/>
@@ -26,12 +28,12 @@
       },
       shape: {
         validator(value) {
-          return oneOf(value, ['circle', 'circle-outline']);
+          return oneOf(value, ['circle', 'round', 'fillet', 'none']);
         }
       },
       size: {
         validator(value) {
-          return oneOf(value, ['small', 'large', 'default']);
+          return oneOf(value, ['small', 'large', 'base']);
         }
       },
       loading: Boolean,
@@ -53,7 +55,7 @@
     data() {
       return {
         prefixCls: 'a-btn',
-        showSlot: true
+        showSlot: true,
       }
     },
     computed: {
@@ -69,7 +71,18 @@
             [`${this.prefixCls}-icon-only`]: !this.showSlot && (!!this.icon || this.loading)
           },
         ];
-      }
+      },
+      styles() {
+        if (!this.showSlot && (!!this.iconfont || !!this.fa || this.loading) && this.shape === 'circle') {
+          let width = this.$refs.btn.offsetWidth;
+          let height = this.$refs.btn.offsetHeight;
+          let ret = width > height ? width : height;
+          return {
+            height: `${ret}px`,
+            width: `${ret}px`,
+          }
+        } else return {};
+      },
     },
     methods: {
       handleClick(event) {

@@ -30,6 +30,14 @@ $btn-prefix-cls: #{$css-prefix}btn;
       }
     }
   }
+  /*按钮形状*/
+  @each $key, $value in $border-radiuses {
+    &.#{$btn-prefix-cls}-#{$key} {
+      & {
+        border-radius: $value;
+      }
+    }
+  }
 
   /*按钮禁用状态*/
   &[disabled=disabled] {

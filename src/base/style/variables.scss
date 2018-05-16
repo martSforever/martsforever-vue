@@ -45,7 +45,8 @@ $padding-base: map_get($paddings, base);
 $padding-small: map_get($paddings, small);
 
 $border-radiuses: (
-  circle:50%,
+  circle:64px,
+  round:32px,
   fillet:6px,
   none:0
 );
