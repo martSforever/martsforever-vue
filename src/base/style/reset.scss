@@ -22,7 +22,7 @@ body {
   @include fill-window;
 }
 
-div, span, label, text, textarea, a, input {
+ span, label, text, textarea, a, input {
   color: $text-color-default;
 }
 

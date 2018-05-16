@@ -11,10 +11,9 @@ $btn-prefix-cls: #{$css-prefix}btn;
   padding: 6px 12px;
   outline: none;
   border: none;
-  float: left;
-  & ~ .#{$btn-prefix-cls} {
-    margin-left: 6px;
-  }
+  //& ~ .#{$btn-prefix-cls} {
+  //  margin-left: 6px;
+  //}
   /*按钮颜色*/
   @each $key, $value in $colors {
     &.#{$btn-prefix-cls}-#{$key} {
@@ -66,6 +65,8 @@ $btn-prefix-cls: #{$css-prefix}btn;
   .#{$btn-prefix-cls} {
     margin-left: 0;
     border-radius: 0;
+    float: left;
+    display: block;
   }
   /*按钮形状*/
   @each $key, $value in $border-radiuses {

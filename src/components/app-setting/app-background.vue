@@ -6,8 +6,8 @@
         <div class="example-item" v-for="item in examples" @click="changeBg(item)"><img :src="item.img" v-effect
                                                                                         class="img"></div>
       </div>
-      <div>
-        <button @click="loadBg">确定</button>
+      <div class="confirm-wrapper">
+        <a-button fa="fa-check" @click="loadBg" size="large" shape="round">确定</a-button>
       </div>
     </div>
   </div>
@@ -15,9 +15,13 @@
 
 <script>
   import ATitle from "../../base/components/a-title/a-title";
+  import AButton from "../../base/components/a-button/a-button";
 
   export default {
-    components: {ATitle},
+    components: {
+      AButton,
+      ATitle
+    },
     name: "app-background",
     data() {
       return {
@@ -82,6 +86,10 @@
           }
         }
       }
+    }
+    .confirm-wrapper{
+      padding-top: 12px;
+      text-align: center;
     }
   }
 </style>
