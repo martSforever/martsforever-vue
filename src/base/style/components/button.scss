@@ -7,6 +7,7 @@ $btn-prefix-cls: #{$css-prefix}btn;
   &, & * {
     color: $text-color-light;
   }
+  @include transition-all;
   padding: 6px 12px;
   outline: none;
   border: none;
