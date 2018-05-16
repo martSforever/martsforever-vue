@@ -55,9 +55,9 @@
     <div class="btn-wrapper">
       <a-button>default</a-button>
       <a-button shape="circle" fa="fa-user" size="large"/>
-      <a-button shape="none" size="large">circle</a-button>
-      <a-button shape="none" size="base">fillet</a-button>
-      <a-button shape="none" size="small">none</a-button>
+      <a-button shape="none" size="large">large</a-button>
+      <a-button shape="none" size="base">base</a-button>
+      <a-button shape="none" size="small">small</a-button>
     </div>
     <div>
       <a-title>自定义样式</a-title>
