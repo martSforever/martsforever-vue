@@ -34,8 +34,8 @@
   }
 </script>
 
-<style scoped lang="stylus">
+<style scoped lang="scss">
   .a-icon-example {
-    $fill-parent();
+    @include fill-parent;
   }
 </style>

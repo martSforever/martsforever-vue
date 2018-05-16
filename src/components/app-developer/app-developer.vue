@@ -18,8 +18,8 @@
   }
 </script>
 
-<style scoped lang="stylus">
+<style scoped lang="scss">
   .app-developer {
-    $fill-parent();
+    @include fill-parent;
   }
 </style>

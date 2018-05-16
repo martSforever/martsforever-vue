@@ -1,7 +1,9 @@
 <template>
   <div class="app-left-menu" v-effect>
     <div class="menu-header">
-      <a-title class="menu-title"><a-icon iconfont="line"/><p>主菜单</p></a-title>
+      <a-title class="menu-title">
+        <a-icon iconfont="line"/>
+        <p>主菜单</p></a-title>
       <!--<button @click="add">add{{menuList.length}}</button>-->
     </div>
     <div class="menu-body">
@@ -9,8 +11,7 @@
         <div v-for="row in rows">
           <ul>
             <li v-for="(item,index) in menuList" class="menu-item" @click="gotoMenu(item)">
-              <!--{{row}}-->
-              <!--<a-iconfont :icon="item.icon" class="menu-icon"/>-->
+              <a-icon :iconfont="item.icon" class="menu-icon"></a-icon>
               <label>{{item.name}}</label>
             </li>
           </ul>
@@ -60,51 +61,50 @@
   }
 </script>
 
-<style scoped lang="stylus">
+<style scoped lang="scss">
   .app-left-menu {
-    $fill-parent();
+    @include fill-parent;
     .menu-header {
       .menu-title {
-        font-size 18px
-        font-weight bold
+        font-size: 18px;
+        font-weight: bold;
       }
-      .iconfont{
-        color $text-color-main
-        font-size 24px
+      .iconfont {
+        color: $text-color-main;
+        font-size: 24px;
       }
     }
-    border-right solid 1px $text-color-deep
-    box-sizing border-box
-    padding: 12px 0px
-    display flex
-    flex-direction column
+    border-right: solid 1px $text-color-deep;
+    box-sizing: border-box;
+    padding: 12px 0;
+    display: flex;
+    flex-direction: column;
     .menu-header, .menu-footer {
-      height 44px
-      display flex
-      align-items center
-      justify-content: flex-start
-      flex-direction row
-      font-size $font-size-large
-      font-weight bold
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: row;
+      font-size: $font-size-large;
+      font-weight: bold;
     }
     .menu-body {
-      flex: 1
-      font-size $font-size-base
-
-      overflow-y hidden
+      flex: 1;
+      font-size: $font-size-base;
+      overflow-y: hidden;
       .menu-item {
-        height 32px
-        padding: 0 25px
-        display flex
-        flex-direction row
-        justify-content flex-start
-        align-items center
-        $transition-all();
+        height: 32px;
+        padding: 0 25px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        @include transition-all;
         &:hover {
-          background-color rgba(255, 255, 255, 0.2);
+          background-color: rgba(255, 255, 255, 0.2);
         }
         .menu-icon {
-          margin-right 6px
+          margin-right: 6px
         }
       }
     }

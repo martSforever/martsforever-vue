@@ -14,13 +14,14 @@
         name: 'hello vue nc,asn'
       }
     },
-    created(){
-        console.log(process.env);
+    created() {
+      console.log(process.env);
     },
   }
 </script>
 
-<style scoped lang="stylus">
-  .a-input
+<style scoped lang="scss">
+  .a-input {
     color: red
+  }
 </style>

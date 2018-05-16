@@ -130,12 +130,12 @@
   }
 </script>
 
-<style scoped lang="stylus">
+<style scoped lang="scss">
   .a-splitter {
     .swiper-container {
-      $fill-parent();
+      @include fill-parent;
     }
-    $fill-parent();
+    @include fill-parent;
     .a-splitter-container {
       .left {
       }

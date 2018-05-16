@@ -19,6 +19,9 @@
       <a-button type="warning">warning</a-button>
       <a-button type="error">error</a-button>
     </div>
+
+    <a-button type="error" class="a-btn-long">error</a-button>
+
   </div>
 </template>
 
@@ -46,10 +49,10 @@
   }
 </script>
 
-<style scoped lang="stylus">
-    .a-button-example{
-      .btn-wrapper{
-        margin-bottom 12px
-      }
+<style scoped lang="scss">
+  .a-button-example {
+    .btn-wrapper {
+      margin-bottom: 12px
     }
+  }
 </style>

@@ -59,7 +59,6 @@
     computed: {
       classes() {
         return [
-          `${this.prefixCls}`,
           {
             [`${this.prefixCls}-${this.type}`]: !!this.type,
             [`${this.prefixCls}-long`]: this.long,
@@ -67,7 +66,8 @@
             [`${this.prefixCls}-${this.size}`]: !!this.size,
             [`${this.prefixCls}-loading`]: this.loading != null && this.loading,
             [`${this.prefixCls}-icon-only`]: !this.showSlot && (!!this.icon || this.loading)
-          }
+          },
+          `${this.prefixCls}`,
         ];
       }
     },
@@ -82,16 +82,6 @@
   }
 </script>
 
-<style scoped lang="stylus">
-  .a-btn {
-    background transparent
-    color $text-color-light
-    border: solid 1px rgba(255, 255, 255, 0.1);
-    padding 6px 12px
-    outline none
-    &[disabled=disabled] {
-      background-color rgba(255, 255, 255, 0.3)
-      cursor not-allowed
-    }
-  }
+<style scoped lang="scss">
+
 </style>

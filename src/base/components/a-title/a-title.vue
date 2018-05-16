@@ -11,21 +11,21 @@
   }
 </script>
 
-<style scoped lang="stylus">
+<style scoped lang="scss">
   .a-title {
-    display inline-flex
-    width 100%
-    align-items center
-    justify-content flex-start
-    flex-direction row
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
     p {
-      padding 0
-      margin: 0
-      width fit-content
-      display inline-block
+      padding: 0;
+      margin: 0;
+      width: fit-content;
+      display: inline-block;
     }
     .title-icon {
-      color $text-color-main
+      color: $text-color-main;
     }
   }
 </style>

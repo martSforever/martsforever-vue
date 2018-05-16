@@ -50,28 +50,28 @@
   }
 </script>
 
-<style scoped lang="stylus">
+<style scoped lang="scss">
   .app-main {
-    $fill-window();
+    @include fill-window;
     .content {
-      position absolute;
-      top: $app-head-height
-      bottom: 0
-      left: 0
-      right: 0
+      position: absolute;
+      top: $app-head-height;
+      bottom: 0;
+      left: 0;
+      right: 0;
       .route-view-wrapper {
-        $fill-parent();
+        @include fill-parent;
       }
       .route-view {
-        $fill-parent();
+        @include fill-parent;
       }
     }
     .menu-wrapper {
-      $fill-parent();
+      @include fill-parent;
     }
     .canvas {
-      position absolute
-      $fill-parent();
+      position: absolute;
+      @include fill-parent;
     }
   }
 </style>

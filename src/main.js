@@ -7,7 +7,7 @@ import 'swiper/dist/css/swiper.css';                                            
 
 import Effect from 'src/base/directives/effect/effect.js'   //
 
-import "src/base/style/theme.styl"
+
 
 Vue.config.productionTip = false;
 

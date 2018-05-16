@@ -26,25 +26,25 @@
   }
 </script>
 
-<style scoped lang="stylus">
+<style scoped lang="scss">
 
   .app-dev-head {
-    height 44px
-    display flex
-    flex-direction row
-    align-items center
-    justify-content: center
+    height: 44px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     .menu-list {
-      display flex
-      flex-direction row
-      align-items center
-      justify-content: center
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
       .menu-item {
-        display inline-block
-        background-color blueviolet
-        color white
-        padding 6px 12px
-        margin-right 12px
+        display: inline-block;
+        background-color: blueviolet;
+        color: white;
+        padding: 6px 12px;
+        margin-right: 12px;
       }
     }
   }

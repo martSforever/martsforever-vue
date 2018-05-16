@@ -18,6 +18,6 @@
   }
 </script>
 
-<style scoped lang="stylus">
+<style scoped lang="scss">
 
 </style>

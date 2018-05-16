@@ -137,26 +137,26 @@
   }
 </script>
 
-<style scoped lang="stylus">
+<style scoped lang="scss">
   .a-scrollbar {
-    overflow-x hidden
-    position relative
-    overflow-y hidden
+    overflow-x: hidden;
+    position: relative;
+    overflow-y: hidden;
     &, & .a-scrollbar-content {
-      $fill-parent();
+      @include fill-parent;
     }
     .a-scrollbar-content {
-      overflow-y auto
+      overflow-y: auto;
     }
     .a-scrollbar-h {
-      position absolute
-      right 0
-      top: 0
-      height 100%
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 100%;
       .a-scroll-bar-h-indicator {
-        width 100%
-        position relative
-        $prefix(box-shadow, 0 0 8px $text-color-main);
+        width: 100%;
+        position: relative;
+        box-shadow: 0 0 8px $text-color-main;
       }
     }
   }

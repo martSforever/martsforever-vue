@@ -53,32 +53,32 @@
   }
 </script>
 
-<style scoped lang="stylus">
+<style scoped lang="scss">
   .app-background {
-    padding 24px
-    $fill-parent();
+    padding: 24px;
+    @include fill-parent;
     .title, .iconfont {
-      font-size 32px !important
+      font-size: 32px !important;
     }
     .content {
-      width calc(100% - 48px);
-      border-radius 6px
+      width: calc(100% - 48px);
+      border-radius: 6px;
       .example-list {
-        padding: 24px 0
-        background-color rgba(255, 255, 255, 0.1);
-        display flex
-        flex-direction row
-        align-items center
-        justify-content space-around
+        padding: 24px 0;
+        background-color: rgba(255, 255, 255, 0.1);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
         .example-item {
-          width: 255px
-          height: 255px
-          padding: 0 12px
+          width: 255px;
+          height: 255px;
+          padding: 0 12px;
           .img {
-            $fill-parent();
-            $prefix(border-radius, 6px);
-            position relative
-            top: 1px
+            @include fill-parent;
+            border-radius: 6px;
+            position: relative;
+            top: 1px;
           }
         }
       }

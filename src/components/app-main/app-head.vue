@@ -47,90 +47,89 @@
   }
 </script>
 
-<style scoped lang="stylus">
+<style scoped lang="scss">
   .app-head {
     .app-head-content {
-      display flex
-      height $app-head-height
+      display: flex;
+      height: $app-head-height;
       background-color: rgba(255, 255, 255, 0.1);
-      position absolute
-      top: 0
-      left: 0
-      right: 0
-      border-bottom $border-bottom-line;
-      box-sizing border-box
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      border-bottom: $border-bottom-line;
+      box-sizing: border-box;
       .left, .center, .right {
-        display inline-block
-        height 100%
+        display: inline-block;
+        height: 100%;
       }
       .left {
-        width 156px
-        display inline-flex
-        align-items: center
-        cursor pointer
+        width: 156px;
+        display: inline-flex;
+        align-items: center;
+        cursor: pointer;
         .logo-img {
-          width 100%
-          height auto
+          width: 100%;
+          height: auto;
         }
       }
       .center {
-        flex 1
-        display flex
-        align-items center
-        justify-content center
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         .search-wrapper {
-          width fit-content
-          display inline-block
-          position relative
+          width: fit-content;
+          display: inline-block;
+          position: relative;
           .search-input {
-            color $text-color-light
-            height 24px
-            width 256px
-            border solid 2px
-            border-color $text-color-main
-            $prefix(box-shadow, 0 0 8px $text-color-main);
-            padding: 0 36px 0 12px
-            border-radius 24px
-            outline none;
-            $transition-all();
+            color: $text-color-light;
+            height: 24px;
+            width: 256px;
+            border: solid 2px $text-color-main;
+            box-shadow: 0 0 8px $text-color-main;
+            padding: 0 36px 0 12px;
+            border-radius: 24px;
+            outline: none;
+            @include transition-all;
             &:focus {
-              border-color $text-color-main2
-              $prefix(box-shadow, 0 0 8px $text-color-main2);
+              border-color: $text-color-main2;
+              box-shadow: 0 0 8px $text-color-main2;
             }
           }
           .fa {
-            position absolute
-            top: 0
-            right 12px
-            height 100%
-            display flex
-            align-items center
-            color $text-color
+            position: absolute;
+            top: 0;
+            right: 12px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            color: $text-color;
           }
         }
       }
       .right {
-        width 256px
-        display flex
-        align-items center
-        justify-content center
-        color $text-color-light
-        cursor pointer
-        $transition-all();
-        $active-on-click();
+        width: 256px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $text-color-light;
+        cursor: pointer;
+        @include transition-all;
+        @include active-on-click;
 
         p {
-          font-weight bold
-          letter-spacing 2px
+          font-weight: bold;
+          letter-spacing: 2px;
         }
         .avatar {
-          height 32px
-          width 32px
-          border-radius 50%
-          margin-right 12px
+          height: 32px;
+          width: 32px;
+          border-radius: 50%;
+          margin-right: 12px;
         }
         &:hover {
-          $prefix(background-color, $bg-deep-color);
+          background-color: $bg-deep-color;
         }
       }
     }

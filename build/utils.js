@@ -30,7 +30,7 @@ exports.cssLoaders = function (options) {
   }
 
   // generate loader string to be used with extract text plugin
-  function generateLoaders (loader, loaderOptions) {
+  function generateLoaders(loader, loaderOptions) {
     const loaders = options.usePostCSS ? [cssLoader, postcssLoader] : [cssLoader]
 
     if (loader) {
@@ -54,21 +54,22 @@ exports.cssLoaders = function (options) {
     }
   }
 
-  const stylusOptions = {
-    import: [
-      path.join(__dirname, "../src/base/style/index.styl"), // variables.styl全局变量文件
-    ]
-  }
+  const scssLoader = generateLoaders('sass').concat({
+    loader: 'sass-resources-loader',
+    options: {
+      resources: path.resolve(__dirname, '../src/base/style/index.scss')
+    }
+  });
 
   // https://vue-loader.vuejs.org/en/configurations/extract-css.html
   return {
     css: generateLoaders(),
     postcss: generateLoaders(),
     less: generateLoaders('less'),
-    sass: generateLoaders('sass', { indentedSyntax: true }),
-    scss: generateLoaders('sass'),
-    stylus: generateLoaders('stylus',stylusOptions),
-    styl: generateLoaders('stylus',stylusOptions)
+    sass: generateLoaders('sass', {indentedSyntax: true}),
+    scss: scssLoader,
+    stylus: generateLoaders('stylus'),
+    styl: generateLoaders('stylus')
   }
 }
 
