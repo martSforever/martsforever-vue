@@ -66,6 +66,30 @@
       <a-button>default</a-button>
       <a-button class="custome-cls">Custome cls</a-button>
     </div>
+    <div>
+      <a-title>按钮组</a-title>
+    </div>
+    <div class="btn-wrapper">
+      <a-button-group shape="round">
+        <a-button>default</a-button>
+        <a-button class="custome-cls">Custome cls</a-button>
+        <a-button type="success">success</a-button>
+        <a-button type="error">error</a-button>
+      </a-button-group>
+      <a-button-group shape="fillet">
+        <a-button>default</a-button>
+        <a-button class="custome-cls">Custome cls</a-button>
+        <a-button type="success">success</a-button>
+        <a-button type="error">error</a-button>
+      </a-button-group>
+      <a-button-group shape="none">
+        <a-button>default</a-button>
+        <a-button class="custome-cls">Custome cls</a-button>
+        <a-button type="success">success</a-button>
+        <a-button type="error">error</a-button>
+      </a-button-group>
+    </div>
+
   </div>
 </template>
 
@@ -73,9 +97,11 @@
   import AButton from "../../base/components/a-button/a-button";
   import AIcon from "../../base/components/a-icon/a-icon";
   import ATitle from "../../base/components/a-title/a-title";
+  import AButtonGroup from "../../base/components/a-button/a-button-group";
 
   export default {
     components: {
+      AButtonGroup,
       ATitle,
       AIcon,
       AButton
@@ -101,13 +127,12 @@
       margin-bottom: 12px;
       padding-left: 24px;
       .a-btn {
-        margin-right: 12px;
       }
     }
     .long-btn {
       width: 300px;
     }
-    .custome-cls{
+    .custome-cls {
       background-color: blueviolet;
     }
   }

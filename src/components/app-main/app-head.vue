@@ -64,7 +64,7 @@
         height: 100%;
       }
       .left {
-        width: 156px;
+        width: 256px;
         display: inline-flex;
         align-items: center;
         cursor: pointer;
