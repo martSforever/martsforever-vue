@@ -15,7 +15,7 @@ $btn-prefix-cls: #{$css-prefix}btn;
   @each $key, $value in $colors {
     &.#{$btn-prefix-cls}-#{$key} {
       & {
-        background-color: $value;
+        background-color: rgba($value,0.6);
       }
     }
   }

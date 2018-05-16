@@ -59,6 +59,7 @@
     computed: {
       classes() {
         return [
+          `${this.prefixCls}`,
           {
             [`${this.prefixCls}-${this.type}`]: !!this.type,
             [`${this.prefixCls}-long`]: this.long,
@@ -67,7 +68,6 @@
             [`${this.prefixCls}-loading`]: this.loading != null && this.loading,
             [`${this.prefixCls}-icon-only`]: !this.showSlot && (!!this.icon || this.loading)
           },
-          `${this.prefixCls}`,
         ];
       }
     },
