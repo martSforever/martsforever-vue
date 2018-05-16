@@ -8,6 +8,7 @@
       <a-button fa="fa-file" :disabled="!disabled" @click="sayHello">not disabled button</a-button>
     </div>
     <div class="btn-wrapper">
+      <a-button>default</a-button>
       <a-button type="primary">primary</a-button>
       <a-button type="ghost">ghost</a-button>
       <a-button type="dashed">dashed</a-button>
@@ -16,7 +17,9 @@
     <div class="btn-wrapper">
       <a-button type="info">info</a-button>
       <a-button type="success">success</a-button>
+      <a-button type="success" :disabled="disabled">success</a-button>
       <a-button type="warning">warning</a-button>
+      <a-button type="warning" :disabled="disabled">warning</a-button>
       <a-button type="error">error</a-button>
     </div>
 

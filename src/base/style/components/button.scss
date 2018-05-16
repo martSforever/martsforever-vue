@@ -1,25 +1,42 @@
 $btn-prefix-cls: #{$css-prefix}btn;
 
 .#{$btn-prefix-cls} {
-  background: transparent;
-  color: $text-color-light;
-  border: solid 1px rgba(255, 255, 255, 0.1);
+
+  /*按钮默认样式*/
+  background-color: rgba(255, 255, 255, 0.1);
+  &, & * {
+    color: $text-color-light;
+  }
   padding: 6px 12px;
   outline: none;
+  border: none;
+
+  /*按钮颜色*/
+  @each $key, $value in $colors {
+    &.#{$btn-prefix-cls}-#{$key} {
+      & {
+        background-color: $value;
+      }
+    }
+  }
+
+  /*按钮禁用状态*/
   &[disabled=disabled] {
     background-color: rgba(255, 255, 255, 0.3);
     cursor: not-allowed;
+    &, & * {
+      color: black;
+    }
+  }
+
+  /*长按钮*/
+  &.#{$btn-prefix-cls} {
+    &#{&}-long {
+      width: 100%;
+    }
   }
 }
 
-.#{$btn-prefix-cls} {
-  &#{&}-long {
-    width: 100%;
-  }
-}
 
-@each $type in 'primary', 'ghost', 'dashed', 'text', 'info', 'success', 'warning', 'error', 'default' {
-  .#{$btn-prefix-cls}-#{$type} *{
-    color: map_get($colors, $type);
-  }
-}
+
+
