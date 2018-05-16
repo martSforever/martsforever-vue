@@ -1,12 +1,16 @@
 <template>
   <div class="a-title">
+    <a-icon iconfont="line"/>
     <slot></slot>
   </div>
 </template>
 
 <script>
 
+  import AIcon from "../a-icon/a-icon";
+
   export default {
+    components: {AIcon},
     name: "a-title",
   }
 </script>
@@ -18,6 +22,10 @@
     align-items: center;
     justify-content: flex-start;
     flex-direction: row;
+    .a-icon{
+      color: $text-color-main;
+      font-size: $font-size-xl;
+    }
     p {
       padding: 0;
       margin: 0;

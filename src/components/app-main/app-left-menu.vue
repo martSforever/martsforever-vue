@@ -1,9 +1,7 @@
 <template>
   <div class="app-left-menu" v-effect>
     <div class="menu-header">
-      <a-title class="menu-title">
-        <a-icon iconfont="line"/>
-        <p>主菜单</p></a-title>
+      <a-title class="menu-title"><p>主菜单</p></a-title>
       <!--<button @click="add">add{{menuList.length}}</button>-->
     </div>
     <div class="menu-body">

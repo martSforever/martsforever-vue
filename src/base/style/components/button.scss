@@ -10,12 +10,23 @@ $btn-prefix-cls: #{$css-prefix}btn;
   padding: 6px 12px;
   outline: none;
   border: none;
+  float: left;
 
   /*按钮颜色*/
   @each $key, $value in $colors {
     &.#{$btn-prefix-cls}-#{$key} {
       & {
-        background-color: rgba($value,0.6);
+        background-color: rgba($value, 0.6);
+      }
+    }
+  }
+
+  /*按钮大小*/
+  @each $key, $value in $font-sizes {
+    &.#{$btn-prefix-cls}-#{$key} {
+      & {
+        font-size: $value;
+        padding: map_get($paddings, $key);
       }
     }
   }

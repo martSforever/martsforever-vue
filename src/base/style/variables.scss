@@ -4,10 +4,11 @@
 * desc:     css样式变量文件
 */
 
-/*Css Prefix*/
+/*Css Prefix  css前缀*/
 $css-prefix: a-;
 $css-prefix-icon: a-icon;
 
+/*颜色值*/
 $colors: (
   primary:#495a80,
   info:#ddf0ed,
@@ -16,19 +17,52 @@ $colors: (
   error:#f17c67,
 );
 
-/*Base*/
-$body-background: #3b3b3e;
-$title-color: #e03636;
-
-$text-color: #a0aaa7;
+/*文字颜色*/
+$text-color-default: #a0aaa7;
 $text-color-light: #d9dbe2;
 $text-color-deep: #636369;
 $text-color-main: #e03636;
 $text-color-main2: #5aff78;
 
-$font-size-large: 16px;
-$font-size-base: 14px;
-$font-size-small: 12px;
+$font-sizes: (
+  xl:24px,
+  large:16px,
+  base:14px,
+  small:12px,
+);
+$font-size-large: map_get($font-sizes, large);
+$font-size-base: map_get($font-sizes, base);
+$font-size-small: map_get($font-sizes, small);
+$font-size-xl: map_get($font-sizes, xl);
+
+$paddings: (
+  large:16px,
+  base:12px,
+  small:6,
+);
+$padding-large: map_get($paddings, large);
+$padding-base: map_get($paddings, base);
+$padding-small: map_get($paddings, small);
+
+$border-radiuses: (
+  circle:50%,
+  fillet:6px,
+  none:0
+);
+$border-circle: map_get($border-radiuses, circle);
+$border-fillet: map_get($border-radiuses, fillet);
+$border-none: map_get($border-radiuses, none);
+
+$border-styles: (
+  dotted:dotted,
+  dashed:dashed,
+  solid:solid,
+  double:double,
+  groove:groove,
+  ridge:ridge,
+  inset:inset,
+  outset:outset,
+);
 
 /*-------------------------------Custome-------------------------------*/
 
