@@ -1,14 +1,11 @@
 <template>
-  <div class="a-scrollbar" ref="scrollbar" @mousemove.prevent="_mousemove" @mouseup="_mouseup" @mouseleave="_mouseleave"
-       @mouseenter="_mouseenter">
-    <div class="a-scrollbar-content" ref="scrollbarContent" @scroll="_contentVScroll">
+  <div class="a-scrollbar" ref="scrollbar">
+    <div class="a-scrollbar-content" ref="scrollbarContent" @scroll="_onContentVScroll">
       <slot></slot>
     </div>
-    <transition name="to-left">
-      <div class="a-scrollbar-h" ref="vScrollbar" v-show="showScrollBar">
-        <div class="a-scroll-bar-h-indicator" ref="vIndicator" @mousedown.prevent="_vIndicatorMouseDown"></div>
-      </div>
-    </transition>
+    <div class="a-scrollbar-h" ref="vScrollbar">
+      <div class="a-scroll-bar-h-indicator" ref="vIndicator"></div>
+    </div>
   </div>
 </template>
 
@@ -66,21 +63,20 @@
         this._initialize();
       }
     },
+    computed: {},
     methods: {
       update() {
         this._initialize();
       },
       _initialize() {
         this.$nextTick(function () {
-          if (this.direction === 'horizontal') {
-            this._initializeHScrollbar();
-          } else {
-            this._initializeVScrollbar();
-          }
+          this._initializeHScrollbar();
+          this._initializeVScrollbar();
         });
       },
       _initializeHScrollbar() {
       },
+      /*初始化纵向滚动条*/
       _initializeVScrollbar() {
         this.$refs.scrollbarContent.style.width = `${this.$refs.scrollbar.offsetWidth + 17}px`;
         this.$refs.vScrollbar.style.backgroundColor = this.scrollBarColor;
@@ -90,29 +86,41 @@
         this.$refs.vIndicator.style.height = `${this._calculateVIndicatorSize()}px`;
         this.$refs.vIndicator.style.backgroundColor = this.indicatorColor;
         this.$refs.vIndicator.style.borderRadius = `${this.scrollbarRadius}px`;
+
+        this.$refs.vIndicator.addEventListener('mousedown', this._onVIndicatorMouseDown);
+        document.addEventListener('mousemove', this._onMousemove);
+        document.addEventListener('mouseup', this._onMouseup);
       },
       _calculateHIndicatorSize() {
 
       },
+      /*计算纵向滚动条指示器高度*/
       _calculateVIndicatorSize() {
+        if (!this.$refs.scrollbarContent) return 0;
         let showHeight = this.$refs.scrollbarContent.offsetHeight;
         let actualHeight = this.$refs.scrollbarContent.scrollHeight;
         let ret = showHeight * showHeight / actualHeight;
         return ret;
       },
-      _contentVScroll(e) {
+
+      /*纵向滚动触发事件*/
+      _onContentVScroll(e) {
         let contentScrollTop = this.$refs.scrollbarContent.scrollTop;
         let scrollBarScrollTop = (contentScrollTop / this.$refs.scrollbarContent.scrollHeight) * this.$refs.scrollbarContent.offsetHeight;
         this.$refs.vIndicator.style.top = `${scrollBarScrollTop}px`;
       },
-      _vIndicatorMouseDown(e) {
+      /*纵向指示器点击开始*/
+      _onVIndicatorMouseDown(e) {
+        e.preventDefault();
         this.vTouch.initialized = true;
         this.vTouch.startX = e.clientX;
         this.vTouch.startY = e.clientY;
         this.vTouch.startTop = removePx(this.$refs.vIndicator.style.top);
         this.vTouch.maxTop = this.$refs.vScrollbar.offsetHeight - this.$refs.vIndicator.offsetHeight;
       },
-      _mousemove(e) {
+      /*纵向指示器点击移动*/
+      _onMousemove(e) {
+        e.preventDefault();
         if (!this.vTouch.initialized) return;
         const deltaX = e.clientX - this.vTouch.startX;
         const deltaY = e.clientY - this.vTouch.startY;
@@ -123,17 +131,23 @@
         let scrollContentResultTop = (removePx(indicatorResultTop) / this.$refs.vIndicator.offsetHeight) * this.$refs.vScrollbar.scrollHeight;
         this.$refs.scrollbarContent.scrollTop = `${scrollContentResultTop}`;
       },
-      _mouseup(e) {
+      /*纵向指示器点击结束*/
+      _onMouseup(e) {
         this.vTouch.initialized = false;
       },
-      _mouseenter() {
+      _onMouseenter() {
         this.autoHide && (this.showScrollBar = true);
       },
-      _mouseleave() {
+      _onMouseleave() {
         this.vTouch.initialized = false;
         this.autoHide && (this.showScrollBar = false);
       },
-    }
+    },
+    beforeDestroy() {
+      this.$refs.vIndicator.removeEventListener('mousedown', this._onVIndicatorMouseDown);
+      document.removeEventListener('mousemove', this._onMousemove);
+      document.removeEventListener('mouseup', this._onMouseup);
+    },
   }
 </script>
 
