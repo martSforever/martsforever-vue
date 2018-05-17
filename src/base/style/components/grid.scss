@@ -1,0 +1,63 @@
+.#{$css-prefix-row} {
+  height: auto;
+  position: relative;
+  display: block;
+  @include clear-fix;
+  &, & * {
+    box-sizing: border-box;
+  }
+
+  /*flex布局*/
+  &.#{$css-prefix-row}-flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    &:before,
+    &:after {
+      display: flex;
+    }
+    /*flex布局*/
+    @each $flexType, $flexValue in $flexs {
+      &.#{$css-prefix-row}-flex-#{$flexType} {
+        @each $key, $value in $flexValue {
+          #{$key}: #{$value}
+        }
+      }
+    }
+  }
+  /*响应式*/
+  .#{$css-prefix-col} {
+    display: block;
+    float: left;
+
+    @for $i from 1 through $cell-num {
+      &.#{$css-prefix-col}-span-#{$i} {
+        width: (1 / $cell-num * $i * 100) * 1%;
+      }
+      &.#{$css-prefix-col}-offset-#{$i} {
+        margin-left: (1 / $cell-num * $i * 100) * 1%;
+      }
+      &.#{$css-prefix-col}-pull-#{$i} {
+        position: relative;
+        right: (1 / $cell-num * $i * 100) * 1%;
+      }
+      &.#{$css-prefix-col}-push-#{$i} {
+        position: relative;
+        left: (1 / $cell-num * $i * 100) * 1%;
+      }
+      &.#{$css-prefix-col}-order-#{$i} {
+        order: $i;
+      }
+    }
+
+    @each $size, $px in $screens {
+      @include res(inspect($size)) {
+        @for $i from 1 through $cell-num {
+          &.#{$css-prefix-col}-#{$size}-#{$i} {
+            width: (1 / $cell-num * $i * 100) * 1%;
+          }
+        }
+      }
+    }
+  }
+}

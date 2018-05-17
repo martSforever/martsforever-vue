@@ -21,9 +21,10 @@
     data() {
       return {
         menuList: [
-          {name: 'a-icon', url: 'aIconExample'},
-          {name: 'a-input', url: 'aInputExample'},
-          {name: 'a-button', url: 'aButtonExample'},
+          {name: 'icon', url: 'aIconExample'},
+          {name: 'input', url: 'aInputExample'},
+          {name: 'button', url: 'aButtonExample'},
+          {name: 'grid', url: 'aGridExample'},
         ],
         name: 'a-icon'
       }

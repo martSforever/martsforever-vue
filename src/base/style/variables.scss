@@ -6,8 +6,10 @@
 
 /*Css Prefix  css前缀*/
 $css-prefix: a;
-$css-prefix-btn: #{$css-prefix}-btn;
-$css-prefix-icon: #{$css-prefix}-icon;
+$css-prefix-btn: #{$css-prefix}-btn; //?-btn
+$css-prefix-icon: #{$css-prefix}-icon; //?-icon
+$css-prefix-row: #{$css-prefix}-row; //?-row
+$css-prefix-col: #{$css-prefix}-col; //?-col
 
 /*颜色值*/
 $colors: (
@@ -25,6 +27,7 @@ $text-color-deep: #636369;
 $text-color-main: #e03636;
 $text-color-main2: #5aff78;
 
+/*文字大小*/
 $font-sizes: (
   xl:24px,
   large:16px,
@@ -36,6 +39,7 @@ $font-size-base: map_get($font-sizes, base);
 $font-size-small: map_get($font-sizes, small);
 $font-size-xl: map_get($font-sizes, xl);
 
+/*内边距*/
 $paddings: (
   large:16px,
   base:12px,
@@ -45,6 +49,7 @@ $padding-large: map_get($paddings, large);
 $padding-base: map_get($paddings, base);
 $padding-small: map_get($paddings, small);
 
+/*圆角*/
 $border-radiuses: (
   circle:64px,
   round:32px,
@@ -55,6 +60,7 @@ $border-circle: map_get($border-radiuses, circle);
 $border-fillet: map_get($border-radiuses, fillet);
 $border-none: map_get($border-radiuses, none);
 
+/*边框样式*/
 $border-styles: (
   dotted:dotted,
   dashed:dashed,
@@ -64,6 +70,35 @@ $border-styles: (
   ridge:ridge,
   inset:inset,
   outset:outset,
+);
+
+/*屏幕大小*/
+/*$screen-xs*/
+$screen-sm: 768px;
+$screen-md: 992px;
+$screen-lg: 1200px;
+$screen-xl: 1920px;
+
+//栅格个数
+$cell-num: 24;
+
+$screens: (
+  xs:(max-width:$screen-sm),
+  sm:(min-width:$screen-sm),
+  md:(min-width:$screen-md),
+  lg:(min-width:$screen-lg),
+  xl:(min-width:$screen-xl),
+);
+
+$flexs: (
+  start:(justify-content:flex-start),
+  center:(justify-content:center),
+  end:(justify-content:flex-end),
+  space-between:(justify-content:space-between),
+  space-around:(justify-content:space-around),
+  top:(align-items:flex-start),
+  middle:(align-items:center),
+  bottom:(align-items:flex-end),
 );
 
 /*-------------------------------Custome-------------------------------*/

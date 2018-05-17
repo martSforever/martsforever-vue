@@ -12,3 +12,24 @@ export function oneOf(value, validList) {
 export function removePx(value) {
   return ((value + "").replace(/px/g, '') - 0);
 }
+
+// 向下查找组件
+export function findComponentsDownward (context, componentName) {
+  return context.$children.reduce((components, child) => {
+    if (child.$options.name === componentName) components.push(child);
+    const foundChilds = findComponentsDownward(child, componentName);
+    return components.concat(foundChilds);
+  }, []);
+}
+
+// 向上查找组件
+export function findComponentsUpward (context, componentName) {
+  let parents = [];
+  const parent = context.$parent;
+  if (parent) {
+    if (parent.$options.name === componentName) parents.push(parent);
+    return parents.concat(findComponentsUpward(parent, componentName));
+  } else {
+    return [];
+  }
+}

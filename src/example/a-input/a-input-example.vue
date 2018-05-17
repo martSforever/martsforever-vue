@@ -59,10 +59,12 @@
     @include fill-parent;
     text-align: center;
     .container {
-      width: 400px;
+      width: 100%;
+      overflow-x: hidden;
+      margin-bottom: 21px;
       display: block;
       float: left;
-      background-color: #495a80;
+      background-color: black;
       & * {
         box-sizing: border-box;
       }
