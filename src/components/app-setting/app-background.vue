@@ -2,12 +2,15 @@
   <div class="app-background">
     <a-title class="title">设置背景</a-title>
     <div class="content">
-      <div class="example-list">
-        <div class="example-item" v-for="item in examples" @click="changeBg(item)"><img :src="item.img" v-effect
-                                                                                        class="img"></div>
-      </div>
+      <a-row type="flex" justify="space-between" gutter="32">
+        <a-col span="4" v-for="(item,index) in examples" :key="index">
+          <div @click="changeBg(item)">
+            <img :src="item.img" v-effect class="img">
+          </div>
+        </a-col>
+      </a-row>
       <div class="confirm-wrapper">
-        <a-button fa="fa-check" @click="loadBg" size="large" shape="round">确定</a-button>
+        <a-button fa="fa-check" @click="loadBg" size="large" shape="round"/>
       </div>
     </div>
   </div>
@@ -16,9 +19,13 @@
 <script>
   import ATitle from "../../base/components/a-title/a-title";
   import AButton from "../../base/components/a-button/a-button";
+  import ARow from "../../base/components/a-grid/a-row";
+  import ACol from "../../base/components/a-grid/a-col";
 
   export default {
     components: {
+      ACol,
+      ARow,
       AButton,
       ATitle
     },
@@ -67,28 +74,17 @@
     .content {
       width: calc(100% - 48px);
       border-radius: 6px;
-      .example-list {
-        padding: 24px 0;
-        background-color: rgba(255, 255, 255, 0.1);
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-around;
-        .example-item {
-          width: 255px;
-          height: 255px;
-          padding: 0 12px;
-          .img {
-            @include fill-parent;
-            border-radius: 6px;
-            position: relative;
-            top: 1px;
-          }
-        }
+      overflow-x: hidden;
+      .img {
+        width: 100%;
+        height: auto;
+        border-radius: 6px;
+        position: relative;
+        top: 1px;
       }
     }
-    .confirm-wrapper{
-      padding-top: 12px;
+    .confirm-wrapper {
+      padding-top: 36px;
       text-align: center;
     }
   }
