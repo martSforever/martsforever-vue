@@ -5,8 +5,9 @@
 */
 
 /*Css Prefix  css前缀*/
-$css-prefix: a-;
-$css-prefix-icon: a-icon;
+$css-prefix: a;
+$css-prefix-btn: #{$css-prefix}-btn;
+$css-prefix-icon: #{$css-prefix}-icon;
 
 /*颜色值*/
 $colors: (

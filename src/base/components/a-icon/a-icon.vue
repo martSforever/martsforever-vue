@@ -4,7 +4,8 @@
 
 <script>
   import AFa from "./a-fa";
-  import AIconfont from "./a-iconfont";
+  import AIconfont from "./a-iconfont"
+  import prefix from 'src/base/script/css-prefix.js';
 
   export default {
     components: {
@@ -14,7 +15,7 @@
     name: "a-icon",
     data() {
       return {
-        prefixCls: 'a-icon'
+        prefixCls: prefix.prefixIcon
       }
     },
     props: {

@@ -1,6 +1,4 @@
-$btn-prefix-cls: #{$css-prefix}btn;
-
-.#{$btn-prefix-cls} {
+.#{$css-prefix-btn} {
 
   /*按钮默认样式*/
   background-color: rgba(255, 255, 255, 0.1);
@@ -11,12 +9,12 @@ $btn-prefix-cls: #{$css-prefix}btn;
   padding: 6px 12px;
   outline: none;
   border: none;
-  //& ~ .#{$btn-prefix-cls} {
+  //& ~ .#{$css-prefix-btn} {
   //  margin-left: 6px;
   //}
   /*按钮颜色*/
   @each $key, $value in $colors {
-    &.#{$btn-prefix-cls}-#{$key} {
+    &.#{$css-prefix-btn}-#{$key} {
       & {
         background-color: rgba($value, 0.6);
       }
@@ -25,7 +23,7 @@ $btn-prefix-cls: #{$css-prefix}btn;
 
   /*按钮大小*/
   @each $key, $value in $font-sizes {
-    &.#{$btn-prefix-cls}-#{$key} {
+    &.#{$css-prefix-btn}-#{$key} {
       & {
         font-size: $value;
         padding: map_get($paddings, $key);
@@ -34,7 +32,7 @@ $btn-prefix-cls: #{$css-prefix}btn;
   }
   /*按钮形状*/
   @each $key, $value in $border-radiuses {
-    &.#{$btn-prefix-cls}-#{$key} {
+    &.#{$css-prefix-btn}-#{$key} {
       & {
         border-radius: $value;
       }
@@ -51,7 +49,7 @@ $btn-prefix-cls: #{$css-prefix}btn;
   }
 
   /*长按钮*/
-  &.#{$btn-prefix-cls} {
+  &.#{$css-prefix-btn} {
     &#{&}-long {
       width: 100%;
       display: block;
@@ -60,9 +58,9 @@ $btn-prefix-cls: #{$css-prefix}btn;
   }
 }
 
-.#{$btn-prefix-cls}-group {
+.#{$css-prefix-btn}-group {
   display: inline-block;
-  .#{$btn-prefix-cls} {
+  .#{$css-prefix-btn} {
     margin-left: 0;
     border-radius: 0;
     float: left;
@@ -70,7 +68,7 @@ $btn-prefix-cls: #{$css-prefix}btn;
   }
   /*按钮形状*/
   @each $key, $value in $border-radiuses {
-    &.#{$btn-prefix-cls}-group-#{$key} {
+    &.#{$css-prefix-btn}-group-#{$key} {
       & {
         border-radius: $value;
         overflow: hidden;

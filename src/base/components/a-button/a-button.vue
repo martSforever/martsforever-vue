@@ -16,6 +16,7 @@
 <script>
   import {oneOf} from "../../script/utils";
   import AIcon from "../a-icon/a-icon";
+  import prefix from 'src/base/script/css-prefix.js';
 
   export default {
     components: {AIcon},
@@ -54,7 +55,7 @@
     },
     data() {
       return {
-        prefixCls: 'a-btn',
+        prefixCls: prefix.prefixBtn,
         showSlot: true,
       }
     },
