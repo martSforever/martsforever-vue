@@ -25,6 +25,7 @@
           {name: 'input', url: 'aInputExample'},
           {name: 'button', url: 'aButtonExample'},
           {name: 'grid', url: 'aGridExample'},
+          {name: 'scrollbar', url: 'aScrollbarExample'},
         ],
         name: 'a-icon'
       }

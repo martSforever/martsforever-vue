@@ -3,6 +3,7 @@ import AIconExample from 'src/example/a-icon/a-icon-example.vue';
 import AButtonExample from 'src/example/a-button/a-button-example.vue';
 import AInputExample from 'src/example/a-input/a-input-example';
 import AGridExample from 'src/example/a-grid/a-grid-example.vue';
+import AScrollbarExample from 'src/example/a-scrollbar/a-scrollbar-example.vue';
 
 export const router = {
   path: '/developer',
@@ -15,6 +16,7 @@ export const router = {
     {path: '/aInputExample', component: AInputExample, name: 'AInputExample'},
     {path: '/aInputExample', component: AInputExample, name: 'AInputExample'},
     {path: '/aGridExample', component: AGridExample, name: 'AGridExample'},
+    {path: '/aScrollbarExample', component: AScrollbarExample, name: 'AScrollbarExample'},
   ]
 };
 

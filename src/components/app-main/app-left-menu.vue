@@ -41,9 +41,9 @@
       }
     },
     created() {
+      this.menuList.push({name: '开发测试', icon: 'development', url: '/developer'});
       this.menuList.push({name: '背景设置', icon: 'settingicon', url: '/appBackground'});
       this.menuList.push({name: '系统管理', icon: 'settingicon', url: '/appSystem'});
-      this.menuList.push({name: '开发测试', icon: 'development', url: '/developer'});
       this.menuList.push({name: '用户管理', icon: 'users', url: '/appUser'});
       this.menuList.push({name: '示例', icon: 'example', url: '/appExample'});
     },
