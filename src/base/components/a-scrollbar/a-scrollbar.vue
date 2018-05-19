@@ -1,6 +1,7 @@
 <template>
   <div class="a-scrollbar" ref="scrollbar">
     <div class="a-scrollbar-content" ref="scrollbarContent" @scroll="_onContentVScroll">
+      <a-button @click="log">log</a-button>
       <slot></slot>
     </div>
     <div class="a-scrollbar-h" ref="vScrollbar">
@@ -10,11 +11,13 @@
 </template>
 
 <script>
-  import {oneOf, removePx} from "../../script/utils";
+  import {removePx} from "../../script/utils";
+  import {watchDomChildList} from "../../script/watch";
+  import AButton from "../a-button/a-button";
 
   export default {
+    components: {AButton},
     props: {
-      data: {},
       autoHide: {
         type: Boolean,
         default: true
@@ -39,14 +42,6 @@
         default: '#e03636',
         desc: '指示器颜色'
       },
-      direction: {
-        type: String,
-        default: 'vertical',
-        desc: '滚动条方向',
-        validator(value) {
-          return oneOf(value, ['vertical', 'horizontal']);
-        },
-      }
     },
     name: "a-scrollbar",
     data() {
@@ -58,15 +53,14 @@
     mounted() {
       this._initialize();
     },
-    watch: {
-      data(newVal, oldVal) {
-        this._initialize();
-      }
-    },
     computed: {},
     methods: {
+      log() {
+        console.dir(this.$refs.scrollbarContent.scrollHeight);
+      },
       update() {
-        this._initialize();
+        console.log('update');
+        this._updateVSize();
       },
       _initialize() {
         this.$nextTick(function () {
@@ -78,35 +72,40 @@
       },
       /*初始化纵向滚动条*/
       _initializeVScrollbar() {
+        // console.log('_initializeVScrollbar');
+        this._updateVSize();
+        this._watchContentSize();
+        this.$refs.vIndicator.addEventListener('mousedown', this._onVIndicatorMouseDown);
+        document.addEventListener('mousemove', this._onMousemove);
+        document.addEventListener('mouseup', this._onMouseup);
+      },
+      /*更新纵向滚动条高度*/
+      _updateVSize() {
         this.$refs.scrollbarContent.style.width = `${this.$refs.scrollbar.offsetWidth + 17}px`;
         this.$refs.vScrollbar.style.backgroundColor = this.scrollBarColor;
         this.$refs.vScrollbar.style.width = `${this.scrollBarSize}px`;
+        this.$refs.vScrollbar.style.top = `${this.scrollBarSize}px`;
+        this.$refs.vScrollbar.style.bottom = `${this.scrollBarSize}px`;
+
+
         this.$refs.vScrollbar.style.borderRadius = `${this.scrollbarRadius}px`;
 
         this.$refs.vIndicator.style.height = `${this._calculateVIndicatorSize()}px`;
         this.$refs.vIndicator.style.backgroundColor = this.indicatorColor;
         this.$refs.vIndicator.style.borderRadius = `${this.scrollbarRadius}px`;
-
-        this.$refs.vIndicator.addEventListener('mousedown', this._onVIndicatorMouseDown);
-        document.addEventListener('mousemove', this._onMousemove);
-        document.addEventListener('mouseup', this._onMouseup);
-      },
-      _calculateHIndicatorSize() {
-
       },
       /*计算纵向滚动条指示器高度*/
       _calculateVIndicatorSize() {
         if (!this.$refs.scrollbarContent) return 0;
-        let showHeight = this.$refs.scrollbarContent.offsetHeight;
-        let actualHeight = this.$refs.scrollbarContent.scrollHeight;
-        let ret = showHeight * showHeight / actualHeight;
-        return ret;
+        let contentOffsetHeight = this.$refs.scrollbarContent.offsetHeight;
+        let contentScrollHeight = this.$refs.scrollbarContent.scrollHeight;
+        let scrollbarOffsetHeight = this.$refs.vScrollbar.offsetHeight;
+        return scrollbarOffsetHeight * contentOffsetHeight / contentScrollHeight;
       },
-
       /*纵向滚动触发事件*/
       _onContentVScroll(e) {
         let contentScrollTop = this.$refs.scrollbarContent.scrollTop;
-        let scrollBarScrollTop = (contentScrollTop / this.$refs.scrollbarContent.scrollHeight) * this.$refs.scrollbarContent.offsetHeight;
+        let scrollBarScrollTop = (contentScrollTop / this.$refs.scrollbarContent.scrollHeight) * this.$refs.vScrollbar.offsetHeight;
         this.$refs.vIndicator.style.top = `${scrollBarScrollTop}px`;
       },
       /*纵向指示器点击开始*/
@@ -128,7 +127,7 @@
         let indicatorResultTop = Math.min(Math.max(this.vTouch.startTop + deltaY, 0), this.vTouch.maxTop);
         this.$refs.vIndicator.style.top = `${indicatorResultTop}px`;
         /*内容滚动*/
-        let scrollContentResultTop = (removePx(indicatorResultTop) / this.$refs.vIndicator.offsetHeight) * this.$refs.vScrollbar.scrollHeight;
+        let scrollContentResultTop = (indicatorResultTop / this.$refs.vScrollbar.scrollHeight) * this.$refs.scrollbarContent.scrollHeight;
         this.$refs.scrollbarContent.scrollTop = `${scrollContentResultTop}`;
       },
       /*纵向指示器点击结束*/
@@ -142,11 +141,20 @@
         this.vTouch.initialized = false;
         this.autoHide && (this.showScrollBar = false);
       },
+      _watchContentSize() {
+        /*检测内容dom子节点变化，当变化完时，更新滚动条高度*/
+        this.observe = watchDomChildList(this.$refs.scrollbarContent, (mutations) => {
+          this.update();
+        });
+      },
     },
     beforeDestroy() {
+      /*纵向滚动事件清除*/
+      // console.log('beforeDestroy');
       this.$refs.vIndicator.removeEventListener('mousedown', this._onVIndicatorMouseDown);
       document.removeEventListener('mousemove', this._onMousemove);
       document.removeEventListener('mouseup', this._onMouseup);
+      this.observe.disconnect();
     },
   }
 </script>
@@ -166,7 +174,6 @@
       position: absolute;
       right: 0;
       top: 0;
-      height: 100%;
       .a-scroll-bar-h-indicator {
         width: 100%;
         position: relative;

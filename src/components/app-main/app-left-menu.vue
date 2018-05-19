@@ -5,7 +5,7 @@
       <!--<button @click="add">add{{menuList.length}}</button>-->
     </div>
     <div class="menu-body">
-      <a-scrollbar :data="rows">
+      <!--<a-scrollbar :data="rows">-->
         <div v-for="row in rows">
           <ul>
             <li v-for="(item,index) in menuList" class="menu-item" @click="gotoMenu(item)">
@@ -14,7 +14,7 @@
             </li>
           </ul>
         </div>
-      </a-scrollbar>
+      <!--</a-scrollbar>-->
     </div>
     <div class="menu-footer">
       this is footer
