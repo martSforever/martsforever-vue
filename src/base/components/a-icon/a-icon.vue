@@ -26,7 +26,7 @@
       color: String,
       iconType: {
         type: String,
-        validator: function (val) {
+        validator: (val) => {
           return oneOf(val, ['fa', 'iconfont'])
         }
       }
