@@ -6,6 +6,7 @@
   import AFa from "./a-fa";
   import AIconfont from "./a-iconfont"
   import prefix from 'src/base/script/css-prefix.js';
+  import {oneOf} from "../../script/utils";
 
   export default {
     components: {
@@ -22,7 +23,13 @@
       fa: String,
       iconfont: String,
       size: [Number, String],
-      color: String
+      color: String,
+      iconType: {
+        type: String,
+        validator: function (val) {
+          return oneOf(val, ['fa', 'iconfont'])
+        }
+      }
     },
     computed: {
       icon() {
@@ -30,6 +37,7 @@
         if (!!this.iconfont) return this.iconfont;
       },
       type() {
+        if (!!this.iconType) return `a-${this.iconType}`;
         if (!!this.fa) return 'a-fa';
         if (!!this.iconfont) return 'a-iconfont';
       },

@@ -29,6 +29,13 @@
       <a-icon iconfont="line" style="color: #495a80"/>
       <a-icon iconfont="loading" style="color: blueviolet"/>
     </div>
+    <div>
+      <a-title>通过type属性指定图标类型，fa还是iconfont</a-title>
+    </div>
+    <div class="icon-wrapper">
+      <a-icon iconfont="line" icon-type="iconfont" style="color: #495a80"/>
+      <a-icon iconfont="fa-list" icon-type="fa" style="color: blueviolet"/>
+    </div>
   </div>
 </template>
 
@@ -61,7 +68,7 @@
 <style scoped lang="scss">
   .a-icon-example {
     @include fill-parent;
-    .icon-wrapper{
+    .icon-wrapper {
       padding-left: 24px;
       margin-bottom: 12px;
     }
