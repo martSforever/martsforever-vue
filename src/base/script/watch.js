@@ -3,6 +3,7 @@
 */
 export function watchDomChildList(target, handler) {
   handleImage(target, handler);
+  window.addEventListener('resize', handler);
   // Firefox和Chrome早期版本中带有前缀
   let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
   // 创建观察者对象
@@ -36,12 +37,12 @@ function handleImage(target, handler) {
   let loadCount = 0;
   for (let i = 0; i < imgs.length; i++) {
     let img = imgs[i];
-    img.onload = () => {
+    img.addEventListener('load', () => {
       img._isLoaded = true;
       loadCount++;
       if (loadCount === imgLength) {
         handler();
       }
-    }
+    });
   }
 }

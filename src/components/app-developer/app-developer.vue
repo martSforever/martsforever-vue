@@ -1,13 +1,13 @@
 <template xmlns:v-effect="http://www.w3.org/1999/xhtml">
   <div class="app-developer">
     <app-dev-head/>
-    <!--<a-scrollbar>-->
+    <a-scrollbar>
       <transition name="fade-in">
         <keep-alive>
           <router-view></router-view>
         </keep-alive>
       </transition>
-    <!--</a-scrollbar>-->
+    </a-scrollbar>
   </div>
 </template>
 

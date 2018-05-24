@@ -1,13 +1,12 @@
 <template>
   <div class="a-scrollbar" ref="scrollbarWrapper">
     <div class="a-scrollbar-content" ref="scrollbarContent" @scroll="_onScroll">
-      <a-button @click="log">log</a-button>
       <slot></slot>
     </div>
     <div class="a-scrollbar-v" ref="vScrollbar" v-show="vShowScrollbar">
       <div class="a-scroll-bar-v-indicator" ref="vIndicator"></div>
     </div>
-    <div class="a-scrollbar-h" ref="hScrollbar">
+    <div class="a-scrollbar-h" ref="hScrollbar" v-show="hShowScrollbar">
       <div class="a-scroll-bar-h-indicator" ref="hIndicator"></div>
     </div>
   </div>
@@ -61,7 +60,7 @@
     computed: {},
     methods: {
       log() {
-        console.dir(this.$refs.scrollbarContent);
+        // console.dir(this.$refs.scrollbarContent);
       },
       update() {
         console.log('update');
@@ -109,8 +108,8 @@
         let contentOffsetHeight = this.$refs.scrollbarContent.offsetHeight - 17;
         /*内容滚动实际高度*/
         let contentScrollHeight = this.$refs.scrollbarContent.scrollHeight;
-        console.log('contentOffsetHeight', contentOffsetHeight);
-        console.log('contentScrollHeight', contentScrollHeight);
+        // console.log('contentOffsetHeight', contentOffsetHeight);
+        // console.log('contentScrollHeight', contentScrollHeight);
 
         /*当内容滚动高度与可视高度相等时（内容高度不足容器显示高度），不显示滚动条*/
         this.vShowScrollbar = !(contentScrollHeight === contentOffsetHeight);
@@ -122,8 +121,8 @@
         let scrollbarOffsetHeight = (this.$refs.scrollbarContent.offsetHeight) - (2 * this.scrollBarSize);
         /*指示器高度*/
         let indicatorHeight = scrollbarOffsetHeight * contentOffsetHeight / contentScrollHeight;
-        console.log('scrollbarOffsetHeight', scrollbarOffsetHeight);
-        console.log('indicatorHeight', indicatorHeight);
+        // console.log('scrollbarOffsetHeight', scrollbarOffsetHeight);
+        // console.log('indicatorHeight', indicatorHeight);
         return indicatorHeight;
       },
       /*纵向滚动触发事件*/
@@ -181,7 +180,7 @@
         }
         /*内容可视宽度度*/
         let contentOffsetWidth = this.$refs.scrollbarContent.offsetWidth - 17;
-        /*内容滚动实际高度*/
+        /*内容滚动实际宽度*/
         let contentScrollWidth = this.$refs.scrollbarContent.scrollWidth;
         /*当内容滚动高度与可视高度相等时（内容高度不足容器显示高度），不显示滚动条*/
         this.hShowScrollbar = !(contentScrollWidth === contentOffsetWidth);
@@ -189,7 +188,7 @@
         //貌似是因为用了v-show控制滚动条显隐，导致滚动条第一次显示的时候，获取得到的offsetWidth一直都是0，这里
         //换一种方法，通过内容可视宽度减去滚动条大小（这里是高度）来获取滚动条长度，因为可能会存在纵向滚动条以及横向滚动条，所以纵向滚动条的上下部都会缩短滚动条宽度的距离，横向滚动条也一样，缩短一些距离
         // let scrollbarOffsetHeight = this.$refs.vScrollbar.offsetHeight;
-        let scrollbarOffsetWdith = this.$refs.scrollbarContent.offsetWidth - (2 * this.scrollBarSize);
+        let scrollbarOffsetWdith = contentOffsetWidth - (2 * this.scrollBarSize);
         /*指示器宽度*/
         let indicatorWidth = scrollbarOffsetWdith * contentOffsetWidth / contentScrollWidth;
         return indicatorWidth;
