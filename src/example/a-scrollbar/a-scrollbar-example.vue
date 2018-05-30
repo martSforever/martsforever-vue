@@ -77,6 +77,8 @@
   import AButton from "../../base/components/a-button/a-button";
   import ATitle from "../../base/components/a-title/a-title";
 
+  const imageUrl = 'http://www.pujia8.com/static/pics/20171215040134_26.jpg';
+
   export default {
     components: {
       ATitle,
@@ -91,7 +93,7 @@
       let list2 = [];
       for (let i = 0; i < num; i++) {
         list.push({
-          url: 'http://img3.redocn.com/tupian/20100113/xiaoliankatongxiangkuang_113352_small.jpg'
+          url: `${imageUrl}`
         });
       }
       list2.push(list[0]);
@@ -106,12 +108,12 @@
     methods: {
       add() {
         this.list.push({
-          url: `http://img3.redocn.com/tupian/20100113/xiaoliankatongxiangkuang_113352_small.jpg?time=${this.getTime()}`
+          url: `${imageUrl}?time=${this.getTime()}`
         });
       },
       add2() {
         this.list2.push({
-          url: `http://img3.redocn.com/tupian/20100113/xiaoliankatongxiangkuang_113352_small.jpg?time=${this.getTime()}`
+          url: `${imageUrl}?time=${this.getTime()}`
         });
       },
       remove() {

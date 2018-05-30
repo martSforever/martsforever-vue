@@ -6,18 +6,19 @@
 
 /*Css Prefix  css前缀*/
 $css-prefix: a;
-$css-prefix-btn: #{$css-prefix}-btn; //?-btn
-$css-prefix-icon: #{$css-prefix}-icon; //?-icon
-$css-prefix-row: #{$css-prefix}-row; //?-row
-$css-prefix-col: #{$css-prefix}-col; //?-col
+$css-prefix-btn: #{$css-prefix}-btn; //a-btn
+$css-prefix-icon: #{$css-prefix}-icon; //a-icon
+$css-prefix-row: #{$css-prefix}-row; //a-row
+$css-prefix-col: #{$css-prefix}-col; //a-col
+$css-prefix-input: #{$css-prefix}-input; //a-input
 
 /*颜色值*/
 $colors: (
-  primary:#495a80,
-  info:#ddf0ed,
+  primary:#0ac2ff,
+  info:#ddd,
   success:#00ff80,
   warning:#e9f01d,
-  error:#f17c67,
+  error:#e03636,
 );
 
 /*文字颜色*/
@@ -31,6 +32,7 @@ $text-color-main2: #5aff78;
 $font-sizes: (
   xl:24px,
   large:16px,
+  middle:15px,
   base:14px,
   small:12px,
 );
@@ -41,9 +43,10 @@ $font-size-xl: map_get($font-sizes, xl);
 
 /*内边距*/
 $paddings: (
-  large:16px,
-  base:12px,
-  small:6,
+  large:12px 12px,
+  middle:9px 12px,
+  base:8px 12px,
+  small:6px 12px,
 );
 $padding-large: map_get($paddings, large);
 $padding-base: map_get($paddings, base);

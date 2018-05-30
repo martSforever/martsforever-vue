@@ -1,0 +1,98 @@
+.#{$css-prefix-input} {
+  flex: 1;
+  order: 2;
+  /*输入框默认样式*/
+  &, & * {
+    color: $text-color-light;
+  }
+  width: fit-content;
+  @include transition-all;
+  padding: 6px 12px;
+  outline: none;
+  border: none;
+
+  /*按钮大小*/
+  @each $key, $value in $font-sizes {
+    &.#{$css-prefix-input}-#{$key} {
+      font-size: $value;
+      padding: map_get($paddings, $key);
+    }
+  }
+}
+
+.#{$css-prefix-input}-wrapper {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+
+  background-color: rgba(0, 0, 0, 0.3);
+
+  width: fit-content;
+  border: solid 2px $text-color-main2;
+
+  &, & * {
+    color: $text-color-main2;
+  }
+  &.#{$css-prefix-input}-wrapper-focus {
+    box-shadow: 0 0 8px $text-color-main2;
+  }
+
+  box-sizing: border-box;
+  /*边框样色颜色*/
+  @each $key, $value in $colors {
+    &.#{$css-prefix-input}-wrapper-#{$key} {
+      & {
+        border-color: $value;
+      }
+      &, & * {
+        color: $value;
+      }
+      &.#{$css-prefix-input}-wrapper-focus {
+        box-shadow: 0 0 8px $text-color-light;
+      }
+    }
+  }
+
+  /*输入框形状*/
+  @each $key, $value in $border-radiuses {
+    @include transition-all;
+    &.#{$css-prefix-input}-wrapper-#{$key} {
+      & {
+        overflow: hidden;
+        border-radius: $value;
+      }
+    }
+
+    &.#{$css-prefix-input}-wrapper-disabled {
+      border-color: $text-color-deep;
+      &, & * {
+        color: $text-color-deep;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .#{$css-prefix-input}-icon {
+    width: 20px;
+    &.#{$css-prefix-input}-icon-left {
+      order: 1;
+      text-align: right;
+    }
+    &.#{$css-prefix-input}-icon-right {
+      order: 3;
+      text-align: left;
+    }
+  }
+  .#{$css-prefix-input}-prepend {
+    order: 0;
+    div {
+      display: inline-block;
+    }
+  }
+  .#{$css-prefix-input}-append {
+    order: 5;
+    div {
+      display: inline-block;
+    }
+  }
+}
