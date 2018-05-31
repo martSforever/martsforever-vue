@@ -1,5 +1,5 @@
 <template>
-  <div class="a-scrollbar" ref="scrollbarWrapper">
+  <div class="a-scrollbar-wrapper" ref="scrollbarWrapper">
     <div class="a-scrollbar-content" ref="scrollbarContent" @scroll="_onScroll">
       <slot></slot>
     </div>
@@ -26,7 +26,7 @@
       },
       scrollBarColor: {
         type: String,
-        default: 'rgba(0,0,0,0.5)',
+        default: 'black',
         desc: '滚动条背景色'
       },
       scrollBarSize: {
@@ -58,6 +58,14 @@
       this._initialize();
     },
     computed: {},
+    watch: {
+      /*vShowScrollbar(newVal, oldVal) {
+        if (newVal) this.$refs.scrollbarContent.style.paddingRight = `${this.scrollBarSize}px`;
+      },
+      hShowScrollbar(newVal, oldVal) {
+        if (newVal) this.$refs.scrollbarContent.style.paddingBottom = `${this.scrollBarSize}px`;
+      },*/
+    },
     methods: {
       log() {
         // console.dir(this.$refs.scrollbarContent);
@@ -70,6 +78,7 @@
       _initialize() {
         this.$nextTick(function () {
           this._watchContentSize();
+          this._initializeContent();
           this._hInitializeScrollbar();
           this._vInitializeScrollbar();
           document.addEventListener('mousemove', this._onMousemove);
@@ -78,10 +87,17 @@
           this._hUpdateSize();
         });
       },
+      _initializeContent() {
+        /*内容宽度增加17个像素，把滚动条隐藏*/
+        this.$refs.scrollbarContent.style.width = `${this.$refs.scrollbarWrapper.offsetWidth + 12}px`;
+        /*内容宽度增加17个像素，把横向滚动条隐藏*/
+        this.$refs.scrollbarContent.style.height = `${this.$refs.scrollbarWrapper.offsetHeight + 12}px`;
+
+        if (this.$slots.default.length !== 1) throw new Error("a-scrollbar内有且仅有一个子节点！");
+      },
+
       /*初始化纵向滚动条*/
       _vInitializeScrollbar() {
-        /*内容宽度增加17个像素，把滚动条隐藏*/
-        this.$refs.scrollbarContent.style.width = `${this.$refs.scrollbarWrapper.offsetWidth + 17}px`;
         /*滚动条背景色，宽高位置，圆角设置*/
         this.$refs.vScrollbar.style.backgroundColor = this.scrollBarColor;
         this.$refs.vScrollbar.style.width = `${this.scrollBarSize}px`;
@@ -158,8 +174,6 @@
       },
 
       _hInitializeScrollbar() {
-        /*内容宽度增加17个像素，把横向滚动条隐藏*/
-        this.$refs.scrollbarContent.style.height = `${this.$refs.scrollbarWrapper.offsetHeight + 17}px`;
         /*滚动条背景色，宽高位置，圆角设置*/
         this.$refs.hScrollbar.style.backgroundColor = this.scrollBarColor;
         this.$refs.hScrollbar.style.height = `${this.scrollBarSize}px`;
@@ -228,7 +242,6 @@
           this.$refs.scrollbarContent.scrollLeft = `${scrollContentResultLeft}`;
         }
       },
-
       _onScroll(e) {
         this._vOnContentScroll(e);
         this._hOnContentScroll(e);
@@ -270,7 +283,7 @@
 </script>
 
 <style scoped lang="scss">
-  .a-scrollbar {
+  .a-scrollbar-wrapper {
     overflow-x: hidden;
     position: relative;
     overflow-y: hidden;
@@ -279,9 +292,9 @@
     }
     .a-scrollbar-content {
       overflow-y: scroll;
-
       overflow-x: scroll;
       white-space: nowrap;
+      box-sizing: border-box;
     }
     .a-scrollbar-v {
       position: absolute;

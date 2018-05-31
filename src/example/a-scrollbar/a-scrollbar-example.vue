@@ -1,7 +1,7 @@
 <template>
   <div class="a-scrollbar-example">
 
-    <div class="explain">
+    <!--<div class="explain">
       <a-title>说明</a-title>
       <div class="detail">
         <div class="item">1、一般的自定义滚动条，都必须将外层设置为固定高度，再对里面一层进行初始化，无法实现自适应高度的问题</div>
@@ -66,6 +66,33 @@
         </div>
 
       </div>
+    </div>-->
+
+    <div class="list">
+      <a-scrollbar>
+        <div class="item">
+          <div class="sub-item">
+            端口加上拉大锯拉开始就到拉萨将离客
+            端口加上拉大锯拉开始就到拉萨将离客
+            端口加上拉大锯拉开始就到拉萨将离客
+            端口加上拉大锯拉开始就到拉萨将离客
+            端口加上拉大锯拉开始就到拉萨将离客
+            端口加上拉大锯拉开始就到拉萨将离客
+            端口加上拉大锯拉开始就到拉萨将离客
+            端口加上拉大锯拉开始就到拉萨将离客
+            端口加上拉大锯拉开始就到拉萨将离客
+            端口加上拉大锯拉开始就到拉萨将离客
+            <!--<div class="sub-wrapper">
+              <a-scrollbar>
+                <div class="sub-wrapper-item">
+                  的进口量撒娇的拉升建档立卡升级到了卡机
+                  的进口量撒娇的拉升建档立卡升级到了卡机
+                </div>
+              </a-scrollbar>
+            </div>-->
+          </div>
+        </div>
+      </a-scrollbar>
     </div>
 
   </div>
@@ -172,6 +199,35 @@
         }
       }
 
+    }
+
+    .list {
+      height: 500px;
+      width: 500px;
+      .item {
+        height: 222px;
+        width: 100%;
+        background-color: black;
+        margin-bottom: 12px;
+        .sub-item {
+          height: 600px;
+          width: 600px;
+          background-color: blue;
+          white-space: normal;
+          word-break: break-all;
+          .sub-wrapper {
+            width: 100%;
+            height: 300px;
+            background-color: blueviolet;
+            white-space: normal;
+            word-break: break-all;
+            .sub-wrapper-item {
+              width: 800px;
+              height: 400px;
+            }
+          }
+        }
+      }
     }
 
   }
