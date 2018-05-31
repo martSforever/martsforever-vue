@@ -26,6 +26,7 @@
           {name: 'button', url: 'aButtonExample'},
           {name: 'grid', url: 'aGridExample'},
           {name: 'scrollbar', url: 'aScrollbarExample'},
+          {name: 'textarea', url: 'aTextareaExample'},
         ],
         name: 'a-icon'
       }

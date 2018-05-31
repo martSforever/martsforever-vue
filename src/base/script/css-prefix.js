@@ -7,4 +7,5 @@ export default {
   prefixRow: `${basePrefix}-row`,
   prefixCol: `${basePrefix}-col`,
   prefixInput:`${basePrefix}-input`,
+  prefixtextArea:`${basePrefix}-textarea`,
 }

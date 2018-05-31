@@ -1,0 +1,58 @@
+.#{$css-prefix-textarea}-wrapper {
+  display: inline-block;
+  @include transition-all;
+  /*输入框默认样式*/
+  &, & * {
+    color: $text-color-light;
+  }
+
+  width: 200px;
+  height: 100px;
+  background-color: blueviolet;
+
+  /*大小*/
+  &.#{$css-prefix-textarea}-wrapper-small {
+    width: 100px;
+    height: 61.8px;
+  }
+  &.#{$css-prefix-textarea}-wrapper-middle {
+    width: 200px;
+    height: 123.6px;
+  }
+  &.#{$css-prefix-textarea}-wrapper-large {
+    width: 300px;
+    height: 185.4px;
+  }
+
+  /*形状*/
+  &.#{$css-prefix-textarea}-wrapper-fillet {
+    border-radius: $border-fillet;
+  }
+  &.#{$css-prefix-textarea}-wrapper-none {
+    border-radius: $border-none;
+  }
+
+  /*颜色*/
+  @each $key, $value in $colors {
+    &.#{$css-prefix-textarea}-wrapper-#{$key} {
+      & {
+        background-color: rgba($value, 0.6);
+      }
+      &, & * {
+        color: white;
+      }
+      &.#{$css-prefix-textarea}-wrapper-focus {
+        box-shadow: 0 0 8px $value;
+      }
+    }
+  }
+
+  .#{$css-prefix-textarea} {
+    overflow: hidden;
+    height: max-content;
+    white-space: normal;
+    word-break: break-all;
+    outline: none;
+    padding: 6px;
+  }
+}

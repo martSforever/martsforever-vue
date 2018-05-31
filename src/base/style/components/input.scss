@@ -26,7 +26,7 @@
   align-items: center;
 
   width: fit-content;
-  background-color: rgba($text-color-main2,0.3);
+  background-color: rgba($text-color-main2, 0.3);
 
   &, & * {
     color: white;
@@ -40,7 +40,7 @@
   @each $key, $value in $colors {
     &.#{$css-prefix-input}-wrapper-#{$key} {
       & {
-        background-color: rgba($value,0.6);
+        background-color: rgba($value, 0.6);
       }
       &, & * {
         color: white;
@@ -60,13 +60,13 @@
         border-radius: $value;
       }
     }
+  }
 
-    &.#{$css-prefix-input}-wrapper-disabled {
-      border-color: $text-color-deep;
-      &, & * {
-        color: $text-color-deep;
-        cursor: not-allowed;
-      }
+  &.#{$css-prefix-input}-wrapper-disabled {
+    &, & * {
+      color: $text-color-default;
+      background-color: $text-color-deep;
+      cursor: not-allowed;
     }
   }
 
