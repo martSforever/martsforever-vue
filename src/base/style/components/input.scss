@@ -25,13 +25,11 @@
   flex-direction: row;
   align-items: center;
 
-  background-color: rgba(0, 0, 0, 0.3);
-
   width: fit-content;
-  border: solid 2px $text-color-main2;
+  background-color: rgba($text-color-main2,0.3);
 
   &, & * {
-    color: $text-color-main2;
+    color: white;
   }
   &.#{$css-prefix-input}-wrapper-focus {
     box-shadow: 0 0 8px $text-color-main2;
@@ -42,13 +40,13 @@
   @each $key, $value in $colors {
     &.#{$css-prefix-input}-wrapper-#{$key} {
       & {
-        border-color: $value;
+        background-color: rgba($value,0.6);
       }
       &, & * {
-        color: $value;
+        color: white;
       }
       &.#{$css-prefix-input}-wrapper-focus {
-        box-shadow: 0 0 8px $text-color-light;
+        box-shadow: 0 0 8px $value;
       }
     }
   }
