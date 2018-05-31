@@ -95,7 +95,9 @@
       },
       /*更新纵向滚动条高度*/
       _vUpdateSize() {
-        this.$refs.vIndicator.style.height = `${this._vCalculateIndicatorSize()}px`;
+        this.$nextTick(() => {
+          this.$refs.vIndicator.style.height = `${this._vCalculateIndicatorSize()}px`;
+        });
       },
       /*计算纵向滚动条指示器高度*/
       _vCalculateIndicatorSize() {
@@ -170,7 +172,9 @@
         this.$refs.hIndicator.addEventListener('mousedown', this._hOnIndicatorMouseDown);
       },
       _hUpdateSize() {
-        this.$refs.hIndicator.style.width = `${this._hCalculateIndicatorSize()}px`;
+        this.$nextTick(() => {
+          this.$refs.hIndicator.style.width = `${this._hCalculateIndicatorSize()}px`;
+        });
       },
       _hCalculateIndicatorSize() {
         /*内容咩有初始化的时候，直接返回0*/

@@ -85,9 +85,9 @@
 
     data() {
       return {
-        currentValue: this.value,
-        prefixCls: prefix.prefixtextArea,
-        isFocus:false,
+        currentValue: this.value, /*存储当前用来双向绑定的值*/
+        prefixCls: prefix.prefixtextArea, /*当前组件样式前缀*/
+        isFocus: false, /*当前组件是否获取了焦点*/
       }
     },
     methods: {
@@ -99,16 +99,17 @@
       },
       handleWrapperClick(event) {
         this.$refs.content.focus();
+        /*将div设置为可编辑之后，每次获取焦点。光标都会放在第一个字符前面，体验非常不好，这里设置每次获取焦点的时候，将光标放到最后一位*/
         moveCursorToEnd(this.$refs.content);
         this.$emit('on-click', event);
       },
       handleContentClick(event) {
         event.stopPropagation();
       },
-      handleFocus(event){
+      handleFocus(event) {
         this.isFocus = true;
       },
-      handleBlur(event){
+      handleBlur(event) {
         this.isFocus = false;
       },
       setCurrentValue(value) {
@@ -136,10 +137,14 @@
     watch: {
       value(val) {
         this.setCurrentValue(val);
+        /*如果在content内用{{currentValue}}绑定值的话，每次值改变，都会导致光标的位置回到初点，这里加判断，如果当前正在编辑的话，就不需要改变值*/
+        if (!this.isFocus) this.$refs.content.innerText = this.value;
       }
     },
     mounted() {
+      /*初始值设置*/
       this.$refs.content.innerText = this.value;
+      /*图片粘贴事件处理*/
       onPasteImage(this.$refs.content, (result) => {
         let img = new Image();
         img.src = result;

@@ -3,7 +3,11 @@
 */
 export function watchDomChildList(target, handler) {
   handleImage(target, handler);
-  window.addEventListener('resize', handler);
+  window.addEventListener('resize', function () {
+    console.log('resize');
+    window.location.reload();
+    handler();
+  });
   // Firefox和Chrome早期版本中带有前缀
   let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
   // 创建观察者对象
