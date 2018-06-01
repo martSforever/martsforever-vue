@@ -3,11 +3,15 @@
     <div class="a-scrollbar-content" ref="scrollbarContent" @scroll="_onScroll">
       <slot></slot>
     </div>
-    <div class="a-scrollbar-v" ref="vScrollbar" v-show="vShowScrollbar">
-      <div class="a-scroll-bar-v-indicator" ref="vIndicator"></div>
+    <div class="a-scrollbar-v-wrapper" ref="vScrollbarWrapper" v-show="vShowScrollbar">
+      <div class="a-scrollbar-v" ref="vScrollbar">
+        <div class="a-scroll-bar-v-indicator" ref="vIndicator"></div>
+      </div>
     </div>
-    <div class="a-scrollbar-h" ref="hScrollbar" v-show="hShowScrollbar">
-      <div class="a-scroll-bar-h-indicator" ref="hIndicator"></div>
+    <div class="a-scrollbar-h-wrapper" ref="hScrollbarWrapper" v-show="hShowScrollbar">
+      <div class="a-scrollbar-h" ref="hScrollbar">
+        <div class="a-scroll-bar-h-indicator" ref="hIndicator"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -58,27 +62,23 @@
       this._initialize();
     },
     computed: {},
-    watch: {
-      /*vShowScrollbar(newVal, oldVal) {
-        if (newVal) this.$refs.scrollbarContent.style.paddingRight = `${this.scrollBarSize}px`;
-      },
-      hShowScrollbar(newVal, oldVal) {
-        if (newVal) this.$refs.scrollbarContent.style.paddingBottom = `${this.scrollBarSize}px`;
-      },*/
-    },
+    watch: {},
     methods: {
       log() {
         // console.dir(this.$refs.scrollbarContent);
       },
       update() {
         console.log('update');
-        this._vUpdateSize();
-        this._hUpdateSize();
+        this.$nextTick(() => {
+          this._updateContent();
+          this._vUpdateSize();
+          this._hUpdateSize();
+        });
       },
       _initialize() {
-        this.$nextTick(function () {
+        this.$nextTick(() => {
           this._watchContentSize();
-          this._initializeContent();
+          this._updateContent();
           this._hInitializeScrollbar();
           this._vInitializeScrollbar();
           document.addEventListener('mousemove', this._onMousemove);
@@ -87,19 +87,24 @@
           this._hUpdateSize();
         });
       },
-      _initializeContent() {
-        /*内容宽度增加17个像素，把滚动条隐藏*/
-        this.$refs.scrollbarContent.style.width = `${this.$refs.scrollbarWrapper.offsetWidth + 12}px`;
-        /*内容宽度增加17个像素，把横向滚动条隐藏*/
-        this.$refs.scrollbarContent.style.height = `${this.$refs.scrollbarWrapper.offsetHeight + 12}px`;
+      _updateContent() {
 
-        if (this.$slots.default.length !== 1) throw new Error("a-scrollbar内有且仅有一个子节点！");
+        /*内容宽度增加17个像素，把横向滚动条隐藏*/
+        let wrapperAppendHeight = this.$refs.scrollbarContent.offsetWidth < this.$refs.scrollbarContent.scrollWidth ? this.scrollBarSize : 0;
+        this.$refs.scrollbarContent.style.height = `${this.$refs.scrollbarWrapper.offsetHeight + (17 - wrapperAppendHeight)}px`;
+        this.hShowScrollbar = !!wrapperAppendHeight;
+
+        /*内容宽度增加17个像素，把滚动条隐藏*/
+        let wrapperAppendWidth = this.$refs.scrollbarContent.offsetHeight < this.$refs.scrollbarContent.scrollHeight ? this.scrollBarSize : 0;
+        this.$refs.scrollbarContent.style.width = `${this.$refs.scrollbarWrapper.offsetWidth + (17 - wrapperAppendWidth)}px`;
+        this.vShowScrollbar = !!wrapperAppendWidth;
+
+        // if (this.$slots.default.length !== 1) throw new Error("a-scrollbar内有且仅有一个子节点！");
       },
 
       /*初始化纵向滚动条*/
       _vInitializeScrollbar() {
         /*滚动条背景色，宽高位置，圆角设置*/
-        this.$refs.vScrollbar.style.backgroundColor = this.scrollBarColor;
         this.$refs.vScrollbar.style.width = `${this.scrollBarSize}px`;
         this.$refs.vScrollbar.style.top = `${this.scrollBarSize}px`;
         this.$refs.vScrollbar.style.bottom = `${this.scrollBarSize}px`;
@@ -108,6 +113,9 @@
         this.$refs.vIndicator.style.backgroundColor = this.indicatorColor;
         this.$refs.vIndicator.style.borderRadius = `${this.scrollbarRadius}px`;
         this.$refs.vIndicator.addEventListener('mousedown', this._vOnIndicatorMouseDown);
+
+        this.$refs.vScrollbarWrapper.style.width = `${this.scrollBarSize}px`;
+        this.$refs.vScrollbarWrapper.style.backgroundColor = this.scrollBarColor;
       },
       /*更新纵向滚动条高度*/
       _vUpdateSize() {
@@ -128,9 +136,6 @@
         let contentScrollHeight = this.$refs.scrollbarContent.scrollHeight;
         // console.log('contentOffsetHeight', contentOffsetHeight);
         // console.log('contentScrollHeight', contentScrollHeight);
-
-        /*当内容滚动高度与可视高度相等时（内容高度不足容器显示高度），不显示滚动条*/
-        this.vShowScrollbar = !(contentScrollHeight === contentOffsetHeight);
 
         /*滚动条高度*/
         //貌似是因为用了v-show控制滚动条显隐，导致滚动条第一次显示的时候，获取得到的offsetHeight一直都是0，这里
@@ -175,7 +180,6 @@
 
       _hInitializeScrollbar() {
         /*滚动条背景色，宽高位置，圆角设置*/
-        this.$refs.hScrollbar.style.backgroundColor = this.scrollBarColor;
         this.$refs.hScrollbar.style.height = `${this.scrollBarSize}px`;
         this.$refs.hScrollbar.style.left = `${this.scrollBarSize}px`;
         this.$refs.hScrollbar.style.right = `${this.scrollBarSize}px`;
@@ -184,6 +188,9 @@
         this.$refs.hIndicator.style.backgroundColor = this.indicatorColor;
         this.$refs.hIndicator.style.borderRadius = `${this.scrollbarRadius}px`;
         this.$refs.hIndicator.addEventListener('mousedown', this._hOnIndicatorMouseDown);
+
+        this.$refs.hScrollbarWrapper.style.height = `${this.scrollBarSize}px`;
+        this.$refs.hScrollbarWrapper.style.backgroundColor = this.scrollBarColor;
       },
       _hUpdateSize() {
         this.$nextTick(() => {
@@ -200,8 +207,7 @@
         let contentOffsetWidth = this.$refs.scrollbarContent.offsetWidth - 17;
         /*内容滚动实际宽度*/
         let contentScrollWidth = this.$refs.scrollbarContent.scrollWidth;
-        /*当内容滚动高度与可视高度相等时（内容高度不足容器显示高度），不显示滚动条*/
-        this.hShowScrollbar = !(contentScrollWidth === contentOffsetWidth);
+
         /*滚动条长度*/
         //貌似是因为用了v-show控制滚动条显隐，导致滚动条第一次显示的时候，获取得到的offsetWidth一直都是0，这里
         //换一种方法，通过内容可视宽度减去滚动条大小（这里是高度）来获取滚动条长度，因为可能会存在纵向滚动条以及横向滚动条，所以纵向滚动条的上下部都会缩短滚动条宽度的距离，横向滚动条也一样，缩短一些距离
@@ -296,23 +302,35 @@
       white-space: nowrap;
       box-sizing: border-box;
     }
-    .a-scrollbar-v {
+    .a-scrollbar-v-wrapper {
       position: absolute;
+      top: 0;
+      bottom: 0;
       right: 0;
-      .a-scroll-bar-v-indicator {
-        position: relative;
-        cursor: pointer;
-        width: 100%;
+      .a-scrollbar-v {
+        position: absolute;
+        .a-scroll-bar-v-indicator {
+          position: relative;
+          cursor: pointer;
+          width: 100%;
+        }
       }
     }
-    .a-scrollbar-h {
+
+    .a-scrollbar-h-wrapper {
       position: absolute;
       bottom: 0;
-      .a-scroll-bar-h-indicator {
-        position: relative;
-        cursor: pointer;
-        height: 100%;
+      left: 0;
+      right: 0;
+      .a-scrollbar-h {
+        position: absolute;
+        .a-scroll-bar-h-indicator {
+          position: relative;
+          cursor: pointer;
+          height: 100%;
+        }
       }
     }
+
   }
 </style>

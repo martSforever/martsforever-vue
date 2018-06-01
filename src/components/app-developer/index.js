@@ -8,14 +8,12 @@ import ATextareaExample from 'src/example/a-textarea/a-textarea-exmaple.vue';
 
 export const router = {
   path: '/developer',
-  name: 'AppDeveloper',
   component: AppDeveloper,
   children: [
-    {path: '/', redirect: '/aIconExample'},
-    {path: '/aIconExample', component: AIconExample, name: 'AIconExample'},
+    {path: '/', component: AIconExample, name: 'AIconExample'},
     {path: '/aButtonExample', component: AButtonExample, name: 'AButtonExample'},
     {path: '/aInputExample', component: AInputExample, name: 'AInputExample'},
-    {path: '/aInputExample', component: AInputExample, name: 'AInputExample'},
+    {path: '/aIconExample', component: AIconExample, name: 'AIconExample'},
     {path: '/aGridExample', component: AGridExample, name: 'AGridExample'},
     {path: '/aScrollbarExample', component: AScrollbarExample, name: 'AScrollbarExample'},
     {path: '/aTextareaExample', component: ATextareaExample, name: 'ATextareaExample'},

@@ -4,7 +4,7 @@
     @click="handleWrapperClick"
     :class="wrapperClass"
   >
-    <!--<a-scrollbar>-->
+    <a-scrollbar>
       <div
         ref="content"
         :class="contentClass"
@@ -14,7 +14,7 @@
         @focus="handleFocus"
         @blur="handleBlur"
       ></div>
-    <!--</a-scrollbar>-->
+    </a-scrollbar>
     <input type="hidden" :id="id" :name="name" :disabled="disabled"/>
   </div>
 </template>

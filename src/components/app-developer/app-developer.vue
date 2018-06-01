@@ -1,13 +1,13 @@
 <template xmlns:v-effect="http://www.w3.org/1999/xhtml">
   <div class="app-developer">
     <app-dev-head/>
-    <!--<a-scrollbar>-->
+    <div class="content-wwrapper">
       <transition name="fade-in">
         <keep-alive>
           <router-view></router-view>
         </keep-alive>
       </transition>
-    <!--</a-scrollbar>-->
+    </div>
   </div>
 </template>
 
@@ -27,5 +27,13 @@
 <style scoped lang="scss">
   .app-developer {
     @include fill-parent;
+    position: relative;
+    .content-wwrapper {
+      position: absolute;
+      top: 44px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
   }
 </style>

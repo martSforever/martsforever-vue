@@ -14,12 +14,6 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'index',
-      redirect: '/appMain'
-    },
-    {
-      path: '/appMain',
-      name: 'AppMain',
       component: AppMain,
       children: [
         {
