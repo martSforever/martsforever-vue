@@ -1,3 +1,8 @@
+/*
+* 将光标移动到末尾
+*/
+import {oneOf} from "./utils";
+
 export function moveCursorToEnd(obj) {
   if (window.getSelection) {//ie11 10 9 ff safari
     obj.focus(); //解决ff不获取焦点无法定位问题
@@ -7,13 +12,16 @@ export function moveCursorToEnd(obj) {
   }
   else if (document.selection) {//ie10 9 8 7 6 5
     let range = document.selection.createRange();//创建选择对象
-    //var range = document.body.createTextRange();
+    //let range = document.body.createTextRange();
     range.moveToElementText(obj);//range定位到obj
     range.collapse(false);//光标移至最后
     range.select();
   }
 }
 
+/*
+* 监听粘贴事件
+*/
 export function onPasteImage(obj, handler) {
   obj.addEventListener('paste', function (event) {
     // 添加到事件对象中的访问系统剪贴板的接口
@@ -41,6 +49,9 @@ export function onPasteImage(obj, handler) {
   });
 }
 
+/*
+* 读取图片
+*/
 function imgReader(target, handler) {
   let file = target.getAsFile(),
     reader = new FileReader();
@@ -48,4 +59,43 @@ function imgReader(target, handler) {
     handler(e.target.result)
   };
   reader.readAsDataURL(file);
+}
+
+/*
+* 是否包含某种样式class
+*/
+export function hasClass(cls, clsList) {
+  return oneOf(cls, clsList.value.split(' '));
+}
+
+/*检测浏览器使用的是哪一种前缀*/
+let elementStyle = document.createElement('div').style;
+
+function caculateVender() {
+  let transformNames = {
+    wehkit: 'wehkitTransform',
+    Moz: 'MozTransform',
+    O: 'OTransform',
+    ms: 'msTransform',
+    standard: 'transform'
+  };
+  for (let key in transformNames) {
+    if (elementStyle[transformNames[key]] !== undefined) {
+      return key;
+    }
+  }
+  return false;
+}
+
+let vender = caculateVender();
+
+/*获取浏览器css兼容性前缀*/
+export function prefixStyle(style) {
+  if (vender === false) {
+    return false;
+  }
+  if (vender === 'standard') {
+    return style;
+  }
+  return vender + style.charAt(0).toUpperCase() + style.substr(1);
 }

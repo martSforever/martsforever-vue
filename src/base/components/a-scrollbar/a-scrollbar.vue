@@ -228,7 +228,6 @@
       },
       /*纵向指示器点击开始*/
       _hOnIndicatorMouseDown(e) {
-        e.preventDefault();
         this.hTouch.initialized = true;
         this.hTouch.startX = e.clientX;
         this.hTouch.startY = e.clientY;
@@ -253,7 +252,6 @@
         this._hOnContentScroll(e);
       },
       _onMousemove(e) {
-        e.preventDefault();
         this._vOnIndicatorMove(e);
         this._hOnIndicatorMove(e);
       },
