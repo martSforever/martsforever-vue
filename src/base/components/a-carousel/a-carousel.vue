@@ -34,6 +34,13 @@
           return oneOf(val, [true, false, 'Y', 'N'])
         },
       },
+      shape: {
+        type: String,
+        default: 'none',
+        validator(val) {
+          return oneOf(val, ['round', 'fillet', 'none']);
+        },
+      }
     },
     data() {
       return {
@@ -51,6 +58,7 @@
     },
     mounted() {
       this._initializedItemStyle();
+      this._initializedShape();
       document.addEventListener('mouseup', this._touchend);
       document.addEventListener('mousemove', this._touchmove);
     },
@@ -77,6 +85,21 @@
           }
         }
         this.maxCarouselLeft = -(this.totalWidth - this.$refs.carousel.offsetWidth);
+      },
+      _initializedShape() {
+        let borderRadius;
+        switch (this.shape) {
+          case 'none':
+            borderRadius = 0;
+            break;
+          case 'fillet':
+            borderRadius = this.$refs.wrapper.offsetHeight * 0.1;
+            break;
+          case 'round':
+            borderRadius = this.$refs.wrapper.offsetHeight * 0.8;
+            break;
+        }
+        this.$refs.wrapper.style.borderRadius = `${borderRadius}px`;
       },
       scrollTo(index) {
         if (index < 0) throw new Error("index不能小于0！");
@@ -144,6 +167,7 @@
       wrapperStyles() {
         let suffixWidth = this.width instanceof Number ? 'px' : '';
         let suffixHeight = this.height instanceof Number ? 'px' : '';
+
         return {
           width: `${this.width}${suffixWidth}`,
           height: `${this.height}${suffixHeight}`
@@ -162,7 +186,9 @@
 <style scoped lang="scss">
   .a-carousel-wrapper {
     display: inline-block;
-    overflow-x: hidden;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
     .a-carousel {
       height: 100%;
       width: 100%;
