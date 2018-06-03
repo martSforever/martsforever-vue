@@ -1,0 +1,60 @@
+<script src="//unpkg.com/vue/dist/vue.js"></script>
+<script src="//unpkg.com/iview/dist/iview.min.js"></script>
+<div id="app">
+    <button @click="add">
+    add
+    </button>
+    <collapse v-model="value1">
+        <panel v-for="(item,index) in list3" :name='index+""'>
+          title-{{index}}
+          <div slot="content">
+             <img v-for="img in list" :src="img.url">
+          </div>
+        </panel>
+    </collapse>
+</div>
+
+<---------------------------------------------------------------------------------------------------->
+
+const imageUrl = 'http://www.pujia8.com/static/pics/20171215040134_26.jpg';
+
+var Main = {
+    data () {
+        let num = 3;
+        let list = [];
+        let list2 = [];
+        for (let i = 0; i < num; i++) {
+          list.push({
+            url: `${imageUrl}`
+          });
+        }
+        list2.push(list[0]);
+        list2.push(list[1]);
+        return {
+          value1:'1',
+          list,
+          list2,
+          list3:[1,2,3],
+          scrollbarSize: 6,
+          showScrollBar: true
+        }
+    },
+    methods:{
+      add(){
+        this.list.push({
+          url: `${imageUrl}?time=${this.getTime()}`
+        });
+      },
+      getTime() {
+        return new Date().getTime();
+      },
+    }
+}
+
+var Component = Vue.extend(Main)
+new Component().$mount('#app')
+
+<---------------------------------------------------------------------------------------------------->
+
+@import url("//unpkg.com/iview/dist/styles/iview.css");
+#app{padding: 32px;}
