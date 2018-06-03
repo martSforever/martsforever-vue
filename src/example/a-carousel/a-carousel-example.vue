@@ -156,6 +156,55 @@
             </a-carousel>
           </div>
         </div>
+        <div class="example-item">
+          <a-title>多重包含</a-title>
+          <a-carousel
+            width="500px"
+            height="27px"
+            class="carousel"
+            ref="carousel"
+            swipeable="Y"
+            shape="round"
+          >
+            <div
+              class="a-carousel-item item-cls"
+              v-for="(item,index) in list"
+              :style="getStyle(item)"
+              @click="onItemClick(item,index)"
+            >
+              {{item.name}}--{{index}}
+            </div>
+          </a-carousel>
+          <div class="content-wrapper">
+            <a-carousel
+              ref="content"
+              swipeable="N"
+              shape="none"
+              width="1000px"
+            >
+              <div class="a-carousel-item">
+                <a-carousel
+                  width="300px"
+                  height="100px"
+                  swipeable="Y"
+                >
+                  <div
+                    class="a-carousel-item item-cls"
+                    v-for="(item,index) in list"
+                    :style="getStyle(item)"
+                  >
+                    {{item.name}}--{{index}}
+                  </div>
+                </a-carousel>
+              </div>
+
+              <div class="a-carousel-item" v-for="(item,index) in list">
+                <!--{{item}}&#45;&#45;{{item.initialized}}-->
+                <a-carousel-exmaple-item :name="item.name" v-if="item.initialized" :style="getStyle(item)"/>
+              </div>
+            </a-carousel>
+          </div>
+        </div>
       </div>
     </a-scrollbar>
   </div>
@@ -226,7 +275,7 @@
 
 <style scoped lang="scss">
   .a-carousel-example {
-    .a-title{
+    .a-title {
       display: block;
     }
     @include fill-parent;
