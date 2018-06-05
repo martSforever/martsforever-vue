@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "font-awesome": "^4.7.0",
+    "stackblur-canvas": "^1.4.1",
     "swiper": "^4.2.6",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
