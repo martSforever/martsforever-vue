@@ -12,7 +12,6 @@ export default new Router({
       children: [
         {
           path: '/',
-          name: 'mainPage',
           redirect: '/developer'
         },
         AppDeveloper.router,

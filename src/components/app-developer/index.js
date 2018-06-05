@@ -4,8 +4,7 @@ export const router = {
   children: [
     {
       path: '/',
-      component: resolve => require(['src/example/a-icon/a-icon-example.vue'], resolve),
-      name: 'AIconExample'
+      redirect:'/aIconExample'
     },
     {
       path: '/aButtonExample',
@@ -36,6 +35,11 @@ export const router = {
       path: '/aCarouselExample',
       component: resolve => require(['src/example/a-carousel/a-carousel-example.vue'], resolve),
       name: 'ACarouselExample'
+    },
+    {
+      path: '/aIconExample',
+      component: resolve => require(['src/example/a-icon/a-icon-example.vue'], resolve),
+      name: 'AIconExample'
     },
   ]
 };
