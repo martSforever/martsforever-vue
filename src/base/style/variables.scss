@@ -12,6 +12,7 @@ $css-prefix-row: #{$css-prefix}-row; //a-row
 $css-prefix-col: #{$css-prefix}-col; //a-col
 $css-prefix-input: #{$css-prefix}-input; //a-input
 $css-prefix-textarea: #{$css-prefix}-textarea; //a-textarea
+$css-prefix-switch: #{$css-prefix}-switch; //a-textarea
 
 /*颜色值*/
 $colors: (
@@ -117,5 +118,11 @@ $bg-light-color: #232529;
 
 /*下划线*/
 $border-bottom-line: solid 1px $text-color-main; //红色下划线
+
+$switchSize: (
+  small:(height:21px),
+  middle:(height:27px),
+  large:(height:36px),
+)
 
 

@@ -28,6 +28,7 @@
         }
       },
       shape: {
+        default:'fillet',
         validator(value) {
           return oneOf(value, ['circle', 'round', 'fillet', 'none']);
         }

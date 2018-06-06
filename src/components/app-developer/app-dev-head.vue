@@ -28,6 +28,7 @@
           {name: 'scrollbar', url: 'aScrollbarExample'},
           {name: 'textarea', url: 'aTextareaExample'},
           {name: 'carousel', url: 'aCarouselExample'},
+          {name: 'switch', url: 'aSwitchExample'},
         ],
         name: 'a-icon'
       }

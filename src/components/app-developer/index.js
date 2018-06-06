@@ -41,6 +41,11 @@ export const router = {
       component: resolve => require(['src/example/a-icon/a-icon-example.vue'], resolve),
       name: 'AIconExample'
     },
+    {
+      path: '/aSwitchExample',
+      component: resolve => require(['src/example/a-switch/a-switch-example.vue'], resolve),
+      name: 'ASwitchExample'
+    },
   ]
 };
 export default {

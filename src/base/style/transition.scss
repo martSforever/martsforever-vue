@@ -22,11 +22,11 @@
 }
 
 /*淡入动画:fade-in*/
-.fade-in-enter-active {
+.fade-in-enter-active, .fade-in-leave-active {
   transition: all .5s cubic-bezier(.55, 0, .1, 1);
   opacity: 1;
 }
 
-.fade-in-enter {
+.fade-in-enter, .fade-in-leave-to {
   opacity: 0
 }

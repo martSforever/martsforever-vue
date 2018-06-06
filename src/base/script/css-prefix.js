@@ -8,4 +8,5 @@ export default {
   prefixCol: `${basePrefix}-col`,
   prefixInput:`${basePrefix}-input`,
   prefixtextArea:`${basePrefix}-textarea`,
+  prefixSwitch:`${basePrefix}-switch`,
 }

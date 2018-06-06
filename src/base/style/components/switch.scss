@@ -1,0 +1,85 @@
+.#{$css-prefix-switch} {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+
+  .#{$css-prefix-switch}-indicator, .#{$css-prefix-switch}-custome {
+    position: absolute;
+  }
+
+  .#{$css-prefix-switch}-custome {
+    @include fill-parent;
+    .#{$css-prefix-switch}-custome-item {
+      @include fill-parent;
+      padding: 0 9px;
+      box-sizing: border-box;
+      display: inline-flex;
+      align-items: center;
+      &.#{$css-prefix-switch}-custome-item-left {
+        float: left;
+        width: 50%;
+        justify-content: start;
+      }
+      &.#{$css-prefix-switch}-custome-item-right {
+        width: 50%;
+        float: right;
+        justify-content: flex-end;
+      }
+    }
+  }
+
+  @each $key, $value in $switchSize {
+    &.#{$css-prefix-switch}-#{$key} {
+      $height: map_get($value, height);
+      width: 2*$height+4px;
+      height: $height;
+      border-radius: $height/2;
+      .#{$css-prefix-switch}-indicator {
+        width: $height;
+        height: $height;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        @include transition-all;
+        &.#{$css-prefix-switch}-indicator-left {
+          left: 2px;
+        }
+        &.#{$css-prefix-switch}-indicator-right {
+          left: 2px+$height;
+          transform: rotate(180deg);
+        }
+        .#{$css-prefix-icon} {
+          font-size: map_get($value, height);
+          color: $text-color-light;
+        }
+      }
+    }
+  }
+  @each $key, $value in $colors {
+    @include transition-all;
+    &.#{$css-prefix-switch}-#{$key} {
+      & {
+        background-color: rgba($value, 0.6);
+      }
+      &:hover {
+        box-shadow: 0 0 8px $value;
+      }
+    }
+  }
+  &.#{$css-prefix-switch}-false {
+    background-color: blueviolet;
+    &:hover {
+      box-shadow: 0 0 8px blueviolet;
+    }
+  }
+  &.#{$css-prefix-switch}-disabled {
+    background-color: $text-color-deep;
+    &:hover {
+      box-shadow: none;
+    }
+  }
+}
