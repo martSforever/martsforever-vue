@@ -1,5 +1,5 @@
 <template>
-  <i :class="faClass" :style="styles"></i>
+  <i :class="faClass" :style="styles" @click="handleClick"></i>
 </template>
 
 <script>
@@ -8,11 +8,16 @@
     props: {
       icon: String,
       classes: String,
-      styles:Object,
+      styles: Object,
     },
     computed: {
       faClass() {
         return `${this.classes} fa ${this.icon}`;
+      },
+    },
+    methods: {
+      handleClick(e) {
+        this.$emit('click', e);
       },
     }
   }

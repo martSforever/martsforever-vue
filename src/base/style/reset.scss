@@ -18,6 +18,7 @@ footer, header, menu, nav, section {
 }
 
 body {
+  overflow: hidden;
   line-height: 1;
   @include fill-window;
 }

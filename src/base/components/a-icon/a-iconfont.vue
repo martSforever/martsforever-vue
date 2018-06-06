@@ -1,5 +1,5 @@
 <template>
-  <svg :class="iconfontCls" aria-hidden="true" :style="styles">
+  <svg :class="iconfontCls" aria-hidden="true" :style="styles" @click="handleClick">
     <use :xlink:href="iconfont"></use>
   </svg>
 </template>
@@ -21,6 +21,11 @@
         return `${this.classes} icon iconfont`;
       },
     },
+    methods: {
+      handleClick(e) {
+        this.$emit('click', e);
+      },
+    }
   }
 </script>
 

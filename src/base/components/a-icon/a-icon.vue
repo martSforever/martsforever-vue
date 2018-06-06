@@ -1,5 +1,5 @@
 <template>
-  <i :is="type" :icon="icon" :styles="styles" :classes="prefixCls"></i>
+  <i :is="type" :icon="icon" :styles="styles" :classes="prefixCls" @click="handleClick"></i>
 </template>
 
 <script>
@@ -51,6 +51,11 @@
         }
         return style;
       }
+    },
+    methods: {
+      handleClick(e) {
+        this.$emit('click',e);
+      },
     }
   }
 </script>

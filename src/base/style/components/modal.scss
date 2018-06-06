@@ -1,0 +1,57 @@
+.#{$css-prefix-modal}-shadow {
+  position: absolute;
+  @include fill-parent;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+
+  .#{$css-prefix-modal}-content {
+    background-color: rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    &.#{$css-prefix-modal}-content-none {
+      border-radius: 0;
+    }
+    &.#{$css-prefix-modal}-content-fillet {
+      border-radius: 12px;
+    }
+
+    .#{$css-prefix-modal}-head, .#{$css-prefix-modal}-foot {
+      min-height: 36px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: $text-color-light;
+      display: flex;
+      align-items: center;
+      padding-left: 12px;
+    }
+    .#{$css-prefix-modal}-body {
+      flex: 1;
+    }
+    .#{$css-prefix-modal}-head {
+      position: relative;
+      .close-icon {
+        height: 100%;
+        width: 36px;
+        position: absolute;
+        right: 0;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: blueviolet;
+
+        @include transition-all;
+        &:hover {
+          transform: rotate(180deg);
+          color: $text-color-main;
+        }
+      }
+    }
+  }
+}

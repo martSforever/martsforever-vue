@@ -9,4 +9,5 @@ export default {
   prefixInput:`${basePrefix}-input`,
   prefixtextArea:`${basePrefix}-textarea`,
   prefixSwitch:`${basePrefix}-switch`,
+  prefixModal:`${basePrefix}-modal`,
 }

@@ -51,6 +51,11 @@ export const router = {
       component: resolve => require(['src/example/test/test.vue'], resolve),
       name: 'test'
     },
+    {
+      path: '/aModal',
+      component: resolve => require(['src/example/a-modal/a-modal-example.vue'], resolve),
+      name: 'modal'
+    },
   ]
 };
 export default {

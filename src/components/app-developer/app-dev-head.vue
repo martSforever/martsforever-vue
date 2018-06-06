@@ -29,6 +29,7 @@
           {name: 'textarea', url: 'aTextareaExample'},
           {name: 'carousel', url: 'aCarouselExample'},
           {name: 'switch', url: 'aSwitchExample'},
+          {name: 'modal', url: 'aModal'},
           {name: 'test', url: 'test'},
         ],
         name: 'a-icon'
