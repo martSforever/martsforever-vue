@@ -1,6 +1,5 @@
 .#{$css-prefix-modal}-shadow {
-  position: absolute;
-  @include fill-parent;
+  @include fill-window;
   overflow: hidden;
 
   display: flex;

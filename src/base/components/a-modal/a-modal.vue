@@ -13,7 +13,7 @@
           @click.stop="handleClickContent">
           <div :class="headCls" v-if="hasHeadSlot || !!title || (closeIcon === true || closeIcon === 'Y')">
             <slot name="head"/>
-            <div v-if="!hasHeadSlot">{{title}}</div>
+            <div v-if="!hasHeadSlot && !!title"><a-icon :fa="typeIcon.icon" :icon-type="typeIcon.type" :style="typeIconColor(typeIcon.color)"/>{{title}}</div>
             <a-icon fa="fa-times" class="close-icon" @click="handleClickCloseIcon"/>
           </div>
           <div :class="bodyCls">
@@ -33,6 +33,34 @@
   import prefix from 'src/base/script/css-prefix.js';
   import {oneOf} from "../../script/utils";
   import AIcon from "../a-icon/a-icon";
+
+  const typeIcons = {
+    success: {
+      icon: 'fa-info-circle',
+      type: 'fa',
+      color: '#00ff80'
+    },
+    info: {
+      icon: 'fa-check-circle',
+      type: 'fa',
+      color: '#ddd'
+    },
+    primary: {
+      icon: 'info',
+      type: 'iconfont',
+      color: '#0ac2ff'
+    },
+    warning: {
+      icon: 'warning',
+      type: 'iconfont',
+      color: '#e9f01d'
+    },
+    error: {
+      icon: 'error',
+      type: 'iconfont',
+      color: '#e03636'
+    },
+  };
 
   export default {
     components: {AIcon},
@@ -81,6 +109,13 @@
         default: true,
         validator(val) {
           return oneOf(val, ['Y', 'N', true, false]);
+        },
+      },
+      type: {
+        type: String,
+        default: 'primary',
+        validator(val) {
+          return oneOf(val, ['info', 'primary', 'success', 'error', 'warning']);
         },
       }
     },
@@ -144,20 +179,38 @@
           height: this.height
         }
       },
+      typeIcon() {
+        return typeIcons[this.type];
+      },
     },
     methods: {
+      typeIconColor(color) {
+        return {
+          color: color,
+          fontSize: '20px',
+          marginRight:'12px'
+        }
+      },
       handleClickWrapper(e) {
-        this.currentValue = false;
-        this.$emit('input', this.currentValue);
+        this.hide();
       },
       handleClickContent(e) {
         this.$emit('clickContent');
       },
       handleClickCloseIcon(e) {
-        console.log('click');
+        this.hide();
+      },
+      show() {
+        (this.currentValue !== true) && (this.$emit('change', true));
+        this.currentValue = true;
+        this.$emit('input', this.currentValue);
+      },
+      hide() {
+        console.log(this.currentValue);
+        (this.currentValue !== false) && (this.$emit('change', false));
         this.currentValue = false;
         this.$emit('input', this.currentValue);
-      }
+      },
     },
   }
 </script>

@@ -7,7 +7,8 @@
     ref="btn"
     :style="styles"
     @click="handleClick">
-    <a-icon iconfont="loading" v-if="loading" :class="{'a-load-loop':loading}"/>
+    <a-icon iconfont="loading" v-if="loading === true || loading === 'Y'"
+            :class="{'a-load-loop':(loading === true || loading === 'Y')}"/>
     <a-icon :iconfont="iconfont" :fa="fa" v-if="(!!iconfont || !!fa) && !loading"/>
     <span v-if="showSlot" ref="slot"><slot></slot></span>
   </button>
@@ -28,7 +29,7 @@
         }
       },
       shape: {
-        default:'fillet',
+        default: 'fillet',
         validator(value) {
           return oneOf(value, ['circle', 'round', 'fillet', 'none']);
         }
@@ -38,7 +39,13 @@
           return oneOf(value, ['small', 'large', 'base']);
         }
       },
-      loading: Boolean,
+      loading: {
+        type: [String, Boolean],
+        default: false,
+        validator(val) {
+          return oneOf(val, [true, false, 'Y', 'N'])
+        },
+      },
       disabled: Boolean,
       htmlType: {
         default: 'button',
