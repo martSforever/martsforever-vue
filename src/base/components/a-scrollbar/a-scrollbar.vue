@@ -89,14 +89,14 @@
       },
       _updateContent() {
 
-        /*内容宽度增加17个像素，把横向滚动条隐藏*/
+        /*内容宽度增加20个像素，把横向滚动条隐藏*/
         let wrapperAppendHeight = this.$refs.scrollbarContent.offsetWidth < this.$refs.scrollbarContent.scrollWidth ? this.scrollBarSize : 0;
-        this.$refs.scrollbarContent.style.height = `${this.$refs.scrollbarWrapper.offsetHeight + (17 - wrapperAppendHeight)}px`;
+        this.$refs.scrollbarContent.style.height = `${this.$refs.scrollbarWrapper.offsetHeight + (20 - wrapperAppendHeight)}px`;
         this.hShowScrollbar = !!wrapperAppendHeight;
 
-        /*内容宽度增加17个像素，把滚动条隐藏*/
+        /*内容宽度增加20个像素，把滚动条隐藏*/
         let wrapperAppendWidth = this.$refs.scrollbarContent.offsetHeight < this.$refs.scrollbarContent.scrollHeight ? this.scrollBarSize : 0;
-        this.$refs.scrollbarContent.style.width = `${this.$refs.scrollbarWrapper.offsetWidth + (17 - wrapperAppendWidth)}px`;
+        this.$refs.scrollbarContent.style.width = `${this.$refs.scrollbarWrapper.offsetWidth + (20 - wrapperAppendWidth)}px`;
         this.vShowScrollbar = !!wrapperAppendWidth;
 
         // if (this.$slots.default.length !== 1) throw new Error("a-scrollbar内有且仅有一个子节点！");
@@ -131,7 +131,7 @@
           return 0;
         }
         /*内容可视高度*/
-        let contentOffsetHeight = this.$refs.scrollbarContent.offsetHeight - 17;
+        let contentOffsetHeight = this.$refs.scrollbarContent.offsetHeight - 20;
         /*内容滚动实际高度*/
         let contentScrollHeight = this.$refs.scrollbarContent.scrollHeight;
         // console.log('contentOffsetHeight', contentOffsetHeight);
@@ -152,7 +152,7 @@
       _vOnContentScroll(e) {
         /*内容滚动位置*/
         let contentScrollTop = this.$refs.scrollbarContent.scrollTop;
-        let scrollBarScrollTop = (contentScrollTop / (this.$refs.scrollbarContent.scrollHeight - this.$refs.scrollbarContent.offsetHeight + 17)) * (this.$refs.vScrollbar.offsetHeight - this.$refs.vIndicator.offsetHeight);
+        let scrollBarScrollTop = (contentScrollTop / (this.$refs.scrollbarContent.scrollHeight - this.$refs.scrollbarContent.offsetHeight + 20)) * (this.$refs.vScrollbar.offsetHeight - this.$refs.vIndicator.offsetHeight);
         this.$refs.vIndicator.style.top = `${scrollBarScrollTop}px`;
       },
       /*纵向指示器点击开始*/
@@ -173,7 +173,7 @@
           let indicatorResultTop = Math.min(Math.max(this.vTouch.startTop + deltaY, 0), this.vTouch.maxTop);
           this.$refs.vIndicator.style.top = `${indicatorResultTop}px`;
           /*内容滚动*/
-          let scrollContentResultTop = (indicatorResultTop / (this.$refs.vScrollbar.offsetHeight - this.$refs.vIndicator.offsetHeight)) * (this.$refs.scrollbarContent.scrollHeight - this.$refs.scrollbarContent.offsetHeight + 17);
+          let scrollContentResultTop = (indicatorResultTop / (this.$refs.vScrollbar.offsetHeight - this.$refs.vIndicator.offsetHeight)) * (this.$refs.scrollbarContent.scrollHeight - this.$refs.scrollbarContent.offsetHeight + 20);
           this.$refs.scrollbarContent.scrollTop = `${scrollContentResultTop}`;
         }
       },
@@ -204,7 +204,7 @@
           return 0;
         }
         /*内容可视宽度度*/
-        let contentOffsetWidth = this.$refs.scrollbarContent.offsetWidth - 17;
+        let contentOffsetWidth = this.$refs.scrollbarContent.offsetWidth - 20;
         /*内容滚动实际宽度*/
         let contentScrollWidth = this.$refs.scrollbarContent.scrollWidth;
 
@@ -222,7 +222,7 @@
         /*内容滚动位置*/
         let contentScrollLeft = this.$refs.scrollbarContent.scrollLeft;
         /*指示器滚动位置*/
-        let scrollBarScrollLeft = (contentScrollLeft / (this.$refs.scrollbarContent.scrollWidth - this.$refs.scrollbarContent.offsetWidth + 17)) * (this.$refs.hScrollbar.offsetWidth - this.$refs.hIndicator.offsetWidth);
+        let scrollBarScrollLeft = (contentScrollLeft / (this.$refs.scrollbarContent.scrollWidth - this.$refs.scrollbarContent.offsetWidth + 20)) * (this.$refs.hScrollbar.offsetWidth - this.$refs.hIndicator.offsetWidth);
         // console.log(this.$refs.scrollbarContent.scrollWidth, this.$refs.scrollbarContent.scrollLeft, this.$refs.scrollbarContent.offsetWidth);
         this.$refs.hIndicator.style.left = `${scrollBarScrollLeft}px`;
       },
@@ -243,7 +243,7 @@
           let indicatorResultLeft = Math.min(Math.max(this.hTouch.startLeft + deltaX, 0), this.hTouch.maxLeft);
           this.$refs.hIndicator.style.left = `${indicatorResultLeft}px`;
           /*内容滚动*/
-          let scrollContentResultLeft = (indicatorResultLeft / (this.$refs.hScrollbar.offsetWidth - this.$refs.hIndicator.offsetWidth)) * (this.$refs.scrollbarContent.scrollWidth - this.$refs.scrollbarContent.offsetWidth + 17);
+          let scrollContentResultLeft = (indicatorResultLeft / (this.$refs.hScrollbar.offsetWidth - this.$refs.hIndicator.offsetWidth)) * (this.$refs.scrollbarContent.scrollWidth - this.$refs.scrollbarContent.offsetWidth + 20);
           this.$refs.scrollbarContent.scrollLeft = `${scrollContentResultLeft}`;
         }
       },
