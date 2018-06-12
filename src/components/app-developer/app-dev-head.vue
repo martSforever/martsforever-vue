@@ -31,6 +31,7 @@
           {name: 'switch', url: 'aSwitchExample'},
           {name: 'modal', url: 'aModal'},
           {name: 'test', url: 'test'},
+          {name: 'lnkLov', url: 'lnkLov'},
         ],
         name: 'a-icon'
       }

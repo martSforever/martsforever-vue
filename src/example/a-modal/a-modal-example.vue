@@ -10,7 +10,7 @@
     <a-title>设置对话框图标级别</a-title>
     <div class="example-item">
       <a-button @click="show11 = !show11">show11-->>{{show11}}</a-button>
-      <a-modal type="success" v-model="show11" title="通知">
+      <a-modal type="info" v-model="show11" title="通知">
         balabala-->>{{show11}}
       </a-modal>
     </div>
