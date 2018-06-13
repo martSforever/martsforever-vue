@@ -206,7 +206,6 @@
         this.$emit('input', this.currentValue);
       },
       hide() {
-        console.log(this.currentValue);
         (this.currentValue !== false) && (this.$emit('change', false));
         this.currentValue = false;
         this.$emit('input', this.currentValue);

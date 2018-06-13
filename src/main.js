@@ -6,6 +6,7 @@ import 'swiper/dist/css/swiper.css';                                            
 import 'src/base/directives'
 
 import 'src/base/style/index.scss';
+import 'src/index.js';
 
 Vue.config.productionTip = false;
 

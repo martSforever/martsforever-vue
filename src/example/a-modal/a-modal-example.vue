@@ -1,5 +1,17 @@
 <template>
   <div class="a-modal-example">
+    <a-title>消息提示插件$Model</a-title>
+    <div class="example-item">
+      <a-button type="info" @click="showInfo">提示对话框</a-button>
+      <a-button type="primary">普通对话框</a-button>
+      <a-button type="warning">警告对话框</a-button>
+      <a-button type="error">错误对话框</a-button>
+      <a-button type="success">成功对话框</a-button>
+
+      <a-button type="primary">确认对话框</a-button>
+      <a-button type="info">输入对话框</a-button>
+    </div>
+
     <a-title>通过引用控制对话框显隐</a-title>
     <div class="example-item">
       <a-button @click="toggle">show1-->>{{show1}}</a-button>
@@ -134,6 +146,11 @@
       },
       handleChange(isShow) {
         this.show1 = isShow;
+      },
+      showInfo(){
+        this.$Modal.info(
+          {title:'请求失败？？？'}
+        );
       },
     },
   }
