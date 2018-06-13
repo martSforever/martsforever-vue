@@ -56,11 +56,6 @@ export const router = {
       component: resolve => require(['src/example/a-modal/a-modal-example.vue'], resolve),
       name: 'modal'
     },
-    {
-      path: '/lnkLov',
-      component: resolve => require(['src/example/lnk-lov/lnk-lov-example.vue'], resolve),
-      name: 'lnkLov'
-    },
   ]
 };
 export default {

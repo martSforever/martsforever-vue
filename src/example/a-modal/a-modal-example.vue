@@ -7,18 +7,18 @@
         balabala-->>{{show1}}
       </a-modal>
     </div>
-    <a-title>设置对话框图标级别</a-title>
-    <div class="example-item">
-      <a-button @click="show11 = !show11">show11-->>{{show11}}</a-button>
-      <a-modal type="info" v-model="show11" title="通知">
-        balabala-->>{{show11}}
-      </a-modal>
-    </div>
     <a-title>通过数据绑定控制显隐</a-title>
     <div class="example-item">
       <a-button @click="show2 = !show2">show2-->>{{show2}}</a-button>
       <a-modal v-model="show2">
         balabala-->>{{show2}}
+      </a-modal>
+    </div>
+    <a-title>设置对话框图标级别</a-title>
+    <div class="example-item">
+      <a-button @click="show11 = !show11">show11-->>{{show11}}</a-button>
+      <a-modal type="info" v-model="show11" title="通知">
+        balabala-->>{{show11}}
       </a-modal>
     </div>
     <a-title>设置遮罩层颜色</a-title>
