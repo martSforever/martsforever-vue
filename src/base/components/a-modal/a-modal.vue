@@ -13,13 +13,16 @@
           @click.stop="handleClickContent">
           <div :class="headCls" v-if="hasHeadSlot || !!title || (closeIcon === true || closeIcon === 'Y')">
             <slot name="head"/>
-            <div v-if="!hasHeadSlot && !!title"><a-icon :fa="typeIcon.icon" :icon-type="typeIcon.type" :style="typeIconColor(typeIcon.color)"/>{{title}}</div>
+            <div v-if="!hasHeadSlot && !!title" class="default-header">
+              <a-icon :fa="typeIcon.icon" :icon-type="typeIcon.type" :style="typeIconColor(typeIcon.color)"/>
+              {{title}}
+            </div>
             <a-icon fa="fa-times" class="close-icon" @click="handleClickCloseIcon"/>
           </div>
-          <div :class="bodyCls">
+          <div :class="bodyCls" :style="bodyStyles">
             <slot></slot>
           </div>
-          <div :class="footCls" v-if="hasFootSlot">
+          <div :class="footCls" v-show="hasFootSlot && showFoot">
             <slot name="foot"/>
             <div v-if="!hasFootSlot">tooltip</div>
           </div>
@@ -41,9 +44,9 @@
       color: '#00ff80'
     },
     info: {
-      icon: 'fa-check-circle',
-      type: 'fa',
-      color: '#ddd'
+      icon: 'Idea',
+      type: 'iconfont',
+      color: '#c0c0c8'
     },
     primary: {
       icon: 'info',
@@ -117,6 +120,14 @@
         validator(val) {
           return oneOf(val, ['info', 'primary', 'success', 'error', 'warning']);
         },
+      },
+      relativeTop: {
+        type: Number,
+        default: 25
+      },
+      showFoot: {
+        type: Boolean,
+        default: true
       }
     },
     watch: {
@@ -129,7 +140,6 @@
         prefix: prefix.prefixModal,
         currentValue: this.value,
         hasHeadSlot: !!this.$slots.head,
-        hasFootSlot: !!this.$slots.foot
       }
     },
     created() {
@@ -170,17 +180,27 @@
 
       shadowStyles() {
         return {
-          backgroundColor: this.shadowColor
+          backgroundColor: this.shadowColor,
+        }
+      },
+      bodyStyles() {
+        return {
+          minHeight:'78px'
         }
       },
       contentStyles() {
         return {
           width: this.width,
-          height: this.height
+          height: this.height,
+          position: 'relative',
+          top: `-${this.relativeTop}%`,
         }
       },
       typeIcon() {
         return typeIcons[this.type];
+      },
+      hasFootSlot() {
+        return !!this.$slots.foot;
       },
     },
     methods: {
@@ -188,7 +208,7 @@
         return {
           color: color,
           fontSize: '20px',
-          marginRight:'12px'
+          marginRight: '12px'
         }
       },
       handleClickWrapper(e) {

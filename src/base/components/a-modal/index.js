@@ -1,24 +1,32 @@
 import Vue from 'vue';
-import Modal from './a-modal';
+import AModal from './a-modal';
 import Button from '../a-button/a-button';
 import prefix from 'src/base/script/css-prefix.js';
 
 const prefixCls = prefix.prefixConfirmModal;
 
-Modal.newInstance = properties => {
+AModal.newInstance = properties => {
   const _props = properties || {};
   const instance = new Vue({
+    components: {
+      AModal
+    },
     data() {
-      return Object.assign({},_props,{
-        value: false,
-        width: '416px',
-        height: '',
-        title: '提示',
-        type: 'info',
-      })
+      return Object.assign(
+        {
+          hasFoot: false,
+          confirmText: '是',
+          cancelText: '否',
+        }
+        , _props,
+        {
+          value: false,
+          width: '416px',
+          height: '',
+        })
     },
     render(h) {
-      return h(Modal, {
+      /*return h(AModal, {
         props: Object.assign({}, _props, {
           width: this.width,
           height: this.height,
@@ -31,9 +39,33 @@ Modal.newInstance = properties => {
             this.value = value;
           },
         }
-      });
+      });*/
+
+      /*
+        onInput={this.__handleOnInput}
+        {...{on: {'input': this.__handleOnInput}}}
+      */
+      return (
+        <a-modal
+          value={this.value}
+          width={this.width}
+          height={this.height}
+          title={this.title}
+          type={this.type}
+          showFoot={this.hasFoot}
+          onInput={(val) => this.value = val}
+        >
+          <div style={{padding: '12px'}}>
+            {this.message}
+          </div>
+          <div slot="foot" class={this.footCls}>
+            <div class="left" onClick={this.__hadleConfirm}>{this.confirmText}</div>
+            <div class="right" onClick={this.__handleCancel}>{this.cancelText}</div>
+          </div>
+        </a-modal>
+      );
     },
-    method: {
+    methods: {
       remove() {
         setTimeout(() => {
           this.destroy();
@@ -44,14 +76,23 @@ Modal.newInstance = properties => {
         document.body.removeChild(this.$el);
         this.onRemove();
       },
-      onConfirm() {
-
+      __handleOnInput(value) {
+        this.value = value;
       },
-      onCancel() {
-
+      __hadleConfirm(e) {
+        this.onConfirm && this.onConfirm(e);
+        this.value = false;
       },
-      onRemove() {
-
+      __handleCancel(e) {
+        this.onCancel && this.onCancel(e);
+        this.value = false;
+      },
+    },
+    computed: {
+      footCls() {
+        return [
+          `${prefixCls}-foot`
+        ]
       },
     }
   });
@@ -60,8 +101,8 @@ Modal.newInstance = properties => {
 
   return {
     show(props) {
-      instance.title = props.title;
-      instance.type = props.type;
+      for (let k in props)
+        instance[k] = props[k];
       instance.value = true;
     },
     remove() {
@@ -74,7 +115,7 @@ Modal.newInstance = properties => {
 let modalInstance;
 
 function getModalInstance() {
-  modalInstance = modalInstance || Modal.newInstance({});
+  modalInstance = modalInstance || AModal.newInstance({});
   return modalInstance;
 }
 
@@ -86,9 +127,26 @@ function showModal(props) {
   instance.show(props);
 }
 
-Modal.info = function (props = {}) {
-  props.type = 'info';
-  return showModal(props);
-};
+const types = [
+  'info', 'success', 'warning', 'error'
+];
 
-export default Modal;
+for (let i = 0; i < types.length; i++) {
+  let type = types[i];
+  AModal[type] = function (props) {
+    props.type = type;
+    props.title = props.title || '提示';
+    props.message = props.message || '';
+    props.hasFoot = false;
+    return showModal(props);
+  }
+}
+
+AModal.showConfirm = function (props) {
+  props.type = props.type || 'warning';
+  props.title = props.title || '提示';
+  props.hasFoot = true;
+  return showModal(props);
+}
+
+export default AModal;

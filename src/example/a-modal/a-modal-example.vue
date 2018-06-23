@@ -3,12 +3,11 @@
     <a-title>消息提示插件$Model</a-title>
     <div class="example-item">
       <a-button type="info" @click="showInfo">提示对话框</a-button>
-      <a-button type="primary">普通对话框</a-button>
-      <a-button type="warning">警告对话框</a-button>
-      <a-button type="error">错误对话框</a-button>
-      <a-button type="success">成功对话框</a-button>
+      <a-button type="warning" @click="showWarning">警告对话框</a-button>
+      <a-button type="error" @click="showError">错误对话框</a-button>
+      <a-button type="success" @click="showSuccess">成功对话框</a-button>
 
-      <a-button type="primary">确认对话框</a-button>
+      <a-button type="primary" @click="showConfirm">确认对话框</a-button>
       <a-button type="info">输入对话框</a-button>
     </div>
 
@@ -43,7 +42,7 @@
     <a-title>自定义宽高</a-title>
     <div class="example-item">
       <a-button @click="show4 = !show4">show4-->>{{show4}}</a-button>
-      <a-modal v-model="show4" width="100%" height="100%">
+      <a-modal v-model="show4" width="400px" height="200px">
         <div style="height:100%;width:100%;background-color: black">
           balabala-->>{{show4}}
         </div>
@@ -147,9 +146,40 @@
       handleChange(isShow) {
         this.show1 = isShow;
       },
-      showInfo(){
+      showInfo() {
         this.$Modal.info(
-          {title:'请求失败？？？'}
+          {title: '操作提示', message: '请求成功！！！'}
+        );
+      },
+      showWarning() {
+        this.$Modal.warning(
+          {title: '警告', message: '没有操作权限！'}
+        );
+      },
+      showError() {
+        this.$Modal.error(
+          {title: '错误', message: '操作失败！'}
+        );
+      },
+      showSuccess() {
+        this.$Modal.success(
+          {title: '提示', message: '操作成功！'}
+        );
+      },
+      showConfirm() {
+        this.$Modal.showConfirm(
+          {
+            title: '确认提示',
+            message: '确定要删除该记录吗？！',
+            confirmText: '是的，给我删了',
+            cancelText:'等等，让我想想……',
+            onConfirm() {
+              console.log('confirm');
+            },
+            onCancel() {
+              console.log('cancel');
+            },
+          }
         );
       },
     },
