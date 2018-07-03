@@ -56,6 +56,11 @@ export const router = {
       component: resolve => require(['src/example/a-modal/a-modal-example.vue'], resolve),
       name: 'modal'
     },
+    {
+      path: '/canvas',
+      component: resolve => require(['src/example/canvas/canvas-example.vue'], resolve),
+      name: 'modal'
+    },
   ]
 };
 export default {
