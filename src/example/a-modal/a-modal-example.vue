@@ -8,7 +8,7 @@
       <a-button type="success" @click="showSuccess">成功对话框</a-button>
 
       <a-button type="primary" @click="showConfirm">确认对话框</a-button>
-      <a-button type="info">输入对话框</a-button>
+      <a-button type="info" @click="showInput">输入对话框</a-button>
     </div>
 
     <a-title>通过引用控制对话框显隐</a-title>
@@ -172,12 +172,23 @@
             title: '确认提示',
             message: '确定要删除该记录吗？！',
             confirmText: '是的，给我删了',
-            cancelText:'等等，让我想想……',
+            cancelText: '等等，让我想想……',
             onConfirm() {
-              console.log('confirm');
+              console.log('confirm ddd');
             },
             onCancel() {
               console.log('cancel');
+            },
+          }
+        );
+      },
+      showInput() {
+        console.log('showInput')
+        this.$Modal.showInput(
+          {
+            title: '请输入密码',
+            onConfirm(e, input) {
+              console.log('confirm callback')
             },
           }
         );

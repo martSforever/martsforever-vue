@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import AModal from './a-modal';
 import Button from '../a-button/a-button';
+import AInput from '../a-input/a-input';
 import prefix from 'src/base/script/css-prefix.js';
 
 const prefixCls = prefix.prefixConfirmModal;
@@ -9,7 +10,8 @@ AModal.newInstance = properties => {
   const _props = properties || {};
   const instance = new Vue({
     components: {
-      AModal
+      AModal,
+      AInput
     },
     data() {
       return Object.assign(
@@ -17,6 +19,8 @@ AModal.newInstance = properties => {
           hasFoot: false,
           confirmText: '是',
           cancelText: '否',
+          input: '值',
+          isInput: false
         }
         , _props,
         {
@@ -56,7 +60,8 @@ AModal.newInstance = properties => {
           onInput={(val) => this.value = val}
         >
           <div style={{padding: '12px'}}>
-            {this.message}
+            <span v-show={!this.isInput}>{this.message}</span>
+            <a-input v-show={this.isInput} value={this.input} onInput={(val) => this.input = val}/>
           </div>
           <div slot="foot" class={this.footCls}>
             <div class="left" onClick={this.__hadleConfirm}>{this.confirmText}</div>
@@ -72,6 +77,7 @@ AModal.newInstance = properties => {
         }, 300)
       },
       destroy() {
+        console.log('destroy')
         this.$destroy();
         document.body.removeChild(this.$el);
         this.onRemove();
@@ -146,6 +152,14 @@ AModal.showConfirm = function (props) {
   props.type = props.type || 'warning';
   props.title = props.title || '提示';
   props.hasFoot = true;
+  return showModal(props);
+}
+
+AModal.showInput = function (props) {
+  props.type = props.type || 'info';
+  props.title = props.title || '请输入...';
+  props.hasFoot = true;
+  props.isInput = true;
   return showModal(props);
 }
 
