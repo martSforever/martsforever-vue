@@ -174,7 +174,7 @@
             confirmText: '是的，给我删了',
             cancelText: '等等，让我想想……',
             onConfirm() {
-              console.log('confirm ddd');
+              console.log('confirm');
             },
             onCancel() {
               console.log('cancel');
@@ -183,12 +183,14 @@
         );
       },
       showInput() {
-        console.log('showInput')
         this.$Modal.showInput(
           {
             title: '请输入密码',
             onConfirm(e, input) {
-              console.log('confirm callback')
+              console.log('input confirm-->>', input)
+            },
+            onCancel() {
+              console.log('input cancel..')
             },
           }
         );

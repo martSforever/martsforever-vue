@@ -5,6 +5,7 @@
     </div>
     <a-icon :fa="icon" :class="iconClass" v-if="!!icon" :icon-type="iconType"/>
     <input
+      ref="input"
       :type="type"
       :id="id"
       :name="name"
@@ -149,6 +150,9 @@
       handleBlur(event) {
         this.isFocus = false;
         this.$emit('on-blur', event);
+      },
+      focus() {
+        this.$refs.input.focus();
       },
     },
     watch: {

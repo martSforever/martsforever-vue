@@ -59,9 +59,23 @@ AModal.newInstance = properties => {
           showFoot={this.hasFoot}
           onInput={(val) => this.value = val}
         >
-          <div style={{padding: '12px'}}>
+          <div style={{
+            padding: '12px',
+            minHeight: '78px',
+            display: 'flex',
+            alignItems: 'center',
+            boxSizing: 'border-box'
+          }}>
             <span v-show={!this.isInput}>{this.message}</span>
-            <a-input v-show={this.isInput} value={this.input} onInput={(val) => this.input = val}/>
+            <a-input
+              v-show={this.isInput}
+              value={this.input}
+              onInput={this.__handleOnInput}
+              ref="input"
+              style={{width: '100%'}}
+              color="info"
+              size="middle"
+            />
           </div>
           <div slot="foot" class={this.footCls}>
             <div class="left" onClick={this.__hadleConfirm}>{this.confirmText}</div>
@@ -83,16 +97,21 @@ AModal.newInstance = properties => {
         this.onRemove();
       },
       __handleOnInput(value) {
-        this.value = value;
+        /*很奇怪的一个问题，就是在输入一个字符之后，input这里会立马失去焦点，导致无法输入，这里每次在数据变化之后，令input重新获取焦点*/
+        this.input = value;
+        this.$nextTick(() => {
+          this.$refs.input.focus();
+        });
       },
       __hadleConfirm(e) {
-        this.onConfirm && this.onConfirm(e);
+        this.onConfirm && this.onConfirm(e, this.isInput ? this.input : null);
         this.value = false;
       },
       __handleCancel(e) {
         this.onCancel && this.onCancel(e);
         this.value = false;
       },
+
     },
     computed: {
       footCls() {
@@ -144,6 +163,7 @@ for (let i = 0; i < types.length; i++) {
     props.title = props.title || '提示';
     props.message = props.message || '';
     props.hasFoot = false;
+    props.isInput = false;
     return showModal(props);
   }
 }
@@ -152,6 +172,7 @@ AModal.showConfirm = function (props) {
   props.type = props.type || 'warning';
   props.title = props.title || '提示';
   props.hasFoot = true;
+  props.isInput = false;
   return showModal(props);
 }
 
@@ -160,6 +181,7 @@ AModal.showInput = function (props) {
   props.title = props.title || '请输入...';
   props.hasFoot = true;
   props.isInput = true;
+  props.input = null;
   return showModal(props);
 }
 
