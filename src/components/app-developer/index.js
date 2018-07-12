@@ -47,19 +47,24 @@ export const router = {
       name: 'ASwitchExample'
     },
     {
-      path: '/test',
-      component: resolve => require(['src/example/test/test.vue'], resolve),
-      name: 'test'
-    },
-    {
       path: '/aModal',
       component: resolve => require(['src/example/a-modal/a-modal-example.vue'], resolve),
       name: 'modal'
     },
     {
+      path: '/aRadio',
+      component: resolve => require(['src/example/a-radio/a-radio-example.vue'], resolve),
+      name: 'radio'
+    },
+    {
       path: '/canvas',
       component: resolve => require(['src/example/canvas/canvas-example.vue'], resolve),
       name: 'modal'
+    },
+    {
+      path: '/test',
+      component: resolve => require(['src/example/test/test.vue'], resolve),
+      name: 'test'
     },
   ]
 };
