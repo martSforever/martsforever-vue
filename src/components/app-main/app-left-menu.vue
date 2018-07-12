@@ -9,7 +9,7 @@
         <div v-for="row in rows">
           <ul>
             <li v-for="(item,index) in menuList" class="menu-item" @click="gotoMenu(item)">
-              <a-icon :iconfont="item.icon" class="menu-icon"></a-icon>
+              <a-icon :icon="item.icon" class="menu-icon"></a-icon>
               <label>{{item.name}}</label>
             </li>
           </ul>
