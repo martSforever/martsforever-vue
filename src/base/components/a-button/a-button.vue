@@ -7,9 +7,10 @@
     ref="btn"
     :style="styles"
     @click="handleClick">
-    <a-icon iconfont="loading" v-if="loading === true || loading === 'Y'"
+    <a-icon icon="loading" v-if="loading === true || loading === 'Y'"
             :class="{'a-load-loop':(loading === true || loading === 'Y')}"/>
-    <a-icon :iconfont="iconfont" :fa="fa" v-if="(!!iconfont || !!fa) && !loading"/>
+
+    <a-icon :icon="icon" v-if="(!!icon) && !loading"/>
     <span v-if="showSlot" ref="slot"><slot></slot></span>
   </button>
 </template>
@@ -53,13 +54,13 @@
           return oneOf(value, ['button', 'submit', 'reset']);
         }
       },
-      icon: String,
+      icon: {
+        type: String
+      },
       long: {
         type: Boolean,
         default: false
       },
-      iconfont: String,
-      fa: String,
     },
     data() {
       return {

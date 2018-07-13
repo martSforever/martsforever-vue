@@ -3,7 +3,7 @@
     <div :class="prependClass">
       <slot name="prepend"/>
     </div>
-    <a-icon :fa="icon" :class="iconClass" v-if="!!icon" :icon-type="iconType"/>
+    <a-icon :icon="icon" :class="iconClass" v-if="!!icon"/>
     <input
       ref="input"
       :type="type"
@@ -86,13 +86,6 @@
         validator: (val) => {
           return oneOf(val, ['left', 'right']);
         },
-      },
-      iconType: {
-        type: String,
-        default: 'fa',
-        validator: (val) => {
-          return oneOf(val, ['fa', 'iconfont'])
-        }
       },
 
       size: {
