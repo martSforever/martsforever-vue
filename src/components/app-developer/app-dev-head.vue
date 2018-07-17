@@ -32,6 +32,7 @@
           {name: 'modal', url: 'aModal'},
           {name: 'test', url: 'test'},
           {name: 'canvas', url: 'canvas'},
+          {name: 'parent-child', url: 'parent-child'},
         ],
         name: 'a-icon'
       }
