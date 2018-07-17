@@ -1,6 +1,5 @@
 <template>
   <div>
-    a-radio-group
     <slot></slot>
   </div>
 </template>
