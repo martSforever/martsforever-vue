@@ -4,11 +4,11 @@
       <a-title>按钮图标</a-title>
     </div>
     <div class="btn-wrapper">
-      <a-button fa="fa-address-book">fa button</a-button>
-      <a-button iconfont="line">iconfont button</a-button>
-      <a-button iconfont="line" :loading="isLoading">loading button</a-button>
-      <a-button fa="fa-file" :disabled="disabled" @click="sayHello">disabled button</a-button>
-      <a-button fa="fa-file" :disabled="!disabled" @click="sayHello">not disabled button</a-button>
+      <a-button icon="fa-address-book">fa button</a-button>
+      <a-button icon="line">iconfont button</a-button>
+      <a-button icon="line" :loading="isLoading">loading button</a-button>
+      <a-button icon="fa-file" :disabled="disabled" @click="sayHello">disabled button</a-button>
+      <a-button icon="fa-file" :disabled="!disabled" @click="sayHello">not disabled button</a-button>
     </div>
     <div>
       <a-title>按钮颜色</a-title>
@@ -37,7 +37,7 @@
     <div class="btn-wrapper">
       <a-button>default</a-button>
       <a-button shape="round">round</a-button>
-      <a-button shape="circle" fa="fa-user"/>
+      <a-button shape="circle" icon="fa-user"/>
       <a-button shape="fillet">fillet</a-button>
       <a-button shape="none">none</a-button>
     </div>
@@ -54,7 +54,7 @@
     </div>
     <div class="btn-wrapper">
       <a-button>default</a-button>
-      <a-button shape="circle" fa="fa-user" size="large"/>
+      <a-button shape="circle" icon="fa-user" size="large"/>
       <a-button shape="none" size="large">large</a-button>
       <a-button shape="none" size="base">base</a-button>
       <a-button shape="none" size="small">small</a-button>

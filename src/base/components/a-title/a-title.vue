@@ -1,6 +1,6 @@
 <template>
   <div class="a-title">
-    <a-icon iconfont="line"/>
+    <a-icon icon="line"/>
     <slot></slot>
   </div>
 </template>

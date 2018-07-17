@@ -6,7 +6,6 @@
   import AFa from "./a-fa";
   import AIconfont from "./a-iconfont"
   import prefix from 'src/base/script/css-prefix.js';
-  import {oneOf} from "../../script/utils";
 
   export default {
     components: {
@@ -20,26 +19,16 @@
       }
     },
     props: {
-      fa: String,
-      iconfont: String,
       size: [Number, String],
       color: String,
-      iconType: {
+      icon: {
         type: String,
-        validator: (val) => {
-          return oneOf(val, ['fa', 'iconfont'])
-        }
+        required: true
       }
     },
     computed: {
-      icon() {
-        if (!!this.fa) return this.fa;
-        if (!!this.iconfont) return this.iconfont;
-      },
       type() {
-        if (!!this.iconType) return `a-${this.iconType}`;
-        if (!!this.fa) return 'a-fa';
-        if (!!this.iconfont) return 'a-iconfont';
+        return this.icon.indexOf('fa-') > -1 ? 'a-fa' : 'a-iconfont'
       },
       styles() {
         let style = {};
@@ -54,7 +43,7 @@
     },
     methods: {
       handleClick(e) {
-        this.$emit('click',e);
+        this.$emit('click', e);
       },
     }
   }

@@ -30,6 +30,7 @@
           {name: 'carousel', url: 'aCarouselExample'},
           {name: 'switch', url: 'aSwitchExample'},
           {name: 'modal', url: 'aModal'},
+          {name: 'radio', url: 'aRadio'},
           {name: 'test', url: 'test'},
           {name: 'canvas', url: 'canvas'},
           {name: 'parent-child', url: 'parent-child'},
