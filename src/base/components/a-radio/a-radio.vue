@@ -15,6 +15,7 @@
     <div class="text">
       <div slot="label">{{label}}</div>
     </div>
+    <input class="input" :name="name" :value="currentValue"/>
   </div>
 </template>
 
@@ -56,12 +57,13 @@
         type: String,
         default: '#e03636'
       },
-      label: {
-        type: String,
-      },
+      label: {},
       iconSize: {
         type: String,
         default: '16px'
+      },
+      name: {
+        type: String
       }
     },
     methods: {
@@ -81,7 +83,7 @@
       },
       tagStyles() {
         return {
-          marginRight: (!!this.label || !!this.$slots.label) ? '6px' : '0',
+          marginRight: (this.label != null || !!this.$slots.label) ? '6px' : '0',
           fontSize: `${this.iconSize}`,
           width: `${this.iconSize}`,
           height: `${this.iconSize}`,
@@ -99,6 +101,9 @@
     cursor: pointer;
     border-radius: 100px;
     padding: 2px 4px;
+    .input {
+      display: none;
+    }
     .tag {
       flex-direction: row;
       display: inline-flex;

@@ -2,7 +2,7 @@
   <div :class="cls" @click="handleClick">
     <div :class="indicatorCls">
       <slot name="indicator" v-if="customeIndicator"/>
-      <a-icon :fa="icon" :icon-type="iconType" v-else :style="iconStyles"/>
+      <a-icon :icon="icon" v-else :style="iconStyles"/>
     </div>
 
     <div class="a-switch-custome">
@@ -63,13 +63,7 @@
         type: String,
         default: 'fa-circle',
       },
-      iconType: {
-        type: String,
-        default: 'fa',
-        validator(val) {
-          return oneOf(val, ['fa', 'iconfont']);
-        },
-      },
+
       iconSize: {
         type: String,
       },

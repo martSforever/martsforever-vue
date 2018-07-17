@@ -14,10 +14,10 @@
           <div :class="headCls" v-if="hasHeadSlot || !!title || (closeIcon === true || closeIcon === 'Y')">
             <slot name="head"/>
             <div v-if="!hasHeadSlot && !!title" class="default-header">
-              <a-icon :fa="typeIcon.icon" :icon-type="typeIcon.type" :style="typeIconColor(typeIcon.color)"/>
+              <a-icon :icon="typeIcon.icon" :style="typeIconColor(typeIcon.color)"/>
               {{title}}
             </div>
-            <a-icon fa="fa-times" class="close-icon" @click="handleClickCloseIcon"/>
+            <a-icon icon="fa-times" class="close-icon" @click="handleClickCloseIcon"/>
           </div>
           <div :class="bodyCls" :style="bodyStyles">
             <slot></slot>
@@ -40,27 +40,22 @@
   const typeIcons = {
     success: {
       icon: 'fa-info-circle',
-      type: 'fa',
       color: '#00ff80'
     },
     info: {
       icon: 'Idea',
-      type: 'iconfont',
       color: '#c0c0c8'
     },
     primary: {
       icon: 'info',
-      type: 'iconfont',
       color: '#0ac2ff'
     },
     warning: {
       icon: 'warning',
-      type: 'iconfont',
       color: '#e9f01d'
     },
     error: {
       icon: 'error',
-      type: 'iconfont',
       color: '#e03636'
     },
   };

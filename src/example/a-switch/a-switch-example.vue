@@ -32,9 +32,14 @@
     <div class="example-item">
       <a-switch/>
       <a-switch icon="fa-gratipay"/>
-      <a-switch icon="settingicon" icon-type="iconfont" icon-size="24px"/>
+      <a-switch icon="settingicon" icon-size="24px"/>
       <a-switch>
         <div class="cst-icon" slot="indicator">韦</div>
+      </a-switch>
+      <a-switch>
+        <div class="cst-icon" slot="indicator">
+          <img :src="avatar">
+        </div>
       </a-switch>
 
     </div>
@@ -53,6 +58,7 @@
   import ATitle from "../../base/components/a-title/a-title";
   import AInput from "../../base/components/a-input/a-input";
   import AButton from "../../base/components/a-button/a-button";
+  import CONST from "../../base/script/const";
 
   export default {
     components: {
@@ -66,7 +72,8 @@
       return {
         value1: true,
         value2: '1',
-        value3: true
+        value3: true,
+        avatar: CONST.userImg
       }
     },
   }
@@ -81,7 +88,7 @@
       display: flex;
       align-items: center;
     }
-    .cst-icon{
+    .cst-icon {
       height: 27px;
       width: 27px;
       border-radius: 13.5px;
@@ -89,6 +96,11 @@
       text-align: center;
       background-color: white;
       color: blueviolet;
+      overflow: hidden;
+      img {
+        height: 27px;
+        width: 27px;
+      }
     }
   }
 </style>
