@@ -28,6 +28,36 @@
         </div>
       </a-radio>
     </div>
+    <a-title>单选按钮组--{{groupValue}}</a-title>
+    <div>
+      <a-radio-group v-model="groupValue">
+        <a-radio name="ambzer" :value="true" label="ambzer"/>
+        <a-radio name="rose" :value="true" label="rose"/>
+        <a-radio name="martsforever" :value="true" label="martsforever"/>
+      </a-radio-group>
+    </div>
+    <a-title>多选按钮组--{{groupValue1}}</a-title>
+    <div>
+      <a-radio-group v-model="groupValue1" :is-multi-selected="true">
+        <a-radio name="ambzer" :value="true" label="ambzer"/>
+        <a-radio name="rose" :value="false" label="rose"/>
+        <a-radio name="martsforever" :value="true" label="martsforever"/>
+      </a-radio-group>
+    </div>
+    <a-title>按钮组方向</a-title>
+    <div>
+      <a-radio-group v-model="groupValue1" :is-multi-selected="true" direction="column">
+        <a-radio name="ambzer" :value="true" label="ambzer"/>
+        <a-radio name="rose" :value="false" label="rose"/>
+        <a-radio name="martsforever" :value="true" label="martsforever"/>
+      </a-radio-group>
+      <a-radio-group v-model="groupValue1" :is-multi-selected="true" direction="row">
+        <a-radio name="ambzer" :value="true" label="ambzer"/>
+        <a-radio name="rose" :value="false" label="rose"/>
+        <a-radio name="martsforever" :value="true" label="martsforever"/>
+      </a-radio-group>
+    </div>
+
   </div>
 </template>
 
@@ -46,7 +76,9 @@
     data() {
       return {
         isChecked: false,
-        avatar: CONST.userImg
+        avatar: CONST.userImg,
+        groupValue: null,
+        groupValue1: null
       }
     },
   }

@@ -21,6 +21,7 @@
 
 <script>
   import AIcon from "../a-icon/a-icon";
+  import {findComponentUpward} from "../../script/utils";
 
   export default {
     name: "a-radio",
@@ -64,11 +65,13 @@
       },
       name: {
         type: String
-      }
+      },
     },
     methods: {
       _handleClick(e) {
         this.currentValue = !this.currentValue;
+        let radioGroup = findComponentUpward(this, 'a-radio-group');
+        radioGroup.updateValue(this)
       },
     },
     computed: {

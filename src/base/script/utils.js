@@ -14,7 +14,7 @@ export function removePx(value) {
 }
 
 // 向下查找组件
-export function findComponentsDownward (context, componentName) {
+export function findComponentsDownward(context, componentName) {
   return context.$children.reduce((components, child) => {
     if (child.$options.name === componentName) components.push(child);
     const foundChilds = findComponentsDownward(child, componentName);
@@ -23,7 +23,7 @@ export function findComponentsDownward (context, componentName) {
 }
 
 // 向上查找组件
-export function findComponentsUpward (context, componentName) {
+export function findComponentsUpward(context, componentName) {
   let parents = [];
   const parent = context.$parent;
   if (parent) {
@@ -32,4 +32,20 @@ export function findComponentsUpward (context, componentName) {
   } else {
     return [];
   }
+}
+
+export function findComponentUpward(context, componentName, componentNames) {
+  if (typeof componentName === 'string') {
+    componentNames = [componentName];
+  } else {
+    componentNames = componentName;
+  }
+
+  let parent = context.$parent;
+  let name = parent.$options.name;
+  while (parent && (!name || componentNames.indexOf(name) < 0)) {
+    parent = parent.$parent;
+    if (parent) name = parent.$options.name;
+  }
+  return parent;
 }
