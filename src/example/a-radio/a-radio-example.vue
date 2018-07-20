@@ -22,7 +22,7 @@
     </div>
     <a-title>自定义icon的内容</a-title>
     <div>
-      <a-radio v-model="isChecked" icon-size="24px" label="martsforever" inactive-icon="user-forbid" icon-color="#999">
+      <a-radio :value="true" icon-size="24px" label="martsforever" inactive-icon="user-forbid" icon-color="#999">
         <div slot="activeTag">
           <img :src="avatar" class="avatar-tag">
         </div>
