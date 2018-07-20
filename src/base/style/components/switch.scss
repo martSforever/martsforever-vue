@@ -50,7 +50,7 @@
         }
         &.#{$css-prefix-switch}-indicator-right {
           left: 2px+$height;
-          transform: rotate(360deg);
+          transform: rotate(180deg);
         }
         .#{$css-prefix-icon} {
           font-size: map_get($value, height);
