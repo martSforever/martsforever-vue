@@ -35,6 +35,12 @@
         <a-radio name="rose" :value="true" label="rose"/>
         <a-radio name="martsforever" :value="true" label="martsforever"/>
       </a-radio-group>
+      <br>
+      <a-radio-group v-model="groupValue">
+        <a-radio name="ambzer" :value="true" label="ambzer"/>
+        <a-radio name="rose" :value="true" label="rose"/>
+        <a-radio name="martsforever" :value="true" label="martsforever"/>
+      </a-radio-group>
     </div>
     <a-title>多选按钮组--{{groupValue1}}</a-title>
     <div>

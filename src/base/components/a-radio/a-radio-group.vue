@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import {findComponentsDownward} from "../../script/utils";
+  import {findComponentsDownward, oneOf} from "../../script/utils";
 
   export default {
     name: "a-radio-group",
@@ -24,6 +24,7 @@
       value(val) {
         if (val !== this.currentValue) {
           this.currentValue = val
+          this.updateRadio(val)
         }
       },
       currentValue(val) {
@@ -61,6 +62,16 @@
             ret.push(item.name)
             return ret
           }, [])
+        }
+      },
+      updateRadio(val) {
+        let radios = findComponentsDownward(this, 'a-radio');
+        if (val instanceof Array) {
+          /*多选*/
+          radios.forEach((radio) => radio.currentValue = oneOf(radio.name, val))
+        } else {
+          /*单选*/
+          radios.forEach((radio) => radio.currentValue = radio.name === val)
         }
       },
     },
