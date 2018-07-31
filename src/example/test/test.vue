@@ -4,21 +4,29 @@
       <a-button @click="log">log class</a-button>
       <a-button @click="add">add class</a-button>
       <a-button @click="remove">remove classes</a-button>
+      <a-button @click="toggle">toggle</a-button>
 
     </a-button-group>
-    <div class="box head"></div>
+    <div class="box"></div>
     <div class="box target" ref="target">
       this is box
     </div>
+
+    <a-collapse-transition>
+      <div class="box target" v-if="isShow" style="margin: 10px">
+      </div>
+    </a-collapse-transition>
+    <div class="box"></div>
   </div>
 </template>
 
 <script>
   import AButton from "../../base/components/a-button/a-button";
   import AButtonGroup from "../../base/components/a-button/a-button-group";
+  import ACollapseTransition from "../../base/components/a-collapse-transition/a-collapse-transition";
 
   export default {
-    components: {AButtonGroup, AButton},
+    components: {ACollapseTransition, AButtonGroup, AButton},
     name: "test",
     data() {
       return {
@@ -35,6 +43,9 @@
       },
       remove() {
         this.$refs.target.removeClass('hello-world')
+      },
+      toggle() {
+        this.isShow = !this.isShow
       },
     },
   }
