@@ -1,26 +1,24 @@
 <template>
   <div class="test">
-    <div>
-      <div>
-        <a-button @click="show">show--{{isShow}}</a-button>
-      </div>
-      <div class="shadow" v-dom-portal @click="close" v-show="isShow">
-        <div class="content" @click.stop="handleContentClick">
-          <div>{{isShow}}</div>
-          <div>
-            <a-button @click.stop="sayHello">sayHello</a-button>
-          </div>
-        </div>
-      </div>
+    <a-button-group shape="round">
+      <a-button @click="log">log class</a-button>
+      <a-button @click="add">add class</a-button>
+      <a-button @click="remove">remove classes</a-button>
+
+    </a-button-group>
+    <div class="box head"></div>
+    <div class="box target" ref="target">
+      this is box
     </div>
   </div>
 </template>
 
 <script>
   import AButton from "../../base/components/a-button/a-button";
+  import AButtonGroup from "../../base/components/a-button/a-button-group";
 
   export default {
-    components: {AButton},
+    components: {AButtonGroup, AButton},
     name: "test",
     data() {
       return {
@@ -29,40 +27,30 @@
     },
     computed: {},
     methods: {
-      sayHello() {
-        console.log('hello haha!!!');
+      log() {
+        console.log(this.$refs.target.className)
       },
-      show() {
-        this.isShow = true;
-        console.log('show', this.isShow);
-
+      add() {
+        this.$refs.target.addClass('hello-world')
       },
-      close() {
-        this.isShow = false;
+      remove() {
+        this.$refs.target.removeClass('hello-world')
       },
-      handleContentClick() {
-        console.log('handleContentClick');
-      },
-    }
+    },
   }
 </script>
 
 <style lang="scss">
-  div.shadow {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 80;
-    .content {
-      background-color: rgba(255, 255, 255, 0.3);
-      height: 300px;
-      width: 450px;
-    }
+  .box {
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    color: brown;
   }
+
+  .target {
+    padding: 10px;
+    margin: 10px;
+  }
+
 </style>

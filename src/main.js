@@ -4,6 +4,7 @@ import router from './router'
 import 'font-awesome/css/font-awesome.css';                                     //font-awesome
 import 'swiper/dist/css/swiper.css';                                            //swiper
 import 'src/base/directives'
+import 'src/base/script/prototype'
 
 import 'src/base/style/index.scss';
 import 'src/index.js';
