@@ -14,6 +14,7 @@
 
     <a-collapse-transition>
       <div class="box target" v-if="isShow" style="margin: 10px">
+        this is content
       </div>
     </a-collapse-transition>
     <div class="box"></div>

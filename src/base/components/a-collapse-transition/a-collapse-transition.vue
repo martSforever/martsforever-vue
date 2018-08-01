@@ -30,23 +30,18 @@
 
       enter(el) {
         el.dataset.oldOverflow = el.style.overflow;
-        if (el.scrollHeight !== 0) {
+        this.$nextTick(()=>{
           el.style.height = null;
           el.style.paddingTop = el.dataset.oldPaddingTop;
           el.style.paddingBottom = el.dataset.oldPaddingBottom;
-        } else {
-          el.style.height = '';
-          el.style.paddingTop = el.dataset.oldPaddingTop;
-          el.style.paddingBottom = el.dataset.oldPaddingBottom;
-        }
-
-        el.style.overflow = 'hidden';
+          el.style.overflow = 'hidden';
+        })
       },
 
       afterEnter(el) {
         // for safari: remove class then reset height is necessary
         el.removeClass('collapse-transition')
-        el.style.height = '';
+        el.style.height = null;
         el.style.overflow = el.dataset.oldOverflow;
       },
 
