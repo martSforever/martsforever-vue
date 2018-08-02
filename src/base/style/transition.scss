@@ -1,3 +1,5 @@
+@import "./variables";
+
 /*从上滑下的显示动画：to-bottom*/
 .to-bottom-enter-active, .to-bottom-leave-active {
   transition: all .4s;
@@ -40,4 +42,9 @@
 .scale-in-enter, .scale-in-leave-to {
   opacity: 0;
   transform: scale(1.1, 1.1);
+}
+
+.collapse-transition {
+  transition: $transition-time height ease-in-out, $transition-time padding-top ease-in-out, $transition-time padding-bottom ease-in-out;
+  transform-origin: left;
 }
