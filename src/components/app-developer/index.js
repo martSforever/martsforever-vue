@@ -71,6 +71,11 @@ export const router = {
       component: resolve => require(['src/example/test/test.vue'], resolve),
       name: 'test'
     },
+    {
+      path: '/popper',
+      component: resolve => require(['src/example/a-popper/a-popper-example.vue'], resolve),
+      name: 'popper'
+    },
   ]
 };
 export default {
