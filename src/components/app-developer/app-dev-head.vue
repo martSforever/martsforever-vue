@@ -32,6 +32,7 @@
           {name: 'modal', url: 'aModal'},
           {name: 'radio', url: 'aRadio'},
           {name: 'test', url: 'test'},
+          {name: 'popper', url: 'popper'},
           {name: 'canvas', url: 'canvas'},
           {name: 'parent-child', url: 'parent-child'},
         ],

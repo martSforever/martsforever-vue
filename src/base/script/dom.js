@@ -1,8 +1,8 @@
+import {oneOf} from "./utils";
+
 /*
 * 将光标移动到末尾
 */
-import {oneOf} from "./utils";
-
 export function moveCursorToEnd(obj) {
   if (window.getSelection) {//ie11 10 9 ff safari
     obj.focus(); //解决ff不获取焦点无法定位问题
@@ -18,6 +18,8 @@ export function moveCursorToEnd(obj) {
     range.select();
   }
 }
+
+/*----------------------------------------------------------------------------------*/
 
 /*
 * 监听粘贴事件
@@ -49,6 +51,8 @@ export function onPasteImage(obj, handler) {
   });
 }
 
+/*----------------------------------------------------------------------------------*/
+
 /*
 * 读取图片
 */
@@ -61,6 +65,8 @@ function imgReader(target, handler) {
   reader.readAsDataURL(file);
 }
 
+/*----------------------------------------------------------------------------------*/
+
 /*
 * 是否包含某种样式class
 */
@@ -68,6 +74,53 @@ export function hasClass(cls, clsList) {
   return oneOf(cls, clsList.value.split(' '));
 }
 
+/* istanbul ignore next */
+export function addClass(el, cls) {
+  if (!el) return;
+  let curClass = el.className;
+  const classes = (cls || '').split(' ');
+
+  for (let i = 0, j = classes.length; i < j; i++) {
+    const clsName = classes[i];
+    if (!clsName) continue;
+
+    if (el.classList) {
+      el.classList.add(clsName);
+    } else {
+      if (!hasClass(el, clsName)) {
+        curClass += ' ' + clsName;
+      }
+    }
+  }
+  if (!el.classList) {
+    el.className = curClass;
+  }
+}
+
+/* istanbul ignore next */
+export function removeClass(el, cls) {
+  if (!el || !cls) return;
+  const classes = cls.split(' ');
+  let curClass = ' ' + el.className + ' ';
+
+  for (let i = 0, j = classes.length; i < j; i++) {
+    const clsName = classes[i];
+    if (!clsName) continue;
+
+    if (el.classList) {
+      el.classList.remove(clsName);
+    } else {
+      if (hasClass(el, clsName)) {
+        curClass = curClass.replace(' ' + clsName + ' ', ' ');
+      }
+    }
+  }
+  if (!el.classList) {
+    el.className = trim(curClass);
+  }
+}
+
+/*----------------------------------------------------------------------------------*/
 /*检测浏览器使用的是哪一种前缀*/
 let elementStyle = document.createElement('div').style;
 
