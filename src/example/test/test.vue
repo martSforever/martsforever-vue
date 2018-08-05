@@ -10,8 +10,11 @@
       this is box
     </div>
 
-    <a-collapse-transition>
-      <div class="box target" v-if="isShow" style="margin: 10px">
+    <a-collapse-transition v-model="isShow">
+      <div class="target" style="margin: 10px;padding: 10px;background-color: brown">
+        <div style="height: 300px;width: 300px;background-color: white">
+          this is content
+        </div>
       </div>
     </a-collapse-transition>
     <div class="box"></div>
@@ -57,7 +60,7 @@
 
   .target {
     padding: 10px;
-    margin: 10px;
+    box-sizing: border-box;
   }
 
 </style>
