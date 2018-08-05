@@ -17,6 +17,7 @@
     name: "a-collapse-transition",
     methods: {
       beforeEnter(el) {
+        console.log('beforeEnter')
         el.addClass('collapse-transition')
         if (!el.dataset) el.dataset = {};
 
@@ -29,6 +30,7 @@
       },
 
       enter(el) {
+        console.log('enter')
         el.dataset.oldOverflow = el.style.overflow;
         if (el.scrollHeight !== 0) {
           el.style.height = null;
@@ -44,6 +46,7 @@
       },
 
       afterEnter(el) {
+        console.log('afterEnter')
         // for safari: remove class then reset height is necessary
         el.removeClass('collapse-transition')
         el.style.height = '';
@@ -51,6 +54,7 @@
       },
 
       beforeLeave(el) {
+        console.log('beforeLeave')
         if (!el.dataset) el.dataset = {};
         el.dataset.oldPaddingTop = el.style.paddingTop;
         el.dataset.oldPaddingBottom = el.style.paddingBottom;
@@ -61,6 +65,7 @@
       },
 
       leave(el) {
+        console.log('leave')
         if (el.scrollHeight !== 0) {
           // for safari: add class after set height, or it will jump to zero height suddenly, weired
           el.addClass('collapse-transition')
@@ -71,6 +76,7 @@
       },
 
       afterLeave(el) {
+        console.log('afterLeave')
         el.removeClass('collapse-transition')
         el.style.height = null;
         el.style.overflow = el.dataset.oldOverflow;

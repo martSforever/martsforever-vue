@@ -1,4 +1,4 @@
-import {oneOf} from "./utils";
+import {camelCase, oneOf} from "./utils";
 
 /*
 * 将光标移动到末尾
@@ -151,4 +151,20 @@ export function prefixStyle(style) {
     return style;
   }
   return vender + style.charAt(0).toUpperCase() + style.substr(1);
+}
+
+
+// getStyle
+export function getStyle(element, styleName) {
+  if (!element || !styleName) return null;
+  styleName = camelCase(styleName);
+  if (styleName === 'float') {
+    styleName = 'cssFloat';
+  }
+  try {
+    const computed = document.defaultView.getComputedStyle(element, '');
+    return element.style[styleName] || computed ? computed[styleName] : null;
+  } catch (e) {
+    return element.style[styleName];
+  }
 }
