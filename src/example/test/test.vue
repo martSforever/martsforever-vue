@@ -1,12 +1,10 @@
 <template>
   <div class="test">
     <a-button-group shape="round">
-      <a-button @click="log">log class</a-button>
-      <a-button @click="add">add class</a-button>
-      <a-button @click="remove">remove classes</a-button>
       <a-button @click="toggle">toggle</a-button>
 
     </a-button-group>
+
     <div class="box"></div>
     <div class="box target" ref="target">
       this is box
@@ -24,9 +22,11 @@
   import AButton from "../../base/components/a-button/a-button";
   import AButtonGroup from "../../base/components/a-button/a-button-group";
   import ACollapseTransition from "../../base/components/a-collapse-transition/a-collapse-transition";
+  import TestChild from "./test-child";
+  import TestParent from "./test-parent";
 
   export default {
-    components: {ACollapseTransition, AButtonGroup, AButton},
+    components: {TestParent, TestChild, ACollapseTransition, AButtonGroup, AButton},
     name: "test",
     data() {
       return {
@@ -35,18 +35,14 @@
     },
     computed: {},
     methods: {
-      log() {
-        console.log(this.$refs.target.className)
-      },
-      add() {
-        this.$refs.target.addClass('hello-world')
-      },
-      remove() {
-        this.$refs.target.removeClass('hello-world')
-      },
       toggle() {
         this.isShow = !this.isShow
       },
+    },
+    created() {
+      this.$on('call-parent', (data) => {
+        console.log('parent-', data)
+      })
     },
   }
 </script>
