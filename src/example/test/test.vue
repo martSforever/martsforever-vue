@@ -57,7 +57,9 @@
       })
     },
     mounted() {
-      this.popper = new Popper(this.$refs.reference, this.$refs.popper, {})
+      this.popper = new Popper(this.$refs.reference, this.$refs.popper, {
+        placement: 'bottom-start'
+      })
     },
   }
 </script>
