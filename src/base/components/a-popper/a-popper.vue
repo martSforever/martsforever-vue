@@ -1,5 +1,5 @@
 <template>
-  <div class="a-popper">
+  <div class="a-popper" :style="styles">
     <slot></slot>
   </div>
 </template>
@@ -45,79 +45,25 @@
     },
     methods: {
       update() {
-        const parent = findComponentUpward(this, this.parentName)
-
         if (!!this.popper) {
-          this.$nextTick(() => {
-            this.popper.update();
-            this.popperStatus = true;
-          });
+          this.popper.update()
         } else {
-          this.$nextTick(() => {
-            console.log('a-popper parent-->>', parent.$options.name, this.referenceName, parent.$refs[this.referenceName])
-            this.popper = new Popper(
-              parent.$refs[this.referenceName],
-              this.$el,
-              {
-                placement: this.placement,
-                modifiers: {
-                  computeStyle: {
-                    gpuAcceleration: false
-                  },
-                  preventOverflow: {
-                    boundariesElement: 'window'
-                  }
-                },
-                onCreate: () => {
-                  this.resetTransformOrigin();
-                  this.$nextTick(this.popper.update());
-                },
-                onUpdate: () => {
-                  this.resetTransformOrigin();
-                }
-              }
-            )
+          const parent = findComponentUpward(this, this.parentName)
+          this.popper = new Popper(parent.$refs[this.referenceName], this.$el, {
+            placement: this.placement
           })
-        }
-        // set a height for parent is Modal and Select's width is 100%
-        if (parent.$options.name === 'iSelect') {
-          this.width = parseInt(getStyle(parent.$el, 'width'));
         }
       },
       destroy() {
-        if (this.popper) {
-          setTimeout(() => {
-            if (this.popper && !this.popperStatus) {
-              this.popper.destroy();
-              this.popper = null;
-            }
-            this.popperStatus = false;
-          }, 300);
-        }
-      },
-      resetTransformOrigin() {
-        // 不判断，Select 会报错，不知道为什么
-        if (!this.popper) return;
 
-        let x_placement = this.popper.popper.getAttribute('x-placement');
-        let placementStart = x_placement.split('-')[0];
-        let placementEnd = x_placement.split('-')[1];
-        const leftOrRight = x_placement === 'left' || x_placement === 'right';
-        if (!leftOrRight) {
-          this.popper.popper.style.transformOrigin = placementStart === 'bottom' || (placementStart !== 'top' && placementEnd === 'start') ? 'center top' : 'center bottom';
-        }
-      }
+      },
     },
-    created() {
-      this.$on('on-update-popper', this.update);
-      this.$on('on-destroy-popper', this.destroy);
+    mounted() {
       this.update()
     },
     beforeDestroy() {
-      if (this.popper) {
-        this.popper.destroy();
-      }
-    }
+      console.log('beforeDestroy')
+    },
   }
 </script>
 

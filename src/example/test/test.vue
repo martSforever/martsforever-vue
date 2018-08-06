@@ -2,6 +2,7 @@
   <div class="test">
     <a-button-group shape="fillet">
       <a-button @click="toggle">toggle</a-button>
+      <a-button @click="initialized = true">initialized</a-button>
     </a-button-group>
 
     <div class="wrapper">
@@ -9,18 +10,20 @@
         this is reference
       </div>
     </div>
-
-    <div ref="popper">
+    <div class="wrapper">
+      <div class="reference">
+        this is divider
+      </div>
+    </div>
+    <a-popper reference-name="reference" parent-name="test" v-if="initialized">
       <a-collapse-transition>
-        <div v-if="isShow"
-             class="target">
+        <div class="target" v-if="isShow">
           <div style="height: 300px;width: 300px;background-color: white">
             this is popper content
           </div>
         </div>
       </a-collapse-transition>
-    </div>
-
+    </a-popper>
   </div>
 </template>
 
@@ -32,23 +35,21 @@
   import TestParent from "./test-parent";
 
   import Popper from 'popper.js'
+  import APopper from "../../base/components/a-popper/a-popper";
 
   export default {
-    components: {TestParent, TestChild, ACollapseTransition, AButtonGroup, AButton},
+    components: {APopper, TestParent, TestChild, ACollapseTransition, AButtonGroup, AButton},
     name: "test",
     data() {
       return {
         isShow: true,
-        popper: null
+        initialized: null
       }
     },
     computed: {},
     methods: {
       toggle() {
         this.isShow = !this.isShow
-        this.$nextTick(() => {
-          this.popper.update()
-        })
       },
     },
     created() {
@@ -57,9 +58,6 @@
       })
     },
     mounted() {
-      this.popper = new Popper(this.$refs.reference, this.$refs.popper, {
-        placement: 'bottom-start'
-      })
     },
   }
 </script>
