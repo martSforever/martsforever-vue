@@ -1,23 +1,26 @@
 <template>
   <div class="test">
-    <a-button-group shape="round">
+    <a-button-group shape="fillet">
       <a-button @click="toggle">toggle</a-button>
-
     </a-button-group>
 
-    <div class="box"></div>
-    <div class="box target" ref="target">
-      this is box
+    <div class="wrapper">
+      <div class="reference" ref="reference">
+        this is reference
+      </div>
     </div>
 
-    <a-collapse-transition v-model="isShow">
-      <div class="target" style="margin: 10px;padding: 10px;background-color: brown">
-        <div style="height: 300px;width: 300px;background-color: white">
-          this is content
+    <div ref="popper">
+      <a-collapse-transition>
+        <div v-if="isShow"
+             class="target">
+          <div style="height: 300px;width: 300px;background-color: white">
+            this is popper content
+          </div>
         </div>
-      </div>
-    </a-collapse-transition>
-    <div class="box"></div>
+      </a-collapse-transition>
+    </div>
+
   </div>
 </template>
 
@@ -28,24 +31,33 @@
   import TestChild from "./test-child";
   import TestParent from "./test-parent";
 
+  import Popper from 'popper.js'
+
   export default {
     components: {TestParent, TestChild, ACollapseTransition, AButtonGroup, AButton},
     name: "test",
     data() {
       return {
         isShow: true,
+        popper: null
       }
     },
     computed: {},
     methods: {
       toggle() {
         this.isShow = !this.isShow
+        this.$nextTick(() => {
+          this.popper.update()
+        })
       },
     },
     created() {
       this.$on('call-parent', (data) => {
         console.log('parent-', data)
       })
+    },
+    mounted() {
+      this.popper = new Popper(this.$refs.reference, this.$refs.popper, {})
     },
   }
 </script>
@@ -59,8 +71,22 @@
   }
 
   .target {
-    padding: 10px;
     box-sizing: border-box;
+    height: 300px;
+    width: 300px;
+    display: inline-block;
+  }
+
+  .wrapper {
+    margin-left: 300px;
+  }
+
+  .reference {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    color: white;
+    background: brown;
   }
 
 </style>
