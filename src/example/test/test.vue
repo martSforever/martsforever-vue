@@ -18,7 +18,13 @@
         this is divider
       </div>
     </div>
-    <a-popper reference-name="reference" parent-name="test" v-model="isShow" placement="right-start">
+    <div class="wrapper">
+      <div class="reference">
+        this is divider
+      </div>
+    </div>
+
+    <a-popper reference-name="reference" parent-name="test" v-model="isShow" placement="bottom">
       <div class="target">
         <div style="height: 300px;width: 300px;background-color: white">
           this is popper content
@@ -64,6 +70,12 @@
 </script>
 
 <style lang="scss">
+
+  .test {
+    height: 100vh;
+    overflow: auto;
+  }
+
   .box {
     width: 100px;
     height: 100px;

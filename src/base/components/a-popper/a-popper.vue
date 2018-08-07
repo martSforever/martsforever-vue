@@ -53,6 +53,7 @@
         this.$nextTick(() => {
           if (this.currentValue !== val) {
             this.currentValue = val
+            if (!!this.currentValue) this.update()
           }
         })
       },
@@ -72,6 +73,7 @@
         if (!!this.popper) {
           this.popper.update()
         } else {
+          console.log('initialized')
           const parent = findComponentUpward(this, this.parentName)
           this.popper = new Popper(parent.$refs[this.referenceName], this.$el, {
             placement: this.placement
@@ -83,7 +85,6 @@
       },
     },
     mounted() {
-      this.update()
     },
     beforeDestroy() {
       console.log('beforeDestroy')
