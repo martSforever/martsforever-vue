@@ -9,20 +9,21 @@
       <div class="reference" ref="reference">
         this is reference
       </div>
+      <div class="reference">
+        this is divider
+      </div>
     </div>
     <div class="wrapper">
       <div class="reference">
         this is divider
       </div>
     </div>
-    <a-popper reference-name="reference" parent-name="test" v-if="initialized">
-      <a-collapse-transition>
-        <div class="target" v-if="isShow">
-          <div style="height: 300px;width: 300px;background-color: white">
-            this is popper content
-          </div>
+    <a-popper reference-name="reference" parent-name="test" v-model="isShow" placement="right-start">
+      <div class="target">
+        <div style="height: 300px;width: 300px;background-color: white">
+          this is popper content
         </div>
-      </a-collapse-transition>
+      </div>
     </a-popper>
   </div>
 </template>
@@ -42,7 +43,7 @@
     name: "test",
     data() {
       return {
-        isShow: true,
+        isShow: false,
         initialized: null
       }
     },

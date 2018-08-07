@@ -1,16 +1,21 @@
 <template>
   <div class="a-popper" :style="styles">
-    <slot></slot>
+    <a-collapse-transition v-if="initialized">
+      <div v-if="currentValue">
+        <slot></slot>
+      </div>
+    </a-collapse-transition>
   </div>
 </template>
 
 <script>
   import Popper from 'popper.js'
-  import {getStyle} from "../../script/dom";
   import {findComponentUpward} from "../../script/utils";
+  import ACollapseTransition from "../a-collapse-transition/a-collapse-transition";
 
   export default {
     name: "a-popper",
+    components: {ACollapseTransition},
     props: {
       placement: {
         type: String,
@@ -27,14 +32,33 @@
       parentName: {
         type: String,
         required: true
+      },
+      value: {
+        type: Boolean,
+        default: false
       }
     },
     data() {
       return {
         popper: null,
         width: '',
-        popperStatus: false
+        popperStatus: false,
+        initialized: this.value,
+        currentValue: this.value
       };
+    },
+    watch: {
+      value(val) {
+        if (!this.initialized && !!val) this.initialized = true
+        this.$nextTick(() => {
+          if (this.currentValue !== val) {
+            this.currentValue = val
+          }
+        })
+      },
+      currentValue(val) {
+        this.$emit('input', val)
+      },
     },
     computed: {
       styles() {
