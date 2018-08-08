@@ -6,12 +6,12 @@
     </a-button-group>
 
     <div class="wrapper">
-      <div class="reference" ref="reference">
+      <div class="reference" ref="reference" v-move="onMove">
         this is reference
       </div>
     </div>
 
-    <a-popper reference-name="reference" parent-name="test" v-model="isShow" placement="bottom">
+    <a-popper reference-name="reference" parent-name="test" v-model="isShow" placement="bottom" ref="aPopper">
       <div class="target">
         <div style="height: 300px;width: 300px;background-color: white">
           this is popper content
@@ -37,13 +37,17 @@
     data() {
       return {
         isShow: false,
-        initialized: null
+        initialized: null,
+        mouse: {}
       }
     },
     computed: {},
     methods: {
       toggle() {
         this.isShow = !this.isShow
+      },
+      onMove(e) {
+        this.$refs.aPopper.update()
       },
     },
     created() {
@@ -87,6 +91,8 @@
     height: 200px;
     color: white;
     background: brown;
+
+    position: relative;
   }
 
 </style>
