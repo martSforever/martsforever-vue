@@ -76,7 +76,7 @@
           console.log('initialized')
           const parent = findComponentUpward(this, this.parentName)
           this.popper = new Popper(parent.$refs[this.referenceName], this.$el, {
-            placement: this.placement
+            placement: this.placement,
           })
         }
       },
@@ -95,5 +95,11 @@
 <style lang="scss">
   .a-popper {
     display: inline-block;
+    .popper__arrow {
+      background-color: #0ac2ff;
+      height: 25px;
+      width: 50px;
+      display: inline-block;
+    }
   }
 </style>

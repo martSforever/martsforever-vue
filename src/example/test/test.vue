@@ -9,19 +9,6 @@
       <div class="reference" ref="reference">
         this is reference
       </div>
-      <div class="reference">
-        this is divider
-      </div>
-    </div>
-    <div class="wrapper">
-      <div class="reference">
-        this is divider
-      </div>
-    </div>
-    <div class="wrapper">
-      <div class="reference">
-        this is divider
-      </div>
     </div>
 
     <a-popper reference-name="reference" parent-name="test" v-model="isShow" placement="bottom">
