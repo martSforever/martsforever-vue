@@ -2,18 +2,35 @@
   <div class="test">
     <a-button-group shape="fillet">
       <a-button @click="toggle">toggle</a-button>
-      <a-button @click="initialized = true">initialized</a-button>
+    </a-button-group>
+
+    <a-button-group shape="fillet">
+      <a-button @click="direction = 'top'">top</a-button>
+      <a-button @click="direction = 'bottom'">bottom</a-button>
+      <a-button @click="direction = 'left'">left</a-button>
+      <a-button @click="direction = 'right'">right</a-button>
+    </a-button-group>
+
+    <a-button-group shape="fillet">
+      <a-button @click="align = 'start'">start</a-button>
+      <a-button @click="align = 'center'">center</a-button>
+      <a-button @click="align = 'end'">end</a-button>
     </a-button-group>
 
     <div class="wrapper">
-      <div class="reference" ref="reference" v-move="onMove">
+      <div class="reference" ref="popperReference" v-move="onMove">
         this is reference
       </div>
     </div>
 
-    <a-popper reference-name="reference" parent-name="test" v-model="isShow" placement="bottom" ref="aPopper">
+    <a-popper reference-name="popperReference"
+              parent-name="test"
+              v-model="isShow"
+              ref="aPopper"
+              :direction="direction"
+              :align="align">
       <div class="target">
-        <div style="height: 300px;width: 300px;background-color: white">
+        <div class="popper-content">
           this is popper content
         </div>
       </div>
@@ -36,9 +53,10 @@
     name: "test",
     data() {
       return {
-        isShow: false,
-        initialized: null,
-        mouse: {}
+        isShow: true,
+
+        direction: 'top',
+        align: 'start'
       }
     },
     computed: {},
@@ -74,15 +92,18 @@
     color: brown;
   }
 
-  .target {
+  .popper-content {
     box-sizing: border-box;
-    height: 300px;
-    width: 300px;
+    height: 250px;
+    width: 250px;
     display: inline-block;
+    background-color: blueviolet;
+    color: white;
   }
 
   .wrapper {
-    margin-left: 300px;
+    margin-left: 600px;
+    margin-top: 300px;
   }
 
   .reference {

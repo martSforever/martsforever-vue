@@ -47,3 +47,36 @@
 .collapse-transition {
   transition: $transition-time height ease-in-out, $transition-time padding-top ease-in-out, $transition-time padding-bottom ease-in-out;
 }
+
+/*缩放过度*/
+.popper-scale-enter-active, .popper-scale-leave-active {
+  transition: all .1s linear;
+  opacity: 1;
+}
+
+.popper-scale-enter, .popper-scale-leave-to {
+  opacity: 0;
+  transform: scale(0.75, 0.75);
+}
+
+$scale-direction: (
+  top-start:bottom left,
+  bottom-start:top left,
+  left-start:right top,
+  right-start:left top,
+  top-center:bottom center,
+  bottom-center:top center,
+  let-center:right center,
+  right-center:left center,
+  top-end:bottom right,
+  bottom-end:top right,
+  left-end:right bottom,
+  right-end:left bottom,
+);
+
+/*按钮形状*/
+@each $key, $value in $scale-direction {
+  .scale-origin-#{$key} {
+    transform-origin: $value;
+  }
+}

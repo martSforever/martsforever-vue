@@ -45,7 +45,7 @@
     },
     mounted() {
       this.hideMenu();
-      console.log(process.env.NODE_ENV);
+      // console.log(process.env.NODE_ENV);
       CanvasBg.initialize(this.$refs.bgCanvasDom);
     },
   }
