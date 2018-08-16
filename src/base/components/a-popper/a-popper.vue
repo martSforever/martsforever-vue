@@ -1,13 +1,15 @@
 <template>
-  <div class="a-popper" :style="styles">
-    <transition name="popper-scale">
-      <div class="a-popper-content-wrapper" :class="popperWrapperClasses" v-show="currentValue">
-        <div class="a-popper-arrow" :style="arrowStyles"></div>
-        <div class="a-popper-content" ref="popperContent">
-          <slot></slot>
+  <div class="a-popper">
+    <div class="a-popper-wrapper">
+      <transition name="popper-scale">
+        <div class="a-popper-content-wrapper" :class="popperWrapperClasses" v-show="currentValue" :style="wrapperStyles">
+          <div class="a-popper-arrow" :style="arrowStyles"></div>
+          <div class="a-popper-content" ref="popperContent">
+            <slot></slot>
+          </div>
         </div>
-      </div>
-    </transition>
+      </transition>
+    </div>
   </div>
 </template>
 
@@ -53,6 +55,10 @@
         validator(val) {
           return oneOf(val, ['start', 'center', 'end'])
         },
+      },
+      shadow: {
+        type: String,
+        default: '0px 0px 20px #f2f2f2'
       }
     },
     data() {
@@ -96,18 +102,30 @@
       },
     },
     computed: {
-      styles() {
-        let style = {};
-        if (this.width) style.width = `${this.width}px`;
-        return style;
+      wrapperStyles() {
+        let styles = {};
+        if (this.width) styles.width = `${this.width}px`
+        if (this.shadow) styles['box-shadow'] = this.shadow
+        console.log('wrapperStyles', styles)
+        return styles;
       },
       arrowStyles() {
-        return {
+        let styles = {
           width: `${this.arrowSize}px`,
           height: `${this.arrowSize}px`,
-          top: `${this.arrowTop}px`,
-          left: `${this.arrowLeft}px`
+          transform: 'rotate(45deg)',
         }
+        if (oneOf(this.currentDirection, ['top', 'bottom'])) {
+          if (this.currentDirection === 'top') {
+            styles.bottom = `${-this.arrowSize / 2 + this.arrowSize / 5}px`
+          } else {
+            styles.top = `${-this.arrowSize / 2 + this.arrowSize / 5}px`
+          }
+          styles.left = `${this.arrowSize / 2}px`
+        }
+        if (this.shadow) styles['box-shadow'] = this.shadow
+        console.log('arrowStyles', styles)
+        return styles
       },
       popperWrapperClasses() {
         return `scale-origin-${this.currentDirection}-${this.currentAlign}`
@@ -159,7 +177,7 @@
     .a-popper-content-wrapper {
       position: relative;
       .a-popper-arrow {
-        background-color: #0ac2ff;
+        background-color: white;
         display: inline-block;
         position: absolute;
       }

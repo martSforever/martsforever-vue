@@ -97,8 +97,8 @@
     height: 250px;
     width: 250px;
     display: inline-block;
-    background-color: blueviolet;
-    color: white;
+    background-color: white;
+    color: black;
   }
 
   .wrapper {
