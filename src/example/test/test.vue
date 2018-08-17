@@ -22,13 +22,15 @@
         this is reference
       </div>
     </div>
-
+    <div>
+      {{direction}}--{{align}}
+    </div>
     <a-popper reference-name="popperReference"
               parent-name="test"
               v-model="isShow"
               ref="aPopper"
-              :direction="direction"
-              :align="align">
+              :direction.sync="direction"
+              :align.sync="align">
       <div class="target">
         <div class="popper-content">
           this is popper content
@@ -56,7 +58,7 @@
         isShow: true,
 
         direction: 'top',
-        align: 'start'
+        align: 'start',
       }
     },
     computed: {},

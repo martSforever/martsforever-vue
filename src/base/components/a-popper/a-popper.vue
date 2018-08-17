@@ -1,8 +1,7 @@
 <template>
   <div class="a-popper">
     <transition name="popper-scale">
-      <div class="a-popper-content-wrapper" :class="popperWrapperClasses" v-show="currentValue"
-           :style="wrapperStyles">
+      <div class="a-popper-content-wrapper" :class="popperWrapperClasses" v-show="currentValue">
         <div class="a-popper-arrow" :style="arrowStyles"></div>
         <div class="a-popper-content" ref="popperContent" :style="popoverContentStyles">
           <slot></slot>
@@ -73,8 +72,12 @@
         currentDirection: this.direction,
         currentAlign: this.align,
 
-        arrowTop: 0,
-        arrowLeft: 0
+        arrowDirectionMap: {
+          top: 'bottom',
+          bottom: 'top',
+          left: 'right',
+          right: 'left',
+        }
       };
     },
     watch: {
@@ -98,17 +101,20 @@
       align(val) {
         if (this.currentAlign !== val) {
           this.currentAlign = val
+          this.$emit('update:align', val)
           !!this.popper && this.popper.destroy()
           this.popper = null
           !!this.currentValue && this.update()
         }
       },
+      currentDirection(val) {
+        this.$emit('update:direction', val)
+      },
+      currentAlign(val) {
+        this.$emit('update:align', val)
+      },
     },
     computed: {
-      wrapperStyles() {
-        let styles = {};
-        return styles;
-      },
       arrowStyles() {
         let styles = {
           width: `${this.arrowSize}px`,
@@ -118,66 +124,9 @@
         !!this.borderRadius && (styles.borderRadius = this.borderRadius)
         !!this.shadow && (styles.boxShadow = this.shadow)
 
-        switch (this.currentDirection) {
-          case 'top':
-            styles.bottom = `${-this.arrowSize / 2 + this.arrowSize / 5}px`
-            switch (this.currentAlign) {
-              case 'start':
-                styles.left = `${this.arrowSize / 2}px`
-                break
-              case 'center':
-                styles.left = `${(this.$el.offsetWidth - (this.arrowSize * Math.sqrt(2))) / 2}px`
-                break
-              case 'end':
-                styles.right = `${this.arrowSize / 2}px`
-                break
-            }
-            break
-          case 'bottom':
-            styles.top = `${-this.arrowSize / 2 + this.arrowSize / 5}px`
-            switch (this.currentAlign) {
-              case 'start':
-                styles.left = `${this.arrowSize / 2}px`
-                break
-              case 'center':
-                styles.left = `${(this.$el.offsetWidth - (this.arrowSize * Math.sqrt(2))) / 2}px`
-                break
-              case 'end':
-                styles.right = `${this.arrowSize / 2}px`
-                break
-            }
-            break
-          case 'left':
-            styles.right = `${-this.arrowSize / 2 + this.arrowSize / 5}px`
-            switch (this.currentAlign) {
-              case 'start':
-                styles.top = `${this.arrowSize / 2}px`
-                break
-              case 'center':
-                styles.top = `${(this.$el.offsetWidth - (this.arrowSize * Math.sqrt(2))) / 2}px`
-                break
-              case 'end':
-                styles.bottom = `${this.arrowSize / 2}px`
-                break
-            }
-            break
-          case 'right':
-            styles.left = `${-this.arrowSize / 2 + this.arrowSize / 5}px`
-            switch (this.currentAlign) {
-              case 'start':
-                styles.top = `${this.arrowSize / 2}px`
-                break
-              case 'center':
-                styles.top = `${(this.$el.offsetWidth - (this.arrowSize * Math.sqrt(2))) / 2}px`
-                break
-              case 'end':
-                styles.bottom = `${this.arrowSize / 2}px`
-                break
-            }
-            break
-        }
-
-
+        styles[this.arrowDirectionMap[this.currentDirection]] = `${-this.arrowSize / 2 + this.arrowSize / 5}px`
+        let align = this.getArrowAlign()
+        styles[align.key] = align.value
         return styles
       },
       popoverContentStyles() {
@@ -203,7 +152,7 @@
             placement: `${this.currentDirection}-${this.currentAlign}`,
             modifiers: {
               offset: {
-                offset: `0,${this.arrowSize}`,
+                offset: `0,${this.arrowSize / 1.5}`,
               }
             },
             onUpdate: () => {
@@ -219,6 +168,19 @@
         let placement = this.popper.popper.getAttribute('x-placement');
         this.currentDirection = placement.split('-')[0];
         this.currentAlign = placement.split('-')[1];
+      },
+      getArrowAlign() {
+        if (oneOf(this.currentDirection, ['top', 'bottom'])) {
+          return {
+            key: this.currentAlign === 'end' ? 'right' : 'left',
+            value: this.currentAlign === 'center' ? `${(this.$el.offsetWidth - (this.arrowSize * Math.sqrt(2))) / 2}px` : `${this.arrowSize / 2}px`
+          }
+        } else {
+          return {
+            key: this.currentAlign === 'end' ? 'bottom' : 'top',
+            value: this.currentAlign === 'center' ? `${(this.$el.offsetWidth - (this.arrowSize * Math.sqrt(2))) / 2}px` : `${this.arrowSize / 2}px`
+          }
+        }
       },
     },
     mounted() {
