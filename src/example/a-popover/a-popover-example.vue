@@ -2,6 +2,7 @@
   <div class="a-popover-example">
     <a-button-group shape="fillet">
       <a-button @click="toggle">toggle</a-button>
+      <a-button @click="toggleOnHover = !toggleOnHover">toggleOnHover</a-button>
     </a-button-group>
 
     <a-button-group shape="fillet">
@@ -16,21 +17,21 @@
       <a-button @click="align = 'center'">center</a-button>
       <a-button @click="align = 'end'">end</a-button>
     </a-button-group>
-
+    <div>
+      {{direction}}--{{align}}
+    </div>
     <div class="wrapper">
       <div class="reference" ref="popperReference" v-move="onMove">
         this is reference
       </div>
     </div>
-    <div>
-      {{direction}}--{{align}}
-    </div>
+
     <a-popover reference-name="popperReference"
                parent-name="a-popover-example"
                v-model="isShow"
                ref="aPopper"
                :size-equal="false"
-               :hide-on-click-outside="false"
+               :hide-on-click-outside="true"
                :direction.sync="direction"
                :align.sync="align">
       <div class="popper-content">
@@ -55,6 +56,7 @@
 
         direction: 'top',
         align: 'start',
+        toggleOnHover: true
       }
     },
     computed: {},

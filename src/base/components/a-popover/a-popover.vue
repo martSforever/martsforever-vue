@@ -1,7 +1,9 @@
 <template>
   <div class="a-popper">
     <transition name="popper-scale">
-      <div class="a-popper-content-wrapper" :class="popperWrapperClasses" v-show="currentValue"
+      <div class="a-popper-content-wrapper"
+           :class="popperWrapperClasses"
+           v-show="currentValue"
            v-clickout-side="_handleClickOutside">
         <div class="a-popper-arrow" :style="arrowStyles"></div>
         <div class="a-popper-content" ref="popperContent" :style="popoverContentStyles">
@@ -14,7 +16,7 @@
 
 <script>
   import Popper from 'popper.js'
-  import {findComponentUpward, oneOf} from "../../script/utils";
+  import {delay, findComponentUpward, oneOf} from "../../script/utils";
   import ACollapseTransition from "../a-collapse-transition/a-collapse-transition";
 
   export default {
@@ -73,10 +75,20 @@
         default: true,
         desc: '是否在点击popover外部元素的时候，关闭popover'
       },
+      showOnClickReference: {
+        type: Boolean,
+        default: true,
+        desc: '是否在点击reference的时候显示popper'
+      },
       sizeEqual: {
         type: Boolean,
         default: true,
         desc: '是否令popper与reference在方向上宽度一致'
+      },
+      toggleOnHover: {
+        type: Boolean,
+        default: false,
+        desc: '是否在鼠标hover的时候自动显示隐藏'
       }
     },
     data() {
@@ -128,6 +140,9 @@
       currentAlign(val) {
         this.$emit('update:align', val)
       },
+      toggleOnHover(val) {
+        this._resetToggleOnHover(val)
+      },
     },
     computed: {
       equalSizeData() {
@@ -144,7 +159,7 @@
         !!this.shadow && (styles.boxShadow = this.shadow)
 
         styles[this.arrowDirectionMap[this.currentDirection]] = `${-this.arrowSize / 2 + this.arrowSize / 5}px`
-        let align = this.getArrowAlign()
+        let align = this._getArrowAlign()
         styles[align.key] = align.value
         return styles
       },
@@ -180,20 +195,20 @@
               }
             },
             onUpdate: () => {
-              this.refreshArrow()
+              this._refreshArrow()
             },
             onCreate: () => {
-              this.refreshArrow()
+              this._refreshArrow()
             }
           })
         }
       },
-      refreshArrow() {
+      _refreshArrow() {
         let placement = this.popper.popper.getAttribute('x-placement');
         this.currentDirection = placement.split('-')[0];
         this.currentAlign = placement.split('-')[1];
       },
-      getArrowAlign() {
+      _getArrowAlign() {
         if (oneOf(this.currentDirection, ['top', 'bottom'])) {
           return {
             key: this.currentAlign === 'end' ? 'right' : 'left',
@@ -209,11 +224,24 @@
       _handleClickOutside() {
         !!this.hideOnClickOutside && (this.currentValue = false)
       },
+      _resetToggleOnHover(toggleOnHover) {
+        if (!!this.reference) {
+          this.reference[`${!!toggleOnHover ? 'addEventListener' : 'removeEventListener'}`]('mouseenter', this._handleReferenceMouseEnter)
+        }
+      },
+      async _handleReferenceMouseEnter(e) {
+        this.currentValue = true
+      },
+      _handleClickReference() {
+        // !!this.showOnClickReference && (this.currentValue = true)
+      },
     },
     mounted() {
       this.currentValue && this.update()
       this.referenceWidth = this.reference.offsetWidth
       this.referenceHeight = this.reference.offsetHeight
+      this._resetToggleOnHover(this.toggleOnHover)
+      this.reference.addEventListener('click', this._handleClickReference)
     },
     beforeDestroy() {
       console.log('a-popper beforeDestroy execute')

@@ -101,3 +101,11 @@ export function camelCase(name) {
     return offset ? letter.toUpperCase() : letter;
   }).replace(MOZ_HACK_REGEXP, 'Moz$1');
 }
+
+export async function delay(duration = 30) {
+  return new Promise((rs) => {
+    setTimeout(() => {
+      rs()
+    }, duration)
+  })
+}
