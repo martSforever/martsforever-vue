@@ -4,7 +4,7 @@ export const router = {
   children: [
     {
       path: '/',
-      redirect:'/aIconExample'
+      redirect: '/aIconExample'
     },
     {
       path: '/aButtonExample',
@@ -75,6 +75,11 @@ export const router = {
       path: '/popover',
       component: resolve => require(['src/example/a-popover/a-popover-example.vue'], resolve),
       name: 'popover'
+    },
+    {
+      path: '/collapse',
+      component: resolve => require(['src/example/a-collapse/a-collapse-example.vue'], resolve),
+      name: 'collapse'
     },
   ]
 };

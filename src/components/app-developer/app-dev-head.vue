@@ -31,9 +31,10 @@
           {name: 'switch', url: 'aSwitchExample'},
           {name: 'modal', url: 'aModal'},
           {name: 'radio', url: 'aRadio'},
-          {name: 'test', url: 'test'},
           {name: 'popover', url: 'popover'},
+          {name: 'collapse', url: 'collapse'},
           {name: 'canvas', url: 'canvas'},
+          {name: 'test', url: 'test'},
           {name: 'parent-child', url: 'parent-child'},
         ],
         name: 'a-icon'
