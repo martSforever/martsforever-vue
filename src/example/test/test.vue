@@ -25,18 +25,19 @@
     <div>
       {{direction}}--{{align}}
     </div>
-    <a-popper reference-name="popperReference"
-              parent-name="test"
-              v-model="isShow"
-              ref="aPopper"
-              :direction.sync="direction"
-              :align.sync="align">
+    <a-popover reference-name="popperReference"
+               parent-name="test"
+               v-model="isShow"
+               ref="aPopper"
+               :hide-on-click-outside="false"
+               :direction.sync="direction"
+               :align.sync="align">
       <div class="target">
         <div class="popper-content">
           this is popper content
         </div>
       </div>
-    </a-popper>
+    </a-popover>
   </div>
 </template>
 
@@ -46,12 +47,10 @@
   import ACollapseTransition from "../../base/components/a-collapse-transition/a-collapse-transition";
   import TestChild from "./test-child";
   import TestParent from "./test-parent";
-
-  import Popper from 'popper.js'
-  import APopper from "../../base/components/a-popper/a-popper";
+  import APopover from "../../base/components/a-popover/a-popover";
 
   export default {
-    components: {APopper, TestParent, TestChild, ACollapseTransition, AButtonGroup, AButton},
+    components: {APopover, TestParent, TestChild, ACollapseTransition, AButtonGroup, AButton},
     name: "test",
     data() {
       return {
@@ -106,6 +105,7 @@
   .wrapper {
     margin-left: 600px;
     margin-top: 300px;
+    height: 2000px;
   }
 
   .reference {
