@@ -31,11 +31,10 @@
                ref="aPopper"
                :hide-on-click-outside="false"
                :direction.sync="direction"
+               :size-equal="false"
                :align.sync="align">
-      <div class="target">
-        <div class="popper-content">
-          this is popper content
-        </div>
+      <div class="popper-content">
+        this is popper content
       </div>
     </a-popover>
   </div>
@@ -96,7 +95,7 @@
   .popper-content {
     box-sizing: border-box;
     height: 250px;
-    width: 250px;
+    width: 100%;
     display: inline-block;
     background-color: white;
     color: black;
@@ -110,7 +109,7 @@
 
   .reference {
     display: inline-block;
-    width: 200px;
+    width: 300px;
     height: 200px;
     color: white;
     background: brown;

@@ -72,15 +72,21 @@
         type: Boolean,
         default: true,
         desc: '是否在点击popover外部元素的时候，关闭popover'
+      },
+      sizeEqual: {
+        type: Boolean,
+        default: true,
+        desc: '是否令popper与reference在方向上宽度一致'
       }
     },
     data() {
       return {
         popper: null,
-        width: '',
         currentValue: this.value,
         currentDirection: this.direction,
         currentAlign: this.align,
+        referenceWidth: null,
+        referenceHeight: null,
         arrowDirectionMap: {
           top: 'bottom',
           bottom: 'top',
@@ -124,6 +130,10 @@
       },
     },
     computed: {
+      equalSizeData() {
+        return oneOf(this.currentDirection, ['top', 'bottom']) ?
+          {key: 'width', val: this.referenceWidth} : {key: 'height', val: this.referenceHeight}
+      },
       arrowStyles() {
         let styles = {
           width: `${this.arrowSize}px`,
@@ -140,7 +150,10 @@
       },
       popoverContentStyles() {
         let styles = {}
-        !!this.width && (styles.width = `${this.width}px`)
+        console.log(this.equalSizeData)
+        if (!!this.sizeEqual && !!this.equalSizeData) {
+          ((styles[this.equalSizeData.key] = `${this.equalSizeData.val}px`))
+        }
         !!this.shadow && (styles.boxShadow = this.shadow)
         !!this.borderRadius && (styles.borderRadius = this.borderRadius)
         return styles
@@ -148,16 +161,19 @@
       popperWrapperClasses() {
         return `scale-origin-${this.currentDirection}-${this.currentAlign}`
       },
+      reference() {
+        const parent = findComponentUpward(this, this.parentName)
+        return parent.$refs[this.referenceName] || {}
+      },
     },
     methods: {
       update() {
         if (!!this.popper) {
           this.popper.update()
         } else {
-          const parent = findComponentUpward(this, this.parentName)
           /*内容popper*/
           console.log('new Popper')
-          this.popper = new Popper(parent.$refs[this.referenceName], this.$el, {
+          this.popper = new Popper(this.reference, this.$el, {
             placement: `${this.currentDirection}-${this.currentAlign}`,
             modifiers: {
               offset: {
@@ -197,6 +213,9 @@
     },
     mounted() {
       this.currentValue && this.update()
+      console.dir(this.reference)
+      this.referenceWidth = this.reference.offsetWidth
+      this.referenceHeight = this.reference.offsetHeight
     },
     beforeDestroy() {
       console.log('a-popper beforeDestroy execute')
