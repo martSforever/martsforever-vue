@@ -72,9 +72,9 @@ export const router = {
       name: 'test'
     },
     {
-      path: '/popper',
-      component: resolve => require(['src/example/a-popper/a-popper-example.vue'], resolve),
-      name: 'popper'
+      path: '/popover',
+      component: resolve => require(['src/example/a-popover/a-popover-example.vue'], resolve),
+      name: 'popover'
     },
   ]
 };

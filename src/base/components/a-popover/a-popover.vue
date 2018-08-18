@@ -202,7 +202,7 @@
         } else {
           return {
             key: this.currentAlign === 'end' ? 'bottom' : 'top',
-            value: this.currentAlign === 'center' ? `${(this.$el.offsetWidth - (this.arrowSize * Math.sqrt(2))) / 2}px` : `${this.arrowSize / 2}px`
+            value: this.currentAlign === 'center' ? `${(this.$el.offsetHeight - (this.arrowSize * Math.sqrt(2))) / 2}px` : `${this.arrowSize / 2}px`
           }
         }
       },
