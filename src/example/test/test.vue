@@ -31,7 +31,6 @@
                ref="aPopper"
                :hide-on-click-outside="false"
                :direction.sync="direction"
-               :size-equal="false"
                :align.sync="align">
       <div class="popper-content">
         this is popper content

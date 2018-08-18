@@ -150,7 +150,6 @@
       },
       popoverContentStyles() {
         let styles = {}
-        console.log(this.equalSizeData)
         if (!!this.sizeEqual && !!this.equalSizeData) {
           ((styles[this.equalSizeData.key] = `${this.equalSizeData.val}px`))
         }
@@ -172,7 +171,7 @@
           this.popper.update()
         } else {
           /*内容popper*/
-          console.log('new Popper')
+          // console.log('new Popper')
           this.popper = new Popper(this.reference, this.$el, {
             placement: `${this.currentDirection}-${this.currentAlign}`,
             modifiers: {
@@ -213,7 +212,6 @@
     },
     mounted() {
       this.currentValue && this.update()
-      console.dir(this.reference)
       this.referenceWidth = this.reference.offsetWidth
       this.referenceHeight = this.reference.offsetHeight
     },
