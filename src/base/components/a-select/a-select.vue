@@ -10,7 +10,7 @@
       ref="popover"
       v-model="currentShow">
       <div class="a-select-options">
-        this select options
+        <slot></slot>
       </div>
     </a-popover>
   </div>
@@ -27,7 +27,17 @@
       show: {
         type: Boolean,
         default: false
-      }
+      },
+    },
+    watch: {
+      show(val) {
+        if (this.currentShow !== val) {
+          this.currentShow = val
+        }
+      },
+      currentShow(val) {
+        this.$emit('update:show', val)
+      },
     },
     data() {
       return {
@@ -53,7 +63,7 @@
     .a-select-options {
       width: 100%;
       background-color: white;
-      padding: 12px;
+      padding: 12px 0;
     }
   }
 
