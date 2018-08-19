@@ -57,6 +57,11 @@ export const router = {
       name: 'radio'
     },
     {
+      path: '/aSelect',
+      component: resolve => require(['src/example/a-select/a-select-example.vue'], resolve),
+      name: 'select'
+    },
+    {
       path: '/canvas',
       component: resolve => require(['src/example/canvas/canvas-example.vue'], resolve),
       name: 'modal'

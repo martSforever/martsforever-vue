@@ -82,7 +82,9 @@
     },
     data() {
       return {
+        isMounted: false,
         popper: null,
+        reference: null,
         currentValue: this.value,
         currentDirection: this.direction,
         currentAlign: this.align,
@@ -144,7 +146,7 @@
 
         styles[this.arrowDirectionMap[this.currentDirection]] = `${-this.arrowSize / 2 + this.arrowSize / 5}px`
         let align = this._getArrowAlign()
-        styles[align.key] = align.value
+        !!align && (styles[align.key] = align.value)
         return styles
       },
       popoverContentStyles() {
@@ -158,10 +160,6 @@
       },
       popperWrapperClasses() {
         return `scale-origin-${this.currentDirection}-${this.currentAlign}`
-      },
-      reference() {
-        const parent = findComponentUpward(this, this.parentName)
-        return parent.$refs[this.referenceName] || {}
       },
     },
     methods: {
@@ -193,16 +191,20 @@
         this.currentAlign = placement.split('-')[1];
       },
       _getArrowAlign() {
-        if (oneOf(this.currentDirection, ['top', 'bottom'])) {
-          return {
-            key: this.currentAlign === 'end' ? 'right' : 'left',
-            value: this.currentAlign === 'center' ? `${(this.$el.offsetWidth - (this.arrowSize * Math.sqrt(2))) / 2}px` : `${this.arrowSize / 2}px`
+        if (!!this.isMounted) {
+          if (oneOf(this.currentDirection, ['top', 'bottom'])) {
+            return {
+              key: this.currentAlign === 'end' ? 'right' : 'left',
+              value: this.currentAlign === 'center' ? `${(this.$el.offsetWidth - (this.arrowSize * Math.sqrt(2))) / 2}px` : `${this.arrowSize / 2}px`
+            }
+          } else {
+            return {
+              key: this.currentAlign === 'end' ? 'bottom' : 'top',
+              value: this.currentAlign === 'center' ? `${(this.$el.offsetHeight - (this.arrowSize * Math.sqrt(2))) / 2}px` : `${this.arrowSize / 2}px`
+            }
           }
         } else {
-          return {
-            key: this.currentAlign === 'end' ? 'bottom' : 'top',
-            value: this.currentAlign === 'center' ? `${(this.$el.offsetHeight - (this.arrowSize * Math.sqrt(2))) / 2}px` : `${this.arrowSize / 2}px`
-          }
+          return null
         }
       },
       _handleClickOutside(e) {
@@ -210,8 +212,14 @@
           this.currentValue = false
         }
       },
+      _getReference() {
+        const parent = findComponentUpward(this, this.parentName)
+        return parent.$refs[this.referenceName] || {}
+      },
     },
     mounted() {
+      this.isMounted = true
+      this.reference = this._getReference()
       this.currentValue && this.update()
       this.referenceWidth = this.reference.offsetWidth
       this.referenceHeight = this.reference.offsetHeight

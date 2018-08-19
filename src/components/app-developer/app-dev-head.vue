@@ -34,6 +34,7 @@
           {name: 'popover', url: 'popover'},
           {name: 'collapse', url: 'collapse'},
           {name: 'canvas', url: 'canvas'},
+          {name: 'select', url: 'aSelect'},
           {name: 'test', url: 'test'},
           {name: 'parent-child', url: 'parent-child'},
         ],

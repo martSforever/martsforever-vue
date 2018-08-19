@@ -31,7 +31,7 @@
                v-model="isShow"
                ref="aPopper"
                :size-equal="false"
-               :hide-on-click-outside="true"
+               :hide-on-click-outside="false"
                :direction.sync="direction"
                :align.sync="align">
       <div class="popper-content">
