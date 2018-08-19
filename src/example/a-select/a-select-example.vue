@@ -1,9 +1,11 @@
 <template>
   <div class="a-select-example">
     <div>
-      --{{currentShow}}--
+      --{{currentShow}}-single-{{selectSingleValue}}-multiple-{{selectMultiValue}}
     </div>
     <a-select
+      v-model="selectSingleValue"
+      :multiple="false"
       :show.sync="currentShow">
       <a-select-option v-for="(item,index) in options"
                        :key="index"
@@ -23,6 +25,9 @@
     data() {
       return {
         currentShow: true,
+        selectSingleValue: '3',
+        selectMultiValue: null,
+
         options: [
           {name: '蛋糕', value: '1'},
           {name: '蛋挞', value: '2'},

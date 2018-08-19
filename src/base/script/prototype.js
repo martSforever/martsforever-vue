@@ -73,3 +73,16 @@ Element.prototype.removeClass = function (classesStr) {
     this.className = curClassesStr.trim();
   }
 }
+
+/*
+* 删除数组所有元素
+*/
+
+Object.defineProperty(Array.prototype, 'removeAll', {
+  configurable: true,
+  writable: true,
+  enumerable: false,
+  value: function () {
+    this.splice(0, this.length)
+  }
+})
