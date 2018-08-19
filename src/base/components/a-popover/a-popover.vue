@@ -40,7 +40,7 @@
       },
       arrowSize: {
         type: Number,
-        default: 20,
+        default: 12,
         desc: '小三角大小，默认单位为px',
       },
       direction: {
@@ -140,7 +140,6 @@
           height: `${this.arrowSize}px`,
           transform: 'rotate(45deg)',
         }
-        !!this.borderRadius && (styles.borderRadius = this.borderRadius)
         !!this.shadow && (styles.boxShadow = this.shadow)
 
         styles[this.arrowDirectionMap[this.currentDirection]] = `${-this.arrowSize / 2 + this.arrowSize / 5}px`

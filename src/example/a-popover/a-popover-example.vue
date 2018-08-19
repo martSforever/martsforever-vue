@@ -99,6 +99,7 @@
     display: inline-block;
     background-color: white;
     color: black;
+    padding: 12px;
   }
 
   .wrapper {
