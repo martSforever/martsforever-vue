@@ -34,7 +34,6 @@
     data() {
       return {
         currentValue: this.value,
-        currentValues: []
       }
     },
     methods: {
