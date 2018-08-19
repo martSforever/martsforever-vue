@@ -16,6 +16,7 @@ export default {
   inserted(el, binding, vnode) {
 
     let mouse = new Mouse()
+    el.style.position = el.style.position || 'relative'
 
     el.addEventListener('mousedown', (e) => {
       mouse.initialized = true

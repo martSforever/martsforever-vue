@@ -53,7 +53,7 @@
       },
       align: {
         type: String,
-        default: 'center',
+        default: 'start',
         desc: '对其方式，如果direction是上或者下，那对其方式start、center、end对应为左对齐，居中对其以及右对齐，反之为顶部对其、居中对其以及底部对其',
         validator(val) {
           return oneOf(val, ['start', 'center', 'end'])

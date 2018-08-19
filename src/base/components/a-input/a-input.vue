@@ -20,6 +20,7 @@
       @input="handleInput"
       @focus="handleFocus"
       @blur="handleBlur"
+      @click="handleClick"
     />
     <div :class="appendClass">
       <slot name="append"></slot>
@@ -146,6 +147,9 @@
       },
       focus() {
         this.$refs.input.focus();
+      },
+      handleClick(e) {
+        this.$emit('click', e)
       },
     },
     watch: {

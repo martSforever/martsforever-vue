@@ -14,5 +14,10 @@
 </script>
 
 <style scoped lang="scss">
-
+  .a-select-example {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    padding: 24px;
+  }
 </style>

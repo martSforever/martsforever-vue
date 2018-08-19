@@ -1,11 +1,13 @@
 <template>
   <div class="a-select">
-    <div ref="input">
-      <a-input/>
+    <div ref="input" class="a-select-input-wrapper" v-move="handleMove">
+      <a-input @click="_handleClickInput"/>
     </div>
     <a-popover
       reference-name="input"
       parent-name="a-select"
+      :size-equal="true"
+      ref="popover"
       v-model="currentShow">
       <div class="a-select-options">
         this select options
@@ -32,9 +34,27 @@
         currentShow: this.show
       }
     },
+    methods: {
+      _handleClickInput(e) {
+        this.currentShow = true
+      },
+      handleMove() {
+        this.$refs.popover.update()
+      },
+    }
   }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
+  .a-select {
+    .a-select-input-wrapper {
+      display: inline-block;
+    }
+    .a-select-options {
+      width: 100%;
+      background-color: white;
+      padding: 12px;
+    }
+  }
 
 </style>
