@@ -3,8 +3,7 @@
     <transition name="popper-scale">
       <div class="a-popper-content-wrapper"
            :class="popperWrapperClasses"
-           v-show="currentValue"
-           v-clickout-side="_handleClickOutside">
+           v-show="currentValue">
         <div class="a-popper-arrow" :style="arrowStyles"></div>
         <div class="a-popper-content" ref="popperContent" :style="popoverContentStyles">
           <slot></slot>
@@ -16,7 +15,7 @@
 
 <script>
   import Popper from 'popper.js'
-  import {delay, findComponentUpward, oneOf} from "../../script/utils";
+  import {findComponentUpward, oneOf} from "../../script/utils";
   import ACollapseTransition from "../a-collapse-transition/a-collapse-transition";
 
   export default {
@@ -75,21 +74,11 @@
         default: true,
         desc: '是否在点击popover外部元素的时候，关闭popover'
       },
-      showOnClickReference: {
-        type: Boolean,
-        default: true,
-        desc: '是否在点击reference的时候显示popper'
-      },
       sizeEqual: {
         type: Boolean,
         default: true,
         desc: '是否令popper与reference在方向上宽度一致'
       },
-      toggleOnHover: {
-        type: Boolean,
-        default: false,
-        desc: '是否在鼠标hover的时候自动显示隐藏'
-      }
     },
     data() {
       return {
@@ -104,7 +93,7 @@
           bottom: 'top',
           left: 'right',
           right: 'left',
-        }
+        },
       };
     },
     watch: {
@@ -128,7 +117,6 @@
       align(val) {
         if (this.currentAlign !== val) {
           this.currentAlign = val
-          this.$emit('update:align', val)
           !!this.popper && this.popper.destroy()
           this.popper = null
           !!this.currentValue && this.update()
@@ -139,9 +127,6 @@
       },
       currentAlign(val) {
         this.$emit('update:align', val)
-      },
-      toggleOnHover(val) {
-        this._resetToggleOnHover(val)
       },
     },
     computed: {
@@ -221,30 +206,20 @@
           }
         }
       },
-      _handleClickOutside() {
-        !!this.hideOnClickOutside && (this.currentValue = false)
-      },
-      _resetToggleOnHover(toggleOnHover) {
-        if (!!this.reference) {
-          this.reference[`${!!toggleOnHover ? 'addEventListener' : 'removeEventListener'}`]('mouseenter', this._handleReferenceMouseEnter)
+      _handleClickOutside(e) {
+        if (!!this.hideOnClickOutside && !this.reference.contains(e.target) && !this.$el.contains(e.target)) {
+          this.currentValue = false
         }
-      },
-      async _handleReferenceMouseEnter(e) {
-        this.currentValue = true
-      },
-      _handleClickReference() {
-        // !!this.showOnClickReference && (this.currentValue = true)
       },
     },
     mounted() {
       this.currentValue && this.update()
       this.referenceWidth = this.reference.offsetWidth
       this.referenceHeight = this.reference.offsetHeight
-      this._resetToggleOnHover(this.toggleOnHover)
-      this.reference.addEventListener('click', this._handleClickReference)
+      document.addEventListener('click', this._handleClickOutside)
     },
     beforeDestroy() {
-      console.log('a-popper beforeDestroy execute')
+      document.removeEventListener('click', this._handleClickOutside)
     },
 
   }
