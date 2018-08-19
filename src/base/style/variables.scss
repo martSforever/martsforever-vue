@@ -60,7 +60,7 @@ $padding-small: map_get($paddings, small);
 $border-radiuses: (
   circle:64px,
   round:32px,
-  fillet:6px,
+  fillet:3px,
   none:0
 );
 $border-circle: map_get($border-radiuses, circle);
