@@ -55,6 +55,7 @@
           }
         } else {
           this.selectComponent.currentValue = !!this.checked ? null : this.value
+          this.selectComponent.currentShow = false
         }
       },
     },

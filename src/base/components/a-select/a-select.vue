@@ -97,6 +97,8 @@
       width: 100%;
       background-color: white;
       padding: 12px 0;
+      max-height: 200px;
+      overflow: auto;
     }
   }
 
