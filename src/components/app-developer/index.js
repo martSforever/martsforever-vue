@@ -62,6 +62,11 @@ export const router = {
       name: 'select'
     },
     {
+      path: '/aDropDown',
+      component: resolve => require(['src/example/a-dropdown/a-dropdown-example.vue'], resolve),
+      name: 'dropdown'
+    },
+    {
       path: '/canvas',
       component: resolve => require(['src/example/canvas/canvas-example.vue'], resolve),
       name: 'modal'
