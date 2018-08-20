@@ -51,7 +51,7 @@
               }
             }
           } else {
-            this.selectComponent.currentValue.push(this.value)
+            this.selectComponent.currentValue.unshift(this.value)
           }
         } else {
           this.selectComponent.currentValue = !!this.checked ? null : this.value

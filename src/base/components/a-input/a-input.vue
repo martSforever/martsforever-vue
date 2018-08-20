@@ -100,6 +100,7 @@
       color: {
         type: String,
         desc: '输入框边框以及文字颜色',
+        default: 'error',
         validator(val) {
           return oneOf(val, ['primary', 'info', 'success', 'warning', 'error'])
         },
