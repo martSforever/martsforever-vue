@@ -28,7 +28,8 @@
     components: {AIcon},
     data() {
       return {
-        currentValue: this.value
+        currentValue: this.value,
+        radioGroup: null,
       }
     },
     watch: {
@@ -70,8 +71,7 @@
     methods: {
       _handleClick(e) {
         this.currentValue = !this.currentValue;
-        let radioGroup = findComponentUpward(this, 'a-radio-group');
-        radioGroup.updateValue(this)
+        !!this.radioGroup && this.radioGroup.updateValue(this)
       },
     },
     computed: {
@@ -92,7 +92,10 @@
           height: `${this.iconSize}`,
         }
       },
-    }
+    },
+    mounted() {
+      this.radioGroup = findComponentUpward(this, 'a-radio-group');
+    },
   }
 </script>
 
