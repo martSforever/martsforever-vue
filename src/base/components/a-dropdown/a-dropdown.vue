@@ -30,6 +30,8 @@
   const TRIGGER_HOVER = 'hover'
   const TRIGGER_CLICK = 'click'
 
+  const DELAY = 50
+
   export default {
     name: "a-dropdown",
     components: {APopover},
@@ -63,7 +65,11 @@
         type: Boolean,
         default: true
       },
-      tag: null
+      tag: null,
+      disabled: {
+        type: Boolean,
+        default: false
+      }
     },
     data() {
       return {
@@ -73,9 +79,11 @@
     },
     methods: {
       _handleClickReference() {
+        if (!!this.disabled) return
         this.trigger === TRIGGER_CLICK && (this.currentShow = true)
       },
       _handleMouseEnter(type) {
+        if (!!this.disabled) return
         if (this.trigger !== TRIGGER_HOVER) return
         if (!!this.timer) {
           clearTimeout(this.timer)
@@ -83,9 +91,10 @@
         }
         this.timer = setTimeout(() => {
           this.currentShow = true
-        }, 100)
+        }, DELAY)
       },
       _handleMouseLeave(type) {
+        if (!!this.disabled) return
         if (this.trigger !== TRIGGER_HOVER) return
         if (!!this.timer) {
           clearTimeout(this.timer)
@@ -93,7 +102,7 @@
         }
         this.timer = setTimeout(() => {
           this.currentShow = false
-        }, 100)
+        }, DELAY)
       },
     }
   }
