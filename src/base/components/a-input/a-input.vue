@@ -114,8 +114,7 @@
       },
 
       value: {
-        type: [String, Number],
-        default: ''
+        default: null
       },
     },
     data() {

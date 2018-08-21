@@ -6,16 +6,34 @@
 
 <script>
   import ATimePicker from "../../base/components/a-time-picker/a-time-picker";
+  import AScrollbar from "../../base/components/a-scrollbar/a-scrollbar";
 
   export default {
     name: "a-time-picker-example",
-    components: {ATimePicker}
+    components: {AScrollbar, ATimePicker},
+    mounted() {
+    },
   }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
   .a-time-picker-example {
     width: 100vw;
     height: 100vh;
+    padding: 12px;
+    text-align: center;
+
+    .wrapper {
+      width: 50px;
+      height: 300px;
+      background-color: #0ac2ff;
+      display: inline-block;
+      .item {
+        height: 50px;
+        margin-bottom: 12px;
+        background-color: #5aff78;
+      }
+    }
+
   }
 </style>

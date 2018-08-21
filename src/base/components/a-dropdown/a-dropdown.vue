@@ -77,6 +77,16 @@
         timer: null,
       }
     },
+    watch: {
+      show(val) {
+        if (this.currentShow !== val) {
+          this.currentShow = val
+        }
+      },
+      currentShow(val) {
+        this.$emit('update:show', val)
+      },
+    },
     methods: {
       _handleClickReference() {
         if (!!this.disabled) return
@@ -111,7 +121,7 @@
 <style lang="scss">
   .a-dropdown {
     .a-dropdown-reference {
-      display: block;
+      display: inline-block;
     }
     .a-dropdown-content {
       background-color: white;
