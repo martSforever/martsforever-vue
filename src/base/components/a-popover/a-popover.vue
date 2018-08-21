@@ -4,7 +4,7 @@
       <div class="a-popper-content-wrapper"
            :class="popperWrapperClasses"
            v-show="currentValue">
-        <div class="a-popper-arrow" :style="arrowStyles"></div>
+        <div class="a-popper-arrow" :style="arrowStyles" v-if="showArrow"></div>
         <div class="a-popper-content" ref="popperContent" :style="popoverContentStyles">
           <slot></slot>
         </div>
@@ -76,9 +76,13 @@
       },
       sizeEqual: {
         type: Boolean,
-        default: true,
+        default: false,
         desc: '是否令popper与reference在方向上宽度一致'
       },
+      showArrow: {
+        type: Boolean,
+        default: true
+      }
     },
     data() {
       return {
