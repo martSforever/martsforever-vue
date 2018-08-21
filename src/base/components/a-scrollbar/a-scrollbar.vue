@@ -1,16 +1,21 @@
 <template>
-  <div class="a-scrollbar-wrapper" ref="scrollbarWrapper">
-    <div class="a-scrollbar-content" ref="scrollbarContent" @scroll="_onScroll">
+  <div class="a-scrollbar-wrapper"
+       ref="scrollbarWrapper"
+       @mouseenter="_onMouseenter"
+       @mouseleave="_onMouseleave">
+    <div class="a-scrollbar-content"
+         ref="scrollbarContent"
+         @scroll="_onScroll">
       <slot></slot>
     </div>
     <div class="a-scrollbar-v-wrapper" ref="vScrollbarWrapper" v-show="vShowScrollbar">
       <div class="a-scrollbar-v" ref="vScrollbar">
-        <div class="a-scroll-bar-v-indicator" ref="vIndicator"></div>
+        <div class="a-scroll-bar-v-indicator" ref="vIndicator" v-show="showScrollBar"></div>
       </div>
     </div>
     <div class="a-scrollbar-h-wrapper" ref="hScrollbarWrapper" v-show="hShowScrollbar">
       <div class="a-scrollbar-h" ref="hScrollbar">
-        <div class="a-scroll-bar-h-indicator" ref="hIndicator"></div>
+        <div class="a-scroll-bar-h-indicator" ref="hIndicator" v-show="showScrollBar"></div>
       </div>
     </div>
   </div>
@@ -35,7 +40,7 @@
       },
       scrollBarSize: {
         type: Number,
-        default: 5,
+        default: 9,
         desc: '如果是横向，就是滚动条高度，如果是纵向，就是滚动条宽度'
       },
       scrollbarRadius: {
@@ -56,6 +61,8 @@
         hTouch: {},                   //横向滚动时，用来存储一些数据的对象
         vShowScrollbar: false,        //纵向滚动条是否显示
         hShowScrollbar: true,         //横向滚动条是否显示
+
+        showScrollBar: false,         //是否显示滚动条,只对indicator做操作，不对indicator的wrapper做操作
       }
     },
     mounted() {
