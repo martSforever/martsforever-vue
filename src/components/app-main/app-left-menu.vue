@@ -5,7 +5,7 @@
       <!--<button @click="add">add{{menuList.length}}</button>-->
     </div>
     <div class="menu-body">
-      <a-scrollbar>
+      <a-scrollbar :auto-hide="false">
         <div v-for="row in rows">
           <ul>
             <li v-for="(item,index) in menuList" class="menu-item" @click="gotoMenu(item)">

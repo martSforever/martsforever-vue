@@ -62,7 +62,7 @@
         vShowScrollbar: false,        //纵向滚动条是否显示
         hShowScrollbar: true,         //横向滚动条是否显示
 
-        showScrollBar: false,         //是否显示滚动条,只对indicator做操作，不对indicator的wrapper做操作
+        showScrollBar: !this.autoHide,         //是否显示滚动条,只对indicator做操作，不对indicator的wrapper做操作
       }
     },
     mounted() {

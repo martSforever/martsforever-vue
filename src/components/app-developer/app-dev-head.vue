@@ -36,6 +36,7 @@
           {name: 'canvas', url: 'canvas'},
           {name: 'select', url: 'aSelect'},
           {name: 'dropdown', url: 'aDropDown'},
+          {name: 'time-picker', url: 'time-picker'},
           {name: 'test', url: 'test'},
           {name: 'parent-child', url: 'parent-child'},
         ],

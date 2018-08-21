@@ -67,6 +67,11 @@ export const router = {
       name: 'dropdown'
     },
     {
+      path: '/time-picker',
+      component: resolve => require(['src/example/a-time-picker/a-time-picker-example.vue'], resolve),
+      name: 'time-picker'
+    },
+    {
       path: '/canvas',
       component: resolve => require(['src/example/canvas/canvas-example.vue'], resolve),
       name: 'modal'
