@@ -169,8 +169,6 @@
   .a-time-picker {
     display: inline-block;
     .drop-content {
-      height: 196px;
-      width: 150px;
       background-color: white;
       .col {
         width: 50px;
@@ -184,7 +182,6 @@
           line-height: 28px;
         }
         .valid {
-          transition: all 0.4s;
           cursor: pointer;
           border-radius: 3px;
           &:hover {
