@@ -197,10 +197,6 @@
           }
         }
       }
-      .minute {
-        border-left: solid 1px $hover-color;
-        border-right: solid 1px $hover-color;
-      }
     }
     .foot {
       padding: 6px 6px 0 6px;
