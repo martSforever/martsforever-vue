@@ -11,7 +11,12 @@
                          :scroll-bar-color="scrollbarColor"
                          :indicator-color="indicatorColor"
                          ref="scrollbarHours">
-              <div v-for="(item,index) in hours" :key="index" class="item">{{item}}</div>
+              <div v-for="(item,index) in hours"
+                   :key="index"
+                   class="item"
+                   :class="{valid:item !== '',active:item === hour}"
+                   @click="_handleClickItem(item,$event,'hour')">{{item}}
+              </div>
             </a-scrollbar>
           </div>
           <div class="col minute">
@@ -19,7 +24,12 @@
                          :scroll-bar-color="scrollbarColor"
                          :indicator-color="indicatorColor"
                          ref="scrollbarMinutes">
-              <div v-for="(item,index) in minutes" :key="index" class="item">{{item}}</div>
+              <div v-for="(item,index) in minutes"
+                   :key="index"
+                   class="item"
+                   :class="{valid:item !== '',active:item === minute}"
+                   @click="_handleClickItem(item,$event,'minute')">{{item}}
+              </div>
             </a-scrollbar>
           </div>
           <div class="col second">
@@ -27,7 +37,12 @@
                          :scroll-bar-color="scrollbarColor"
                          :indicator-color="indicatorColor"
                          ref="scrollbarSeconds">
-              <div v-for="(item,index) in seconds" :key="index" class="item">{{item}}</div>
+              <div v-for="(item,index) in seconds"
+                   :key="index"
+                   class="item"
+                   :class="{valid:item !== '',active:item === second}"
+                   @click="_handleClickItem(item,$event,'second')">{{item}}
+              </div>
             </a-scrollbar>
           </div>
         </div>
@@ -71,6 +86,10 @@
       let seconds = []
       for (let i = 0; i < 60; i++) seconds.push(i)
 
+      hours.pushArray(['', '', '']).unshiftArray(['', '', ''])
+      minutes.pushArray(['', '', '']).unshiftArray(['', '', ''])
+      seconds.pushArray(['', '', '']).unshiftArray(['', '', ''])
+
       return {
         hours: hours,                     //小时数组
         minutes: minutes,                 //分钟数组
@@ -79,13 +98,13 @@
 
         scrollbarSize: 6,                 //滚动条大小
         scrollbarColor: 'white',          //滚动条颜色
-        indicatorColor: '#ddd',        //滚动条指示器颜色
+        indicatorColor: '#ddd',           //滚动条指示器颜色
 
         isUpdateScrollBar: false,         //是否已经刷新过滚动条
 
-        hour: null,                       //当前选中的小时
-        minute: null,                     //当前选中的分钟
-        second: null,                     //当前选中的秒
+        hour: 0,                          //当前选中的小时
+        minute: 0,                        //当前选中的分钟
+        second: 0,                        //当前选中的秒
       }
     },
     methods: {
@@ -97,8 +116,31 @@
           this.$refs.scrollbarMinutes.update()
           this.$refs.scrollbarSeconds.update()
           this.isUpdateScrollBar = true
+          setTimeout(() => {
+            this.$refs.scrollbarHours.scrollToY(28 * 3)
+            this.$refs.scrollbarMinutes.scrollToY(28 * 3)
+            this.$refs.scrollbarSeconds.scrollToY(28 * 3)
+          }, 100)
         }
       },
+      _handleClickItem(item, e, type) {
+        if (item === '') return
+        switch (type) {
+          case 'hour':
+            this.hour = item
+            this.$refs.scrollbarHours.scrollToY(e.target.offsetTop - 28 * 3)
+            break
+          case 'minute':
+            this.minute = item
+            this.$refs.scrollbarMinutes.scrollToY(e.target.offsetTop - 28 * 3)
+            break
+          case 'second':
+            this.second = item
+            this.$refs.scrollbarSeconds.scrollToY(e.target.offsetTop - 28 * 3)
+            break
+        }
+      },
+
     },
     mounted() {
 
@@ -113,21 +155,30 @@
   .a-time-picker {
     display: inline-block;
     .drop-content {
-      height: 200px;
+      height: 196px;
       width: 150px;
       background-color: white;
       .col {
         width: 50px;
         float: left;
-        height: 200px;
+        height: 196px;
         box-sizing: border-box;
+        padding-left: 6px;
         .item {
           height: 28px;
           text-align: center;
           line-height: 28px;
+        }
+        .valid {
           transition: all 0.4s;
+          cursor: pointer;
+          border-radius: 3px;
           &:hover {
             background-color: $hover-color;
+            color: white;
+          }
+          &.active {
+            background-color: $text-color-primary;
             color: white;
           }
         }

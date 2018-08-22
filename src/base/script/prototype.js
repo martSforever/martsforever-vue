@@ -86,3 +86,27 @@ Object.defineProperty(Array.prototype, 'removeAll', {
     this.splice(0, this.length)
   }
 })
+
+
+Object.defineProperty(Array.prototype, 'pushArray', {
+  configurable: true,
+  writable: true,
+  enumerable: false,
+  value: function (array) {
+    array.forEach((item) => {
+      this.push(item)
+    })
+    return this
+  }
+})
+Object.defineProperty(Array.prototype, 'unshiftArray', {
+  configurable: true,
+  writable: true,
+  enumerable: false,
+  value: function (array) {
+    array.forEach((item) => {
+      this.unshift(item)
+    })
+    return this
+  }
+})
