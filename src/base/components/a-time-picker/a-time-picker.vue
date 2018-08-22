@@ -1,14 +1,15 @@
 <template>
   <div class="a-time-picker">
+    {{hour}}:{{minute}}:{{second}}
     <a-dropdown
       :show.sync="currentShow"
       trigger="click">
       <a-input @click="_handleClick" :value="currentShow"/>
       <div slot="dropdown">
         <div class="drop-content">
-          <a-time-spinner ref="hourSpinner" :length="24"/>
-          <a-time-spinner ref="minuteSpinner"/>
-          <a-time-spinner ref="secondSpinner"/>
+          <a-time-spinner v-model="hour" ref="hourSpinner" :length="24"/>
+          <a-time-spinner v-model="minute" ref="minuteSpinner"/>
+          <a-time-spinner v-model="second" ref="secondSpinner"/>
         </div>
         <div class="foot">
           <a-button type="success">
@@ -43,6 +44,13 @@
         type: String,
         default: 'hh:mm:ss'
       },
+      value: {
+        type: Date,
+        default: () => {
+          console.log(new Date())
+          return new Date()
+        }
+      }
     },
     watch: {
       show(val) {
@@ -58,32 +66,13 @@
       },
     },
     data() {
-      let hours = []
-      for (let i = 0; i < 24; i++) hours.push(i)
-      let minutes = []
-      for (let i = 0; i < 60; i++) minutes.push(i)
-      let seconds = []
-      for (let i = 0; i < 60; i++) seconds.push(i)
-
-      hours.pushArray(['', '', '']).unshiftArray(['', '', ''])
-      minutes.pushArray(['', '', '']).unshiftArray(['', '', ''])
-      seconds.pushArray(['', '', '']).unshiftArray(['', '', ''])
-
       return {
-        hours: hours,                     //小时数组
-        minutes: minutes,                 //分钟数组
-        seconds: seconds,                 //秒数组
-        currentShow: this.show,           //当前是否显示
-
-        scrollbarSize: 6,                 //滚动条大小
-        scrollbarColor: 'white',          //滚动条颜色
-        indicatorColor: '#ddd',           //滚动条指示器颜色
-
-        isUpdateScrollBar: false,         //是否已经刷新过滚动条
-
-        hour: 0,                          //当前选中的小时
-        minute: 0,                        //当前选中的分钟
-        second: 0,                        //当前选中的秒
+        currentShow: this.show,                               //当前是否显示
+        currentValue: this.value,                             //当前值
+        isUpdateScrollBar: false,                             //是否已经刷新过滚动条
+        hour: this.value.getHours(),                          //当前选中的小时
+        minute: this.value.getMinutes(),                        //当前选中的分钟
+        second: this.value.getSeconds(),                        //当前选中的秒
       }
     },
     methods: {
@@ -95,34 +84,8 @@
           this.$refs.minuteSpinner.updateScrollBar()
           this.$refs.secondSpinner.updateScrollBar()
           this.isUpdateScrollBar = true
-          setTimeout(() => {
-            this.$refs.hourSpinner.scrollToY(28 * 3)
-            this.$refs.minuteSpinner.scrollToY(28 * 3)
-            this.$refs.secondSpinner.scrollToY(28 * 3)
-          }, 100)
         }
       },
-      _handleClickItem(item, e, type) {
-        if (item === '') return
-        switch (type) {
-          case 'hour':
-            this.hour = item
-            this.$refs.scrollbarHours.scrollToY(e.target.offsetTop - 28 * 3)
-            break
-          case 'minute':
-            this.minute = item
-            this.$refs.scrollbarMinutes.scrollToY(e.target.offsetTop - 28 * 3)
-            break
-          case 'second':
-            this.second = item
-            this.$refs.scrollbarSeconds.scrollToY(e.target.offsetTop - 28 * 3)
-            break
-        }
-      },
-    },
-
-    mounted() {
-
     },
   }
 </script>

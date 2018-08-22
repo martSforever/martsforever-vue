@@ -76,6 +76,9 @@
       },
       updateScrollBar() {
         this.$refs.scrollbar.update()
+        setTimeout(() => {
+          this.scrollToY(28 * (3 + this.currentValue))
+        }, 100)
       },
       scrollToY(y) {
         this.$refs.scrollbar.scrollToY(y)
