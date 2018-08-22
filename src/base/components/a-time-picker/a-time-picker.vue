@@ -6,45 +6,9 @@
       <a-input @click="_handleClick" :value="currentShow"/>
       <div slot="dropdown">
         <div class="drop-content">
-          <div class="col hour">
-            <a-scrollbar :scroll-bar-size="scrollbarSize"
-                         :scroll-bar-color="scrollbarColor"
-                         :indicator-color="indicatorColor"
-                         ref="scrollbarHours">
-              <div v-for="(item,index) in hours"
-                   :key="index"
-                   class="item"
-                   :class="{valid:item !== '',active:item === hour}"
-                   @click="_handleClickItem(item,$event,'hour')">{{item}}
-              </div>
-            </a-scrollbar>
-          </div>
-          <div class="col minute">
-            <a-scrollbar :scroll-bar-size="scrollbarSize"
-                         :scroll-bar-color="scrollbarColor"
-                         :indicator-color="indicatorColor"
-                         ref="scrollbarMinutes">
-              <div v-for="(item,index) in minutes"
-                   :key="index"
-                   class="item"
-                   :class="{valid:item !== '',active:item === minute}"
-                   @click="_handleClickItem(item,$event,'minute')">{{item}}
-              </div>
-            </a-scrollbar>
-          </div>
-          <div class="col second">
-            <a-scrollbar :scroll-bar-size="scrollbarSize"
-                         :scroll-bar-color="scrollbarColor"
-                         :indicator-color="indicatorColor"
-                         ref="scrollbarSeconds">
-              <div v-for="(item,index) in seconds"
-                   :key="index"
-                   class="item"
-                   :class="{valid:item !== '',active:item === second}"
-                   @click="_handleClickItem(item,$event,'second')">{{item}}
-              </div>
-            </a-scrollbar>
-          </div>
+          <a-time-spinner ref="hourSpinner" :length="24"/>
+          <a-time-spinner ref="minuteSpinner"/>
+          <a-time-spinner ref="secondSpinner"/>
         </div>
         <div class="foot">
           <a-button type="success">
@@ -65,10 +29,11 @@
   import AScrollbar from "../a-scrollbar/a-scrollbar";
   import AIcon from "../a-icon/a-icon";
   import AButton from "../a-button/a-button";
+  import ATimeSpinner from "./a-time-spinner";
 
   export default {
     name: "a-time-picker",
-    components: {AButton, AIcon, AScrollbar, AInput, ADropdown},
+    components: {ATimeSpinner, AButton, AIcon, AScrollbar, AInput, ADropdown},
     props: {
       show: {
         type: Boolean,
@@ -126,14 +91,14 @@
       },
       _refreshScrollBar() {
         if (!this.isUpdateScrollBar) {
-          this.$refs.scrollbarHours.update()
-          this.$refs.scrollbarMinutes.update()
-          this.$refs.scrollbarSeconds.update()
+          this.$refs.hourSpinner.updateScrollBar()
+          this.$refs.minuteSpinner.updateScrollBar()
+          this.$refs.secondSpinner.updateScrollBar()
           this.isUpdateScrollBar = true
           setTimeout(() => {
-            this.$refs.scrollbarHours.scrollToY(28 * 3)
-            this.$refs.scrollbarMinutes.scrollToY(28 * 3)
-            this.$refs.scrollbarSeconds.scrollToY(28 * 3)
+            this.$refs.hourSpinner.scrollToY(28 * 3)
+            this.$refs.minuteSpinner.scrollToY(28 * 3)
+            this.$refs.secondSpinner.scrollToY(28 * 3)
           }, 100)
         }
       },
