@@ -46,6 +46,14 @@
             </a-scrollbar>
           </div>
         </div>
+        <div class="foot">
+          <a-button type="success">
+            <a-icon icon="fa-check"/>
+          </a-button>
+          <a-button type="error">
+            <a-icon icon="fa-times"/>
+          </a-button>
+        </div>
       </div>
     </a-dropdown>
   </div>
@@ -55,15 +63,21 @@
   import ADropdown from "../a-dropdown/a-dropdown";
   import AInput from "../a-input/a-input";
   import AScrollbar from "../a-scrollbar/a-scrollbar";
+  import AIcon from "../a-icon/a-icon";
+  import AButton from "../a-button/a-button";
 
   export default {
     name: "a-time-picker",
-    components: {AScrollbar, AInput, ADropdown},
+    components: {AButton, AIcon, AScrollbar, AInput, ADropdown},
     props: {
       show: {
         type: Boolean,
         default: false
-      }
+      },
+      format: {
+        type: String,
+        default: 'hh:mm:ss'
+      },
     },
     watch: {
       show(val) {
@@ -140,8 +154,8 @@
             break
         }
       },
-
     },
+
     mounted() {
 
     },
@@ -186,6 +200,19 @@
       .minute {
         border-left: solid 1px $hover-color;
         border-right: solid 1px $hover-color;
+      }
+    }
+    .foot {
+      padding: 6px 6px 0 6px;
+      border-top: #ddd solid 1px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      .a-btn {
+        margin-left: 6px;
+        .a-icon {
+          color: white;
+        }
       }
     }
   }

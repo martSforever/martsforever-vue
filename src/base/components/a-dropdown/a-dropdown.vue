@@ -125,7 +125,7 @@
     }
     .a-dropdown-content {
       background-color: white;
-      padding: 12px 0;
+      padding: 6px 0;
     }
   }
 </style>
