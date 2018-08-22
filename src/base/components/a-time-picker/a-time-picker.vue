@@ -79,7 +79,7 @@
 
         scrollbarSize: 6,                 //滚动条大小
         scrollbarColor: 'white',          //滚动条颜色
-        indicatorColor: '#f2f2f2',        //滚动条指示器颜色
+        indicatorColor: '#ddd',        //滚动条指示器颜色
 
         isUpdateScrollBar: false,         //是否已经刷新过滚动条
 
@@ -107,6 +107,9 @@
 </script>
 
 <style lang="scss">
+
+  $hover-color: #ddd;
+
   .a-time-picker {
     display: inline-block;
     .drop-content {
@@ -122,14 +125,16 @@
           height: 28px;
           text-align: center;
           line-height: 28px;
+          transition: all 0.4s;
           &:hover {
-            background-color: #f2f2f2;
+            background-color: $hover-color;
+            color: white;
           }
         }
       }
       .minute {
-        border-left: solid 1px #f2f2f2;
-        border-right: solid 1px #f2f2f2;
+        border-left: solid 1px $hover-color;
+        border-right: solid 1px $hover-color;
       }
     }
   }
