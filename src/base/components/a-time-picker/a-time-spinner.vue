@@ -72,12 +72,14 @@
     methods: {
       _handleClickItem(item, e) {
         this.currentValue = item
-        this.scrollToY(e.target.offsetTop - 28 * 3)
+        this.updateScrollTop()
       },
       updateScrollBar() {
         this.$refs.scrollbar.update()
+      },
+      updateScrollTop() {
         setTimeout(() => {
-          this.scrollToY(28 * (3 + this.currentValue))
+          this.scrollToY(28 * (this.currentValue))
         }, 100)
       },
       scrollToY(y) {

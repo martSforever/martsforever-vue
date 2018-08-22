@@ -81,8 +81,11 @@
       _refreshScrollBar() {
         if (!this.isUpdateScrollBar) {
           this.$refs.hourSpinner.updateScrollBar()
+          this.$refs.hourSpinner.updateScrollTop()
           this.$refs.minuteSpinner.updateScrollBar()
+          this.$refs.minuteSpinner.updateScrollTop()
           this.$refs.secondSpinner.updateScrollBar()
+          this.$refs.secondSpinner.updateScrollTop()
           this.isUpdateScrollBar = true
         }
       },
