@@ -72,6 +72,11 @@ export const router = {
       name: 'time-picker'
     },
     {
+      path: '/date-picker',
+      component: resolve => require(['src/example/a-date-picker/a-date-picker-example.vue'], resolve),
+      name: 'date-picker'
+    },
+    {
       path: '/canvas',
       component: resolve => require(['src/example/canvas/canvas-example.vue'], resolve),
       name: 'modal'
