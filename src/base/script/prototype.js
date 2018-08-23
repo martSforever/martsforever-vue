@@ -113,7 +113,7 @@ Object.defineProperty(Array.prototype, 'unshiftArray', {
 
 Object.defineProperty(Date.prototype, 'format', {
   value: function (formatStr) {
-    return formatStr.replace(/"[^"]*"|'[^']*'|\b(?:d{1,4}|M{1,4}|yy(?:yy)?|([hHmstT])\1?|[lLZ])\b/g, function ($0) {
+    return formatStr.replace(/"[^"]*"|'[^']*'|\b(?:d{1,4}|M{1,4}|yy(?:yy)?|([hHmstT])\1?|[lLZ])\b/g, ($0) => {
       switch ($0) {
         case 'd':
           return this.getDate();

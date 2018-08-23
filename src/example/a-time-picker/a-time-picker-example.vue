@@ -1,6 +1,7 @@
 <template>
   <div class="a-time-picker-example">
-    <a-time-picker/>
+    {{time.format('yyyy-MM-dd HH:mm:ss')}}------{{JSON.stringify(time)}}
+    <a-time-picker v-model="time" format="HH时mm分ss秒"/>
   </div>
 </template>
 
@@ -12,9 +13,23 @@
   export default {
     name: "a-time-picker-example",
     components: {AScrollbar, ATimePicker},
-    mounted() {
-      console.log(zeroize(10, 4))
+    data() {
+
+      let time = new Date()
+      // time.setHours(20)
+      // time.setMinutes(20)
+      // time.setSeconds(20)
+      return {
+        time: time
+      }
     },
+    mounted() {
+    },
+    methods: {
+      handleInput(e) {
+        this.time = e
+      },
+    }
   }
 </script>
 

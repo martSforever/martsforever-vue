@@ -1,10 +1,9 @@
 <template>
   <div class="a-time-picker">
-    {{hour}}:{{minute}}:{{second}}
     <a-dropdown
       :show.sync="currentShow"
       trigger="click">
-      <a-input @click="_handleClick" :value="currentShow"/>
+      <a-input @click="_handleClick" :value="label"/>
       <div slot="dropdown">
         <div class="drop-content">
           <a-time-spinner v-model="hour" ref="hourSpinner" :length="24"/>
@@ -12,10 +11,10 @@
           <a-time-spinner v-model="second" ref="secondSpinner"/>
         </div>
         <div class="foot">
-          <a-button type="success">
+          <a-button type="success" @click="_onConfirm">
             <a-icon icon="fa-check"/>
           </a-button>
-          <a-button type="error">
+          <a-button type="error" @click="_onCancel">
             <a-icon icon="fa-times"/>
           </a-button>
         </div>
@@ -46,10 +45,7 @@
       },
       value: {
         type: Date,
-        default: () => {
-          console.log(new Date())
-          return new Date()
-        }
+        default: () => new Date()
       }
     },
     watch: {
@@ -62,6 +58,11 @@
         this.$emit('update:show', val)
         if (!!val) {
           this._refreshScrollBar()
+        }
+      },
+      value(val) {
+        if (this.currentValue !== val) {
+          this.currentValue = val
         }
       },
     },
@@ -88,6 +89,23 @@
           this.$refs.secondSpinner.updateScrollTop()
           this.isUpdateScrollBar = true
         }
+      },
+      _onConfirm() {
+        let time = new Date(this.value)
+        time.setHours(this.hour)
+        time.setMinutes(this.minute)
+        time.setSeconds(this.second)
+        this.currentValue = time
+        this.$emit('input', this.currentValue)
+        this.currentShow = false
+      },
+      _onCancel() {
+        this.currentShow = false
+      },
+    },
+    computed: {
+      label() {
+        return this.currentValue.format(this.format)
       },
     },
   }
