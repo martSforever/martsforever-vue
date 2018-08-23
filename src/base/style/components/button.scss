@@ -1,14 +1,16 @@
 .#{$css-prefix-btn} {
-
   /*按钮默认样式*/
   background-color: rgba(255, 255, 255, 0.1);
   &, & * {
     color: $text-color-light;
   }
   @include transition-all;
-  padding: 6px 12px;
   outline: none;
   border: none;
+  height: 32px;
+  line-height: 32px;
+  padding: 0 6px;
+
   //& ~ .#{$css-prefix-btn} {
   //  margin-left: 6px;
   //}

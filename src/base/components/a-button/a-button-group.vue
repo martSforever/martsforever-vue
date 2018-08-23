@@ -16,7 +16,8 @@
       shape: {
         validator(value) {
           return oneOf(value, ['round', 'fillet', 'none']);
-        }
+        },
+        default: 'fillet'
       },
       size: {
         validator(value) {
