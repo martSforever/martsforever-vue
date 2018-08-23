@@ -1,4 +1,6 @@
-// 判断参数是否是其中之一
+/*
+*  判断参数是否是其中之一
+*/
 export function oneOf(value, validList) {
   for (let i = 0; i < validList.length; i++) {
     if (value === validList[i]) {
@@ -8,12 +10,16 @@ export function oneOf(value, validList) {
   return false;
 }
 
-//去掉px,返回数字
+/*
+*  去掉px,返回数字
+*/
 export function removePx(value) {
   return ((value + "").replace(/px/g, '') - 0);
 }
 
-// 向下查找组件
+/*
+*  向下查找组件
+*/
 export function findComponentsDownward(context, componentName) {
   return context.$children.reduce((components, child) => {
     if (child.$options.name === componentName) components.push(child);
@@ -22,7 +28,9 @@ export function findComponentsDownward(context, componentName) {
   }, []);
 }
 
-// 向上查找组件
+/*
+*  向上查找组件
+*/
 export function findComponentsUpward(context, componentName) {
   let parents = [];
   const parent = context.$parent;
@@ -34,6 +42,9 @@ export function findComponentsUpward(context, componentName) {
   }
 }
 
+/*
+*  向上查找一个组件
+*/
 export function findComponentUpward(context, componentName, componentNames) {
   if (typeof componentName === 'string') {
     componentNames = [componentName];
@@ -50,6 +61,9 @@ export function findComponentUpward(context, componentName, componentNames) {
   return parent;
 }
 
+/*
+*  判断变量类型
+*/
 export function typeOf(obj) {
   const toString = Object.prototype.toString;
   const map = {
@@ -67,7 +81,9 @@ export function typeOf(obj) {
   return map[toString.call(obj)];
 }
 
-// deepCopy
+/*
+*  深度复制
+*/
 export function deepCopy(data) {
   const t = typeOf(data);
   let o;
@@ -92,16 +108,22 @@ export function deepCopy(data) {
   return o;
 }
 
-
 const SPECIAL_CHARS_REGEXP = /([\:\-\_]+(.))/g;
 const MOZ_HACK_REGEXP = /^moz([A-Z])/;
 
+/*
+*  转为驼峰命名
+*/
 export function camelCase(name) {
-  return name.replace(SPECIAL_CHARS_REGEXP, function (_, separator, letter, offset) {
-    return offset ? letter.toUpperCase() : letter;
-  }).replace(MOZ_HACK_REGEXP, 'Moz$1');
+  return name
+    .replace(SPECIAL_CHARS_REGEXP, function (_, separator, letter, offset) {
+      return offset ? letter.toUpperCase() : letter;
+    }).replace(MOZ_HACK_REGEXP, 'Moz$1');
 }
 
+/*
+*  推迟时间
+*/
 export async function delay(duration = 30) {
   return new Promise((rs) => {
     setTimeout(() => {
@@ -109,3 +131,18 @@ export async function delay(duration = 30) {
     }, duration)
   })
 }
+
+/*
+*  填充0字符
+*/
+export function zeroize(value, length = 2) {
+  let val = value + ''
+  let i = length - val.length
+  while (i > 0) {
+    val = '0' + val
+    i--
+  }
+  return val
+}
+
+

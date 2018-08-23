@@ -67,10 +67,10 @@
     },
     data() {
       return {
-        currentShow: this.show,                               //当前是否显示
-        currentValue: this.value,                             //当前值
-        isUpdateScrollBar: false,                             //是否已经刷新过滚动条
-        hour: this.value.getHours(),                          //当前选中的小时
+        currentShow: this.show,                                 //当前是否显示
+        currentValue: this.value,                               //当前值
+        isUpdateScrollBar: false,                               //是否已经刷新过滚动条
+        hour: this.value.getHours(),                            //当前选中的小时
         minute: this.value.getMinutes(),                        //当前选中的分钟
         second: this.value.getSeconds(),                        //当前选中的秒
       }

@@ -7,11 +7,13 @@
 <script>
   import ATimePicker from "../../base/components/a-time-picker/a-time-picker";
   import AScrollbar from "../../base/components/a-scrollbar/a-scrollbar";
+  import {zeroize} from "../../base/script/utils";
 
   export default {
     name: "a-time-picker-example",
     components: {AScrollbar, ATimePicker},
     mounted() {
+      console.log(zeroize(10, 4))
     },
   }
 </script>
