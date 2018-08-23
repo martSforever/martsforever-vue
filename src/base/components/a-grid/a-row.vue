@@ -52,10 +52,10 @@
       },
       styles() {
         let style = {};
-        if ((this.gutter-0) !== 0) {
+        if ((this.gutter - 0) !== 0) {
           style = {
-            marginLeft: (this.gutter-0) / -2 + 'px',
-            marginRight: (this.gutter-0) / -2 + 'px'
+            marginLeft: (this.gutter - 0) / -2 + 'px',
+            marginRight: (this.gutter - 0) / -2 + 'px'
           };
         }
 
@@ -67,9 +67,8 @@
         const Cols = findComponentsDownward(this, 'a-col');
         if (Cols.length) {
           Cols.forEach((child) => {
-            if ((val-0) !== 0) {
-              console.log(val,(val-0));
-              child.gutter = (val-0);
+            if ((val - 0) !== 0) {
+              child.gutter = (val - 0);
             }
           });
         }

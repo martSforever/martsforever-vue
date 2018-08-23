@@ -1,15 +1,25 @@
 <template>
   <div class="a-date-picker-example">
     <a-date-picker/>
+    --{{year}}--
+    <div>
+      <a-year-panel v-model="year"/>
+    </div>
   </div>
 </template>
 
 <script>
   import ADatePicker from "../../base/components/a-date-picker/a-date-picker";
+  import AYearPanel from "../../base/components/a-date-picker/a-year-panel";
 
   export default {
     name: "a-date-picker-example",
-    components: {ADatePicker}
+    components: {AYearPanel, ADatePicker},
+    data() {
+      return {
+        year: null
+      }
+    },
   }
 </script>
 
