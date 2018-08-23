@@ -71,8 +71,10 @@
     },
     methods: {
       _handleClickItem(item, e) {
-        this.currentValue = item
-        this.updateScrollTop()
+        if (!!item) {
+          this.currentValue = item
+          this.updateScrollTop()
+        }
       },
       updateScrollBar() {
         this.$refs.scrollbar.update()

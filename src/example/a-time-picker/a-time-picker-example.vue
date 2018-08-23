@@ -1,7 +1,7 @@
 <template>
   <div class="a-time-picker-example">
-    {{time.format('yyyy-MM-dd HH:mm:ss')}}------{{JSON.stringify(time)}}
     <a-time-picker v-model="time" format="HH时mm分ss秒"/>
+    <a-time-picker v-model="time" format="HH:mm:ss"/>
   </div>
 </template>
 
