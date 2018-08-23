@@ -1,19 +1,11 @@
 import {oneOf, zeroize} from "./utils";
 
 /*
-*  String字符串
-*/
-
-/*
 *  去除字符串前后的空格换行符，以及ufeff字符
 */
 String.prototype.trim = function () {
   return (this || '').replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '');
 }
-
-/*
-*  HTML节点
-*/
 
 /*
 *  判断是否存在class
@@ -77,7 +69,6 @@ Element.prototype.removeClass = function (classesStr) {
 /*
 * 删除数组所有元素
 */
-
 Object.defineProperty(Array.prototype, 'removeAll', {
   configurable: true,
   writable: true,
@@ -87,7 +78,9 @@ Object.defineProperty(Array.prototype, 'removeAll', {
   }
 })
 
-
+/*
+*  在数组末尾插入数组
+*/
 Object.defineProperty(Array.prototype, 'pushArray', {
   configurable: true,
   writable: true,
@@ -99,6 +92,10 @@ Object.defineProperty(Array.prototype, 'pushArray', {
     return this
   }
 })
+
+/*
+*  在数组头部插入数组
+*/
 Object.defineProperty(Array.prototype, 'unshiftArray', {
   configurable: true,
   writable: true,
@@ -111,6 +108,9 @@ Object.defineProperty(Array.prototype, 'unshiftArray', {
   }
 })
 
+/*
+*  日期格式化
+*/
 Object.defineProperty(Date.prototype, 'format', {
   value: function (formatStr) {
     return formatStr.replace(/"[^"]*"|'[^']*'|\b(?:d{1,4}|M{1,4}|yy(?:yy)?|([hHmstT])\1?|[lLZ])\b/g, ($0) => {
@@ -163,3 +163,21 @@ Object.defineProperty(Date.prototype, 'format', {
     });
   }
 })
+
+/*
+*  遍历元素
+*/
+Object.defineProperty(Object.prototype, 'iterate', {
+  writable: false,
+  enumerable: false,
+  configurable: true,
+  value: function (func, init) {
+    for (let key in this) {
+      if (this.hasOwnProperty(key))
+        init = func(key, this[key], init)
+    }
+    return init
+  }
+})
+
+

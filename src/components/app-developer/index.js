@@ -77,6 +77,11 @@ export const router = {
       name: 'date-picker'
     },
     {
+      path: '/i18n',
+      component: resolve => require(['src/example/i18n/i18n-example.vue'], resolve),
+      name: 'i18n'
+    },
+    {
       path: '/canvas',
       component: resolve => require(['src/example/canvas/canvas-example.vue'], resolve),
       name: 'modal'

@@ -6,6 +6,7 @@ import 'swiper/dist/css/swiper.css';                                            
 import 'src/base/directives'                                                    //自定义指令
 import 'src/base/script/prototype'                                              //给各种原型添加属性方法
 import spreadPlugin from 'src/base/vue-plugin/spread'                           //自定义向上广播，向下广播功能
+import i18n from './base/locale'
 
 import 'src/base/style/index.scss';
 import 'src/index.js';
@@ -16,5 +17,6 @@ Vue.use(spreadPlugin)
 new Vue({
   el: '#app',
   router,
+  i18n,
   render: h => h(App)
 });
