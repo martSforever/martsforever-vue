@@ -3,7 +3,9 @@
     <a-row :gutter="6">
       <a-col v-for="(item,index) in options" :key="index" span="8">
         <div class="year-item" :class="{current:item===currentValue,now:item === current}" @click="_handleClick(item)">
-          {{item}}
+          <slot :item="item">
+            {{item}}
+          </slot>
         </div>
       </a-col>
     </a-row>

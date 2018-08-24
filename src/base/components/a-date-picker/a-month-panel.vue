@@ -6,7 +6,11 @@
         <label>{{$t('date-picker.month')}}</label>
       </div>
     </div>
-    <a-pick-panel v-model="currentValue" :current="now" :options="options"/>
+    <a-pick-panel v-model="currentValue" :current="now" :options="options">
+      <template slot-scope="data">
+        {{data.item}}{{$t('date-picker.month')}}
+      </template>
+    </a-pick-panel>
   </div>
 </template>
 
