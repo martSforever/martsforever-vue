@@ -164,6 +164,16 @@ Object.defineProperty(Date.prototype, 'format', {
   }
 })
 
+Object.defineProperty(Date.prototype, 'yyyyMMddHHmmss', {
+  writable: false,
+  enumerable: false,
+  configurable: true,
+  value: function () {
+    return this.format('yyyy-MM-dd HH:mm:ss')
+  }
+})
+
+
 /*
 *  遍历元素
 */
