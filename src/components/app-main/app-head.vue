@@ -12,18 +12,9 @@
           </div>
         </div>
         <div class="right" v-effect>
-          <div class="pick-language-wrapper">
-            <a-dropdown trigger="hover">
-              this is dropdown
-              <div slot="dropdown">
-                <div>
-                  dropdown item
-                </div>
-              </div>
-            </a-dropdown>
-          </div>
-          <img :src="avatar" class="avatar">
-          <p>{{user.name}} <i class="fa fa-angle-double-down"></i></p>
+          <pick-language/>
+          <p class="user-info"><img :src="avatar" class="avatar">{{user.name}} <i class="fa fa-angle-double-down"></i>
+          </p>
         </div>
       </div>
     </transition>
@@ -32,10 +23,11 @@
 
 <script>
   import ADropdown from "../../base/components/a-dropdown/a-dropdown";
+  import PickLanguage from "../bus-component/pick-language";
 
   export default {
     name: "app-head",
-    components: {ADropdown},
+    components: {PickLanguage, ADropdown},
     data() {
       return {
         show: false,
@@ -122,29 +114,23 @@
         }
       }
       .right {
-        width: 512px;
+        width: 300px;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
         color: $text-color-light;
         cursor: pointer;
         overflow: visible;
+        padding: 0 24px;
         @include transition-all;
         @include active-on-click;
-        .pick-language-wrapper {
-          height: 100%;
-          .a-dropdown {
-            height: 100%;
-            .a-dropdown-reference {
-              height: 100%;
-              display: flex;
-              align-items: center;
-            }
-          }
-        }
         p {
           font-weight: bold;
           letter-spacing: 2px;
+        }
+        .user-info {
+          display: flex;
+          align-items: center;
         }
         .avatar {
           height: 32px;
