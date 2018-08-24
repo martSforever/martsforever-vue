@@ -65,7 +65,7 @@
           display: inline-block;
           height: 28px;
           line-height: 28px;
-          width: 40px;
+          padding: 0 3px;
           &:hover, &.now, &.current {
             color: white;
           }
