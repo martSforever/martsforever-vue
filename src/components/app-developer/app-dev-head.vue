@@ -38,6 +38,7 @@
           {name: 'dropdown', url: 'aDropDown'},
           {name: 'time-picker', url: 'time-picker'},
           {name: 'date-picker', url: 'date-picker'},
+          {name: 'tabs', url: 'tabs'},
           {name: 'i18n', url: 'i18n'},
           {name: 'test', url: 'test'},
           {name: 'parent-child', url: 'parent-child'},
