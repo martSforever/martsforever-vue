@@ -3,6 +3,7 @@ module.exports = {
   "language-name": "简体中文",
 
   "date-picker": {
-    "year": '年'
+    "year": "年",
+    "month": "月",
   }
 }

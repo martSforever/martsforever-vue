@@ -1,9 +1,10 @@
 <template>
   <div class="a-date-picker-example">
     <a-date-picker/>
-    --{{year}}--
+    --{{year}}--{{month}}--
     <div>
       <a-year-panel v-model="year"/>
+      <a-month-panel v-model="month"/>
     </div>
   </div>
 </template>
@@ -11,13 +12,15 @@
 <script>
   import ADatePicker from "../../base/components/a-date-picker/a-date-picker";
   import AYearPanel from "../../base/components/a-date-picker/a-year-panel";
+  import AMonthPanel from "../../base/components/a-date-picker/a-month-panel";
 
   export default {
     name: "a-date-picker-example",
-    components: {AYearPanel, ADatePicker},
+    components: {AMonthPanel, AYearPanel, ADatePicker},
     data() {
       return {
-        year: null
+        year: null,
+        month: null
       }
     },
   }

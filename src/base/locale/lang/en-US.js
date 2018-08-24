@@ -3,6 +3,7 @@ module.exports = {
   "language-name": "English(United State)",
 
   "date-picker": {
-    "year": 'year'
+    "year": 'year',
+    "month": "month",
   }
 }
