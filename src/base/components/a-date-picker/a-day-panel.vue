@@ -1,7 +1,13 @@
 <template>
   <div class="a-day-panel">
     <div class="head">
-      {{pickYear}}年{{pickMonth+1}}月{{day}}日
+      <div class="icon-wrapper" @click="prevMonth">
+        <a-icon icon="fa-angle-double-left"/>
+      </div>
+      <div>{{pickYear}}年{{pickMonth+1}}月</div>
+      <div class="icon-wrapper" @click="nextMonth">
+        <a-icon icon="fa-angle-double-right"/>
+      </div>
     </div>
     <div class="content-wrapper">
       <div class="row">
@@ -9,7 +15,8 @@
           {{$t(`date.week.${item}`)}}
         </div>
 
-        <div class="col" v-for="(item,index) in days" :class="{invalid:!item.currentMonth}">
+        <div class="col" v-for="(item,index) in days"
+             :class="{invalid:!item.currentMonth,current:pickYear === year&&pickMonth===month&&item.day === day}">
           {{item.day}}
         </div>
       </div>
@@ -21,10 +28,11 @@
 
   import ARow from "../a-grid/a-row";
   import ACol from "../a-grid/a-col";
+  import AIcon from "../a-icon/a-icon";
 
   export default {
     name: "a-day-panel",
-    components: {ACol, ARow},
+    components: {AIcon, ACol, ARow},
     props: {
       year: {
         type: Number,
@@ -45,9 +53,9 @@
         weeks: ['0', '1', '2', '3', '4', '5', '6'],
         pickYear: this.year,
         pickMonth: this.month,
+
       }
     },
-    methods: {},
     computed: {
       days() {
         let days = []
@@ -58,7 +66,6 @@
         date.setMonth(month, 1)                     //目标月，要展示的月日历,目标月的第一天
         let week = date.getDay()                    //目标月的第一天是星期几
         date.setDate(0)
-        console.log(date.yyyyMMddHHmmss())
         let day = date.getDate()                    //目标月上个月的最后一天
         while (week > 0) {                          //添加上个月的日期
           days.unshift({
@@ -77,17 +84,29 @@
             currentMonth: true
           })
         }
-        week = 13 - date.getDay()                        //需要增加下个月几天
-        for (let i = 1; i <= week; i++) days.push({
+        for (let i = 1; days.length < 42; i++) days.push({
           day: i,
           currentMonth: false
         })
         return days
       },
     },
-    mounted() {
-
-    },
+    methods: {
+      nextMonth() {
+        this.pickMonth++
+        if (this.pickMonth === 12) {
+          this.pickMonth = 0
+          this.pickYear++
+        }
+      },
+      prevMonth() {
+        this.pickMonth--
+        if (this.pickMonth === -1) {
+          this.pickMonth = 11
+          this.pickYear--
+        }
+      },
+    }
   }
 </script>
 

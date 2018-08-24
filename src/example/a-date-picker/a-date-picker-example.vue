@@ -5,7 +5,7 @@
     <div style="display: flex;justify-content: space-around">
       <a-year-panel v-model="year"/>
       <a-month-panel v-model="month"/>
-      <a-day-panel/>
+      <a-day-panel :year="2018" :month="7" :day="31"/>
     </div>
   </div>
 </template>
