@@ -2,7 +2,7 @@ module.exports = {
   "locale": "zh-CN",
   "language-name": "简体中文",
 
-  "date-picker": {
+  "date": {
     "year": "年",
     "month": "月",
 
@@ -19,6 +19,14 @@ module.exports = {
     month11: '11 月',
     month12: '12 月',
 
-
+    week: {
+      sun: '日',
+      mon: '一',
+      tue: '二',
+      wed: '三',
+      thu: '四',
+      fri: '五',
+      sat: '六'
+    }
   }
 }

@@ -65,8 +65,9 @@
           display: inline-block;
           height: 28px;
           line-height: 28px;
-          padding: 0 3px;
+          padding: 0 9px;
           font-size: 12px;
+
           &:hover, &.now, &.current {
             color: white;
           }

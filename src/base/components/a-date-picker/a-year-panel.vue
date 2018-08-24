@@ -6,7 +6,7 @@
       </div>
       <div>
         <label>{{currentValue}}</label>
-        <label>{{$t('date-picker.year')}}</label>
+        <label>{{$t('date.year')}}</label>
       </div>
       <div class="icon-wrapper" @click="page = page+1">
         <a-icon icon="fa-angle-double-right"/>

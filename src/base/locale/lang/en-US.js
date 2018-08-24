@@ -2,7 +2,7 @@ module.exports = {
   "locale": "en-US",
   "language-name": "English(United State)",
 
-  "date-picker": {
+  "date": {
     "year": 'Year',
     "month": "Month",
 
@@ -18,5 +18,15 @@ module.exports = {
     month10: 'October',
     month11: 'November',
     month12: 'December',
+
+    week: {
+      sun: 'Sun',
+      mon: 'Mon',
+      tue: 'Tue',
+      wed: 'Wed',
+      thu: 'Thu',
+      fri: 'Fri',
+      sat: 'Sat'
+    }
   }
 }
