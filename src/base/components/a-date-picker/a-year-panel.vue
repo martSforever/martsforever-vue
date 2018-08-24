@@ -12,13 +12,7 @@
         <a-icon icon="fa-angle-double-right"/>
       </div>
     </div>
-    <a-row :gutter="6">
-      <a-col v-for="(item,index) in options" :key="index" span="8">
-        <div class="year-item" :class="{current:item===currentValue,now:item === now}" @click="_handleClick(item)">
-          {{item}}
-        </div>
-      </a-col>
-    </a-row>
+    <a-pick-panel v-model="currentValue" :current="now" :options="options"/>
   </div>
 </template>
 
@@ -27,10 +21,11 @@
   import ACol from "../a-grid/a-col";
   import AScrollbar from "../a-scrollbar/a-scrollbar";
   import AIcon from "../a-icon/a-icon";
+  import APickPanel from "./a-pick-panel";
 
   export default {
     name: "a-year-panel",
-    components: {AIcon, AScrollbar, ACol, ARow},
+    components: {APickPanel, AIcon, AScrollbar, ACol, ARow},
     props: {
       value: {
         type: Number,
@@ -102,34 +97,6 @@
         }
       }
     }
-    .a-row {
-      height: 176px;
-      .a-col {
-        height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        .year-item {
-          border-radius: $border-fillet;
-          cursor: pointer;
-          display: inline-block;
-          height: 28px;
-          line-height: 28px;
-          width: 40px;
-          &:hover, &.now, &.current {
-            color: white;
-          }
-          &:hover {
-            background-color: #ddd;
-          }
-          &.now {
-            background-color: #bfccdd;
-          }
-          &.current {
-            background-color: $text-color-primary;
-          }
-        }
-      }
-    }
+
   }
 </style>
