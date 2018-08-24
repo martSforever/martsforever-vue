@@ -17,15 +17,17 @@
   import AButtonGroup from "../../base/components/a-button/a-button-group";
   import AButton from "../../base/components/a-button/a-button";
 
+  import SomeBusinessTab from './some-business-tab'
+
   export default {
     name: "a-tabs-example",
     components: {AButton, AButtonGroup, ATabs},
     methods: {
       addTab() {
-        console.log('add tab', this.$refs.tabs)
+        this.$refs.tabs.addTab(SomeBusinessTab)
       },
       removeTab() {
-
+        this.$refs.tabs.removeTab()
       },
     }
   }
