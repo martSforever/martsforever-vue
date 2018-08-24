@@ -1,9 +1,10 @@
 <template>
   <div class="pick-language">
     <a-dropdown trigger="hover">
-      this is dropdown
+      {{currentLanguageName}}
       <div slot="dropdown">
-        <a-dropdown-item class="lang-item" v-for="(item,index) in languages" :key="index">
+        <a-dropdown-item class="lang-item" v-for="(item,index) in languages" :key="index"
+                         @click.native="handleChangeLanguage(item.lang,item.name)">
           {{item.name}}
         </a-dropdown-item>
       </div>
@@ -13,7 +14,6 @@
 
 <script>
   import ADropdown from "../../base/components/a-dropdown/a-dropdown";
-  import langs from '../../base/locale/lang'
   import ADropdownItem from "../../example/a-dropdown/a-dropdown-item";
 
   export default {
@@ -22,11 +22,15 @@
     data() {
       return {
         languages: null,
-        languageName: null
+        currentLanguageName: null
       }
     },
     mounted() {
-      this.languages = langs.iterate((key, value, ret) => {
+      console.log(this.$i18n)
+
+
+      this.languages = this.$i18n.messages.iterate((key, value, ret) => {
+        if (key === this.$i18n.locale) this.currentLanguageName = value['language-name']
         ret.push({
           name: value['language-name'],
           value,
@@ -36,11 +40,11 @@
       }, [])
     },
     methods: {
-      handleChangeLanguage(lang) {
-        console.log(lang)
+      handleChangeLanguage(lang, name) {
         this.$i18n.locale = lang
+        this.currentLanguageName = name
       },
-    }
+    },
   }
 </script>
 

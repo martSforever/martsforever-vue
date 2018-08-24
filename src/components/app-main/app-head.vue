@@ -11,7 +11,7 @@
             <i class="fa fa-search"></i>
           </div>
         </div>
-        <div class="right" v-effect>
+        <div class="right">
           <pick-language/>
           <p class="user-info"><img :src="avatar" class="avatar">{{user.name}} <i class="fa fa-angle-double-down"></i>
           </p>
