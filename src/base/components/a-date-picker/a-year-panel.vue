@@ -4,7 +4,10 @@
       <div class="icon-wrapper" @click="page = page-1">
         <a-icon icon="fa-angle-double-left"/>
       </div>
-      {{currentValue}}
+      <div>
+        <label>{{currentValue}}</label>
+        <label>{{$t('date-picker.year')}}</label>
+      </div>
       <div class="icon-wrapper" @click="page = page+1">
         <a-icon icon="fa-angle-double-right"/>
       </div>
