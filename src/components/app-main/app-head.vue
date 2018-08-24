@@ -12,6 +12,16 @@
           </div>
         </div>
         <div class="right" v-effect>
+          <div class="pick-language-wrapper">
+            <a-dropdown trigger="hover">
+              this is dropdown
+              <div slot="dropdown">
+                <div>
+                  dropdown item
+                </div>
+              </div>
+            </a-dropdown>
+          </div>
           <img :src="avatar" class="avatar">
           <p>{{user.name}} <i class="fa fa-angle-double-down"></i></p>
         </div>
@@ -21,8 +31,11 @@
 </template>
 
 <script>
+  import ADropdown from "../../base/components/a-dropdown/a-dropdown";
+
   export default {
     name: "app-head",
+    components: {ADropdown},
     data() {
       return {
         show: false,
@@ -47,7 +60,7 @@
   }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
   .app-head {
     .app-head-content {
       display: flex;
@@ -109,15 +122,26 @@
         }
       }
       .right {
-        width: 256px;
+        width: 512px;
         display: flex;
         align-items: center;
         justify-content: center;
         color: $text-color-light;
         cursor: pointer;
+        overflow: visible;
         @include transition-all;
         @include active-on-click;
-
+        .pick-language-wrapper {
+          height: 100%;
+          .a-dropdown {
+            height: 100%;
+            .a-dropdown-reference {
+              height: 100%;
+              display: flex;
+              align-items: center;
+            }
+          }
+        }
         p {
           font-weight: bold;
           letter-spacing: 2px;

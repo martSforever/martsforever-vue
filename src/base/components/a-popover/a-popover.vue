@@ -240,6 +240,7 @@
   .a-popper {
     background: transparent;
     display: inline-block;
+    z-index: 9999;
     .a-popper-content-wrapper {
       background: transparent;
       position: relative;

@@ -30,7 +30,7 @@
   const TRIGGER_HOVER = 'hover'
   const TRIGGER_CLICK = 'click'
 
-  const DELAY = 50
+  const DELAY = 100
 
   export default {
     name: "a-dropdown",
@@ -93,6 +93,7 @@
         this.trigger === TRIGGER_CLICK && (this.currentShow = true)
       },
       _handleMouseEnter(type) {
+        // console.log(`${type} enter`)
         if (!!this.disabled) return
         if (this.trigger !== TRIGGER_HOVER) return
         if (!!this.timer) {
@@ -104,6 +105,7 @@
         }, DELAY)
       },
       _handleMouseLeave(type) {
+        // console.log(`${type} leave`)
         if (!!this.disabled) return
         if (this.trigger !== TRIGGER_HOVER) return
         if (!!this.timer) {
