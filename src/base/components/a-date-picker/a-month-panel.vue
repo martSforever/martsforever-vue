@@ -8,7 +8,7 @@
     </div>
     <a-pick-panel v-model="currentValue" :current="now" :options="options">
       <template slot-scope="data">
-        {{data.item}}{{$t('date-picker.month')}}
+        {{$t(`date-picker.month${data.index+1}`)}}
       </template>
     </a-pick-panel>
   </div>

@@ -26,9 +26,6 @@
       }
     },
     mounted() {
-      console.log(this.$i18n)
-
-
       this.languages = this.$i18n.messages.iterate((key, value, ret) => {
         if (key === this.$i18n.locale) this.currentLanguageName = value['language-name']
         ret.push({

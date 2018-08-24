@@ -2,8 +2,8 @@
   <div class="a-pick-panel">
     <a-row :gutter="6">
       <a-col v-for="(item,index) in options" :key="index" span="8">
-        <div class="year-item" :class="{current:item===currentValue,now:item === current}" @click="_handleClick(item)">
-          <slot :item="item">
+        <div class="item" :class="{current:item===currentValue,now:item === current}" @click="_handleClick(item)">
+          <slot :item="item" :index="index">
             {{item}}
           </slot>
         </div>
@@ -59,13 +59,14 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        .year-item {
+        .item {
           border-radius: $border-fillet;
           cursor: pointer;
           display: inline-block;
           height: 28px;
           line-height: 28px;
           padding: 0 3px;
+          font-size: 12px;
           &:hover, &.now, &.current {
             color: white;
           }
