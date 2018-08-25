@@ -6,6 +6,7 @@
          ref="items"
          @mouseenter="_handleMouseEnter"
          @mouseleave="_handleMouseLeave"
+         :class="{active:currentValue === index}"
          @click="_handleClickItem(item,index)">
       {{item}}
     </div>
@@ -109,13 +110,16 @@
       align-items: center;
       margin-right: 24px;
       user-select: none;
+      color: #999;
+      &.active {
+        color: $text-color-main;
+      }
     }
     .a-tabs-head-indicator {
       transition: all 0.15s;
       position: absolute;
       border-radius: 2px;
       bottom: 0;
-
     }
   }
 </style>
