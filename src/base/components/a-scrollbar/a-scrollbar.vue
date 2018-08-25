@@ -5,6 +5,7 @@
        @mouseleave="_onMouseleave">
     <div class="a-scrollbar-content"
          ref="scrollbarContent"
+         v-watch-dom="update"
          @scroll="_onScroll">
       <slot></slot>
     </div>
@@ -277,10 +278,6 @@
         this.autoHide && (this.showScrollBar = false);
       },
       _watchContentSize() {
-        /*检测内容dom子节点变化，当变化完时，更新滚动条高度*/
-        this.observe = watchDomChildList(this.$refs.scrollbarContent, (mutations) => {
-          this.update();
-        });
       },
       scrollTo(x, y) {
         this.$refs.scrollbarContent.scrollTo(x, y)
@@ -302,7 +299,6 @@
       this.$refs.hIndicator.removeEventListener('mousedown', this._hOnIndicatorMouseDown);
       document.removeEventListener('mousemove', this._onMousemove);
       document.removeEventListener('mouseup', this._onMouseup);
-      this.observe.disconnect();
     },
   }
 </script>
