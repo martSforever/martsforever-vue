@@ -6,7 +6,7 @@
     <div class="a-tabs-content-wrapper">
       <a-carousel
         ref="carousel"
-        :swipeable="false"
+        :swipeable="true"
         height="100%">
         <a-carousel-item classes="item-cls"
                          v-for="(item,index) in list"
@@ -33,21 +33,25 @@
         vueComponents: [],
 
         list: [
-          {name: 'input', color: '#abf', width: '100px', initialized: false},
-          {name: 'button', color: '#ff7261', width: '200px', initialized: false},
-          {name: 'textarea', color: '#598dff', width: '300px', initialized: false},
-          {name: 'hello', color: '#4effbc', width: '200px', initialized: false},
-          {name: 'balbala', color: '#ff24ad', width: '200px', initialized: false},
+          {name: 'input', color: '#abf'},
+          {name: 'button', color: '#ff7261'},
+          {name: 'textarea', color: '#598dff'},
+          {name: 'hello', color: '#4effbc'},
+          {name: 'balbala', color: '#ff24ad'},
         ],
       }
     },
     methods: {
       addTab(component) {
-        let instance = new Vue(component)
+        /*let instance = new Vue(component)
         const vueComponent = instance.$mount()
         console.log(vueComponent)
         this.vueComponents.push(vueComponent)
-        this.$refs.content.appendChild(vueComponent.$el)
+        this.$refs.content.appendChild(vueComponent.$el)*/
+        this.list.push({
+          name: new Date().getTime(),
+          color: '#ff7261',
+        })
       },
       removeTab() {
         let vc = this.vueComponents.pop()

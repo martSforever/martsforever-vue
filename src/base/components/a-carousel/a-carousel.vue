@@ -1,6 +1,6 @@
 <template>
   <div class="a-carousel-wrapper" ref="wrapper" :style="wrapperStyles">
-    <div class="a-carousel" ref="carousel" @mousedown="_touchStart">
+    <div class="a-carousel" ref="carousel" @mousedown="_touchStart" v-watch-dom="_initializedItemStyle">
       <slot></slot>
     </div>
   </div>
@@ -64,6 +64,10 @@
     },
     methods: {
       _initializedItemStyle() {
+        this.touch.itemLefts = []
+        this.maxCarouselLeft = 0
+        this.totalWidth = 0
+
         let nodes = this.$refs.carousel.childNodes;
         let children = [];
         for (let i = 0; i < nodes.length; i++) {
@@ -85,6 +89,7 @@
           }
         }
         this.maxCarouselLeft = -(this.totalWidth - this.$refs.carousel.offsetWidth);
+        console.log('this.maxCarouselLeft ', this.maxCarouselLeft)
       },
       _initializedShape() {
         let borderRadius;
