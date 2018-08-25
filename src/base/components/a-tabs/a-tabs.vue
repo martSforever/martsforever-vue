@@ -1,18 +1,21 @@
 <template>
   <div class="a-tabs">
-    <a-tabs-head :labels="tabLabels" @change="_handleChangeLabel"/>
-    <a-carousel
-      ref="carousel"
-      :swipeable="false"
-      height="100px">
-      <div
-        class="a-carousel-item item-cls"
-        v-for="(item,index) in list"
-        :style="{backgroundColor:item.color}"
-      >
-        <div>{{item.name}}--{{index}}</div>
-      </div>
-    </a-carousel>
+    <div class="a-tabs-head-wrapper">
+      <a-tabs-head :labels="tabLabels" @change="_handleChangeLabel"/>
+    </div>
+    <div class="a-tabs-content-wrapper">
+      <a-carousel
+        ref="carousel"
+        :swipeable="false"
+        height="100%">
+        <a-carousel-item classes="item-cls"
+                         v-for="(item,index) in list"
+                         :styles="{backgroundColor:item.color}"
+                         :key="index">
+          <div>{{item.name}}--{{index}}</div>
+        </a-carousel-item>
+      </a-carousel>
+    </div>
   </div>
 </template>
 
@@ -20,10 +23,11 @@
   import Vue from 'vue'
   import ATabsHead from "./a-tabs-head";
   import ACarousel from "../a-carousel/a-carousel";
+  import ACarouselItem from "../a-carousel/a-carousel-item";
 
   export default {
     name: "a-tabs",
-    components: {ACarousel, ATabsHead},
+    components: {ACarouselItem, ACarousel, ATabsHead},
     data() {
       return {
         vueComponents: [],
@@ -52,7 +56,6 @@
       },
 
       _handleChangeLabel({item, index}) {
-        console.log(item, index)
         this.$refs.carousel.scrollTo(index)
       },
     },
@@ -69,6 +72,19 @@
 <style lang="scss">
   .a-tabs {
     text-align: left;
-
+    position: relative;
+    height: 100%;
+    width: 100%;
+    .a-tabs-head-wrapper {
+      height: 44px;
+      font-size: 16px;
+    }
+    .a-tabs-content-wrapper {
+      position: absolute;
+      top: 50px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
   }
 </style>

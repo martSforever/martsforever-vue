@@ -23,7 +23,7 @@
       },
       indicatorSize: {
         type: Number,
-        default: 2
+        default: 3
       },
       indicatorColor: {
         type: String,
@@ -99,7 +99,7 @@
   .a-tabs-head {
     position: relative;
     padding-left: 12px;
-    height: 32px;
+    height: 100%;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -107,7 +107,7 @@
       height: 100%;
       display: inline-flex;
       align-items: center;
-      margin-right: 12px;
+      margin-right: 24px;
       user-select: none;
     }
     .a-tabs-head-indicator {

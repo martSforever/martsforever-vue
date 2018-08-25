@@ -1,15 +1,18 @@
 <template>
-  <div class="a-tab">
+  <a-carousel-item classes="a-tab">
     <div class="a-tab-head" @click="currentInitialized = true">tab head</div>
     <div v-if="currentInitialized">
       <slot></slot>
     </div>
-  </div>
+  </a-carousel-item>
 </template>
 
 <script>
+  import ACarouselItem from "../a-carousel/a-carousel-item";
+
   export default {
     name: "a-tab",
+    components: {ACarouselItem},
     props: {
       initialized: false
     },
