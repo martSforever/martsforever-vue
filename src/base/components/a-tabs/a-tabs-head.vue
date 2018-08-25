@@ -28,7 +28,7 @@
       },
       indicatorColor: {
         type: String,
-        default: '#e03636'
+        default: '#84d8ff'
       },
       value: {
         type: Number,
@@ -112,7 +112,7 @@
       user-select: none;
       color: #999;
       &.active {
-        color: $text-color-main;
+        color: $text-color-primary;
       }
     }
     .a-tabs-head-indicator {
