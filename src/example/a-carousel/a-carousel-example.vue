@@ -6,13 +6,9 @@
           <a-title>基本用法</a-title>
           <a-carousel
             height="100px">
-            <div
-              class="a-carousel-item item-cls"
-              v-for="(item,index) in list"
-              :style="getBgColor(item)"
-            >
+            <a-carousel-item classes="item-cls" v-for="(item,index) in list" :styles="getBgColor(item)" :key="index">
               <div>{{item.name}}--{{index}}</div>
-            </div>
+            </a-carousel-item>
           </a-carousel>
         </div>
         <div class="example-item">
@@ -218,9 +214,11 @@
   import ACarouselExmapleItem from "./a-carousel-exmaple-item";
   import ATitle from "../../base/components/a-title/a-title";
   import AScrollbar from "../../base/components/a-scrollbar/a-scrollbar";
+  import ACarouselItem from "../../base/components/a-carousel/a-carousel-item";
 
   export default {
     components: {
+      ACarouselItem,
       AScrollbar,
       ATitle,
       ACarouselExmapleItem,
