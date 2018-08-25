@@ -87,7 +87,6 @@
       },
       _initialize() {
         this.$nextTick(() => {
-          this._watchContentSize();
           this._updateContent();
           this._hInitializeScrollbar();
           this._vInitializeScrollbar();
@@ -276,8 +275,6 @@
       _onMouseleave() {
         this.vTouch.initialized = false;
         this.autoHide && (this.showScrollBar = false);
-      },
-      _watchContentSize() {
       },
       scrollTo(x, y) {
         this.$refs.scrollbarContent.scrollTo(x, y)
