@@ -7,7 +7,7 @@
       <a-carousel
         @initialized="_handleCarouselInitialized"
         ref="carousel"
-        :swipeable="true"
+        :swipeable="false"
         height="100%">
         <slot></slot>
       </a-carousel>
@@ -43,12 +43,16 @@
           this.currentValue = val
         }
       },
-      currentValue(val) {
-        this.$emit('input', val)
-        this.openTab(val)
+      /*currentValue变化的时候，更新carousel，因为tabHead是直接双向绑定的currentValue，所以不用更新tabHead*/
+      currentValue(newVal, oldVal) {
+        if (newVal !== oldVal) {
+          this.$emit('input', newVal)
+          this._updateCarousel(newVal)
+        }
       },
     },
     methods: {
+      /*手动增加自定义tab*/
       addTab(component) {
         /*let instance = new Vue(component)
         const vueComponent = instance.$mount()
@@ -56,30 +60,40 @@
         this.vueComponents.push(vueComponent)
         this.$refs.content.appendChild(vueComponent.$el)*/
       },
+      /*手动删除自定义tab*/
       removeTab() {
         let vc = this.vueComponents.pop()
         this.$refs.content.removeChild(vc.$el)
         vc.$destroy()
       },
+      /*打开tab*/
       openTab(tabIndex) {
-        let tabs = this._getTabInstance()
-        if (!!tabs) tabs[tabIndex].currentInitialized = true
-        this.$nextTick(() => this.$refs.carousel.scrollTo(tabIndex))
+        this.currentValue = tabIndex
       },
+
+      /*更新carousel*/
+      _updateCarousel(index) {
+        // console.log('_updateCarousel')
+        let tabs = this._getTabInstance()
+        if (!!tabs) tabs[index].currentInitialized = true
+        this.$nextTick(() => this.$refs.carousel.scrollTo(index))
+      },
+      /*获取子tab 的vue组件实例*/
+      _getTabInstance() {
+        return this.$refs.carousel.$children.reduce((ret, child) => {
+          if (child.$options._componentTag === 'a-tab') {
+            ret.push(child)
+          }
+          return ret
+        }, [])
+      },
+      /*更新tabItems，用于给tabHead展示标签*/
       _handleCarouselInitialized() {
         this.tabItems = this._getTabInstance().reduce((ret, item) => {
           ret.push({
             title: item.title,
             name: item.name
           })
-          return ret
-        }, [])
-      },
-      _getTabInstance() {
-        return this.$refs.carousel.$children.reduce((ret, child) => {
-          if (child.$options._componentTag === 'a-tab') {
-            ret.push(child)
-          }
           return ret
         }, [])
       },
@@ -90,7 +104,8 @@
       },
     },
     mounted() {
-      this.openTab(this.currentValue)
+      /*a-tabs初始化的时候，打开以及初始化指定tab*/
+      this._updateCarousel(this.currentValue)
     },
   }
 </script>

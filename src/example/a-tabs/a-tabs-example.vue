@@ -5,11 +5,10 @@
         <a-button @click="addTabByChangeList">addTabByChangeList</a-button>
         <a-button @click="removeTabByChangeList">removeTabByChangeList</a-button>
       </a-button-group>
-      <div>tabIndex--{{tabIndex}}</div>
-      <div>{{list}}</div>
+      <div>a-tabs-example-->>{{tabIndex}}</div>
     </div>
     <div class="content">
-      <a-tabs ref="tabs">
+      <a-tabs ref="tabs" v-model="tabIndex">
         <a-tab classes="item-cls"
                :title="item.name"
                :name="item.name+'code'"
@@ -53,6 +52,7 @@
       addTabByChangeList() {
         // this.$refs.tabs.addTab(SomeBusinessTab)
         this.list.push({name: '果冻', color: '#ff9950'},)
+        this.$nextTick(() => this.$refs.tabs.openTab(this.list.length - 1))
       },
       removeTabByChangeList() {
         // this.$refs.tabs.removeTab()
