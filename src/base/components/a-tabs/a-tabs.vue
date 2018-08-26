@@ -5,15 +5,11 @@
     </div>
     <div class="a-tabs-content-wrapper">
       <a-carousel
+        @initialized="_handleCarouselInitialized"
         ref="carousel"
         :swipeable="true"
         height="100%">
-        <a-carousel-item classes="item-cls"
-                         v-for="(item,index) in list"
-                         :styles="{backgroundColor:item.color}"
-                         :key="index">
-          <div>{{item.name}}--{{index}}</div>
-        </a-carousel-item>
+        <slot></slot>
       </a-carousel>
     </div>
   </div>
@@ -31,14 +27,7 @@
     data() {
       return {
         vueComponents: [],
-
-        list: [
-          {name: 'input', color: '#abf'},
-          {name: 'button', color: '#ff7261'},
-          {name: 'textarea', color: '#598dff'},
-          {name: 'hello', color: '#4effbc'},
-          {name: 'balbala', color: '#ff24ad'},
-        ],
+        tabItems: []
       }
     },
     methods: {
@@ -61,6 +50,18 @@
 
       _handleChangeLabel({item, index}) {
         this.$refs.carousel.scrollTo(index)
+      },
+
+      _handleCarouselInitialized() {
+        this.tabItems = this.$refs.carousel.$children.reduce((ret, child) => {
+          if (child.$options._componentTag === 'a-tab') {
+            ret.push({
+              title: child.title,
+              name: child.name
+            })
+          }
+          return ret
+        }, [])
       },
     },
     computed: {

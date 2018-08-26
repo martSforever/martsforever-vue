@@ -89,7 +89,7 @@
           }
         }
         this.maxCarouselLeft = -(this.totalWidth - this.$refs.carousel.offsetWidth);
-        console.log('this.maxCarouselLeft ', this.maxCarouselLeft)
+        this.$emit('initialized')
       },
       _initializedShape() {
         let borderRadius;

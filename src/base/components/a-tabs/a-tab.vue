@@ -1,9 +1,10 @@
 <template>
-  <a-carousel-item classes="a-tab">
-    <div class="a-tab-head" @click="currentInitialized = true">tab head</div>
+  <a-carousel-item classes="a-tab" :classes="classes" :styles="styles">
+    <!--<div class="a-tab-head" @click="currentInitialized = true">tab head</div>
     <div v-if="currentInitialized">
       <slot></slot>
-    </div>
+    </div>-->
+    <slot></slot>
   </a-carousel-item>
 </template>
 
@@ -14,7 +15,16 @@
     name: "a-tab",
     components: {ACarouselItem},
     props: {
-      initialized: false
+      initialized: false,
+      classes: null,
+      styles: null,
+      title: {
+        type: String,
+        default: 'title' + new Date().getTime()
+      },
+      name: {
+        default: new Date().getTime()
+      }
     },
     data() {
       return {
