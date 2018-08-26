@@ -2,14 +2,14 @@
   <div class="a-tabs-example">
     <div style="margin-bottom: 6px">
       <a-button-group>
-        <a-button @click="addTab">add tab</a-button>
-        <a-button @click="removeTab">remove tab</a-button>
+        <a-button @click="addTabByChangeList">addTabByChangeList</a-button>
+        <a-button @click="removeTabByChangeList">removeTabByChangeList</a-button>
       </a-button-group>
       <div>tabIndex--{{tabIndex}}</div>
       <div>{{list}}</div>
     </div>
     <div class="content">
-      <a-tabs ref="tabs" >
+      <a-tabs ref="tabs">
         <a-tab classes="item-cls"
                :title="item.name"
                :name="item.name+'code'"
@@ -50,13 +50,16 @@
       }
     },
     methods: {
-      addTab() {
+      addTabByChangeList() {
         // this.$refs.tabs.addTab(SomeBusinessTab)
         this.list.push({name: '果冻', color: '#ff9950'},)
       },
-      removeTab() {
+      removeTabByChangeList() {
         // this.$refs.tabs.removeTab()
         this.list.pop()
+      },
+      addTab() {
+
       },
     }
   }
