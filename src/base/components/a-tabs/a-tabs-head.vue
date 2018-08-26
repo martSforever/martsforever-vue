@@ -45,11 +45,17 @@
         this.$emit('input', val)
       },
       labels(val) {
-        this.$nextTick(()=>{
+        this.$nextTick(() => {
           if (!!val && val.length > 0 && !!this.$refs.items) {
             let el = this.$refs.items[this.currentValue]
-            this.indicatorLeft = el.offsetLeft
-            this.indicatorWidth = el.offsetWidth
+            while (!el && this.currentValue > -1) {
+              this.currentValue--
+              el = this.$refs.items[this.currentValue]
+            }
+            if (this.currentValue > -1) {
+              this.indicatorLeft = el.offsetLeft
+              this.indicatorWidth = el.offsetWidth
+            }
           }
         })
       },

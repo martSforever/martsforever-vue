@@ -15,6 +15,7 @@
                :styles="{backgroundColor:item.color}"
                :key="index">
           <div>{{item.name}}--{{index}}</div>
+          <some-business-sub-content :name="item.name"/>
         </a-tab>
       </a-tabs>
     </div>
@@ -28,10 +29,11 @@
 
   import SomeBusinessTab from './some-business-tab'
   import ATab from "../../base/components/a-tabs/a-tab";
+  import SomeBusinessSubContent from "./some-business-sub-content";
 
   export default {
     name: "a-tabs-example",
-    components: {ATab, AButton, AButtonGroup, ATabs},
+    components: {SomeBusinessSubContent, ATab, AButton, AButtonGroup, ATabs},
     data() {
       return {
         list: [
@@ -45,10 +47,12 @@
     },
     methods: {
       addTab() {
-        this.$refs.tabs.addTab(SomeBusinessTab)
+        // this.$refs.tabs.addTab(SomeBusinessTab)
+        this.list.push({name: '果冻', color: '#ff9950'},)
       },
       removeTab() {
-        this.$refs.tabs.removeTab()
+        // this.$refs.tabs.removeTab()
+        this.list.pop()
       },
     }
   }

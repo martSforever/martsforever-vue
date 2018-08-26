@@ -1,7 +1,7 @@
 <template>
   <div class="a-tabs">
     <div class="a-tabs-head-wrapper">
-      <a-tabs-head :labels="tabLabels" @change="_handleChangeLabel"/>
+      <a-tabs-head :labels="tabLabels" v-model="currentValue"/>
     </div>
     <div class="a-tabs-content-wrapper">
       <a-carousel
@@ -24,11 +24,29 @@
   export default {
     name: "a-tabs",
     components: {ACarouselItem, ACarousel, ATabsHead},
+    props: {
+      value: {
+        type: Number,
+        default: 0
+      }
+    },
     data() {
       return {
+        currentValue: this.value,
         vueComponents: [],
         tabItems: []
       }
+    },
+    watch: {
+      value(val) {
+        if (this.currentValue !== val) {
+          this.currentValue = val
+        }
+      },
+      currentValue(val) {
+        this.$emit('input', val)
+        this.$refs.carousel.scrollTo(val)
+      },
     },
     methods: {
       addTab(component) {
@@ -37,18 +55,11 @@
         console.log(vueComponent)
         this.vueComponents.push(vueComponent)
         this.$refs.content.appendChild(vueComponent.$el)*/
-        this.list.push({
-          name: new Date().getTime(),
-          color: '#ff7261',
-        })
       },
       removeTab() {
         let vc = this.vueComponents.pop()
         this.$refs.content.removeChild(vc.$el)
         vc.$destroy()
-      },
-      _handleChangeLabel({item, index}) {
-        this.$refs.carousel.scrollTo(index)
       },
       _handleCarouselInitialized() {
         this.tabItems = this.$refs.carousel.$children.reduce((ret, child) => {
@@ -60,7 +71,6 @@
           }
           return ret
         }, [])
-        console.log(this.tabItems)
       },
     },
     computed: {

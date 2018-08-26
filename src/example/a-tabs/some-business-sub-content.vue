@@ -1,17 +1,20 @@
 <template>
   <div>
-    some-business-sub-content
+    some-business-sub-content-->>{{name}}
   </div>
 </template>
 
 <script>
   export default {
+    props: {
+      name: ''
+    },
     name: "some-business-sub-content",
     created() {
-      console.log('some-business-sub-content initialized')
+      console.log(`${name} initialized`)
     },
     destroyed() {
-      console.log('some-business-sub-content destroy')
+      console.log(`${name} destroyed`)
     },
   }
 </script>
