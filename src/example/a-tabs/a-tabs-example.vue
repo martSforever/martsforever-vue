@@ -6,6 +6,7 @@
         <a-button @click="removeTabByChangeList">removeTabByChangeList</a-button>
         <a-button @click="addTab">addTab</a-button>
         <a-button @click="removeTab">removeTab</a-button>
+        <a-button @click="removeSpecialTab">removeSpecialTab</a-button>
       </a-button-group>
       <div>a-tabs-example-->>{{tabIndex}}</div>
     </div>
@@ -43,6 +44,7 @@
     data() {
       return {
         tabIndex: 3,
+        addInstances: [],
         list: [
           {name: '西红柿', color: '#abf', init: false},
           {name: '牙膏', color: '#ff7261', init: false},
@@ -55,19 +57,27 @@
     methods: {
       addTabByChangeList() {
         this.list.push({name: '果冻', color: '#ff9950'},)
-        this.$nextTick(() => this.$refs.tabs.openTab(this.list.length - 1))
+        this.$nextTick(() => this.$refs.tabs.openTab(this.$refs.tabs.getTabs().length - 1))
       },
       removeTabByChangeList() {
         // this.$refs.tabs.removeTab()
         this.list.pop()
       },
       addTab() {
-        this.addInstance = this.$refs.tabs.addTab(SomeBusinessTab)
+        this.addInstances.push(this.$refs.tabs.addTab(SomeBusinessTab))
         this.$nextTick(() => this.$refs.tabs.openTab(this.$refs.tabs.tabLabels.length - 1))
 
       },
       removeTab() {
-        this.$refs.tabs.removeTab(this.addInstance)
+        (this.addInstances.length > 0) && (this.$refs.tabs.removeTab(this.addInstances.pop()))
+      },
+      removeSpecialTab() {
+        let tabs = this.$refs.tabs.getTabs()
+        tabs.forEach((item) => {
+          if (item.title === '奶茶') {
+            this.$refs.tabs.removeTab(item)
+          }
+        })
       },
     }
   }

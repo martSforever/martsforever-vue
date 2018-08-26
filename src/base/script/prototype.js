@@ -107,6 +107,23 @@ Object.defineProperty(Array.prototype, 'unshiftArray', {
     return this
   }
 })
+/*
+*  删除数组元素
+*/
+Object.defineProperty(Array.prototype, 'remove', {
+  configurable: true,
+  writable: true,
+  enumerable: false,
+  value: function (target) {
+    for (let i = 0; i < this.length; i++) {
+      let item = this[i];
+      if (target === item) {
+        this.splice(i, 1)
+        return
+      }
+    }
+  }
+})
 
 /*
 *  日期格式化

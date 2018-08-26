@@ -33,8 +33,7 @@
     data() {
       return {
         currentValue: this.value,
-        vueComponents: [],
-        tabItems: []
+        tabs: []
       }
     },
     watch: {
@@ -56,26 +55,24 @@
       addTab(component) {
         const vueComponent = new Vue(component)
         const vueInstance = vueComponent.$mount()
+
         const aTab = vueInstance.$children[0]
         if (aTab.$options.name !== 'a-tab') {
           console.error('要添加的vue组件的根节点必须是a-tab！！！')
           vueInstance.$destroy()
           return
         }
-        this.vueComponents.push(aTab)
+
         this.$refs.carousel.appendChild(vueInstance.$el)
-        this.$refs.carousel.$children.push(aTab)
-
-        this.tabItems.push({
-          title: aTab.title,
-          name: aTab.name
-        })
-
-        return vueInstance
+        this.$refs.carousel.$children.push(vueInstance)
+        this._handleCarouselInitialized()
+        return this.tabs[this.tabs.length - 1]
       },
       /*手动删除自定义tab*/
-      removeTab(instance) {
+      removeTab(tabItem) {
+        let {tab, instance, name, title} = tabItem
         this.$refs.carousel.removeChild(instance.$el)
+        this.$refs.carousel.$children.remove(instance)
         instance.$destroy()
         this._handleCarouselInitialized()
       },
@@ -87,33 +84,42 @@
       /*更新carousel*/
       _updateCarousel(index) {
         // console.log('_updateCarousel')
-        let tabs = this._getTabInstance()
-        if (!!tabs) tabs[index].currentInitialized = true
+        let tabs = this.getTabs()
+        if (!!tabs) tabs[index].tab.currentInitialized = true
         this.$nextTick(() => this.$refs.carousel.scrollTo(index))
       },
       /*获取子tab 的vue组件实例*/
-      _getTabInstance() {
+      getTabs() {
         return this.$refs.carousel.$children.reduce((ret, child) => {
+          let item = {}
+          let tab, instance;
           if (child.$options.name === 'a-tab') {
-            ret.push(child)
+            tab = child
+            instance = tab
+          } else if (!!child.$children[0] && child.$children[0].$options.name === 'a-tab') {
+            tab = child.$children[0]
+            instance = child
+          } else {
+            console.error(`${child.$options.name}不是a-tab，根节点也不是a-tab实例`)
           }
+          item = {
+            tab,
+            instance,
+            name: tab.name,
+            title: tab.title
+          }
+          ret.push(item)
           return ret
         }, [])
       },
       /*更新tabItems，用于给tabHead展示标签*/
       _handleCarouselInitialized() {
-        this.tabItems = this._getTabInstance().reduce((ret, item) => {
-          ret.push({
-            title: item.title,
-            name: item.name
-          })
-          return ret
-        }, [])
+        this.tabs = this.getTabs()
       },
     },
     computed: {
       tabLabels() {
-        return this.tabItems.map((item) => item.title)
+        return this.tabs.map((item) => item.title)
       },
     },
     mounted() {
