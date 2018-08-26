@@ -47,11 +47,9 @@
         this.$refs.content.removeChild(vc.$el)
         vc.$destroy()
       },
-
       _handleChangeLabel({item, index}) {
         this.$refs.carousel.scrollTo(index)
       },
-
       _handleCarouselInitialized() {
         this.tabItems = this.$refs.carousel.$children.reduce((ret, child) => {
           if (child.$options._componentTag === 'a-tab') {
@@ -62,13 +60,12 @@
           }
           return ret
         }, [])
+        console.log(this.tabItems)
       },
     },
     computed: {
       tabLabels() {
-        return [
-          '西红柿', '牙膏', '烙饼', '杂酱面', '烧烤摊'
-        ]
+        return this.tabItems.map((item) => item.title)
       },
     }
   }

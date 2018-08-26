@@ -44,6 +44,15 @@
       currentValue(val) {
         this.$emit('input', val)
       },
+      labels(val) {
+        this.$nextTick(()=>{
+          if (!!val && val.length > 0 && !!this.$refs.items) {
+            let el = this.$refs.items[this.currentValue]
+            this.indicatorLeft = el.offsetLeft
+            this.indicatorWidth = el.offsetWidth
+          }
+        })
+      },
     },
     data() {
       return {
@@ -76,11 +85,6 @@
         this.currentValue = index
         this.$emit('change', {item, index})
       },
-    },
-    mounted() {
-      let el = this.$refs.items[this.currentValue]
-      this.indicatorLeft = el.offsetLeft
-      this.indicatorWidth = el.offsetWidth
     },
     computed: {
       indicatorStyle() {
