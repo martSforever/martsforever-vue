@@ -5,14 +5,17 @@
         <a-button @click="addTab">add tab</a-button>
         <a-button @click="removeTab">remove tab</a-button>
       </a-button-group>
+      <div>tabIndex--{{tabIndex}}</div>
+      <div>{{list}}</div>
     </div>
     <div class="content">
-      <a-tabs ref="tabs">
+      <a-tabs ref="tabs" >
         <a-tab classes="item-cls"
                :title="item.name"
                :name="item.name+'code'"
                v-for="(item,index) in list"
                :styles="{backgroundColor:item.color}"
+               :initialized.sync="item.init"
                :key="index">
           <div>{{item.name}}--{{index}}</div>
           <some-business-sub-content :name="item.name"/>
@@ -36,12 +39,13 @@
     components: {SomeBusinessSubContent, ATab, AButton, AButtonGroup, ATabs},
     data() {
       return {
+        tabIndex: 3,
         list: [
-          {name: '西红柿', color: '#abf'},
-          {name: '牙膏', color: '#ff7261'},
-          {name: '奶茶', color: '#598dff'},
-          {name: '炸酱面', color: '#4effbc'},
-          {name: '烧烤摊', color: '#ff24ad'},
+          {name: '西红柿', color: '#abf', init: false},
+          {name: '牙膏', color: '#ff7261', init: false},
+          {name: '奶茶', color: '#598dff', init: false},
+          {name: '炸酱面', color: '#4effbc', init: false},
+          {name: '烧烤摊', color: '#ff24ad', init: false},
         ],
       }
     },

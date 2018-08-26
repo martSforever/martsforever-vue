@@ -45,7 +45,7 @@
       },
       currentValue(val) {
         this.$emit('input', val)
-        this.$refs.carousel.scrollTo(val)
+        this.openTab(val)
       },
     },
     methods: {
@@ -61,13 +61,24 @@
         this.$refs.content.removeChild(vc.$el)
         vc.$destroy()
       },
+      openTab(tabIndex) {
+        let tabs = this._getTabInstance()
+        if (!!tabs) tabs[tabIndex].currentInitialized = true
+        this.$nextTick(() => this.$refs.carousel.scrollTo(tabIndex))
+      },
       _handleCarouselInitialized() {
-        this.tabItems = this.$refs.carousel.$children.reduce((ret, child) => {
+        this.tabItems = this._getTabInstance().reduce((ret, item) => {
+          ret.push({
+            title: item.title,
+            name: item.name
+          })
+          return ret
+        }, [])
+      },
+      _getTabInstance() {
+        return this.$refs.carousel.$children.reduce((ret, child) => {
           if (child.$options._componentTag === 'a-tab') {
-            ret.push({
-              title: child.title,
-              name: child.name
-            })
+            ret.push(child)
           }
           return ret
         }, [])
@@ -77,7 +88,10 @@
       tabLabels() {
         return this.tabItems.map((item) => item.title)
       },
-    }
+    },
+    mounted() {
+      this.openTab(this.currentValue)
+    },
   }
 </script>
 

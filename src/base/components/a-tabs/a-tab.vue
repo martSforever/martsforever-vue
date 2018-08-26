@@ -1,10 +1,8 @@
 <template>
   <a-carousel-item classes="a-tab" :classes="classes" :styles="styles">
-    <!--<div class="a-tab-head" @click="currentInitialized = true">tab head</div>
     <div v-if="currentInitialized">
       <slot></slot>
-    </div>-->
-    <slot></slot>
+    </div>
   </a-carousel-item>
 </template>
 
@@ -25,6 +23,11 @@
       name: {
         default: new Date().getTime()
       }
+    },
+    watch: {
+      currentInitialized(val) {
+        this.$emit('update:initialized', val)
+      },
     },
     data() {
       return {

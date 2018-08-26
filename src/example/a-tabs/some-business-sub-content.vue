@@ -10,11 +10,18 @@
       name: ''
     },
     name: "some-business-sub-content",
-    created() {
-      console.log(`${name} initialized`)
-    },
     destroyed() {
-      console.log(`${name} destroyed`)
+      console.log(`${this.name} destroyed`)
+    },
+    mounted() {
+      console.log(`${this.name} initialized`)
+      this.dates = []
+
+      let i = 10000
+      while (i > 0) {
+        i--
+        this.dates.push(new Date())
+      }
     },
   }
 </script>
