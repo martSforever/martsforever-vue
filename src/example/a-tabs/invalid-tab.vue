@@ -1,10 +1,8 @@
 <template>
-  <a-tab title="某业务tab" name="sbt" :initialized="true">
-    <div style="background-color: #0ac2ff">
-      some-business-tab
-      <some-business-sub-content name="sbt"/>
-    </div>
-  </a-tab>
+  <div>
+    some-business-tab
+    <some-business-sub-content name="invalid tab"/>
+  </div>
 </template>
 
 <script>
@@ -13,7 +11,7 @@
   import SomeBusinessSubContent from "./some-business-sub-content";
 
   export default {
-    name: "some-business-tab",
+    name: "invalid-tab",
     components: {SomeBusinessSubContent, AIcon, ATab},
     data() {
       return {
@@ -21,12 +19,6 @@
       }
     },
     mounted() {
-      /*测试是否存在内存泄漏*/
-      let num = 10000
-      while (num > 0) {
-        this.dates.push(new Date())
-        num--
-      }
     },
   }
 </script>

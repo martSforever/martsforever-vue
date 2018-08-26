@@ -4,6 +4,8 @@
       <a-button-group>
         <a-button @click="addTabByChangeList">addTabByChangeList</a-button>
         <a-button @click="removeTabByChangeList">removeTabByChangeList</a-button>
+        <a-button @click="addTab">addTab</a-button>
+        <a-button @click="removeTab">removeTab</a-button>
       </a-button-group>
       <div>a-tabs-example-->>{{tabIndex}}</div>
     </div>
@@ -19,6 +21,7 @@
           <div>{{item.name}}--{{index}}</div>
           <some-business-sub-content :name="item.name"/>
         </a-tab>
+
       </a-tabs>
     </div>
   </div>
@@ -32,6 +35,7 @@
   import SomeBusinessTab from './some-business-tab'
   import ATab from "../../base/components/a-tabs/a-tab";
   import SomeBusinessSubContent from "./some-business-sub-content";
+  import InvalidTab from "./invalid-tab";
 
   export default {
     name: "a-tabs-example",
@@ -50,7 +54,6 @@
     },
     methods: {
       addTabByChangeList() {
-        // this.$refs.tabs.addTab(SomeBusinessTab)
         this.list.push({name: '果冻', color: '#ff9950'},)
         this.$nextTick(() => this.$refs.tabs.openTab(this.list.length - 1))
       },
@@ -59,7 +62,12 @@
         this.list.pop()
       },
       addTab() {
+        this.addInstance = this.$refs.tabs.addTab(SomeBusinessTab)
+        this.$nextTick(() => this.$refs.tabs.openTab(this.$refs.tabs.tabLabels.length - 1))
 
+      },
+      removeTab() {
+        this.$refs.tabs.removeTab(this.addInstance)
       },
     }
   }

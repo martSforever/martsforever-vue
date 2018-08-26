@@ -67,7 +67,6 @@
         this.touch.itemLefts = []
         this.maxCarouselLeft = 0
         this.totalWidth = 0
-
         let nodes = this.$refs.carousel.childNodes;
         let children = [];
         for (let i = 0; i < nodes.length; i++) {
@@ -108,7 +107,10 @@
       },
       scrollTo(index) {
         if (index < 0) throw new Error("index不能小于0！");
-        if (index > this.touch.itemLefts.length - 1) throw new Error("index大于子元素个数-1");
+        if (index > this.touch.itemLefts.length - 1) {
+          console.error(`index大于子元素个数-->>${index}`);
+          return
+        }
 
         let offsetLeft = -(this.touch.itemLefts[index]);
         offsetLeft = Math.min(Math.max(this.maxCarouselLeft, offsetLeft), 0);
@@ -167,6 +169,13 @@
         this.$refs.carousel.style[this.transform] = `translate3d(${offsetLeft}px,0,0)`;
         this.touch.initialized = false;
       },
+
+      appendChild(el) {
+        this.$refs.carousel.appendChild(el)
+      },
+      removeChild(el) {
+        this.$refs.carousel.removeChild(el)
+      },
     },
     computed: {
       wrapperStyles() {
@@ -188,7 +197,7 @@
   }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
   .a-carousel-wrapper {
     display: inline-block;
     overflow: hidden;

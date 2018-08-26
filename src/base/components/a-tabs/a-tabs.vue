@@ -54,17 +54,30 @@
     methods: {
       /*手动增加自定义tab*/
       addTab(component) {
-        /*let instance = new Vue(component)
-        const vueComponent = instance.$mount()
-        console.log(vueComponent)
-        this.vueComponents.push(vueComponent)
-        this.$refs.content.appendChild(vueComponent.$el)*/
+        const vueComponent = new Vue(component)
+        const vueInstance = vueComponent.$mount()
+        const aTab = vueInstance.$children[0]
+        if (aTab.$options.name !== 'a-tab') {
+          console.error('要添加的vue组件的根节点必须是a-tab！！！')
+          vueInstance.$destroy()
+          return
+        }
+        this.vueComponents.push(aTab)
+        this.$refs.carousel.appendChild(vueInstance.$el)
+        this.$refs.carousel.$children.push(aTab)
+
+        this.tabItems.push({
+          title: aTab.title,
+          name: aTab.name
+        })
+
+        return vueInstance
       },
       /*手动删除自定义tab*/
-      removeTab() {
-        let vc = this.vueComponents.pop()
-        this.$refs.content.removeChild(vc.$el)
-        vc.$destroy()
+      removeTab(instance) {
+        this.$refs.carousel.removeChild(instance.$el)
+        instance.$destroy()
+        this._handleCarouselInitialized()
       },
       /*打开tab*/
       openTab(tabIndex) {
@@ -81,7 +94,7 @@
       /*获取子tab 的vue组件实例*/
       _getTabInstance() {
         return this.$refs.carousel.$children.reduce((ret, child) => {
-          if (child.$options._componentTag === 'a-tab') {
+          if (child.$options.name === 'a-tab') {
             ret.push(child)
           }
           return ret
