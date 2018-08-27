@@ -1,17 +1,5 @@
 <template>
   <div class="a-year-panel">
-    <div class="head">
-      <div class="icon-wrapper" @click="prevYear">
-        <a-icon icon="fa-angle-double-left"/>
-      </div>
-      <div>
-        <label>{{currentValue}}</label>
-        <label>{{$t('date.year')}}</label>
-      </div>
-      <div class="icon-wrapper" @click="nextYear">
-        <a-icon icon="fa-angle-double-right"/>
-      </div>
-    </div>
     <a-pick-panel v-model="currentValue" :current="now" :options="options"/>
   </div>
 </template>
@@ -76,33 +64,8 @@
 </script>
 
 <style lang="scss">
-
-  $gutter: 6px;
   .a-year-panel {
-    background-color: white;
     display: inline-block;
-    border-radius: $border-fillet;
     width: 216px;
-    height: 216px;
-    .head {
-      padding: 0 12px;
-      height: 40px;
-      border-bottom: $border-bottom-line;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      .icon-wrapper {
-        height: 20px;
-        line-height: 20px;
-        width: 20px;
-        cursor: pointer;
-        &:hover {
-          background-color: $text-color-main;
-          border-radius: 20px;
-          color: white;
-        }
-      }
-    }
-
   }
 </style>

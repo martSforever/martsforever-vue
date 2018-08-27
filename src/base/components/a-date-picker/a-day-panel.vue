@@ -1,14 +1,5 @@
 <template>
   <div class="a-day-panel">
-    <div class="head">
-      <div class="icon-wrapper" @click="prevMonth">
-        <a-icon icon="fa-angle-double-left"/>
-      </div>
-      <div>{{currentPickYear}}年{{currentPickMonth+1}}月</div>
-      <div class="icon-wrapper" @click="nextMonth">
-        <a-icon icon="fa-angle-double-right"/>
-      </div>
-    </div>
     <div class="content-wrapper">
       <div class="row">
         <div class="col" v-for="(item,index) in weeks" :key="index">
@@ -186,36 +177,13 @@
 
   $gutter: 6px;
   .a-day-panel {
-    background-color: white;
     display: inline-block;
-    border-radius: $border-fillet;
     width: 216px;
-    height: 216px;
-    .head {
-      padding: 0 12px;
-      height: 40px;
-      border-bottom: $border-bottom-line;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      .icon-wrapper {
-        height: 20px;
-        line-height: 20px;
-        width: 20px;
-        cursor: pointer;
-        &:hover {
-          background-color: $text-color-main;
-          border-radius: 20px;
-          color: white;
-        }
-      }
-    }
     .content-wrapper {
       height: 173px;
       width: 100%;
       padding-top: 3px;
       user-select: none;
-
       .row {
         width: 100%;
         .col {

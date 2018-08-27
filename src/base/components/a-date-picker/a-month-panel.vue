@@ -1,11 +1,5 @@
 <template>
   <div class="a-month-panel">
-    <div class="head">
-      <div>
-        <label>{{currentValue}}</label>
-        <label>{{$t('date.month')}}</label>
-      </div>
-    </div>
     <a-pick-panel v-model="currentValue" :current="now" :options="options">
       <template slot-scope="data">
         {{$t(`date.month${data.index+1}`)}}
@@ -58,33 +52,8 @@
 </script>
 
 <style lang="scss">
-
-  $gutter: 6px;
   .a-month-panel {
-    background-color: white;
     display: inline-block;
-    border-radius: $border-fillet;
     width: 216px;
-    height: 216px;
-    .head {
-      padding: 0 12px;
-      height: 40px;
-      border-bottom: $border-bottom-line;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      .icon-wrapper {
-        height: 20px;
-        line-height: 20px;
-        width: 20px;
-        cursor: pointer;
-        &:hover {
-          background-color: $text-color-main;
-          border-radius: 20px;
-          color: white;
-        }
-      }
-    }
-
   }
 </style>
