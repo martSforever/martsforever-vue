@@ -1,6 +1,5 @@
 <template>
   <div class="a-date-picker-example">
-    <a-date-picker/>
     <div>--{{year}}--{{month}}--{{day}}--</div>
     <div>pick-->>{{pickYear}}--{{pickMonth}}</div>
     <div style="display: flex;justify-content: space-around">
@@ -11,6 +10,9 @@
                    :day.sync="day"
                    :pick-year.sync="pickYear"
                    :pick-month.sync="pickMonth"/>
+    </div>
+    <div style="margin-top: 100px">
+      <a-date-picker/>
     </div>
   </div>
 </template>

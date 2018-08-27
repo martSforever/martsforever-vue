@@ -1,5 +1,5 @@
 <template>
-  <i :is="type" :icon="icon" :styles="styles" :classes="prefixCls" @click="handleClick"></i>
+  <i :is="type" :icon="icon" :styles="styles" :class="classes" @click="handleClick"></i>
 </template>
 
 <script>
@@ -24,11 +24,15 @@
       icon: {
         type: String,
         required: true
-      }
+      },
+      className: null
     },
     computed: {
       type() {
         return this.icon.indexOf('fa-') > -1 ? 'a-fa' : 'a-iconfont'
+      },
+      classes() {
+        return [this.prefixCls, this.className]
       },
       styles() {
         let style = {};
