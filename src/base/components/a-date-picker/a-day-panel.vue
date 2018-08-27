@@ -1,5 +1,20 @@
 <template>
   <div class="a-day-panel">
+
+    <div class="pick-panel-head">
+      <div>
+        <a-icon icon="fa-angle-double-left" class-name="highlight-label"/>
+        <a-icon icon="fa-angle-left" class-name="highlight-label"/>
+      </div>
+      <div>
+        {{pickYear}}-{{pickMonth}}
+      </div>
+      <div>
+        <a-icon icon="fa-angle-right" class-name="highlight-label"/>
+        <a-icon icon="fa-angle-double-right" class-name="highlight-label"/>
+      </div>
+    </div>
+
     <div class="content-wrapper">
       <div class="row">
         <div class="col" v-for="(item,index) in weeks" :key="index">
@@ -201,7 +216,8 @@
             color: white;
           }
           &:hover {
-            background-color: #ddd;
+            background-color: $text-color-main;
+            color: white;
           }
           &.now {
             background-color: #bfccdd;
@@ -211,9 +227,9 @@
           }
 
           &.invalid {
-            color: $text-color-light;
+            color: black;
             &:hover {
-              background-color: transparent;
+              color: white;
             }
           }
         }

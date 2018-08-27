@@ -124,6 +124,22 @@ Object.defineProperty(Array.prototype, 'remove', {
     }
   }
 })
+/*
+*  删除数组元素
+*/
+Object.defineProperty(Array.prototype, 'last', {
+  configurable: true,
+  writable: true,
+  enumerable: false,
+  value: function () {
+    if (this.length > 0) {
+      return this[this.length - 1]
+    } else {
+      return null
+    }
+
+  }
+})
 
 /*
 *  日期格式化

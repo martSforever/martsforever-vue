@@ -1,5 +1,10 @@
 <template>
   <div class="a-year-panel">
+    <div class="pick-panel-head">
+      <a-icon icon="fa-arrow-left" class-name="highlight-label" @click="prevYear"/>
+      <span>{{yearLabel}}</span>
+      <a-icon icon="fa-arrow-right" class-name="highlight-label" @click="nextYear"/>
+    </div>
     <a-pick-panel v-model="currentValue" :current="now" :options="options"/>
   </div>
 </template>
@@ -59,6 +64,9 @@
         }
         return ret
       },
+      yearLabel() {
+        return `${this.options[0]}-${this.options.last()}`
+      },
     }
   }
 </script>
@@ -67,5 +75,8 @@
   .a-year-panel {
     display: inline-block;
     width: 216px;
+    .a-year-panel {
+      height: 40px;
+    }
   }
 </style>

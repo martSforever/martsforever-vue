@@ -85,4 +85,21 @@
     }
   }
 
+  .pick-panel-head {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    .highlight-label {
+      cursor: pointer;
+      padding: 3px 6px;
+      border-radius: $border-fillet;
+      font-size: 13px;
+      &:hover {
+        color: white;
+        background-color: $text-color-main;
+      }
+    }
+  }
 </style>

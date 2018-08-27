@@ -1,5 +1,12 @@
 <template>
   <div class="a-date-picker">
+    <div>
+      <a-button-group>
+        <a-button @click="currentView = VIEW.YEAR">year</a-button>
+        <a-button @click="currentView = VIEW.MONTH">month</a-button>
+        <a-button @click="currentView = VIEW.DAY">day</a-button>
+      </a-button-group>
+    </div>
     <div class="a-date-picker-popover-content">
       <!--<div class="head">
         <div class="left">
@@ -17,7 +24,7 @@
         </div>
       </div>-->
       <div class="content">
-        <a-year-panel v-model="pickYear" v-show="currentView === VIEW.YEAR" ref="yearPanel"/>
+        <a-year-panel v-model="pickYear" v-show="currentView === VIEW.YEAR"/>
         <a-month-panel v-model="pickMonth" v-show="currentView === VIEW.MONTH"/>
         <a-day-panel v-show="currentView === VIEW.DAY"
                      ref="dayPanel"
@@ -37,10 +44,12 @@
   import AMonthPanel from "./a-month-panel";
   import ADayPanel from "./a-day-panel";
   import AIcon from "../a-icon/a-icon";
+  import AButtonGroup from "../a-button/a-button-group";
+  import AButton from "../a-button/a-button";
 
   export default {
     name: "a-date-picker",
-    components: {AIcon, ADayPanel, AMonthPanel, AYearPanel},
+    components: {AButton, AButtonGroup, AIcon, ADayPanel, AMonthPanel, AYearPanel},
     props: {
       value: {
         type: Date,
@@ -52,7 +61,7 @@
       return {
         VIEW,
         currentValue: this.value,
-        currentView: VIEW.YEAR,
+        currentView: VIEW.DAY,
 
         year: this.value.getFullYear(),
         month: this.value.getMonth() + 1,
@@ -104,7 +113,7 @@
     }
     .a-date-picker-popover-content {
       display: inline-block;
-      background-color: #f2f2f2;
+      background-color: #f2f2f222;
       border-radius: $border-fillet;
       user-select: none;
     }

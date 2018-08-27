@@ -1,5 +1,12 @@
 <template>
   <div class="a-month-panel">
+
+    <div class="pick-panel-head">
+      <a-icon icon="fa-angle-double-left" class-name="highlight-label"/>
+      <span>{{$t(`date.month${currentValue}`)}}</span>
+      <a-icon icon="fa-angle-double-right" class-name="highlight-label"/>
+    </div>
+
     <a-pick-panel v-model="currentValue" :current="now" :options="options">
       <template slot-scope="data">
         {{$t(`date.month${data.index+1}`)}}
