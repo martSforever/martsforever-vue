@@ -53,6 +53,12 @@
       }
     },
     watch: {
+      year(val) {
+        if (this.pickYear !== val) this.pickYear = val
+      },
+      month(val) {
+        if (this.pickMonth !== val) this.pickMonth = val
+      },
       view(val) {
         if (this.currentView !== val) {
           this.currentView = val
@@ -73,10 +79,6 @@
       }
     },
     methods: {
-      openView(code) {
-        this.currentView = code
-      },
-
       prevYear() {
         this.$refs.yearPanel.prevYear()
       },

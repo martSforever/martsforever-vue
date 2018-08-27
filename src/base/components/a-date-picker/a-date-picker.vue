@@ -2,7 +2,7 @@
   <div class="a-date-picker">
 
     <div ref="reference" class="input-wrapper">
-      <a-input @click="_handleClickInput"/>
+      <a-input @click="_handleClickInput" :value="showLabel"/>
     </div>
 
     <a-popover
@@ -56,9 +56,9 @@
         type: String,
         default: 'date',
         validator(val) {
-          return oneOf(val, ['year', 'month', 'date'])
+          return oneOf(val.trim(), ['year', 'month', 'date', 'year|month', 'month|year'])
         },
-      }
+      },
     },
     watch: {
       value(val) {
@@ -68,6 +68,17 @@
       },
       currentValue(val) {
         this.$emit('input', val)
+      },
+      show(val) {
+        if (this.currentShow !== val) {
+          this.currentShow = val
+        }
+      },
+      currentShow(val) {
+        this.$emit('update:show', val)
+        if (!!val) {
+          this.resetView()
+        }
       },
     },
     data() {
@@ -81,16 +92,45 @@
       _handleClickInput() {
         this.currentShow = true
       },
-
+      _handleClickYear(item) {
+        this.currentValue.setFullYear(item)
+        if (this.type === 'year') {
+          this.currentValue = new Date(this.currentValue)
+          this.currentShow = false
+        } else
+          this.view = 'month'
+      },
+      _handleClickMonth(item) {
+        this.currentValue.setMonth(item - 1)
+        if (oneOf(this.type, ['month', 'year|month', 'month|year'])) {
+          this.currentValue = new Date(this.currentValue)
+          this.currentShow = false
+        } else {
+          this.view = 'date'
+        }
+      },
       _handleClickDate(item) {
         this.currentValue = new Date(item.year, item.month, item.day)
         this.currentShow = false
       },
-      _handleClickYear() {
-        this.view = 'month'
-      },
-      _handleClickMonth() {
-        this.view = 'date'
+      resetView() {
+        switch (this.type) {
+          case 'year':
+            this.view = 'year'
+            break
+          case 'year|month':
+            this.view = 'year'
+            break
+          case 'month|year':
+            this.view = 'year'
+            break
+          case 'month':
+            this.view = 'month'
+            break
+          case 'date':
+            this.view = 'date'
+            break
+        }
       },
     },
     computed: {
@@ -101,7 +141,25 @@
           day: this.currentValue.getDate(),
         }
       },
-    }
+      showLabel() {
+        return this.currentValue.format(this.dateFormat)
+      },
+      dateFormat() {
+        switch (this.type) {
+          case 'year':
+            return 'yyyy'
+          case 'month':
+            return 'MM'
+          case 'year|month':
+            return 'yyyy-MM'
+          case 'date':
+            return 'yyyy-MM-dd'
+        }
+      },
+    },
+    mounted() {
+      this.resetView()
+    },
   }
 </script>
 
