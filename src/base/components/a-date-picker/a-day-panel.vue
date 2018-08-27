@@ -4,7 +4,7 @@
     <div class="pick-panel-head">
       <div>
         <a-icon icon="fa-angle-double-left" class-name="highlight-label" @click="currentPickYear--"/>
-        <a-icon icon="fa-angle-left" class-name="highlight-label" @click="currentPickMonth--"/>
+        <a-icon icon="fa-angle-left" class-name="highlight-label" @click="prevMonth"/>
       </div>
       <div>
         <span class="highlight-label" @click="$emit('open-year')">{{pickYear}}
@@ -12,7 +12,7 @@
         class="highlight-label" @click="$emit('open-month')">{{$t(`date.month${pickMonth}`)}}</span>
       </div>
       <div>
-        <a-icon icon="fa-angle-right" class-name="highlight-label" @click="currentPickMonth++"/>
+        <a-icon icon="fa-angle-right" class-name="highlight-label" @click="nextMonth"/>
         <a-icon icon="fa-angle-double-right" class-name="highlight-label" @click="currentPickYear++"/>
       </div>
     </div>
