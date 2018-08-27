@@ -82,6 +82,10 @@
       showArrow: {
         type: Boolean,
         default: true
+      },
+      backgroundColor: {
+        type: String,
+        default: 'transparent'
       }
     },
     data() {
@@ -147,6 +151,7 @@
           transform: 'rotate(45deg)',
         }
         !!this.shadow && (styles.boxShadow = this.shadow)
+        !!this.backgroundColor && (styles.backgroundColor = this.backgroundColor)
 
         styles[this.arrowDirectionMap[this.currentDirection]] = `${-this.arrowSize / 2 + this.arrowSize / 5}px`
         let align = this._getArrowAlign()
@@ -155,6 +160,7 @@
       },
       popoverContentStyles() {
         let styles = {}
+        !!this.backgroundColor && (styles.backgroundColor = this.backgroundColor)
         if (!!this.sizeEqual && !!this.equalSizeData) {
           ((styles[this.equalSizeData.key] = `${this.equalSizeData.val}px`))
         }

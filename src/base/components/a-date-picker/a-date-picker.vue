@@ -1,52 +1,23 @@
 <template>
   <div class="a-date-picker">
-    <div>
-      <a-button-group>
-        <a-button @click="currentView = VIEW.YEAR">year</a-button>
-        <a-button @click="currentView = VIEW.MONTH">month</a-button>
-        <a-button @click="currentView = VIEW.DAY">day</a-button>
-      </a-button-group>
+
+    <div ref="reference" class="input-wrapper">
+      <a-input @click="_handleClickInput"/>
     </div>
-    <div class="a-date-picker-popover-content">
-      <!--<div class="head">
-        <div class="left">
-          <a-icon icon="fa-angle-double-left" class-name="text" @click="prevYear"/>
-          <a-icon icon="fa-angle-left" class-name="text" @click="prevMonth"/>
-        </div>
-        <span class="info">
-          <span class="text" @click="openView(VIEW.YEAR)">{{pickYear}}</span>
-          -
-          <span class="text" @click="openView(VIEW.MONTH)">{{pickMonth}}</span>
-        </span>
-        <div class="right">
-          <a-icon icon="fa-angle-right" class-name="text" @click="nextMonth"/>
-          <a-icon icon="fa-angle-double-right" class-name="text" @click="nextYear"/>
-        </div>
-      </div>-->
-      <div class="content">
-        <a-year-panel v-model="pickYear"
-                      v-show="currentView === VIEW.YEAR"
-                      @click="currentView = VIEW.MONTH"
-                      @click-label="currentView = VIEW.DAY"/>
-        <a-month-panel v-model="pickMonth"
-                       v-show="currentView === VIEW.MONTH"
-                       @prev="pickYear--"
-                       @next="pickYear++"
-                       @click="currentView = VIEW.DAY">
-          <span class="highlight-label" @click="currentView = VIEW.YEAR">{{pickYear}}</span>
-        </a-month-panel>
-        <a-day-panel v-show="currentView === VIEW.DAY"
-                     ref="dayPanel"
-                     :pick-year.sync="pickYear"
-                     :pick-month.sync="pickMonth"
-                     :year.sync="year"
-                     :month.sync="month"
-                     :day.sync="day"
-                     @open-year="currentView = VIEW.YEAR"
-                     @open-month="currentView = VIEW.MONTH"
-        />
+
+    <a-popover
+      parent-name="a-date-picker"
+      reference-name="reference"
+      direction="bottom"
+      align="start"
+      v-model="currentShow"
+      background-color="#404245"
+      shadow="none"
+    >
+      <div class="a-date-picker-popover-content">
+        <a-date-panel/>
       </div>
-    </div>
+    </a-popover>
   </div>
 </template>
 
@@ -58,47 +29,31 @@
   import AIcon from "../a-icon/a-icon";
   import AButtonGroup from "../a-button/a-button-group";
   import AButton from "../a-button/a-button";
+  import ADatePanel from "./a-date-panel";
+  import APopover from "../a-popover/a-popover";
+  import AInput from "../a-input/a-input";
 
   export default {
     name: "a-date-picker",
-    components: {AButton, AButtonGroup, AIcon, ADayPanel, AMonthPanel, AYearPanel},
+    components: {AInput, APopover, ADatePanel, AButton, AButtonGroup, AIcon, ADayPanel, AMonthPanel, AYearPanel},
     props: {
       value: {
         type: Date,
         default: () => new Date()
+      },
+      show: {
+        type: Boolean,
+        default: false
       }
     },
     data() {
-      const VIEW = {YEAR: 0x001, MONTH: 0x002, DAY: 0x003}
       return {
-        VIEW,
-        currentValue: this.value,
-        currentView: VIEW.DAY,
-
-        year: this.value.getFullYear(),
-        month: this.value.getMonth() + 1,
-        day: this.value.getDate(),
-
-        pickYear: this.value.getFullYear(),
-        pickMonth: this.value.getMonth() + 1,
+        currentShow: this.show
       }
     },
     methods: {
-      openView(code) {
-        this.currentView = code
-      },
-
-      prevYear() {
-        this.$refs.yearPanel.prevYear()
-      },
-      nextYear() {
-        this.$refs.yearPanel.nextYear()
-      },
-      prevMonth() {
-        this.$refs.dayPanel.prevMonth()
-      },
-      nextMonth() {
-        this.$refs.dayPanel.nextMonth()
+      _handleClickInput() {
+        this.currentShow = true
       },
     }
   }
@@ -106,26 +61,11 @@
 
 <style lang="scss">
   .a-date-picker {
-    .head {
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 12px;
-      .text {
-        cursor: pointer;
-        padding: 3px 6px;
-        border-radius: $border-fillet;
-        font-size: 13px;
-        &:hover {
-          color: white;
-          background-color: $text-color-main;
-        }
-      }
+    .input-wrapper {
+      display: inline-block;
     }
     .a-date-picker-popover-content {
       display: inline-block;
-      background-color: #f2f2f222;
       border-radius: $border-fillet;
       user-select: none;
     }
