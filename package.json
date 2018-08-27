@@ -11,6 +11,7 @@
     "release": "cross-env NODE_ENV=production   webpack --config build/webpack.prod.conf.js"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "font-awesome": "^4.7.0",
     "popper.js": "^1.14.3",
     "stackblur-canvas": "^1.4.1",
