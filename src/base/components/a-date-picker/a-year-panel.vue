@@ -1,11 +1,11 @@
 <template>
   <div class="a-year-panel">
     <div class="pick-panel-head">
-      <a-icon icon="fa-arrow-left" class-name="highlight-label" @click="prevYear"/>
-      <span>{{yearLabel}}</span>
-      <a-icon icon="fa-arrow-right" class-name="highlight-label" @click="nextYear"/>
+      <a-icon icon="fa-chevron-left" class-name="highlight-label" @click="prevYear"/>
+      <span class="highlight-label" @click="$emit('click-label')">{{yearLabel}}</span>
+      <a-icon icon="fa-chevron-right" class-name="highlight-label" @click="nextYear"/>
     </div>
-    <a-pick-panel v-model="currentValue" :current="now" :options="options"/>
+    <a-pick-panel v-model="currentValue" :current="now" :options="options" @click="_handleClick"/>
   </div>
 </template>
 
@@ -45,7 +45,8 @@
     },
     methods: {
       _handleClick(item) {
-        this.currentValue = item
+        // this.currentValue = item
+        this.$emit('click', item)
       },
       nextYear() {
         this.page++

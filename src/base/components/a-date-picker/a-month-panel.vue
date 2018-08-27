@@ -9,7 +9,7 @@
       <a-icon icon="fa-angle-double-right" class-name="highlight-label" @click="$emit('next')"/>
     </div>
 
-    <a-pick-panel v-model="currentValue" :current="now" :options="options">
+    <a-pick-panel v-model="currentValue" :current="now" :options="options" @click="_handleClick">
       <template slot-scope="data">
         {{$t(`date.month${data.index+1}`)}}
       </template>
@@ -54,7 +54,8 @@
     },
     methods: {
       _handleClick(item) {
-        this.currentValue = item
+        // this.currentValue = item
+        this.$emit('click', item)
       },
     },
   }

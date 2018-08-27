@@ -44,6 +44,7 @@
     },
     methods: {
       _handleClick(item) {
+        this.$emit('click', item)
         this.currentValue = item
       },
     }
@@ -97,6 +98,8 @@
       padding: 3px 6px;
       border-radius: $border-fillet;
       font-size: 13px;
+      height: 18px;
+      line-height: 18px;
       &:hover {
         color: white;
         background-color: $text-color-main;

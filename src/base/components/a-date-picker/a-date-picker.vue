@@ -24,9 +24,16 @@
         </div>
       </div>-->
       <div class="content">
-        <a-year-panel v-model="pickYear" v-show="currentView === VIEW.YEAR"/>
-        <a-month-panel v-model="pickMonth" v-show="currentView === VIEW.MONTH" @prev="pickYear--" @next="pickYear++">
-          {{pickYear}}
+        <a-year-panel v-model="pickYear"
+                      v-show="currentView === VIEW.YEAR"
+                      @click="currentView = VIEW.MONTH"
+                      @click-label="currentView = VIEW.DAY"/>
+        <a-month-panel v-model="pickMonth"
+                       v-show="currentView === VIEW.MONTH"
+                       @prev="pickYear--"
+                       @next="pickYear++"
+                       @click="currentView = VIEW.DAY">
+          <span class="highlight-label" @click="currentView = VIEW.YEAR">{{pickYear}}</span>
         </a-month-panel>
         <a-day-panel v-show="currentView === VIEW.DAY"
                      ref="dayPanel"
@@ -34,7 +41,10 @@
                      :pick-month.sync="pickMonth"
                      :year.sync="year"
                      :month.sync="month"
-                     :day.sync="day"/>
+                     :day.sync="day"
+                     @open-year="currentView = VIEW.YEAR"
+                     @open-month="currentView = VIEW.MONTH"
+        />
       </div>
     </div>
   </div>
