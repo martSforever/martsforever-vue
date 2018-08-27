@@ -25,7 +25,9 @@
       </div>-->
       <div class="content">
         <a-year-panel v-model="pickYear" v-show="currentView === VIEW.YEAR"/>
-        <a-month-panel v-model="pickMonth" v-show="currentView === VIEW.MONTH"/>
+        <a-month-panel v-model="pickMonth" v-show="currentView === VIEW.MONTH" @prev="pickYear--" @next="pickYear++">
+          {{pickYear}}
+        </a-month-panel>
         <a-day-panel v-show="currentView === VIEW.DAY"
                      ref="dayPanel"
                      :pick-year.sync="pickYear"

@@ -2,9 +2,11 @@
   <div class="a-month-panel">
 
     <div class="pick-panel-head">
-      <a-icon icon="fa-angle-double-left" class-name="highlight-label"/>
-      <span>{{$t(`date.month${currentValue}`)}}</span>
-      <a-icon icon="fa-angle-double-right" class-name="highlight-label"/>
+      <a-icon icon="fa-angle-double-left" class-name="highlight-label" @click="$emit('prev')"/>
+      <div>
+        <slot></slot>
+      </div>
+      <a-icon icon="fa-angle-double-right" class-name="highlight-label" @click="$emit('next')"/>
     </div>
 
     <a-pick-panel v-model="currentValue" :current="now" :options="options">
@@ -28,8 +30,8 @@
     props: {
       value: {
         type: Number,
-        default: () => new Date().getFullYear()
-      }
+        default: () => new Date().getMonth() + 1
+      },
     },
     watch: {
       value(val) {
