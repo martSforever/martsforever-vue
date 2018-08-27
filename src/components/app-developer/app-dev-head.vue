@@ -41,6 +41,7 @@
           {name: 'tabs', url: 'tabs'},
           {name: 'i18n', url: 'i18n'},
           {name: 'test', url: 'test'},
+          {name: 'avatar', url: 'avatar'},
           {name: 'parent-child', url: 'parent-child'},
         ],
         name: 'a-icon'

@@ -97,6 +97,11 @@ export const router = {
       name: 'modal'
     },
     {
+      path: '/avatar',
+      component: resolve => require(['src/example/a-avatar/a-avatar-example.vue'], resolve),
+      name: 'avatar'
+    },
+    {
       path: '/test',
       component: resolve => require(['src/example/test/test.vue'], resolve),
       name: 'test'
