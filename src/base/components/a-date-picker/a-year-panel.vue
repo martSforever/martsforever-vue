@@ -1,14 +1,14 @@
 <template>
   <div class="a-year-panel">
     <div class="head">
-      <div class="icon-wrapper" @click="page = page-1">
+      <div class="icon-wrapper" @click="prevYear">
         <a-icon icon="fa-angle-double-left"/>
       </div>
       <div>
         <label>{{currentValue}}</label>
         <label>{{$t('date.year')}}</label>
       </div>
-      <div class="icon-wrapper" @click="page = page+1">
+      <div class="icon-wrapper" @click="nextYear">
         <a-icon icon="fa-angle-double-right"/>
       </div>
     </div>
@@ -53,6 +53,12 @@
     methods: {
       _handleClick(item) {
         this.currentValue = item
+      },
+      nextYear() {
+        this.page++
+      },
+      prevYear() {
+        this.page--
       },
     },
     computed: {

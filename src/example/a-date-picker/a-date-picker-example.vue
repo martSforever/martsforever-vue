@@ -1,11 +1,16 @@
 <template>
   <div class="a-date-picker-example">
     <a-date-picker/>
-    --{{year}}--{{month}}--
+    <div>--{{year}}--{{month}}--{{day}}--</div>
+    <div>pick-->>{{pickYear}}--{{pickMonth}}</div>
     <div style="display: flex;justify-content: space-around">
-      <a-year-panel v-model="year"/>
-      <a-month-panel v-model="month"/>
-      <a-day-panel :year="2018" :month="7" :day="31"/>
+      <a-year-panel v-model="pickYear"/>
+      <a-month-panel v-model="pickMonth"/>
+      <a-day-panel :year.sync="year"
+                   :month.sync="month"
+                   :day.sync="day"
+                   :pick-year.sync="pickYear"
+                   :pick-month.sync="pickMonth"/>
     </div>
   </div>
 </template>
@@ -21,8 +26,12 @@
     components: {ADayPanel, AMonthPanel, AYearPanel, ADatePicker},
     data() {
       return {
-        year: null,
-        month: null
+        year: 2018,
+        month: 8,
+        day: 28,
+
+        pickYear: 2018,
+        pickMonth: 8
       }
     },
   }

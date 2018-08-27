@@ -4,7 +4,7 @@
       <div class="icon-wrapper" @click="prevMonth">
         <a-icon icon="fa-angle-double-left"/>
       </div>
-      <div>{{pickYear}}年{{pickMonth+1}}月</div>
+      <div>{{currentPickYear}}年{{currentPickMonth+1}}月</div>
       <div class="icon-wrapper" @click="nextMonth">
         <a-icon icon="fa-angle-double-right"/>
       </div>
@@ -14,9 +14,13 @@
         <div class="col" v-for="(item,index) in weeks" :key="index">
           {{$t(`date.week.${item}`)}}
         </div>
-
-        <div class="col" v-for="(item,index) in days"
-             :class="{invalid:!item.currentMonth,current:pickYear === year&&pickMonth===month&&item.day === day}">
+      </div>
+      <div class="row">
+        <div class="col"
+             v-for="(item,index) in days"
+             :key="index"
+             @click="_handleClick(item)"
+             :class="colClasses(item)">
           {{item.day}}
         </div>
       </div>
@@ -45,66 +49,134 @@
       day: {
         type: Number,
         default: new Date().getDate()
-      }
+      },
+      pickYear: {type: Number},
+      pickMonth: {type: Number},
     },
-    watch: {},
     data() {
+      let now = new Date()
       return {
         weeks: ['0', '1', '2', '3', '4', '5', '6'],
-        pickYear: this.year,
-        pickMonth: this.month,
+        currentPickYear: this.pickYear != null ? this.pickYear : this.year,
+        currentPickMonth: (this.pickMonth != null ? this.pickMonth : this.month) - 1,
 
+        currentYear: this.year,
+        currentMonth: this.month,
+        currentDay: this.day,
+
+        nowYear: now.getFullYear(),
+        nowMonth: now.getMonth() + 1,
+        nowDay: now.getDate()
       }
+    },
+    watch: {
+      year(val) {
+        if (this.currentYear !== val) {
+          this.currentYear = val
+        }
+      },
+      currentYear(val) {
+        this.$emit('update:year', val)
+      },
+      month(val) {
+        if (this.currentMonth !== val) {
+          this.currentMonth = val
+        }
+      },
+      currentMonth(val) {
+        this.$emit('update:month', val)
+      },
+      day(val) {
+        if (this.currentDay !== val) {
+          this.currentDay = val
+        }
+      },
+      currentDay(val) {
+        this.$emit('update:day', val)
+      },
+      pickYear(val) {
+        if (this.currentPickYear !== val) {
+          this.currentPickYear = val
+        }
+      },
+      currentPickYear(val) {
+        this.$emit('update:pickYear', val)
+      },
+      pickMonth(val) {
+        if (this.currentPickMonth !== val - 1) {
+          this.currentPickMonth = val - 1
+        }
+      },
+      currentPickMonth(val) {
+        this.$emit('update:pickMonth', val + 1)
+      },
     },
     computed: {
       days() {
         let days = []
         let date = new Date()
-        date.setFullYear(this.pickYear, this.pickMonth, 1)
-        let month = this.pickMonth
-
-        date.setMonth(month, 1)                     //目标月，要展示的月日历,目标月的第一天
-        let week = date.getDay()                    //目标月的第一天是星期几
-        date.setDate(0)
-        let day = date.getDate()                    //目标月上个月的最后一天
-        while (week > 0) {                          //添加上个月的日期
+        let month = this.currentPickMonth                                //当前显示日历版的月份
+        date.setFullYear(this.currentPickYear, month, 1)                 //当前日历版的年月时间
+        /*---------------------------------------添加目标月上个月日期-------------------------------------------*/
+        let week = date.getDay()                                  //目标月的第一天是星期几
+        date.setDate(0)                                           //设置时间为目标月上个月的最后一天
+        let day = date.getDate()
+        while (week > 0) {                                        //添加上个月的最后几天
           days.unshift({
             day: day,
-            currentMonth: false
+            month: date.getMonth(),
+            year: date.getFullYear(),
           })
           day--
           week--
         }
-        date.setMonth(month + 1, 1)                 //设置目标月的下一月
-        date.setDate(0)
-        day = date.getDate()                        //目标月最后一天
-        for (let i = 1; i <= day; i++) {
+        /*---------------------------------------添加目标月日期-------------------------------------------*/
+        date.setFullYear(this.currentPickYear, month + 1, 1)             //设置日期为目标月的下一月，1号
+        date.setDate(0)                                           //设置日期为目标月最后一天
+        day = date.getDate()                                      //目标月最后一天
+        for (let i = 1; i <= day; i++) {                          //添加目标月日期
           days.push({
             day: i,
-            currentMonth: true
+            month: date.getMonth(),
+            year: date.getFullYear(),
           })
         }
+        /*---------------------------------------添加目标月下个月日期-------------------------------------------*/
+        date.setFullYear(this.currentPickYear, month + 1, 1)             //设置日期为目标月的下一月，1号
         for (let i = 1; days.length < 42; i++) days.push({
           day: i,
-          currentMonth: false
+          month: date.getMonth(),
+          year: date.getFullYear(),
         })
         return days
       },
     },
     methods: {
       nextMonth() {
-        this.pickMonth++
-        if (this.pickMonth === 12) {
-          this.pickMonth = 0
-          this.pickYear++
+        this.currentPickMonth++
+        if (this.currentPickMonth === 12) {
+          this.currentPickMonth = 0
+          this.currentPickYear++
         }
       },
       prevMonth() {
-        this.pickMonth--
-        if (this.pickMonth === -1) {
-          this.pickMonth = 11
-          this.pickYear--
+        this.currentPickMonth--
+        if (this.currentPickMonth === -1) {
+          this.currentPickMonth = 11
+          this.currentPickYear--
         }
+      },
+      colClasses(item) {
+        return {
+          invalid: item.month !== this.currentPickMonth || item.year !== this.currentPickYear,
+          current: this.currentYear === item.year && (this.currentMonth - 1) === item.month && this.currentDay === item.day,
+          now: this.nowYear === item.year && (this.nowMonth - 1) === item.month && this.nowDay === item.day,
+        }
+      },
+      _handleClick(item) {
+        this.currentYear = item.year
+        this.currentMonth = item.month + 1
+        this.currentDay = item.day
       },
     }
   }
@@ -157,7 +229,7 @@
           border-radius: $border-fillet;
           cursor: pointer;
 
-          &:hover, &.now, &.current {
+          &:hover, &.now, &.current, &.invalid {
             color: white;
           }
           &:hover {
