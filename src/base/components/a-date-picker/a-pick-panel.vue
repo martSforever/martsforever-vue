@@ -97,7 +97,7 @@
       cursor: pointer;
       padding: 3px 6px;
       border-radius: $border-fillet;
-      font-size: 13px;
+      font-size: 12px;
       height: 18px;
       line-height: 18px;
       &:hover {
