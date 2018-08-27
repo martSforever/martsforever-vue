@@ -1,6 +1,7 @@
 <template>
   <div class="a-avatar-example">
     <a-avatar src="http://www.pujia8.com/static/pics/20171215040134_26.jpg"/>
+    <a-avatar src="http://www.pujia8.com/static/pics/20171215040134_26.jpg" shape="star"/>
   </div>
 </template>
 
