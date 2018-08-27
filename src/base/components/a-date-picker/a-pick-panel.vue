@@ -72,7 +72,8 @@
             color: white;
           }
           &:hover {
-            background-color: #ddd;
+            background-color: $text-color-main;
+            color: white;
           }
           &.now {
             background-color: #bfccdd;
