@@ -12,7 +12,8 @@
                    :pick-month.sync="pickMonth"/>
     </div>
     <div style="margin-top: 100px">
-      <a-date-picker/>
+      <div>{{date.yyyyMMddHHmmss()}}</div>
+      <a-date-picker v-model="date"/>
     </div>
   </div>
 </template>
@@ -33,7 +34,9 @@
         day: 28,
 
         pickYear: 2018,
-        pickMonth: 8
+        pickMonth: 8,
+
+        date: new Date()
       }
     },
   }

@@ -15,7 +15,13 @@
       shadow="none"
     >
       <div class="a-date-picker-popover-content">
-        <a-date-panel/>
+        <a-date-panel :year="dateData.year"
+                      :month="dateData.month+1"
+                      :day="dateData.day"
+                      @click-date="_handleClickDate"
+                      @click-year="_handleClickYear"
+                      @click-month="_handleClickMonth"
+                      :view.sync="view"/>
       </div>
     </a-popover>
   </div>
@@ -32,6 +38,7 @@
   import ADatePanel from "./a-date-panel";
   import APopover from "../a-popover/a-popover";
   import AInput from "../a-input/a-input";
+  import {oneOf} from "../../script/utils";
 
   export default {
     name: "a-date-picker",
@@ -44,16 +51,55 @@
       show: {
         type: Boolean,
         default: false
+      },
+      type: {
+        type: String,
+        default: 'date',
+        validator(val) {
+          return oneOf(val, ['year', 'month', 'date'])
+        },
       }
+    },
+    watch: {
+      value(val) {
+        if (this.currentValue !== val) {
+          this.currentValue = val
+        }
+      },
+      currentValue(val) {
+        this.$emit('input', val)
+      },
     },
     data() {
       return {
-        currentShow: this.show
+        currentValue: this.value,
+        currentShow: this.show,
+        view: 'date'
       }
     },
     methods: {
       _handleClickInput() {
         this.currentShow = true
+      },
+
+      _handleClickDate(item) {
+        this.currentValue = new Date(item.year, item.month, item.day)
+        this.currentShow = false
+      },
+      _handleClickYear() {
+        this.view = 'month'
+      },
+      _handleClickMonth() {
+        this.view = 'date'
+      },
+    },
+    computed: {
+      dateData() {
+        return {
+          year: this.currentValue.getFullYear(),
+          month: this.currentValue.getMonth(),
+          day: this.currentValue.getDate(),
+        }
       },
     }
   }

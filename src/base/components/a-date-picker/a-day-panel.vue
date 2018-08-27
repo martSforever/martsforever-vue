@@ -182,9 +182,7 @@
         }
       },
       _handleClick(item) {
-        this.currentYear = item.year
-        this.currentMonth = item.month + 1
-        this.currentDay = item.day
+        this.$emit('click', item)
       },
     }
   }

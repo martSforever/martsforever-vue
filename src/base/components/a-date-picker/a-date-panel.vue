@@ -1,23 +1,24 @@
 <template>
   <div class="a-date-panel">
     <a-year-panel v-model="pickYear"
-                  v-show="currentView === VIEW.YEAR"
-                  @click="currentView = VIEW.MONTH"
+                  v-if="currentView === VIEW.YEAR"
+                  @click="_handleClickYear"
                   @click-label="currentView = VIEW.DAY"/>
     <a-month-panel v-model="pickMonth"
-                   v-show="currentView === VIEW.MONTH"
+                   v-if="currentView === VIEW.MONTH"
                    @prev="pickYear--"
                    @next="pickYear++"
-                   @click="currentView = VIEW.DAY">
+                   @click="_handleClickMonth">
       <span class="highlight-label" @click="currentView = VIEW.YEAR">{{pickYear}}</span>
     </a-month-panel>
-    <a-day-panel v-show="currentView === VIEW.DAY"
+    <a-day-panel v-if="currentView === VIEW.DAY"
                  ref="dayPanel"
                  :pick-year.sync="pickYear"
                  :pick-month.sync="pickMonth"
-                 :year.sync="year"
-                 :month.sync="month"
-                 :day.sync="day"
+                 :year="year"
+                 :month="month"
+                 :day="day"
+                 @click="_handleClickDate"
                  @open-year="currentView = VIEW.YEAR"
                  @open-month="currentView = VIEW.MONTH"
     />
@@ -28,29 +29,47 @@
   import AYearPanel from "./a-year-panel";
   import AMonthPanel from "./a-month-panel";
   import ADayPanel from "./a-day-panel";
+  import {oneOf} from "../../script/utils";
 
   export default {
     name: "a-date-panel",
     components: {ADayPanel, AMonthPanel, AYearPanel},
     props: {
-      value: {
-        type: Date,
-        default: () => new Date()
+      view: {
+        type: String,
+        default: 'date',
+        validator(val) {
+          return oneOf(val, ['year', 'month', 'date'])
+        },
+      },
+      year: {
+        type: Number
+      },
+      month: {
+        type: Number,
+      },
+      day: {
+        type: Number,
       }
     },
+    watch: {
+      view(val) {
+        if (this.currentView !== val) {
+          this.currentView = val
+        }
+      },
+      currentView(val) {
+        this.$emit('update:view', val)
+      },
+    },
     data() {
-      const VIEW = {YEAR: 0x001, MONTH: 0x002, DAY: 0x003}
+      const VIEW = {YEAR: 'year', MONTH: 'month', DAY: 'date'}
       return {
         VIEW,
-        currentValue: this.value,
-        currentView: VIEW.DAY,
+        currentView: this.view,
 
-        year: this.value.getFullYear(),
-        month: this.value.getMonth() + 1,
-        day: this.value.getDate(),
-
-        pickYear: this.value.getFullYear(),
-        pickMonth: this.value.getMonth() + 1,
+        pickYear: this.year,
+        pickMonth: this.month,
       }
     },
     methods: {
@@ -69,6 +88,18 @@
       },
       nextMonth() {
         this.$refs.dayPanel.nextMonth()
+      },
+
+      _handleClickYear(item) {
+        this.pickYear = item
+        this.$emit('click-year', item)
+      },
+      _handleClickMonth(item) {
+        this.pickMonth = item
+        this.$emit('click-month', item)
+      },
+      _handleClickDate(item) {
+        this.$emit('click-date', item)
       },
     }
   }
