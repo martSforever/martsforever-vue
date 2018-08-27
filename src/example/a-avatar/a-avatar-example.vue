@@ -1,6 +1,6 @@
 <template>
   <div class="a-avatar-example">
-    <a-avatar/>
+    <a-avatar src="http://www.pujia8.com/static/pics/20171215040134_26.jpg"/>
   </div>
 </template>
 
