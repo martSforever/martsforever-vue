@@ -17,10 +17,16 @@
       TestNode: {
         render(h) {
           console.log(this.$parent)                           //这个this.$parent其实就是test-parent自己
+          let _this = this.$parent
           // return h('div', this.$parent.$scopedSlots.default({message: 'rose'}))
           return (
             <div>
-              {this.$parent.$scopedSlots.default({message: 'rose'})}
+              <div>
+                {_this.$scopedSlots.default({message: 'rose'})}
+              </div>
+              <div>
+               {!!_this.renderFunc && (_this.renderFunc.call(_this._renderProxy, h, {message: 'green'}))}
+              </div>
             </div>
           )
         },

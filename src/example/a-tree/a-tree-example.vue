@@ -1,8 +1,8 @@
 <template>
   <div class="a-tree-example">
-    <a-tree :data="data1" options-key="children">
-      <template slot-scope="{data}">
-        {{data.name}}
+    <a-tree :data="data1" options-key="children" :render-func="renderTreeNode">
+      <template slot-scope="{name}">
+        111-->>{{name}}
       </template>
     </a-tree>
   </div>
@@ -27,11 +27,24 @@
                 {name: '天河区'},
               ]
             },
-            {name: '佛山市'},
+            {
+              name: '佛山市',
+              children: [
+                {name: '禅城区'},
+                {name: '顺德区'},
+              ]
+            },
             {name: '深圳市'}
           ]
         }
       }
+    },
+    methods: {
+      renderTreeNode(h, item) {
+        return (
+          <div>222->>{item.name}</div>
+        )
+      },
     },
   }
 </script>

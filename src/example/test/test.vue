@@ -27,9 +27,9 @@
     },
     computed: {},
     methods: {
-      myRenderFunc(h) {
+      myRenderFunc(h, {message}) {
         return (
-          <div>this is my render functions</div>
+          <div class="message">--{message}--</div>
         )
       },
     },

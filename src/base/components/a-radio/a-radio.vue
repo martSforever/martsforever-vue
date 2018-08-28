@@ -6,7 +6,7 @@
           <a-icon :icon="activeIcon" :color="iconColor"/>
         </slot>
       </div>
-      <div key="inactive-tag" class="inactive-tag">
+      <div key="inactive-tag" class="inactive-tag" :class="inactiveTagClasses">
         <slot name="inactiveTag">
           <a-icon :icon="inactiveIcon" :color="iconColor"/>
         </slot>
@@ -67,9 +67,14 @@
       name: {
         type: String
       },
+      disabled: {
+        type: Boolean,
+        default: false
+      }
     },
     methods: {
       _handleClick(e) {
+        if (!!this.disabled) return
         this.currentValue = !this.currentValue;
         !!this.radioGroup && this.radioGroup.updateValue(this)
       },
@@ -79,6 +84,12 @@
         return {
           show: this.currentValue,
           hide: !this.currentValue
+        }
+      },
+      inactiveTagClasses() {
+        return {
+          show: !this.currentValue,
+          hide: this.currentValue
         }
       },
       radioStyles() {

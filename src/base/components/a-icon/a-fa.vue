@@ -12,7 +12,7 @@
     },
     computed: {
       faClass() {
-        return `${this.classes} fa ${this.icon}`;
+        return `fa ${this.icon}`;
       },
     },
     methods: {

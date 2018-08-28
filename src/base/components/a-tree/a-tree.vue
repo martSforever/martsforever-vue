@@ -1,26 +1,28 @@
 <template>
   <div class="a-tree">
-    <div class="a-tree-head" @click="toggle">
-      <div class="indicator">
-        <a-radio :active-icon="activeIcon"
-                 :inactive-icon="inactiveIcon"
-                 :value="!currentShow"
-                 v-if="!!optionsKey && !!data[optionsKey]"/>
+    <div class="a-tree-content-wrapper" @click="toggle">
+      <div class="icon-wrapper">
+        <a-radio
+          :disabled="true"
+          :active-icon="activeIcon"
+          :inactive-icon="inactiveIcon"
+          :value="currentShow || !(!!optionsKey && !!data[optionsKey] && data[optionsKey].length>0)"/>
       </div>
-      <div class="content">
-        <slot :data="data"></slot>
-      </div>
+      <node-content/>
     </div>
-    <a-collapse-transition v-if="!!optionsKey && !!data[optionsKey]">
-      <div class="a-tree-option-wrapper" v-if="currentShow">
-        <a-tree v-for="(item,index) in data[optionsKey]"
-                :key="index"
-                :data="item"
-                :active-icon="activeIcon"
-                :inactive-icon="inactiveIcon"
-                :options-key="optionsKey">
-          <slot :data="item"></slot>
-        </a-tree>
+    <a-collapse-transition>
+      <div class="a-tree-options-wrapper"
+           v-show="!!optionsKey && !!data[optionsKey] && data[optionsKey].length>0 && currentShow">
+        <div v-if="initialized">
+          <a-tree v-for="(item,index) in data[optionsKey]"
+                  :key="index"
+                  :data="item"
+                  :is-root="false"
+                  :options-key="optionsKey"
+                  :active-icon="activeIcon"
+                  :inactive-icon="inactiveIcon"
+                  :render-func="renderFunc"/>
+        </div>
       </div>
     </a-collapse-transition>
   </div>
@@ -29,22 +31,36 @@
 <script>
   import ACollapseTransition from "../a-collapse-transition/a-collapse-transition";
   import ARadio from "../a-radio/a-radio";
+  import {findComponentUpward} from "../../script/utils";
 
   export default {
     name: "a-tree",
-    components: {ARadio, ACollapseTransition},
+    components: {
+      ARadio,
+      ACollapseTransition,
+      NodeContent: {
+        render(h) {
+          let tree = this.$parent
+          return (
+            <div class="a-tree-node-content">
+              {!!tree.renderFunc && (tree.renderFunc.call(tree._renderProxy, h, tree.data))}
+              {!!tree.root.$scopedSlots.default && tree.root.$scopedSlots.default(tree.data)}
+            </div>
+          )
+        },
+      }
+    },
     props: {
       data: {
-        type: Object,
         default: null
       },
       activeIcon: {
         type: String,
-        default: 'fa-plus-square-o',
+        default: 'fa-minus-square-o',
       },
       inactiveIcon: {
         type: String,
-        default: 'fa-minus-square-o'
+        default: 'fa-plus-square-o'
       },
       show: {
         type: Boolean,
@@ -52,7 +68,14 @@
       },
       optionsKey: {
         type: String,
-      }
+      },
+      renderFunc: {
+        type: Function,
+      },
+      isRoot: {
+        type: Boolean,
+        default: true
+      },
     },
     watch: {
       show(val) {
@@ -60,34 +83,46 @@
       },
       currentShow(val) {
         this.$emit('update:show', val)
+        if (!this.initialized && !!val) this.initialized = true
       },
     },
     data() {
       return {
-        currentShow: this.show
+        root: null,
+        currentShow: this.show,
+        initialized: this.show
       }
     },
     methods: {
       toggle() {
-        this.currentShow = !this.currentShow
+        if (!this.currentShow) this.initialized = true
+        this.$nextTick(() => this.currentShow = !this.currentShow)
       },
-    }
+    },
+    created() {
+      console.log('created')
+      let parent = findComponentUpward(this, 'a-tree')
+      this.root = !!this.isRoot ? this : parent.root
+    },
+    destroyed() {
+      console.log('destroyed')
+    },
   }
 </script>
 
 <style lang="scss">
   .a-tree {
-    .a-tree-head {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
+    .a-tree-content-wrapper {
       cursor: pointer;
-      margin-bottom: 12px;
-      .indicator {
+      .icon-wrapper {
         width: 30px;
+        display: inline-block;
+      }
+      .a-tree-node-content {
+        display: inline-block;
       }
     }
-    .a-tree-option-wrapper {
+    .a-tree-options-wrapper {
       padding-left: 30px;
     }
   }
