@@ -42,6 +42,7 @@
           {name: 'i18n', url: 'i18n'},
           {name: 'test', url: 'test'},
           {name: 'avatar', url: 'avatar'},
+          {name: 'tree', url: 'tree'},
           {name: 'parent-child', url: 'parent-child'},
         ],
         name: 'a-icon'

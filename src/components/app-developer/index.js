@@ -102,6 +102,12 @@ export const router = {
       name: 'avatar'
     },
     {
+      path: '/tree',
+      component: resolve => require(['src/example/a-tree/a-tree-example.vue'], resolve),
+
+      name: 'tree'
+    },
+    {
       path: '/test',
       component: resolve => require(['src/example/test/test.vue'], resolve),
       name: 'test'
