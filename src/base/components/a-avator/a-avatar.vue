@@ -19,7 +19,7 @@
         type: String,
         default: 'drop',
         validator(val) {
-          return oneOf(val, ['drop', 'star'])
+          return oneOf(val, ['drop', 'star', 'heart'])
         },
       }
     },
@@ -39,7 +39,6 @@
 
       /*水滴形*/
       drawDrop(image) {
-        console.log('width:', image.width, 'height', image.height)
         let ctx = this.$refs.canvas.getContext('2d');
         this.$refs.canvas.width = this.size;
         this.$refs.canvas.height = this.size;
@@ -68,13 +67,43 @@
         ctx.closePath();
         ctx.clip();
         ctx.drawImage(image, 0, 0, this.size, this.size);
-      }
+      },
+
+      drawHeart(image) {
+        let ctx = this.$refs.canvas.getContext('2d');
+        this.$refs.canvas.width = this.size;
+        this.$refs.canvas.height = this.size;
+        let x = this.size / 2
+        let y = (this.size / 2) - (this.size / 20)
+        let a = (this.size * 3) / 100                                                    //?
+        let vertices = []
+        for (let i = 0; i < 50; i++) {
+          let step = i / 50 * (Math.PI * 2);//设置心上面两点之间的角度，具体分成多少份，好像需要去试。
+          let vector = {
+            x: a * (16 * Math.pow(Math.sin(step), 3)),
+            y: a * (13 * Math.cos(step) - 5 * Math.cos(2 * step) - 2 * Math.cos(3 * step) - Math.cos(4 * step))
+          }
+          vertices.push(vector);
+        }
+        ctx.save()
+        ctx.beginPath();
+        ctx.translate(x, y);
+        ctx.rotate(Math.PI);
+        for (let i = 0; i < 50; i++) {
+          let vector = vertices[i];
+          ctx.lineTo(vector.x, vector.y);
+        }
+        ctx.restore()
+        ctx.closePath();
+        ctx.clip();
+        ctx.drawImage(image, 0, 0, this.size, this.size);
+      },
     }
   }
 </script>
 
 <style lang="scss">
   .a-avatar {
-    /*background-color: white;*/
+    background-color: black;
   }
 </style>
