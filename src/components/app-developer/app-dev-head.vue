@@ -43,6 +43,7 @@
           {name: 'test', url: 'test'},
           {name: 'avatar', url: 'avatar'},
           {name: 'tree', url: 'tree'},
+          {name: 'tag', url: 'tag'},
           {name: 'parent-child', url: 'parent-child'},
         ],
         name: 'a-icon'
