@@ -1,4 +1,5 @@
 import {oneOf, zeroize} from "./utils";
+import Vue from 'vue'
 
 /*
 *  去除字符串前后的空格换行符，以及ufeff字符
@@ -220,6 +221,17 @@ Object.defineProperty(Object.prototype, 'iterate', {
         init = func(key, this[key], init)
     }
     return init
+  }
+})
+/*
+*  添加响应式数据
+*/
+Object.defineProperty(Object.prototype, 'setBindingPrototype', {
+  writable: false,
+  enumerable: false,
+  configurable: true,
+  value: function (key, value) {
+    Vue.set(this, key, value)
   }
 })
 

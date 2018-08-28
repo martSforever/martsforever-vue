@@ -1,11 +1,13 @@
 <template>
   <div class="a-tree-example">
-    <a-tree :data="data1" options-key="children"
+    <a-tree :data="data1"
+            child-key="children"
             :render-func="renderTreeNode"
             :before-open="handleTreeBeforeOpen"
             :open-on-start="false"
             :initialized-on-start="false"
-            :open-on-click-content="false">
+            check-key="checked"
+            :open-on-click-content="true">
       <template slot-scope="item">
         <span class="name" style="background-color: #0ac2ff">{{item.name}}</span>
       </template>
@@ -47,19 +49,20 @@
     methods: {
       renderTreeNode(h, item) {
         return (
-          <span class="name" style={{backgroundColor: 'red', marginRight: '12px'}}>{item.name}</span>
+          <span class="name" style={{backgroundColor: 'blueviolet', marginRight: '12px'}}>{item.name}</span>
         )
       },
       handleTreeBeforeOpen(data, next) {
-        // console.log('handleTreeBeforeOpen', data)
-        data.children.pushArray([
+        console.log('handleTreeBeforeOpen', data)
+        /*data.children.pushArray([
           {name: 'aaa'},
           {name: 'bbb'},
           {name: 'ccc'},
-        ])
-        setTimeout(() => {
+        ])*/
+        /*setTimeout(() => {
           next()
-        }, 300)
+        }, 300)*/
+        next()
       },
     },
   }

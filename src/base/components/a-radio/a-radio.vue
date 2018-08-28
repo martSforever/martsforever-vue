@@ -76,6 +76,7 @@
       _handleClick(e) {
         if (!!this.disabled) return
         this.currentValue = !this.currentValue;
+        this.$emit('change', this.currentValue)
         !!this.radioGroup && this.radioGroup.updateValue(this)
       },
     },
