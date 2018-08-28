@@ -21,6 +21,7 @@
                   :options-key="optionsKey"
                   :active-icon="activeIcon"
                   :inactive-icon="inactiveIcon"
+                  :initialized-on-start="initializedOnStart"
                   :render-func="renderFunc"/>
         </div>
       </div>
@@ -52,30 +53,41 @@
     },
     props: {
       data: {
-        default: null
+        default: null,
+        desc: '每个节点渲染所需要的数据'
       },
       activeIcon: {
         type: String,
         default: 'fa-minus-square-o',
+        desc: '树展开的时候显示的图标',
       },
       inactiveIcon: {
         type: String,
-        default: 'fa-plus-square-o'
+        default: 'fa-plus-square-o',
+        desc: "树收起的时候展示的图标"
       },
       show: {
         type: Boolean,
-        default: false
+        default: false,
+        desc: '是否展开'
       },
       optionsKey: {
         type: String,
+        desc: '子树数据在props->data中的对象属性key',
       },
       renderFunc: {
         type: Function,
+        desc: '支持两种自定义节点内容方式，这个是其中一种，通过渲染函数的方式进行，第一个参数为h，第二个参数为节点渲染所需要的数据',
       },
       isRoot: {
         type: Boolean,
-        default: true
+        default: true,
+        desc: '是否为根节点，这个属性是供a-tree内部使用的，实际业务开发的时候无需关注该属性',
       },
+      initializedOnStart: {
+        type: Boolean,
+        desc: '是否在初始化的时候就渲染所有节点',
+      }
     },
     watch: {
       show(val) {
@@ -90,7 +102,7 @@
       return {
         root: null,
         currentShow: this.show,
-        initialized: this.show
+        initialized: this.initializedOnStart || this.show
       }
     },
     methods: {
