@@ -104,6 +104,6 @@
 
 <style lang="scss">
   .a-avatar {
-    background-color: black;
+    /*background-color: black;*/
   }
 </style>
