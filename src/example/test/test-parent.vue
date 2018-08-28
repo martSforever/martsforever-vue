@@ -1,20 +1,42 @@
 <template>
   <div class="test-parent">
-    this is test-parent
-    <slot></slot>
+    <div>test parent content</div>
+    ###
+    <slot :message="message"></slot>
+    ###
+    !!
+    <test-node/>
+    !!
   </div>
 </template>
 
 <script>
   export default {
     name: "test-parent",
+    components: {
+      TestNode: {
+        render(h) {
+          console.log(this.$parent)                           //这个this.$parent其实就是test-parent自己
+          // return h('div', this.$parent.$scopedSlots.default({message: 'rose'}))
+          return (
+            <div>
+              {this.$parent.$scopedSlots.default({message: 'rose'})}
+            </div>
+          )
+        },
+      }
+    },
     props: {
-      tag: ''
+      renderFunc: {
+        type: Function,
+      }
+    },
+    data() {
+      return {
+        message: 'bilibili'
+      }
     },
     created() {
-      this.$on('call-parent', (data) => {
-        console.log(`call parent[${this.tag}]-->>`, data)
-      })
     },
   }
 </script>

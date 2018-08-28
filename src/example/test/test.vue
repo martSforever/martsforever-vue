@@ -1,6 +1,10 @@
 <template>
   <div class="test">
-    this is test page
+    <test-parent :render-func="myRenderFunc">
+      <template slot-scope="{message}">
+        <div class="message">--{{message}}--</div>
+      </template>
+    </test-parent>
   </div>
 </template>
 
@@ -18,11 +22,16 @@
     data() {
       return {
         isShow: true,
+        name: 'ambzer'
       }
     },
     computed: {},
     methods: {
-
+      myRenderFunc(h) {
+        return (
+          <div>this is my render functions</div>
+        )
+      },
     },
     mounted() {
     },
@@ -34,6 +43,14 @@
   .test {
     height: 100vh;
     overflow: auto;
+
+    .message {
+      padding: 3px 12px;
+      background-color: $text-color-primary;
+      color: white;
+      display: inline-block;
+      border-radius: $border-fillet;
+    }
   }
 
 </style>
