@@ -4,7 +4,8 @@
             :render-func="renderTreeNode"
             :before-open="handleTreeBeforeOpen"
             :open-on-start="false"
-            :initialized-on-start="false">
+            :initialized-on-start="false"
+            :open-on-click-content="false">
       <template slot-scope="item">
         <span class="name" style="background-color: #0ac2ff">{{item.name}}</span>
       </template>
@@ -50,7 +51,7 @@
         )
       },
       handleTreeBeforeOpen(data, next) {
-        console.log('handleTreeBeforeOpen', data)
+        // console.log('handleTreeBeforeOpen', data)
         data.children.pushArray([
           {name: 'aaa'},
           {name: 'bbb'},

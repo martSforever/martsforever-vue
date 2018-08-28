@@ -1,14 +1,15 @@
 <template>
   <div class="a-tree">
-    <div class="a-tree-content-wrapper" @click="toggle">
+    <div class="a-tree-content-wrapper">
       <div class="icon-wrapper">
         <a-radio
+          @click.native="toggle"
           :disabled="true"
           :active-icon="activeIcon"
           :inactive-icon="inactiveIcon"
           :value="currentShow || !(!!optionsKey && !!data[optionsKey] && data[optionsKey].length>0)"/>
       </div>
-      <node-content/>
+      <node-content @click.native="_handleClickNodeContent"/>
     </div>
     <a-collapse-transition>
       <div class="a-tree-options-wrapper"
@@ -93,6 +94,11 @@
         type: Boolean,
         default: false,
         desc: '是否在初始化的时候就打开所有节点',
+      },
+      openOnClickContent: {
+        type: Boolean,
+        default: true,
+        desc: '是否在点击tree节点的时候，展开或者收缩节点树内容'
       }
     },
     watch: {
@@ -110,6 +116,9 @@
       }
     },
     methods: {
+      _handleClickNodeContent() {
+        !!this.openOnClickContent && this.toggle()
+      },
       toggle() {
         if (!this.currentShow) this.initialized = true
         this.$nextTick(() => {
