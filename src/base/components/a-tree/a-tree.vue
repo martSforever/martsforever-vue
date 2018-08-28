@@ -112,8 +112,10 @@
 
 <style lang="scss">
   .a-tree {
+    margin-bottom: 12px;
     .a-tree-content-wrapper {
       cursor: pointer;
+      display: inline-block;
       .icon-wrapper {
         width: 30px;
         display: inline-block;
@@ -124,6 +126,7 @@
     }
     .a-tree-options-wrapper {
       padding-left: 30px;
+      margin-top: 12px;
     }
   }
 </style>

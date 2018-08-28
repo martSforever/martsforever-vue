@@ -1,8 +1,8 @@
 <template>
   <div class="a-tree-example">
     <a-tree :data="data1" options-key="children" :render-func="renderTreeNode">
-      <template slot-scope="{name}">
-        111-->>{{name}}
+      <template slot-scope="item">
+        <span class="name" style="background-color: #0ac2ff">{{item.name}}</span>
       </template>
     </a-tree>
   </div>
@@ -42,13 +42,20 @@
     methods: {
       renderTreeNode(h, item) {
         return (
-          <div>222->>{item.name}</div>
+          <span class="name" style={{backgroundColor: 'red', marginRight: '12px'}}>{item.name}</span>
         )
       },
     },
   }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
+  .a-tree-example {
+    .name {
+      border-radius: $border-fillet;
+      color: white;
+      padding: 3px 12px;
+    }
+  }
 
 </style>
