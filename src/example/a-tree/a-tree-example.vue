@@ -53,8 +53,13 @@
   .a-tree-example {
     .name {
       border-radius: $border-fillet;
+      display: inline-block;
       color: white;
-      padding: 3px 12px;
+      height: 20px;
+      width: 100px;
+      text-align: center;
+      line-height: 20px;
+      user-select: none;
     }
   }
 

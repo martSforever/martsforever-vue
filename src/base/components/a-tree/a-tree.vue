@@ -96,7 +96,18 @@
     methods: {
       toggle() {
         if (!this.currentShow) this.initialized = true
-        this.$nextTick(() => this.currentShow = !this.currentShow)
+        this.$nextTick(() => {
+          !!this.currentShow ?
+            this._close()
+            :
+            this._open()
+        })
+      },
+      _open() {
+        this.currentShow = true
+      },
+      _close() {
+        this.currentShow = false
       },
     },
     created() {
@@ -113,6 +124,9 @@
 <style lang="scss">
   .a-tree {
     margin-bottom: 12px;
+    &:last-child {
+      margin-bottom: 0;
+    }
     .a-tree-content-wrapper {
       cursor: pointer;
       display: inline-block;
