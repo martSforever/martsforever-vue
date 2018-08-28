@@ -23,7 +23,8 @@
                   :inactive-icon="inactiveIcon"
                   :initialized-on-start="initializedOnStart"
                   :before-open="beforeOpen"
-                  :render-func="renderFunc"/>
+                  :render-func="renderFunc"
+                  :open-on-start="openOnStart"/>
         </div>
       </div>
     </a-collapse-transition>
@@ -67,11 +68,6 @@
         default: 'fa-plus-square-o',
         desc: "树收起的时候展示的图标"
       },
-      show: {
-        type: Boolean,
-        default: false,
-        desc: '是否展开'
-      },
       optionsKey: {
         type: String,
         desc: '子树数据在props->data中的对象属性key',
@@ -93,21 +89,24 @@
         type: Function,
         desc: '在打开之前触发的动作，可以用来延迟加载数据',
       },
+      openOnStart: {
+        type: Boolean,
+        default: false,
+        desc: '是否在初始化的时候就打开所有节点',
+      }
     },
     watch: {
-      show(val) {
-        if (this.currentShow !== val) this.currentShow = val
-      },
       currentShow(val) {
         this.$emit('update:show', val)
         if (!this.initialized && !!val) this.initialized = true
       },
     },
     data() {
+      let currentShow = this.openOnStart
       return {
         root: null,
-        currentShow: this.show,
-        initialized: this.initializedOnStart || this.show
+        currentShow,
+        initialized: this.initializedOnStart || currentShow
       }
     },
     methods: {

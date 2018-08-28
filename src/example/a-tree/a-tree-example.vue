@@ -1,6 +1,10 @@
 <template>
   <div class="a-tree-example">
-    <a-tree :data="data1" options-key="children" :render-func="renderTreeNode" :before-open="handleTreeBeforeOpen">
+    <a-tree :data="data1" options-key="children"
+            :render-func="renderTreeNode"
+            :before-open="handleTreeBeforeOpen"
+            :open-on-start="false"
+            :initialized-on-start="false">
       <template slot-scope="item">
         <span class="name" style="background-color: #0ac2ff">{{item.name}}</span>
       </template>
@@ -54,7 +58,7 @@
         ])
         setTimeout(() => {
           next()
-        }, 1000)
+        }, 300)
       },
     },
   }
