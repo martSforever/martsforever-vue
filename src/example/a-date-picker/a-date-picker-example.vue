@@ -14,6 +14,7 @@
     <div style="margin-top: 100px">
       <div>{{date.yyyyMMddHHmmss()}}</div>
       <a-date-picker v-model="date" type="date"/>
+      <a-date-picker v-model="date" type="date"/>
     </div>
   </div>
 </template>

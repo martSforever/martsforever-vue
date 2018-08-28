@@ -165,6 +165,7 @@
 
 <style lang="scss">
   .a-date-picker {
+    display: inline-block;
     .input-wrapper {
       display: inline-block;
     }
