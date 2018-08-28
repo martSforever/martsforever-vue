@@ -22,6 +22,7 @@
                   :active-icon="activeIcon"
                   :inactive-icon="inactiveIcon"
                   :initialized-on-start="initializedOnStart"
+                  :before-open="beforeOpen"
                   :render-func="renderFunc"/>
         </div>
       </div>
@@ -87,7 +88,11 @@
       initializedOnStart: {
         type: Boolean,
         desc: '是否在初始化的时候就渲染所有节点',
-      }
+      },
+      beforeOpen: {
+        type: Function,
+        desc: '在打开之前触发的动作，可以用来延迟加载数据',
+      },
     },
     watch: {
       show(val) {
@@ -116,7 +121,12 @@
         })
       },
       _open() {
-        this.currentShow = true
+        if (!!this.beforeOpen) {
+          this.beforeOpen(this.data, () => {
+            this.currentShow = true
+          })
+        } else
+          this.currentShow = true
       },
       _close() {
         this.currentShow = false
