@@ -1,7 +1,7 @@
 <template>
   <div class="a-tag-example">
-    a-tag-example
-    <a-tag/>
+    <span>a-tag-example</span>
+    <a-tag :strings="tags"/>
   </div>
 </template>
 
@@ -10,11 +10,22 @@
 
   export default {
     name: "a-tag-example",
-    components: {ATag}
-
+    components: {ATag},
+    data() {
+      return {
+        tags: [
+          'one',
+          'two',
+        ]
+      }
+    },
   }
 </script>
 
 <style lang="scss">
-
+  .a-tag-example {
+    & > * {
+      vertical-align: top;
+    }
+  }
 </style>
