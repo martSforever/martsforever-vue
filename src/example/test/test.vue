@@ -1,10 +1,12 @@
 <template>
   <div class="test">
-    <test-parent :render-func="myRenderFunc">
-      <template slot-scope="{message}">
-        <div class="message">--{{message}}--</div>
-      </template>
-    </test-parent>
+    <a-button-group>
+      <a-button @click="add">add</a-button>
+      <a-button @click="remove">remove</a-button>
+    </a-button-group>
+    <div class="wrapper">
+      <div class="item" v-for="(item,index) in cities" :key="index" @click="handleClick(item,index)">{{item.name}}</div>
+    </div>
   </div>
 </template>
 
@@ -22,15 +24,27 @@
     data() {
       return {
         isShow: true,
-        name: 'ambzer'
+        name: 'ambzer',
+        cities: [
+          {name: '广州市'},
+          {name: '上海市'},
+          {name: '北京市'},
+          {name: '深圳市'},
+          {name: '长沙市'},
+          {name: '南京市'},
+        ]
       }
     },
     computed: {},
     methods: {
-      myRenderFunc(h, {message}) {
-        return (
-          <div class="message">--{message}--</div>
-        )
+      handleClick(item, index) {
+        this.cities.splice(index, 1)
+      },
+      add() {
+        this.cities.push({name: '广州市'})
+      },
+      remove() {
+        this.cities.pop()
       },
     },
     mounted() {
@@ -51,6 +65,20 @@
       display: inline-block;
       border-radius: $border-fillet;
     }
+
+    .wrapper {
+      .item {
+        height: 60px;
+        margin-bottom: 12px;
+        border-radius: $border-fillet;
+        width: 300px;
+        padding: 12px;
+        color: white;
+        background-color: $text-color-primary;
+
+      }
+    }
+
   }
 
 </style>
