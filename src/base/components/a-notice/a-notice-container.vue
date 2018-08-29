@@ -2,8 +2,14 @@
   <div class="a-notice-container" :style="containerStyles">
     <div class="a-notice-wrapper" :style="contentStyles">
       <a-move-container>
-        <a-move-item v-for="option in noticeOptions" :key="option.id">
-          <a-notice :message="option.message" :type="option.type"/>
+        <a-move-item v-for="(option) in noticeOptions" :key="option.id">
+          <a-notice
+            :message="option.message"
+            :title="option.title"
+            :type="option.type"
+            :auto-close="option.autoClose"
+            :duration="option.duration"
+            @close="_handleClose(option)"/>
         </a-move-item>
       </a-move-container>
     </div>
@@ -31,7 +37,7 @@
       },
       vertical: {
         type: String,
-        default: 'end',
+        default: 'start',
         validator(val) {
           return oneOf(val, ['start', 'center', 'end'])
         },
@@ -56,6 +62,9 @@
           [this.horizontal === 'end' ? 'right' : 'left']: this.horizontal === 'center' ? 50 : 0,
           [this.vertical === 'end' ? 'bottom' : 'top']: this.vertical === 'center' ? 50 : 0,
         }
+      },
+      _handleClose(option) {
+        this.noticeOptions.remove(option)
       },
     },
     computed: {
