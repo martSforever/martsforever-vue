@@ -19,7 +19,8 @@
     </div>
 
     <a-move-container :direction="direction">
-      <a-move-item v-for="item in cities" :key="item.name" class="test-item" @click.native="handleClick">
+      <a-move-item v-for="(item,index) in cities" :key="item.name" class="test-item"
+                   @click.native="handleClick(item,index)">
         {{item.name}}
       </a-move-item>
     </a-move-container>
