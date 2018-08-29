@@ -45,6 +45,7 @@
           {name: 'tree', url: 'tree'},
           {name: 'tag', url: 'tag'},
           {name: 'a-move', url: 'a-move'},
+          {name: 'notice', url: 'notice'},
           {name: 'parent-child', url: 'parent-child'},
         ],
         name: 'a-icon'
