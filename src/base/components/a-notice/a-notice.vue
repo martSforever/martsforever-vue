@@ -1,11 +1,16 @@
 <template>
   <div class="a-notice">
     <div class="standard">
-      <div class="title">
-        <span class="text">{{title}}</span>
-        <a-icon icon="fa-times" @click="close"/>
+      <div class="icon-wrapper" :class="[type]">
+        <a-icon :icon="iconMap[type]"/>
       </div>
-      <div class="message">{{message}}</div>
+      <div class="content-wrapper">
+        <div class="title">
+          <span class="text">{{title}}</span>
+          <a-icon icon="fa-times" @click="close"/>
+        </div>
+        <div class="message">{{message}}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -47,7 +52,7 @@
         default: 'info',
         desc: '消息提示类型，共有4种',
         validator(val) {
-          return oneOf(val, ['info', 'success', 'warn', 'error'])
+          return oneOf(val, ['info', 'success', 'warning', 'error'])
         },
       },
     },
@@ -56,6 +61,17 @@
         this.$emit('close')
       },
     },
+    data() {
+      return {
+        iconMap: {
+          info: 'fa-info-circle',
+          success: 'fa-check-circle',
+          warning: 'fa-exclamation-circle',
+          error: 'fa-times-circle',
+        },
+      }
+    },
+    computed: {},
     mounted() {
       !!this.autoClose && setTimeout(() => this.close(), this.duration)
     },
@@ -70,25 +86,40 @@
     padding: 12px;
     min-width: 225px;
     .standard {
-      .title {
-        font-size: 18px;
-        margin-bottom: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        .text {
-          color: black;
-        }
-        .a-icon {
-          cursor: pointer;
-          @include transition-all();
-          &:hover {
-            transform: rotate(360deg);
+      display: flex;
+      align-items: stretch;
+      .icon-wrapper {
+        height: 100%;
+        font-size: 24px;
+        width: 32px;
+        @each $key, $value in $colors {
+          &.#{$key} {
+            color: $value;
           }
         }
       }
-      .message {
-        font-size: 14px;
+      .content-wrapper {
+        flex: 1;
+        .title {
+          font-size: 18px;
+          margin-bottom: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          .text {
+            color: black;
+          }
+          .a-icon {
+            cursor: pointer;
+            @include transition-all();
+            &:hover {
+              transform: rotate(360deg);
+            }
+          }
+        }
+        .message {
+          font-size: 14px;
+        }
       }
     }
   }

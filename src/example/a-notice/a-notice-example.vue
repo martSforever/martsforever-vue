@@ -1,18 +1,24 @@
 <template>
   <div class="a-notice-example">
-    <a-title>horizontal:{{horizontal}} ----- vertical:{{vertical}}</a-title>
     <div class="option-wrapper">
       <a-button-group>
-        <a-button>horizontal-->></a-button>
+        <a-button type="primary">horizontal-->>{{horizontal}}</a-button>
         <a-button @click="horizontal = 'start'">start</a-button>
         <a-button @click="horizontal = 'center'">center</a-button>
         <a-button @click="horizontal = 'end'">end</a-button>
       </a-button-group>
       <a-button-group>
-        <a-button>vertical-->></a-button>
+        <a-button type="primary">vertical-->>{{vertical}}</a-button>
         <a-button @click="vertical = 'start'">start</a-button>
         <a-button @click="vertical = 'center'">center</a-button>
         <a-button @click="vertical = 'end'">end</a-button>
+      </a-button-group>
+      <a-button-group>
+        <a-button type="primary">type-->>{{type}}</a-button>
+        <a-button @click="type = 'info'">info</a-button>
+        <a-button @click="type = 'success'">success</a-button>
+        <a-button @click="type = 'warning'">warning</a-button>
+        <a-button @click="type = 'error'">error</a-button>
       </a-button-group>
 
       <a-radio v-model="autoCLose" label="auto close"/>
@@ -43,8 +49,9 @@
         horizontal: 'end',
         vertical: 'start',
         timer: null,
-        autoCLose: true,
-        duration: 2000
+        autoCLose: false,
+        duration: 2000,
+        type: 'success'
       }
     },
     methods: {
@@ -56,7 +63,7 @@
           duration: this.duration - 0,
           title: '通知',
           message: '您的快递到了！！！',
-
+          type: this.type
         })
       },
     },

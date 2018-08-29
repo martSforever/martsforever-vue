@@ -25,6 +25,12 @@ $colors: (
   error:#e03636,
 );
 
+$color-success: map_get($colors, success);
+$color-primary: map_get($colors, primary);
+$color-info: map_get($colors, info);
+$color-warning: map_get($colors, warning);
+$color-error: map_get($colors, error);
+
 /*文字颜色*/
 $text-color-default: #a0aaa7;
 $text-color-light: #d9dbe2;
