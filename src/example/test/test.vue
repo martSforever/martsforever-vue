@@ -3,10 +3,13 @@
     <a-button-group>
       <a-button @click="add">add</a-button>
       <a-button @click="remove">remove</a-button>
+      <a-button @click="shuffle">shuffle</a-button>
     </a-button-group>
-    <div class="wrapper">
-      <div class="item" v-for="(item,index) in cities" :key="index" @click="handleClick(item,index)">{{item.name}}</div>
-    </div>
+    <transition-group name="list-complete" tag="div" class="wrapper">
+      <div class="item list-complete-item" v-for="(item,index) in cities" :key="item.name"
+           @click="handleClick(item,index)">{{item.name}}
+      </div>
+    </transition-group>
   </div>
 </template>
 
@@ -41,10 +44,13 @@
         this.cities.splice(index, 1)
       },
       add() {
-        this.cities.push({name: '广州市'})
+        this.cities.push({name: new Date().getTime()})
       },
       remove() {
         this.cities.pop()
+      },
+      shuffle() {
+        this.cities = _.shuffle(this.cities)
       },
     },
     mounted() {
@@ -78,7 +84,20 @@
 
       }
     }
+  }
 
+  .list-complete-item {
+    transition: all 0.4s;
+    display: block;
+  }
+
+  .list-complete-enter, .list-complete-leave-to {
+    opacity: 0;
+    transform: translateX(80%);
+  }
+
+  .list-complete-leave-active {
+    position: absolute;
   }
 
 </style>

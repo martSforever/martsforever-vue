@@ -14,6 +14,8 @@ import 'src/index.js';
 Vue.config.productionTip = false;
 Vue.use(spreadPlugin)
 
+window._ = require('lodash')
+
 new Vue({
   el: '#app',
   router,
