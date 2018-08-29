@@ -6,9 +6,19 @@
         <a-button @click="remove">remove</a-button>
         <a-button @click="shuffle">shuffle</a-button>
       </a-button-group>
+      <a-button-group>
+        <a-button @click="changeDirection('left')">left</a-button>
+        <a-button @click="changeDirection('right')">right</a-button>
+        <a-button @click="changeDirection('top')">top</a-button>
+        <a-button @click="changeDirection('bottom')">bottom</a-button>
+        <a-button @click="changeDirection('left-top')">left-top</a-button>
+        <a-button @click="changeDirection('right-top')">right-top</a-button>
+        <a-button @click="changeDirection('left-bottom')">left-bottom</a-button>
+        <a-button @click="changeDirection('right-bottom')">right-bottom</a-button>
+      </a-button-group>
     </div>
 
-    <a-move-container>
+    <a-move-container :direction="direction">
       <a-move-item v-for="item in cities" :key="item.name" class="test-item" @click.native="handleClick">
         {{item.name}}
       </a-move-item>
@@ -27,6 +37,7 @@
     components: {AButton, AButtonGroup, AMoveItem, AMoveContainer},
     data() {
       return {
+        direction: 'bottom-right',
         cities: [
           {name: '广州市'},
           {name: '上海市'},
@@ -52,6 +63,10 @@
       },
       shuffle() {
         this.cities = _.shuffle(this.cities)
+      },
+
+      changeDirection(d) {
+        this.direction = d
       },
     }
   }
