@@ -74,13 +74,16 @@
 
 <style lang="scss">
   .test-item {
-    height: 60px;
+    height: 120px;
+    width: 120px;
     margin-bottom: 12px;
+    margin-right: 12px;
     border-radius: $border-fillet;
-    width: 300px;
     padding: 12px;
     color: white;
     background-color: $text-color-primary;
+
+    display: inline-block !important;
   }
 
 </style>
