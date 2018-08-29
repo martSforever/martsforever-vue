@@ -113,6 +113,11 @@ export const router = {
       name: 'tag'
     },
     {
+      path: '/a-move',
+      component: resolve => require(['src/example/a-move/a-move-example.vue'], resolve),
+      name: 'a-move'
+    },
+    {
       path: '/test',
       component: resolve => require(['src/example/test/test.vue'], resolve),
       name: 'test'

@@ -13,6 +13,7 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "font-awesome": "^4.7.0",
+    "lodash": "^4.17.10",
     "popper.js": "^1.14.3",
     "stackblur-canvas": "^1.4.1",
     "swiper": "^4.2.6",

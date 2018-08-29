@@ -93,7 +93,7 @@
 
   .list-complete-enter, .list-complete-leave-to {
     opacity: 0;
-    transform: translateX(80%);
+    transform: translate(80%, 30%);
   }
 
   .list-complete-leave-active {
