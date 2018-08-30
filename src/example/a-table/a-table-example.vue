@@ -13,9 +13,9 @@
       <a-table-column order="10" field="age" title="配送信息">
         <a-table-column field="name" title="姓名"></a-table-column>
         <a-table-column field="address" title="配送地址">
-          <a-table-column field="province" title="省"></a-table-column>
-          <a-table-column field="city" title="市"></a-table-column>
-          <a-table-column field="district" title="县"></a-table-column>
+          <a-table-column order="10" field="province" title="省"></a-table-column>
+          <a-table-column order="20" field="city" title="市"></a-table-column>
+          <a-table-column order="15" field="district" title="县"></a-table-column>
         </a-table-column>
       </a-table-column>
       <a-table-column order="20" field="dispatchInfo" title="发货信息">
