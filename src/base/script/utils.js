@@ -162,4 +162,11 @@ export function uuid() {
   return uuid;
 }
 
+/*
+*  获取数组 随机下标
+*/
+export function randomIndex(array) {
+  return (!!array && array.length > 0) ? Math.floor(Math.random() * array.length) : 0
+}
+
 

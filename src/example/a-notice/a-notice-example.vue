@@ -28,7 +28,9 @@
     <div>
       <a-button-group>
         <a-button @click="info">info</a-button>
-        <a-button @click="render">render</a-button>
+        <a-button @click="renderContent">render</a-button>
+        <a-button @click="close">close</a-button>
+        <a-button @click="closeSpecific">closeSpecific</a-button>
       </a-button-group>
     </div>
   </div>
@@ -41,16 +43,19 @@
   import ASwitch from "../../base/components/a-switch/a-switch";
   import AInput from "../../base/components/a-input/a-input";
   import ATitle from "../../base/components/a-title/a-title";
+  import {randomIndex} from "../../base/script/utils";
 
   export default {
     name: "a-notice-example",
     components: {ATitle, AInput, ASwitch, ARadio, AButton, AButtonGroup},
     data() {
       return {
+        options: [],
+
         horizontal: 'end',
         vertical: 'start',
         timer: null,
-        autoCLose: false,
+        autoCLose: true,
         duration: 2000,
         type: 'success'
       }
@@ -67,14 +72,33 @@
           type: this.type
         })
       },
-      render() {
-        this.$notice.info({
-          renderFunc(h) {
+      renderContent() {
+        let option = this.$notice.info({
+          horizontal: this.horizontal,
+          vertical: this.vertical,
+          autoClose: this.autoCLose,
+          duration: this.duration - 0,
+          title: '通知',
+          message: '您的快递到了！！！',
+          type: this.type,
+
+          renderFunc: (h) => {
             return (
-              <div>hello, this is render content</div>
+              <div>
+                <g-input value={this.duration} style={{width: '100%'}}/>
+              </div>
             )
           },
         })
+        this.options.push(option)
+      },
+      close() {
+        this.options.pop().close()
+      },
+      closeSpecific() {
+        let index = randomIndex(this.options)
+        this.options[index].close()
+        this.options.splice(index, 1)
       },
     },
 

@@ -56,7 +56,9 @@
       },
       addNotice(options) {
         options.id = uuid()
+        options.close = () => this._handleClose(options)
         this.noticeOptions.push(options)
+        return options
       },
       _getContainerStylesData() {
         return {

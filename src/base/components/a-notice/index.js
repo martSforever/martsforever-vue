@@ -17,7 +17,7 @@ export default {
       noticeContainer = NoticeContainer.newInstance({horizontal: o.horizontal, vertical: o.vertical})
       noticeContainers[`${o.horizontal}-${o.vertical}`] = noticeContainer
     }
-    noticeContainer.addNotice(o)
+    return noticeContainer.addNotice(o)
   },
 }
 

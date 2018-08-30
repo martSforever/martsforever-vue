@@ -8,6 +8,10 @@ import 'src/base/script/prototype'                                              
 import spreadPlugin from 'src/base/vue-plugin/spread'                           //自定义向上广播，向下广播功能
 import i18n from './base/locale'
 
+import AInput from 'src/base/components/a-input/a-input'
+
+Vue.component('g-input', AInput)
+
 import 'src/base/style/index.scss';
 import 'src/index.js';
 
