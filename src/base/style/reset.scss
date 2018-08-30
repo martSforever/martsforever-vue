@@ -23,8 +23,8 @@ body {
   @include fill-window;
 }
 
- span, label, text, textarea, a, input {
-  color: $text-color-default;
+span, label, text, textarea, a, input {
+  //color: $text-color-default;
 }
 
 blockquote, q {
