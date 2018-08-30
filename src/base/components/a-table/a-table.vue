@@ -8,10 +8,11 @@
 
 <script>
   import ATableHead from "./a-table-head";
+  import AScrollbar from "../a-scrollbar/a-scrollbar";
 
   export default {
     name: "a-table",
-    components: {ATableHead},
+    components: {AScrollbar, ATableHead},
     props: {
       fitWidth: {
         type: Boolean,
@@ -25,7 +26,7 @@
 
 <style lang="scss">
   .a-table {
-
+    width: 100%;
+    overflow: auto;
   }
-
 </style>

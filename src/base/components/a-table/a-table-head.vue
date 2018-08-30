@@ -11,9 +11,9 @@
             :rowspan="column.rowSpan"
             :colspan="column.colSpan"
             class="a-table-head-td"
-            :width="column.width"
             :key="index">
-          <div class="cell">
+          <!--不能给td设置宽度，当列宽总和大于容器宽度是，table列会被压缩，设置里面的div的宽度即可-->
+          <div class="cell" :style="_getHeadTdCellStyles(column)">
             <rendering-scope-slot v-if="!!column.titleScopedSlots" :scope-slot-func="column.titleScopedSlots"/>
             <rendering-render-func v-if="!!column.titleRenderFunc" :render-func="column.titleRenderFunc"/>
             <span v-if="!column.titleScopedSlots && !column.titleRenderFunc">{{column.title}}</span>
@@ -99,6 +99,11 @@
 
         this.columns = columns
         this.headRows = headRows
+      },
+      _getHeadTdCellStyles(column) {
+        let ret = {}
+        ret.width = `${column.width}px`
+        return ret
       },
     },
     mounted() {

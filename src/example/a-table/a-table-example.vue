@@ -25,11 +25,20 @@
       <a-table-column title="a">
         <a-table-column title="b">
           <a-table-column title="c">
-
           </a-table-column>
         </a-table-column>
         <a-table-column title="d"></a-table-column>
       </a-table-column>
+      <a-table-column title="other"></a-table-column>
+      <a-table-column title="other"></a-table-column>
+      <a-table-column title="other"></a-table-column>
+      <a-table-column title="other"></a-table-column>
+      <a-table-column title="other"></a-table-column>
+      <a-table-column title="other"></a-table-column>
+      <a-table-column title="other"></a-table-column>
+      <a-table-column title="other"></a-table-column>
+      <a-table-column title="other"></a-table-column>
+      <a-table-column title="other"></a-table-column>
     </a-table>
   </div>
 </template>
