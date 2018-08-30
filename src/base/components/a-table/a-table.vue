@@ -1,6 +1,6 @@
 <template>
   <div class="a-table">
-    <a-table-head>
+    <a-table-head :fit-width="fitWidth">
       <slot></slot>
     </a-table-head>
   </div>
@@ -12,6 +12,12 @@
   export default {
     name: "a-table",
     components: {ATableHead},
+    props: {
+      fitWidth: {
+        type: Boolean,
+        default: false
+      },
+    },
     mounted() {
     },
   }

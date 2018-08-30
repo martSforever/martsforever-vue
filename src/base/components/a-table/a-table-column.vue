@@ -18,6 +18,10 @@
       colRenderFunc: {
         type: Function
       },
+      width: {
+        type: Number,
+        default: 120
+      },
     },
     methods: {
       getColumn() {
@@ -27,7 +31,8 @@
           titleScopedSlots: this.$scopedSlots.title,
           colScopedSlots: this.$scopedSlots.default,
           titleRenderFunc: this.titleRenderFunc,
-          colRenderFunc: this.colRenderFunc
+          colRenderFunc: this.colRenderFunc,
+          width: this.width
         }
         ret.children = this.$children.reduce((ret, child) => {
           if (child.$options.name === 'a-table-column') ret.push(child.getColumn())

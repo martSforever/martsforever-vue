@@ -1,9 +1,10 @@
 <template>
   <div class="a-table-example">
     <div class="operation">
+      <a-switch v-model="fitWidth"/>
       <a-input v-model="title"/>
     </div>
-    <a-table>
+    <a-table :fit-width="fitWidth">
       <a-table-column field="date" title="日期">
         <template slot-scope="data" slot="title">
           {{title}}
@@ -37,13 +38,15 @@
   import ATable from "../../base/components/a-table/a-table";
   import ATableColumn from "../../base/components/a-table/a-table-column";
   import AInput from "../../base/components/a-input/a-input";
+  import ASwitch from "../../base/components/a-switch/a-switch";
 
   export default {
     name: "a-table-example",
-    components: {AInput, ATableColumn, ATable},
+    components: {ASwitch, AInput, ATableColumn, ATable},
     data() {
       return {
-        title: 'hello world hahajkshakjdhakdhjkashd'
+        title: 'hello world hahajkshakjdhakdhjkashd',
+        fitWidth: false
       }
     },
   }

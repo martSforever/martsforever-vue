@@ -5,13 +5,13 @@
       <slot></slot>
     </div>
     <!--表头-->
-    <table border="1" class="a-table-head-table" cellpadding="12" cellspacing="12">
+    <table border="1" class="a-table-head-table" :style="tableStyles">
       <tr v-for="(row,index) in headRows" :key="index">
         <td v-for="(column,index) in row"
             :rowspan="column.rowSpan"
             :colspan="column.colSpan"
             class="a-table-head-td"
-            width="100"
+            :width="column.width"
             :key="index">
           <div class="cell">
             <rendering-scope-slot v-if="!!column.titleScopedSlots" :scope-slot-func="column.titleScopedSlots"/>
@@ -31,11 +31,24 @@
   export default {
     name: "a-table-head",
     components: {RenderingRenderFunc, RenderingScopeSlot},
+    props: {
+      fitWidth: {
+        type: Boolean,
+        default: false
+      },
+    },
     data() {
       return {
         columns: null,
         headRows: null
       }
+    },
+    computed: {
+      tableStyles() {
+        let ret = {}
+        !!this.fitWidth && (ret.width = '100%')
+        return ret
+      },
     },
     methods: {
       _initializedColumns() {
@@ -104,14 +117,19 @@
     }
 
     .a-table-head-table {
-      width: 100%;
+
+      table-layout: fixed;
+      word-break: break-all;
       .a-table-head-td {
-        background-color: #f2f2f2;
+        background-color: white;
         color: black;
+        /*不在支持cellspacing，使用border替代*/
+        border: solid 6px #f2f2f2;
         .cell {
           /*min-height: 30px;*/
           /*display: inline-flex;*/
           /*align-items: center;*/
+          padding: 6px;
         }
         .rendering-scope-slot, .rendering-render-func {
           display: inline-block;
