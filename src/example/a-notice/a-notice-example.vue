@@ -28,9 +28,12 @@
     <div>
       <a-button-group>
         <a-button @click="info">info</a-button>
-        <a-button @click="renderContent">render</a-button>
         <a-button @click="close">close</a-button>
         <a-button @click="closeSpecific">closeSpecific</a-button>
+      </a-button-group>
+      <a-button-group>
+        <a-button @click="renderContent">render</a-button>
+        <a-button @click="renderBinding">render binding</a-button>
       </a-button-group>
     </div>
   </div>
@@ -81,11 +84,29 @@
           title: '通知',
           message: '您的快递到了！！！',
           type: this.type,
-
           renderFunc: (h) => {
             return (
               <div>
                 <g-input value={this.duration} style={{width: '100%'}}/>
+              </div>
+            )
+          },
+        })
+        this.options.push(option)
+      },
+      renderBinding() {
+        let option = this.$notice.info({
+          horizontal: this.horizontal,
+          vertical: this.vertical,
+          autoClose: this.autoCLose,
+          duration: this.duration - 0,
+          title: '通知',
+          message: '您的快递到了！！！',
+          type: this.type,
+          renderFunc: (h) => {
+            return (
+              <div>
+                <g-input value={this.duration} style={{width: '100%'}} onInput={this.handleNoticeInput}/>
               </div>
             )
           },
@@ -99,6 +120,9 @@
         let index = randomIndex(this.options)
         this.options[index].close()
         this.options.splice(index, 1)
+      },
+      handleNoticeInput(val) {
+        this.duration = val
       },
     },
 
