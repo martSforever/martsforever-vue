@@ -1,6 +1,6 @@
 <template>
   <div class="a-notice">
-    <div class="standard">
+    <div class="standard" v-if="!renderFunc">
       <div class="icon-wrapper" :class="[type]">
         <a-icon :icon="iconMap[type]"/>
       </div>
@@ -12,16 +12,20 @@
         <div class="message">{{message}}</div>
       </div>
     </div>
+    <div class="render" v-if="!!renderFunc">
+      <a-render-node :render-func="renderFunc"/>
+    </div>
   </div>
 </template>
 
 <script>
   import {oneOf} from "../../script/utils";
   import AIcon from "../a-icon/a-icon";
+  import ARenderNode from "../a-render-node/a-render-node";
 
   export default {
     name: "a-notice",
-    components: {AIcon},
+    components: {ARenderNode, AIcon},
     props: {
       duration: {
         type: Number,
@@ -54,6 +58,9 @@
         validator(val) {
           return oneOf(val, ['info', 'success', 'warning', 'error'])
         },
+      },
+      renderFunc: {
+        type: Function,
       },
     },
     methods: {

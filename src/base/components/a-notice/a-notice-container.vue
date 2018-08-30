@@ -9,6 +9,7 @@
             :type="option.type"
             :auto-close="option.autoClose"
             :duration="option.duration"
+            :render-func="option.renderFunc"
             @close="_handleClose(option)"/>
         </a-move-item>
       </a-move-container>

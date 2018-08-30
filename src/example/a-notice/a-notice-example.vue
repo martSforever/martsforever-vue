@@ -28,6 +28,7 @@
     <div>
       <a-button-group>
         <a-button @click="info">info</a-button>
+        <a-button @click="render">render</a-button>
       </a-button-group>
     </div>
   </div>
@@ -64,6 +65,15 @@
           title: '通知',
           message: '您的快递到了！！！',
           type: this.type
+        })
+      },
+      render() {
+        this.$notice.info({
+          renderFunc(h) {
+            return (
+              <div>hello, this is render content</div>
+            )
+          },
         })
       },
     },
