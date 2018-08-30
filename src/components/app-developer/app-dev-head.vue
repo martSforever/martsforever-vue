@@ -47,6 +47,7 @@
           {name: 'a-move', url: 'a-move'},
           {name: 'notice', url: 'notice'},
           {name: 'scopedslot', url: 'scopedslot'},
+          {name: 'table', url: 'table'},
           {name: 'parent-child', url: 'parent-child'},
         ],
         name: 'a-icon'

@@ -128,6 +128,11 @@ export const router = {
       name: 'scopedslot'
     },
     {
+      path: '/table',
+      component: resolve => require(['src/example/a-table/a-table-example.vue'], resolve),
+      name: 'table'
+    },
+    {
       path: '/test',
       component: resolve => require(['src/example/test/test.vue'], resolve),
       name: 'test'
