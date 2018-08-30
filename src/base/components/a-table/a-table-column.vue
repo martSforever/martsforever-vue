@@ -22,6 +22,9 @@
         type: Number,
         default: 120
       },
+      order: {
+        default: 0
+      },
     },
     methods: {
       getColumn() {
@@ -32,7 +35,8 @@
           colScopedSlots: this.$scopedSlots.default,
           titleRenderFunc: this.titleRenderFunc,
           colRenderFunc: this.colRenderFunc,
-          width: this.width
+          width: this.width,
+          order: this.order,
         }
         ret.children = this.$children.reduce((ret, child) => {
           if (child.$options.name === 'a-table-column') ret.push(child.getColumn())

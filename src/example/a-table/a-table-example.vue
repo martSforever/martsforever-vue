@@ -5,12 +5,12 @@
       <a-input v-model="title"/>
     </div>
     <a-table :fit-width="fitWidth">
-      <a-table-column field="date" title="日期">
+      <a-table-column order="5" field="date" title="日期">
         <template slot-scope="data" slot="title">
           {{title}}
         </template>
       </a-table-column>
-      <a-table-column field="age" title="配送信息">
+      <a-table-column order="10" field="age" title="配送信息">
         <a-table-column field="name" title="姓名"></a-table-column>
         <a-table-column field="address" title="配送地址">
           <a-table-column field="province" title="省"></a-table-column>
@@ -18,7 +18,7 @@
           <a-table-column field="district" title="县"></a-table-column>
         </a-table-column>
       </a-table-column>
-      <a-table-column field="dispatchInfo" title="发货信息">
+      <a-table-column order="20" field="dispatchInfo" title="发货信息">
         <a-table-column field="dispatchDate" title="发货时间"></a-table-column>
         <a-table-column field="dispatchAddress" title="发货地址"></a-table-column>
       </a-table-column>
@@ -54,7 +54,7 @@
     components: {ASwitch, AInput, ATableColumn, ATable},
     data() {
       return {
-        title: 'hello world hahajkshakjdhakdhjkashd',
+        title: '日期',
         fitWidth: false
       }
     },

@@ -63,6 +63,8 @@
         /*遍历，计算每个节点的level，以及计算最大level*/
         (function calcLevel(columns, level) {
           if (!!columns && columns.length > 0) {
+            columns.sort((a, b) => (b.order - 0) - (a.order - 0))
+
             if (level > maxLevel) maxLevel = level
             columns.forEach((column) => {
               column.level = level - 1
