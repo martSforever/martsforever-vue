@@ -123,6 +123,11 @@ export const router = {
       name: 'notice'
     },
     {
+      path: '/scopedslot',
+      component: resolve => require(['src/example/scoped-slot/scoped-slot-example.vue'], resolve),
+      name: 'scopedslot'
+    },
+    {
       path: '/test',
       component: resolve => require(['src/example/test/test.vue'], resolve),
       name: 'test'

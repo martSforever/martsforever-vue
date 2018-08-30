@@ -46,6 +46,7 @@
           {name: 'tag', url: 'tag'},
           {name: 'a-move', url: 'a-move'},
           {name: 'notice', url: 'notice'},
+          {name: 'scopedslot', url: 'scopedslot'},
           {name: 'parent-child', url: 'parent-child'},
         ],
         name: 'a-icon'
