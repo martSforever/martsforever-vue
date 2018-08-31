@@ -2,9 +2,6 @@
   <td class="a-table-head-cell"
       :rowspan="rowspan"
       :colspan="colspan"
-      @mousemove="_handleMouseMove"
-      @mouseleave="_handleMouseLeave"
-      @mousedown="_handleMouseDown"
       ref="td"
       :style="tdStyles">
     <!--不能给td设置宽度，当列宽总和大于容器宽度是，table列会被压缩，设置里面的div的宽度即可-->
@@ -13,7 +10,9 @@
       <rendering-render-func v-if="!!column.titleRenderFunc" :render-func="column.titleRenderFunc"/>
       <span v-if="!column.titleScopedSlots && !column.titleRenderFunc">{{column.title}}</span>
     </div>
-    <div class="drag-indicator" :style="dragIndicatorStyles"></div>
+    <div class="drag-indicator"
+         :style="dragIndicatorStyles"
+         @mousedown="_handleMouseDown"></div>
   </td>
 </template>
 
@@ -57,8 +56,8 @@
     },
     data() {
       return {
-        isHoverBorder: false,
-        dragIndicatorHeight: 0
+        dragIndicatorHeight: 0,               //用来拖拽的指示器的宽度
+
       }
     },
     methods: {
@@ -68,12 +67,17 @@
         return ret
       },
       _handleMouseMove(e) {
-        if (!this.isBottom) return
-      },
-      _handleMouseLeave(e) {
-        if (!this.isBottom) return
+        console.log('move', this.column.title)
       },
       _handleMouseDown(e) {
+        document.addEventListener('mousemove', this._handleMouseMove)
+        document.addEventListener('mouseup', this._handleMouseUp)
+        document.body.style.userSelect = 'none'
+      },
+      _handleMouseUp(e) {
+        document.removeEventListener('mousemove', this._handleMouseMove)
+        document.removeEventListener('mouseup', this._handleMouseUp)
+        document.body.style.userSelect = 'auto'
       },
     },
     mounted() {
