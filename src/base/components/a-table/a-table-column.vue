@@ -8,21 +8,27 @@
     props: {
       field: {
         type: String,
+        desc: '标志字段',
       },
       title: {
         type: String,
+        desc: '列标题，当没有titleRenderFunc以及没有$scopedSlots.title时，显示该文本',
       },
       titleRenderFunc: {
         type: Function,
+        desc: '自定义列标题渲染函数'
       },
       colRenderFunc: {
-        type: Function
+        type: Function,
+        desc: '自定义列内容渲染函数'
       },
       width: {
-        default: '120px'
+        default: '120px',
+        desc: '列宽度'
       },
       order: {
-        default: 0
+        default: 0,
+        desc: '列排序'
       },
     },
     watch: {
