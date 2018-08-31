@@ -33,13 +33,13 @@
       </div>
     </div>
     <a-table :fit-width="fitWidth">
-      <a-table-column order="20" field="date" title="日期" :width="columnWidth+'px'">
+      <a-table-column order="15" field="date" title="日期">
         <template slot-scope="data" slot="title">
           slot-scope's content -->> {{title}}
         </template>
       </a-table-column>
       <a-table-column order="10" field="age" :title="title">
-        <a-table-column field="name" title="姓名"></a-table-column>
+        <a-table-column field="name" title="姓名" :width="columnWidth+'px'"></a-table-column>
         <a-table-column field="address" title="配送地址">
           <a-table-column order="10" field="province" title="省"></a-table-column>
           <a-table-column order="20" field="city" title="市"></a-table-column>
@@ -85,7 +85,7 @@
       return {
         title: '日期',
         fitWidth: false,
-        firstOrder: '15',
+        firstOrder: '13',
         columnWidth: 200
       }
     },
