@@ -25,6 +25,13 @@
         default: 0
       },
     },
+    watch: {
+      order(newval, oldval) {
+        if (newval !== oldval) {
+          this.$parent._updateHeadRows()
+        }
+      },
+    },
     methods: {
       getColumn() {
         let _this = this

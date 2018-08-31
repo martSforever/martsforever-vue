@@ -40,7 +40,8 @@
     data() {
       return {
         columns: null,
-        headRows: null
+        maxLevel: 0,
+        headRows: null,
       }
     },
     computed: {
@@ -63,8 +64,6 @@
         /*遍历，计算每个节点的level，以及计算最大level*/
         (function calcLevel(columns, level) {
           if (!!columns && columns.length > 0) {
-            columns.sort((a, b) => (b.order - 0) - (a.order - 0))
-
             if (level > maxLevel) maxLevel = level
             columns.forEach((column) => {
               column.level = level - 1
@@ -73,17 +72,10 @@
           }
         })(columns, 1);
 
-        /*将要渲染的头信息*/
-        let headRows = []
-        let num = 0
-        while (num < maxLevel) {
-          headRows.push([])
-          num++
-        }
 
         /*计算每个节点所占行数以及列数*/
         function calcRowSpan(column) {
-          headRows[column.level].push(column)
+
           if (!!column.children && column.children.length > 0) {
             column.children.forEach(child => calcRowSpan(child))
             column.rowSpan = 1
@@ -99,7 +91,30 @@
 
         columns.forEach(column => calcRowSpan(column))
 
+        this.maxLevel = maxLevel
         this.columns = columns
+        this._updateHeadRows()
+      },
+      _updateHeadRows() {
+        /*将要渲染的头信息*/
+        let headRows = []
+        let num = 0
+        while (num < this.maxLevel) {
+          headRows.push([])
+          num++
+        }
+
+        function iterateColumn(columns) {
+          if (!!columns && columns.length > 0) {
+            columns.sort((a, b) => (b.order - 0) - (a.order - 0))
+            columns.forEach((column) => {
+              headRows[column.level].push(column)
+              iterateColumn(column.children)
+            })
+          }
+        }
+
+        iterateColumn(this.columns)
         this.headRows = headRows
       },
       _getHeadTdCellStyles(column) {

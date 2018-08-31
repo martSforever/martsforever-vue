@@ -19,7 +19,7 @@
       </div>
     </div>
     <a-table :fit-width="fitWidth">
-      <a-table-column :order="firstOrder" field="date" title="日期" :width="columnWidth">
+      <a-table-column order="20" field="date" title="日期" :width="columnWidth">
         <template slot-scope="data" slot="title">
           slot-scope's content -->> {{title}}
         </template>
@@ -32,7 +32,7 @@
           <a-table-column order="15" field="district" title="县"></a-table-column>
         </a-table-column>
       </a-table-column>
-      <a-table-column order="20" field="dispatchInfo" title="发货信息">
+      <a-table-column :order="firstOrder" field="dispatchInfo" title="发货信息">
         <a-table-column field="dispatchDate" title="发货时间"></a-table-column>
         <a-table-column field="dispatchAddress" title="发货地址"></a-table-column>
       </a-table-column>
