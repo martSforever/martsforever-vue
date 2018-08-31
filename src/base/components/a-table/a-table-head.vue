@@ -139,6 +139,7 @@
 
 <style lang="scss">
   .a-table-head {
+    overflow-y: hidden;
     .hide-column {
       height: 0;
       width: 0;

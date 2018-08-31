@@ -84,11 +84,6 @@
       this.dragIndicatorHeight = this.$refs.td.offsetHeight - 5
     },
     computed: {
-      /*是否为最下级表头，就是没有子表头的*/
-      isBottom() {
-        let children = this.column.children
-        return !(!!children && children.length > 0)
-      },
       tdStyles() {
         return {
           border: `${this.borderStyle} ${this.borderSize}px ${this.borderColor}`,
@@ -124,6 +119,7 @@
       background-color: black;
       top: 0;
       cursor: w-resize;
+      z-index: 1;
     }
   }
 </style>
