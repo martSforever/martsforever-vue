@@ -37,13 +37,24 @@
           this.$parent._updateHeadRows()
         }
       },
+      width(val) {
+        if (this.currentWidth !== val) this.currentWidth = val
+      },
+      currentWidth(val) {
+        this.$emit('update:width', val)
+      },
+    },
+    data() {
+      return {
+        currentWidth: this.width
+      }
     },
     methods: {
       getColumn() {
         let _this = this
         let ret = {
           get width() {
-            return _this.width
+            return _this.currentWidth
           },
           get title() {
             return _this.title
@@ -65,6 +76,9 @@
           },
           get field() {
             return _this.field
+          },
+          updateWidth(width) {
+            _this.currentWidth = width
           },
         }
 

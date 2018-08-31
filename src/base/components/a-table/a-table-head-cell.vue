@@ -19,6 +19,7 @@
 <script>
   import RenderingRenderFunc from "../rendering-render-func";
   import RenderingScopeSlot from "../rendering-scope-slot";
+  import {findComponentUpward, removePx} from "../../script/utils";
 
   export default {
     name: "a-table-head-cell",
@@ -57,7 +58,8 @@
     data() {
       return {
         dragIndicatorHeight: 0,               //用来拖拽的指示器的宽度
-
+        table: null,
+        indicatorRect: {},
       }
     },
     methods: {
@@ -67,21 +69,45 @@
         return ret
       },
       _handleMouseMove(e) {
-        console.log('move', this.column.title)
+        this.indicator.style.left = `${e.clientX}px`
       },
       _handleMouseDown(e) {
+        this.startX = e.clientX
+
+        /*点击indicator之后，给document加上mousemove事件以及moveup事件*/
         document.addEventListener('mousemove', this._handleMouseMove)
         document.addEventListener('mouseup', this._handleMouseUp)
-        document.body.style.userSelect = 'none'
+        document.body.style.userSelect = 'none'                                             //拖拽期间，不能选中任何东西
+
+        /*拖拽的indicator的样式*/
+        this.indicator = document.createElement('div')
+        this.indicator.style.width = `${e.target.offsetWidth}px`
+        this.indicator.style.backgroundColor = 'cadetblue'
+        this.indicator.style.zIndex = 1
+        this.indicator.style.height = `${this.table.$el.offsetHeight}px`
+        this.indicator.style.display = 'inline-block'
+        this.indicator.style.position = 'absolute'
+        this.indicator.style.top = `${this.table.$el.getBoundingClientRect().top}px`
+        this.indicator.style.left = `${e.clientX}px`
+
+        document.body.appendChild(this.indicator)
       },
       _handleMouseUp(e) {
+        /*拖拽结束之后，清除监听的事件*/
         document.removeEventListener('mousemove', this._handleMouseMove)
         document.removeEventListener('mouseup', this._handleMouseUp)
-        document.body.style.userSelect = 'auto'
+        document.body.style.userSelect = 'auto'                                             //拖拽结束之后，恢复选中动作
+        document.body.removeChild(this.indicator)                                           //拖拽结束后，删除indicator
+
+        this.endX = e.clientX
+        let durX = this.endX - this.startX
+        console.log(durX, this.column.width)
+        this.column.updateWidth(`${removePx(this.column.width) + durX}px`)
       },
     },
     mounted() {
       this.dragIndicatorHeight = this.$refs.td.offsetHeight - 5
+      this.table = findComponentUpward(this, 'a-table')
     },
     computed: {
       tdStyles() {
