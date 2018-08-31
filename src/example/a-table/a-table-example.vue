@@ -1,16 +1,30 @@
 <template>
   <div class="a-table-example">
     <div class="operation">
-      <a-switch v-model="fitWidth"/>
-      <a-input v-model="title"/>
+      <div class="item">
+        table宽度自适应：
+        <a-switch v-model="fitWidth"/>
+      </div>
+      <div class="item">
+        列标题：
+        <a-input v-model="title"/>
+      </div>
+      <div class="item">
+        列排序：
+        <a-input v-model="firstOrder"/>
+      </div>
+      <div class="item">
+        列宽度：
+        <a-input v-model="columnWidth"/>
+      </div>
     </div>
     <a-table :fit-width="fitWidth">
-      <a-table-column order="5" field="date" title="日期">
+      <a-table-column :order="firstOrder" field="date" title="日期" :width="columnWidth">
         <template slot-scope="data" slot="title">
-          {{title}}
+          slot-scope's content -->> {{title}}
         </template>
       </a-table-column>
-      <a-table-column order="10" field="age" title="配送信息">
+      <a-table-column order="10" field="age" :title="title">
         <a-table-column field="name" title="姓名"></a-table-column>
         <a-table-column field="address" title="配送地址">
           <a-table-column order="10" field="province" title="省"></a-table-column>
@@ -55,7 +69,9 @@
     data() {
       return {
         title: '日期',
-        fitWidth: false
+        fitWidth: false,
+        firstOrder: '15',
+        columnWidth: '200px'
       }
     },
   }
@@ -68,6 +84,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      .item {
+        display: flex;
+        align-items: center;
+        margin-right: 12px;
+      }
     }
   }
 </style>

@@ -104,13 +104,13 @@
       },
       _getHeadTdCellStyles(column) {
         let ret = {}
-        ret.width = `${column.width}px`
+        ret.width = column.width
         return ret
       },
     },
     mounted() {
       this._initializedColumns()
-      console.log(this.columns, this.headRows)
+      // console.log(this.columns, this.headRows)
     },
   }
 </script>

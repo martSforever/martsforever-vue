@@ -19,8 +19,7 @@
         type: Function
       },
       width: {
-        type: Number,
-        default: 120
+        default: '120px'
       },
       order: {
         default: 0
@@ -28,16 +27,34 @@
     },
     methods: {
       getColumn() {
+        let _this = this
         let ret = {
-          field: this.field,
-          title: this.title,
-          titleScopedSlots: this.$scopedSlots.title,
-          colScopedSlots: this.$scopedSlots.default,
-          titleRenderFunc: this.titleRenderFunc,
-          colRenderFunc: this.colRenderFunc,
-          width: this.width,
-          order: this.order,
+          get width() {
+            return _this.width
+          },
+          get title() {
+            return _this.title
+          },
+          get titleScopedSlots() {
+            return _this.$scopedSlots.title
+          },
+          get colScopedSlots() {
+            return _this.$scopedSlots.default
+          },
+          get titleRenderFunc() {
+            return _this.titleRenderFunc
+          },
+          get colRenderFunc() {
+            return _this.colRenderFunc
+          },
+          get order() {
+            return _this.order
+          },
+          get field() {
+            return _this.field
+          },
         }
+
         ret.children = this.$children.reduce((ret, child) => {
           if (child.$options.name === 'a-table-column') ret.push(child.getColumn())
           return ret

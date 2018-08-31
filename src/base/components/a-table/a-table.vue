@@ -16,7 +16,12 @@
     props: {
       fitWidth: {
         type: Boolean,
-        default: false
+        default: false,
+        desc: '表格宽度是否自适应，当列宽不够需要自动拉伸以填充容器宽度的时候，该选项建议为true',
+      },
+      list: {
+        type: Array,
+        default: () => []
       },
     },
     mounted() {
