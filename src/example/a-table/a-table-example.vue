@@ -11,15 +11,29 @@
       </div>
       <div class="item">
         列排序：
-        <a-input v-model="firstOrder"/>
+        <a-input v-model="firstOrder">
+          <div slot="prepend" style="width: 30px;text-align: center;cursor: pointer;" @click="firstOrder++">
+            <a-icon icon="fa-plus"/>
+          </div>
+          <div slot="append" style="width: 30px;text-align: center;cursor: pointer;" @click="firstOrder--">
+            <a-icon icon="fa-minus"/>
+          </div>
+        </a-input>
       </div>
       <div class="item">
         列宽度：
-        <a-input v-model="columnWidth"/>
+        <a-input v-model="columnWidth">
+          <div slot="prepend" style="width: 30px;text-align: center;cursor: pointer;" @click="columnWidth+=10">
+            <a-icon icon="fa-plus"/>
+          </div>
+          <div slot="append" style="width: 30px;text-align: center;cursor: pointer;" @click="columnWidth-=10">
+            <a-icon icon="fa-minus"/>
+          </div>
+        </a-input>
       </div>
     </div>
     <a-table :fit-width="fitWidth">
-      <a-table-column order="20" field="date" title="日期" :width="columnWidth">
+      <a-table-column order="20" field="date" title="日期" :width="columnWidth+'px'">
         <template slot-scope="data" slot="title">
           slot-scope's content -->> {{title}}
         </template>
@@ -62,16 +76,17 @@
   import ATableColumn from "../../base/components/a-table/a-table-column";
   import AInput from "../../base/components/a-input/a-input";
   import ASwitch from "../../base/components/a-switch/a-switch";
+  import AIcon from "../../base/components/a-icon/a-icon";
 
   export default {
     name: "a-table-example",
-    components: {ASwitch, AInput, ATableColumn, ATable},
+    components: {AIcon, ASwitch, AInput, ATableColumn, ATable},
     data() {
       return {
         title: '日期',
         fitWidth: false,
         firstOrder: '15',
-        columnWidth: '200px'
+        columnWidth: 200
       }
     },
   }
