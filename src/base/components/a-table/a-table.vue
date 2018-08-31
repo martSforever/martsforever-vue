@@ -1,6 +1,9 @@
 <template>
   <div class="a-table">
-    <a-table-head :fit-width="fitWidth">
+    <a-table-head :fit-width="fitWidth"
+                  :border-color="borderColor"
+                  :border-size="borderSize"
+                  :border-style="borderStyle">
       <slot></slot>
     </a-table-head>
   </div>
@@ -21,7 +24,23 @@
       },
       list: {
         type: Array,
-        default: () => []
+        default: () => [],
+        desc: '列表数据',
+      },
+      borderSize: {
+        type: Number,
+        default: 6,
+        desc: '边框宽度',
+      },
+      borderColor: {
+        type: String,
+        default: '#f2f2f2',
+        desc: '边框颜色',
+      },
+      borderStyle: {
+        type: String,
+        default: 'solid',
+        desc: '边框风格',
       },
     },
     mounted() {

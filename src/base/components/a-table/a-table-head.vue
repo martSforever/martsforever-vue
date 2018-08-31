@@ -8,6 +8,9 @@
         <a-table-head-cell
           v-for="(column,cellIndex) in row"
           :key="cellIndex"
+          :border-color="borderColor"
+          :border-size="borderSize"
+          :border-style="borderStyle"
           :rowspan="column.rowSpan"
           :colspan="column.colSpan"
           :column="column"/>
@@ -28,6 +31,22 @@
       fitWidth: {
         type: Boolean,
         default: false
+      },
+
+      borderSize: {
+        type: Number,
+        default: 6,
+        desc: '边框宽度',
+      },
+      borderColor: {
+        type: String,
+        default: '#f2f2f2',
+        desc: '边框颜色',
+      },
+      borderStyle: {
+        type: String,
+        default: 'solid',
+        desc: '边框风格',
       },
     },
     data() {
@@ -125,26 +144,9 @@
       width: 0;
       overflow: hidden;
     }
-
     .a-table-head-table {
-
       table-layout: fixed;
       word-break: break-all;
-      .a-table-head-cell {
-        background-color: white;
-        color: black;
-        /*不在支持cellspacing，使用border替代*/
-        border: solid 6px #f2f2f2;
-        .cell {
-          /*min-height: 30px;*/
-          /*display: inline-flex;*/
-          /*align-items: center;*/
-          padding: 6px;
-        }
-        .rendering-scope-slot, .rendering-render-func {
-          display: inline-block;
-        }
-      }
     }
   }
 
