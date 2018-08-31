@@ -88,7 +88,7 @@
         this.indicator.style.display = 'inline-block'
         this.indicator.style.position = 'absolute'
         this.indicator.style.top = `${this.table.$el.getBoundingClientRect().top}px`
-        this.indicator.style.left = `${e.clientX}px`
+        this.indicator.style.left = `${e.clientX - e.target.offsetWidth / 2}px`
 
         document.body.appendChild(this.indicator)
       },

@@ -23,10 +23,12 @@
       <div class="item">
         列宽度：
         <a-input v-model="columnWidth">
-          <div slot="prepend" style="width: 30px;text-align: center;cursor: pointer;" @click="columnWidth+=10">
+          <div slot="prepend" style="width: 30px;text-align: center;cursor: pointer;"
+               @click="columnWidth=(removePx(columnWidth)+10)+'px'">
             <a-icon icon="fa-plus"/>
           </div>
-          <div slot="append" style="width: 30px;text-align: center;cursor: pointer;" @click="columnWidth-=10">
+          <div slot="append" style="width: 30px;text-align: center;cursor: pointer;"
+               @click="columnWidth=(removePx(columnWidth)-10)+'px'">
             <a-icon icon="fa-minus"/>
           </div>
         </a-input>
@@ -39,7 +41,7 @@
         </template>
       </a-table-column>
       <a-table-column order="10" field="age" :title="title">
-        <a-table-column field="name" title="姓名" :width="columnWidth+'px'"></a-table-column>
+        <a-table-column field="name" title="姓名" :width.sync="columnWidth"></a-table-column>
         <a-table-column field="address" title="配送地址">
           <a-table-column order="10" field="province" title="省"></a-table-column>
           <a-table-column order="20" field="city" title="市"></a-table-column>
@@ -101,6 +103,7 @@
   import AInput from "../../base/components/a-input/a-input";
   import ASwitch from "../../base/components/a-switch/a-switch";
   import AIcon from "../../base/components/a-icon/a-icon";
+  import {removePx} from "../../base/script/utils";
 
   export default {
     name: "a-table-example",
@@ -110,7 +113,7 @@
         title: '日期',
         fitWidth: false,
         firstOrder: '13',
-        columnWidth: 200
+        columnWidth: `200px`
       }
     },
 
@@ -127,6 +130,7 @@
       _handleMouseLeave(e) {
         document.body.style.cursor = 'default'
       },
+      removePx,
     },
   }
 </script>
