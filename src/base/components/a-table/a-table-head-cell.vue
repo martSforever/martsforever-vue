@@ -101,8 +101,10 @@
 
         this.endX = e.clientX
         let durX = this.endX - this.startX
-        console.log(durX, this.column.width)
-        this.column.updateWidth(`${removePx(this.column.width) + durX}px`)
+        let width = removePx(this.column.width)
+        width = width + durX
+        width = width > 30 ? width : 30
+        this.column.updateWidth(`${width}px`)
       },
     },
     mounted() {
