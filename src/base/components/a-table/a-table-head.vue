@@ -1,9 +1,7 @@
 <template>
   <div class="a-table-head">
     <!--用一个div装下传入的a-table-column，a-table-column实际上没有-->
-    <div class="hide-column">
-      <slot></slot>
-    </div>
+    <span class="hide-column"><slot></slot></span>
     <!--表头-->
     <table border="1" class="a-table-head-table" :style="tableStyles">
       <tr v-for="(row,trIndex) in headRows" :key="trIndex">
@@ -12,14 +10,7 @@
           :key="cellIndex"
           :rowspan="column.rowSpan"
           :colspan="column.colSpan"
-          :column="column">
-          <!--不能给td设置宽度，当列宽总和大于容器宽度是，table列会被压缩，设置里面的div的宽度即可-->
-          <div class="cell" :style="_getHeadTdCellStyles(column)">
-            <rendering-scope-slot v-if="!!column.titleScopedSlots" :scope-slot-func="column.titleScopedSlots"/>
-            <rendering-render-func v-if="!!column.titleRenderFunc" :render-func="column.titleRenderFunc"/>
-            <span v-if="!column.titleScopedSlots && !column.titleRenderFunc">{{column.title}}</span>
-          </div>
-        </a-table-head-cell>
+          :column="column"/>
       </tr>
     </table>
   </div>
@@ -118,11 +109,6 @@
 
         iterateColumn(this.columns)
         this.headRows = headRows
-      },
-      _getHeadTdCellStyles(column) {
-        let ret = {}
-        ret.width = column.width
-        return ret
       },
     },
     mounted() {
