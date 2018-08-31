@@ -68,6 +68,30 @@
       <a-table-column title="other"></a-table-column>
       <a-table-column title="other"></a-table-column>
     </a-table>
+
+    <!--<table style="background-color: white" cellspacing="10">
+      <tr>
+        <td class="test-td">
+          <div class="test-cell">标题1</div>
+        </td>
+        <td class="test-td">
+          <div class="test-cell">标题1</div>
+        </td>
+        <td class="test-td">
+          <div class="test-cell">标题1</div>
+        </td>
+        <td class="test-td">
+          <div class="test-cell">标题1</div>
+        </td>
+        <td class="test-td">
+          <div class="test-cell">标题1</div>
+        </td>
+        <td class="test-td" @mousemove="_handleMouseMove" @mouseleave="_handleMouseLeave" ref="td">
+          <div class="test-cell">标题1</div>
+        </td>
+      </tr>
+    </table>-->
+
   </div>
 </template>
 
@@ -89,6 +113,21 @@
         columnWidth: 200
       }
     },
+
+    methods: {
+      _handleMouseMove(e) {
+        let {offsetX, offsetY} = e
+        let offsetWidth = this.$refs.td.offsetWidth
+        if (Math.abs(offsetX - offsetWidth + 5) < 5) {
+          document.body.style.cursor = 'w-resize'
+        } else {
+          document.body.style.cursor = 'default'
+        }
+      },
+      _handleMouseLeave(e) {
+        document.body.style.cursor = 'default'
+      },
+    },
   }
 </script>
 
@@ -104,6 +143,15 @@
         align-items: center;
         margin-right: 12px;
       }
+    }
+
+    .test-td {
+      border: solid 6px #f2f2f2;
+      margin: 3px;
+    }
+    .test-cell {
+      height: 30px;
+      padding: 12px;
     }
   }
 </style>

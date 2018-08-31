@@ -6,19 +6,20 @@
     </div>
     <!--表头-->
     <table border="1" class="a-table-head-table" :style="tableStyles">
-      <tr v-for="(row,index) in headRows" :key="index">
-        <td v-for="(column,index) in row"
-            :rowspan="column.rowSpan"
-            :colspan="column.colSpan"
-            class="a-table-head-td"
-            :key="index">
+      <tr v-for="(row,trIndex) in headRows" :key="trIndex">
+        <a-table-head-cell
+          v-for="(column,cellIndex) in row"
+          :key="cellIndex"
+          :rowspan="column.rowSpan"
+          :colspan="column.colSpan"
+          :column="column">
           <!--不能给td设置宽度，当列宽总和大于容器宽度是，table列会被压缩，设置里面的div的宽度即可-->
           <div class="cell" :style="_getHeadTdCellStyles(column)">
             <rendering-scope-slot v-if="!!column.titleScopedSlots" :scope-slot-func="column.titleScopedSlots"/>
             <rendering-render-func v-if="!!column.titleRenderFunc" :render-func="column.titleRenderFunc"/>
             <span v-if="!column.titleScopedSlots && !column.titleRenderFunc">{{column.title}}</span>
           </div>
-        </td>
+        </a-table-head-cell>
       </tr>
     </table>
   </div>
@@ -27,10 +28,11 @@
 <script>
   import RenderingScopeSlot from "../rendering-scope-slot";
   import RenderingRenderFunc from "../rendering-render-func";
+  import ATableHeadCell from "./a-table-head-cell";
 
   export default {
     name: "a-table-head",
-    components: {RenderingRenderFunc, RenderingScopeSlot},
+    components: {ATableHeadCell, RenderingRenderFunc, RenderingScopeSlot},
     props: {
       fitWidth: {
         type: Boolean,
@@ -55,7 +57,7 @@
       _initializedColumns() {
         /*---------------------------------------获取所有column的参数-------------------------------------------*/
         let columns = this.$children.reduce((ret, child) => {
-          ret.push(child.getColumn())
+          (child.$options.name === 'a-table-column') && ret.push(child.getColumn())
           return ret
         }, [])
         /*---------------------------------------计算column的rowSpan以及colSpan，以实现多级表头-------------------------------------------*/
@@ -142,7 +144,7 @@
 
       table-layout: fixed;
       word-break: break-all;
-      .a-table-head-td {
+      .a-table-head-cell {
         background-color: white;
         color: black;
         /*不在支持cellspacing，使用border替代*/
