@@ -1,5 +1,5 @@
 <template>
-  <div class="a-table-head">
+  <div class="a-table-head" :style="{marginBottom:`${-removePx(padding)/2}px`}">
     <!--用一个div装下传入的a-table-column，a-table-column实际上没有-->
     <span class="hide-column"><slot></slot></span>
     <!--表头-->
@@ -23,6 +23,7 @@
   import RenderingScopeSlot from "../rendering-scope-slot";
   import RenderingRenderFunc from "../rendering-render-func";
   import ATableHeadCell from "./a-table-head-cell";
+  import {removePx} from "../../script/utils";
 
   export default {
     name: "a-table-head",
@@ -47,6 +48,11 @@
         default: 'solid',
         desc: '边框风格',
       },
+      padding: {
+        type: String,
+        default: '12px',
+        desc: '每个单元格的内边距',
+      },
     },
     data() {
       return {
@@ -68,6 +74,7 @@
       },
     },
     methods: {
+      removePx,
       _initializedColumns() {
         /*---------------------------------------获取所有column的参数-------------------------------------------*/
         let columns = this.$children.reduce((ret, child) => {
@@ -143,7 +150,6 @@
 
 <style lang="scss">
   .a-table-head {
-    overflow-y: hidden;
     .hide-column {
       height: 0;
       width: 0;

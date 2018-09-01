@@ -9,9 +9,16 @@
                   :border-color="borderColor"
                   :border-size="borderSize"
                   :border-style="borderStyle"
+                  :padding="padding"
                   @update:columns="columns = $event">
       <slot></slot>
     </a-table-head>
+    <a-table-body :columns="renderColumns"
+                  :data-list="list"
+                  :border-color="borderColor"
+                  :border-size="borderSize"
+                  :padding="padding"
+                  :border-style="borderStyle"/>
   </div>
 </template>
 
@@ -20,10 +27,11 @@
   import AScrollbar from "../a-scrollbar/a-scrollbar";
   import AButtonGroup from "../a-button/a-button-group";
   import AButton from "../a-button/a-button";
+  import ATableBody from "./a-table-body";
 
   export default {
     name: "a-table",
-    components: {AButton, AButtonGroup, AScrollbar, ATableHead},
+    components: {ATableBody, AButton, AButtonGroup, AScrollbar, ATableHead},
     props: {
       fitWidth: {
         type: Boolean,
@@ -48,6 +56,11 @@
         type: String,
         default: 'solid',
         desc: '边框风格',
+      },
+      padding: {
+        type: String,
+        default: '12px',
+        desc: '每个单元格的内边距',
       },
     },
     data() {
@@ -88,6 +101,7 @@
 <style lang="scss">
   .a-table {
     width: 100%;
-    overflow: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
   }
 </style>
