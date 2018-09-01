@@ -34,7 +34,6 @@
       },
 
       borderSize: {
-        type: Number,
         default: 6,
         desc: '边框宽度',
       },

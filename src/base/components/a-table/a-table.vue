@@ -28,7 +28,6 @@
         desc: '列表数据',
       },
       borderSize: {
-        type: Number,
         default: 6,
         desc: '边框宽度',
       },

@@ -21,6 +21,17 @@
         </a-input>
       </div>
       <div class="item">
+        边框宽度：
+        <a-input v-model="borderSize">
+          <div slot="prepend" style="width: 30px;text-align: center;cursor: pointer;" @click="borderSize++">
+            <a-icon icon="fa-plus"/>
+          </div>
+          <div slot="append" style="width: 30px;text-align: center;cursor: pointer;" @click="borderSize--">
+            <a-icon icon="fa-minus"/>
+          </div>
+        </a-input>
+      </div>
+      <div class="item">
         列宽度：
         <a-input v-model="columnWidth">
           <div slot="prepend" style="width: 30px;text-align: center;cursor: pointer;"
@@ -34,7 +45,7 @@
         </a-input>
       </div>
     </div>
-    <a-table :fit-width="fitWidth">
+    <a-table :fit-width="fitWidth" :border-size="borderSize">
       <a-table-column order="15" field="date" title="日期">
         <template slot-scope="data" slot="title">
           slot-scope's content -->> {{title}}
@@ -113,7 +124,8 @@
         title: '日期',
         fitWidth: false,
         firstOrder: '13',
-        columnWidth: `200px`
+        columnWidth: `200px`,
+        borderSize: 6
       }
     },
 
