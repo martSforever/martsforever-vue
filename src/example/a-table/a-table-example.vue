@@ -52,7 +52,7 @@
       </a-button-group>
     </div>
 
-    <a-table :fit-width="fitWidth" :border-size="borderSize" :list="dataList">
+    <a-table :fit-width="fitWidth" :border-size="borderSize" :list="dataList" row-height="40px">
       <a-table-column order="15" field="date" title="日期">
         <template slot-scope="data" slot="title">
           slot-scope's content -->> {{title}}

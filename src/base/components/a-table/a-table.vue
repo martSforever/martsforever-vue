@@ -13,7 +13,8 @@
                   :border-color="borderColor"
                   :border-size="borderSize"
                   :padding="padding"
-                  :border-style="borderStyle"/>
+                  :border-style="borderStyle"
+                  :row-height="rowHeight"/>
   </div>
 </template>
 
