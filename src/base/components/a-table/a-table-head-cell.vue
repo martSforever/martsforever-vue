@@ -81,7 +81,7 @@
         /*拖拽的indicator的样式*/
         this.indicator = document.createElement('div')
         this.indicator.style.width = `${e.target.offsetWidth}px`
-        this.indicator.style.backgroundColor = 'cadetblue'
+        this.indicator.style.backgroundColor = this.borderColor
         this.indicator.style.zIndex = 1
         this.indicator.style.height = `${this.table.$el.offsetHeight}px`
         this.indicator.style.display = 'inline-block'
@@ -100,10 +100,10 @@
 
         this.endX = e.clientX
         let durX = this.endX - this.startX
-        let width = removePx(this.column.width)
+        let width = removePx(this.dragColumn.width)
         width = width + durX
         width = width > 30 ? width : 30
-        this.column.updateWidth(`${width}px`)
+        this.dragColumn.updateWidth(`${width}px`)
       },
     },
     mounted() {
@@ -124,6 +124,16 @@
           height: this.dragIndicatorHeight + 'px'
         }
       },
+      dragColumn() {
+        function iterate(column) {
+          if (!(!!column.children && column.children.length > 0)) return column
+          else {
+            return iterate(column.children[column.children.length - 1])
+          }
+        }
+
+        return iterate(this.column)
+      },
     },
   }
 </script>
@@ -143,7 +153,7 @@
     .drag-indicator {
       position: absolute;
       height: 100%;
-      background-color: black;
+      background-color: transparent;
       top: 0;
       cursor: w-resize;
       z-index: 1;
