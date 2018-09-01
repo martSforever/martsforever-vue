@@ -45,7 +45,7 @@
         </a-input>
       </div>
     </div>
-    <a-table :fit-width="fitWidth" :border-size="borderSize">
+    <a-table :fit-width="fitWidth" :border-size="borderSize" :list="dataList">
       <a-table-column order="15" field="date" title="日期">
         <template slot-scope="data" slot="title">
           slot-scope's content -->> {{title}}
@@ -63,7 +63,7 @@
         <a-table-column field="dispatchDate" title="发货时间"></a-table-column>
         <a-table-column field="dispatchAddress" title="发货地址"></a-table-column>
       </a-table-column>
-      <a-table-column title="a">
+      <!--<a-table-column title="a">
         <a-table-column title="b">
           <a-table-column title="c">
           </a-table-column>
@@ -79,32 +79,8 @@
       <a-table-column title="other"></a-table-column>
       <a-table-column title="other"></a-table-column>
       <a-table-column title="other"></a-table-column>
-      <a-table-column title="other"></a-table-column>
+      <a-table-column title="other"></a-table-column>-->
     </a-table>
-
-    <!--<table style="background-color: white" cellspacing="10">
-      <tr>
-        <td class="test-td">
-          <div class="test-cell">标题1</div>
-        </td>
-        <td class="test-td">
-          <div class="test-cell">标题1</div>
-        </td>
-        <td class="test-td">
-          <div class="test-cell">标题1</div>
-        </td>
-        <td class="test-td">
-          <div class="test-cell">标题1</div>
-        </td>
-        <td class="test-td">
-          <div class="test-cell">标题1</div>
-        </td>
-        <td class="test-td" @mousemove="_handleMouseMove" @mouseleave="_handleMouseLeave" ref="td">
-          <div class="test-cell">标题1</div>
-        </td>
-      </tr>
-    </table>-->
-
   </div>
 </template>
 
@@ -124,24 +100,24 @@
         title: '日期',
         fitWidth: false,
         firstOrder: '13',
-        columnWidth: `200px`,
-        borderSize: 6
+        columnWidth: `1250px`,
+        borderSize: 6,
+
+        /*@formatter:off*/
+        dataList: [
+          {date: '11', dispatchDate: 'aaa',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
+          {date: '11', dispatchDate: 'aaa',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
+          {date: '11', dispatchDate: 'aaa',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
+          {date: '11', dispatchDate: 'aaa',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
+          {date: '11', dispatchDate: 'aaa',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
+          {date: '11', dispatchDate: 'aaa',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
+          {date: '11', dispatchDate: 'aaa',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
+          {date: '11', dispatchDate: 'aaa',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
+        ],
+        /*@formatter:on*/
       }
     },
-
     methods: {
-      _handleMouseMove(e) {
-        let {offsetX, offsetY} = e
-        let offsetWidth = this.$refs.td.offsetWidth
-        if (Math.abs(offsetX - offsetWidth + 5) < 5) {
-          document.body.style.cursor = 'w-resize'
-        } else {
-          document.body.style.cursor = 'default'
-        }
-      },
-      _handleMouseLeave(e) {
-        document.body.style.cursor = 'default'
-      },
       removePx,
     },
   }

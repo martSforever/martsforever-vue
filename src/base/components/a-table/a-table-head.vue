@@ -55,6 +55,11 @@
         headRows: null,
       }
     },
+    watch: {
+      columns(val) {
+        this.$emit('update:columns', val)
+      },
+    },
     computed: {
       tableStyles() {
         let ret = {}

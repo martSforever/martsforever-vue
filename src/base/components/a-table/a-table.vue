@@ -1,9 +1,15 @@
 <template>
   <div class="a-table">
+    <div>
+      <a-button-group>
+        <a-button @click="log">log</a-button>
+      </a-button-group>
+    </div>
     <a-table-head :fit-width="fitWidth"
                   :border-color="borderColor"
                   :border-size="borderSize"
-                  :border-style="borderStyle">
+                  :border-style="borderStyle"
+                  @update:columns="columns = $event">
       <slot></slot>
     </a-table-head>
   </div>
@@ -12,10 +18,12 @@
 <script>
   import ATableHead from "./a-table-head";
   import AScrollbar from "../a-scrollbar/a-scrollbar";
+  import AButtonGroup from "../a-button/a-button-group";
+  import AButton from "../a-button/a-button";
 
   export default {
     name: "a-table",
-    components: {AScrollbar, ATableHead},
+    components: {AButton, AButtonGroup, AScrollbar, ATableHead},
     props: {
       fitWidth: {
         type: Boolean,
@@ -42,7 +50,37 @@
         desc: '边框风格',
       },
     },
-    mounted() {
+    data() {
+      return {
+        columns: null
+      }
+    },
+    watch: {},
+    methods: {
+      log(e) {
+        this.renderColumns.forEach((child) => {
+          console.log(child.title)
+        })
+      },
+    },
+    computed: {
+      renderColumns() {
+        if (!this.columns || this.columns.length < 1) return []
+        let ret = []
+
+        function iterate(column) {
+          if (!!column.children && column.children.length > 0) {
+            column.children.forEach((child) => {
+              iterate(child)
+            })
+          } else {
+            ret.push(column)
+          }
+        }
+
+        this.columns.forEach((child) => iterate(child))
+        return ret
+      },
     },
   }
 </script>
