@@ -3,7 +3,7 @@
     <table>
       <tr v-for="(row,rowIndex) in dataList" :key="rowIndex">
         <td v-for="(col,colIndex) in columns" :key="colIndex" :style="tdStyles">
-          <div :style="{width:col.width,padding}">
+          <div :style="{width:col.width,padding,height:rowHeight}" class="a-table-cell">
             {{row[col.field]}}
           </div>
         </td>
@@ -43,6 +43,10 @@
         type: String,
         default: '12px',
         desc: '每个单元格的内边距',
+      },
+      rowHeight: {
+        type: String,
+        default: '40px'
       },
     },
     computed: {

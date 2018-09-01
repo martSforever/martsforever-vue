@@ -61,6 +61,10 @@
         default: '12px',
         desc: '每个单元格的内边距',
       },
+      rowHeight: {
+        type: String,
+        default: '40px'
+      },
     },
     data() {
       return {
@@ -97,5 +101,10 @@
     overflow-x: auto;
     overflow-y: hidden;
     background-color: white;
+    .a-table-cell {
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+    }
   }
 </style>

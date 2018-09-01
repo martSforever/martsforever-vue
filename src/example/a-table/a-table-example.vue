@@ -45,6 +45,13 @@
         </a-input>
       </div>
     </div>
+
+    <div>
+      <a-button-group>
+        <a-button @click="addRow">add row</a-button>
+      </a-button-group>
+    </div>
+
     <a-table :fit-width="fitWidth" :border-size="borderSize" :list="dataList">
       <a-table-column order="15" field="date" title="日期">
         <template slot-scope="data" slot="title">
@@ -91,10 +98,12 @@
   import ASwitch from "../../base/components/a-switch/a-switch";
   import AIcon from "../../base/components/a-icon/a-icon";
   import {removePx} from "../../base/script/utils";
+  import AButtonGroup from "../../base/components/a-button/a-button-group";
+  import AButton from "../../base/components/a-button/a-button";
 
   export default {
     name: "a-table-example",
-    components: {AIcon, ASwitch, AInput, ATableColumn, ATable},
+    components: {AButton, AButtonGroup, AIcon, ASwitch, AInput, ATableColumn, ATable},
     data() {
       return {
         title: '日期',
@@ -119,6 +128,17 @@
     },
     methods: {
       removePx,
+      addRow() {
+        this.dataList.push({
+          date: '11',
+          dispatchDate: 'aaa',
+          dispatchAddress: '22',
+          name: 'bbb',
+          province: 'sheng',
+          city: 'city',
+          district: 'district'
+        })
+      },
     },
   }
 </script>
