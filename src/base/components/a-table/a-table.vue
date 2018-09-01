@@ -1,12 +1,7 @@
 <template>
   <div class="a-table">
-    <div>
-      <a-button-group>
-        <a-button @click="log">log</a-button>
-      </a-button-group>
-    </div>
     <a-table-head :fit-width="fitWidth"
-                  :border-color="borderColor"
+                  :border-color="borderColor||headBorderColor"
                   :border-size="borderSize"
                   :border-style="borderStyle"
                   :padding="padding"
@@ -49,13 +44,17 @@
       },
       borderColor: {
         type: String,
-        default: '#f2f2f2',
         desc: '边框颜色',
       },
       borderStyle: {
         type: String,
         default: 'solid',
         desc: '边框风格',
+      },
+      headBorderColor: {
+        type: String,
+        default: '#f2f2f2',
+        desc: '标题边框色',
       },
       padding: {
         type: String,
@@ -69,13 +68,7 @@
       }
     },
     watch: {},
-    methods: {
-      log(e) {
-        this.renderColumns.forEach((child) => {
-          console.log(child.title)
-        })
-      },
-    },
+    methods: {},
     computed: {
       renderColumns() {
         if (!this.columns || this.columns.length < 1) return []
@@ -103,5 +96,6 @@
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
+    background-color: white;
   }
 </style>

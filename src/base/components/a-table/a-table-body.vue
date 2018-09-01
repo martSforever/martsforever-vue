@@ -31,17 +31,13 @@
       },
       borderColor: {
         type: String,
-        default: '#f2f2f2',
+        default: 'transparent',
         desc: '边框颜色',
       },
       borderStyle: {
         type: String,
         default: 'solid',
         desc: '边框风格',
-      },
-      cellColor: {
-        type: String,
-        default: 'white'
       },
       padding: {
         type: String,
@@ -53,7 +49,6 @@
       tdStyles() {
         return {
           border: `${this.borderStyle} ${this.borderSize}px ${this.borderColor}`,
-          backgroundColor: `${this.cellColor}`
         }
       },
     },
@@ -61,5 +56,7 @@
 </script>
 
 <style lang="scss">
-
+  .a-table-body {
+    width: max-content;
+  }
 </style>

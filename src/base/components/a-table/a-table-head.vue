@@ -150,6 +150,8 @@
 
 <style lang="scss">
   .a-table-head {
+    width: max-content;
+
     .hide-column {
       height: 0;
       width: 0;

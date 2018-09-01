@@ -49,10 +49,6 @@
         default: 'solid',
         desc: '边框风格',
       },
-      cellColor: {
-        type: String,
-        default: 'white'
-      },
       padding: {
         type: String,
         default: '12px',
@@ -114,7 +110,6 @@
       tdStyles() {
         return {
           border: `${this.borderStyle} ${this.borderSize}px ${this.borderColor}`,
-          backgroundColor: `${this.cellColor}`
         }
       },
       dragIndicatorStyles() {
