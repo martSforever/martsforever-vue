@@ -26,6 +26,7 @@
         :row-height="rowHeight"
         :scroll-left.sync="scrollLeft"
         :bottom-line="bottomLine"
+        :striple="striple"
         :body-has-vertical-scrollbar.sync="bodyHasVerticalScrollbar"/>
     </div>
   </div>
@@ -80,6 +81,10 @@
         type: Number
       },
       bottomLine: {
+        type: Boolean,
+        default: true
+      },
+      striple: {
         type: Boolean,
         default: true
       },

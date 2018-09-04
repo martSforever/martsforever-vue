@@ -11,7 +11,7 @@
       <tr v-for="(row,rowIndex) in dataList"
           :key="rowIndex"
           class="a-table-body-tr"
-          :class="{'a-table-body-tr-bottom-line':!!bottomLine}">
+          :class="{'a-table-body-tr-bottom-line':!!bottomLine,'a-table-body-tr-striple':!!striple}">
         <td v-for="(col,colIndex) in columns" :key="colIndex" :style="tdStyles" class="a-table-body-td">
           <div :style="{width:col.width,padding,height:rowHeight}" class="a-table-cell">
             {{row[col.field]}}
@@ -68,6 +68,9 @@
       },
       scrollLeft: {},
       bottomLine: {
+        type: Boolean,
+      },
+      striple: {
         type: Boolean,
       },
     },
@@ -134,9 +137,17 @@
     display: inline-block;
     overflow-x: auto;
     overflow-y: auto;
-    .a-table-body-tr.a-table-body-tr-bottom-line {
-      .a-table-body-td {
-        border-bottom-color: $table-bottom-color !important;
+    .a-table-body-tr {
+      &.a-table-body-tr-striple:nth-child(even) {
+        background-color: $table-bottom-color;
+      }
+      &.a-table-body-tr-bottom-line {
+        .a-table-body-td {
+          border-bottom-color: $table-bottom-color !important;
+        }
+      }
+      &:hover {
+        background-color: darken($table-bottom-color, 3) !important;
       }
     }
   }
