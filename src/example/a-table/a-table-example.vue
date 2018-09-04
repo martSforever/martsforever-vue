@@ -53,42 +53,48 @@
       </a-button-group>
     </div>
 
-    <a-table :fit-width="fitWidth" :border-size="borderSize" :list="dataList" row-height="40px" table-height="550px">
-      <a-table-column order="15" field="date" title="日期">
-        <template slot-scope="data" slot="title">
-          slot-scope's content -->> {{title}}
-        </template>
-      </a-table-column>
-      <a-table-column order="10" field="age" :title="title">
-        <a-table-column field="name" title="姓名" :width.sync="columnWidth"></a-table-column>
-        <a-table-column field="address" title="配送地址">
-          <a-table-column order="10" field="province" title="省"></a-table-column>
-          <a-table-column order="20" field="city" title="市"></a-table-column>
-          <a-table-column order="15" field="district" title="县"></a-table-column>
+    <div style="height: 800px;background-color: transparent">
+      <a-table :fit-width="fitWidth"
+               :border-size="borderSize"
+               :list="dataList"
+               row-height="40px"
+               :row-num="5">
+        <a-table-column order="15" field="date" title="日期">
+          <template slot-scope="data" slot="title">
+            slot-scope's content -->> {{title}}
+          </template>
         </a-table-column>
-      </a-table-column>
-      <a-table-column :order="firstOrder" field="dispatchInfo" title="发货信息">
-        <a-table-column field="dispatchDate" title="发货时间"></a-table-column>
-        <a-table-column field="dispatchAddress" title="发货地址"></a-table-column>
-      </a-table-column>
-      <!--<a-table-column title="a">
-        <a-table-column title="b">
-          <a-table-column title="c">
+        <a-table-column order="10" field="age" :title="title">
+          <a-table-column field="name" title="姓名" :width.sync="columnWidth"></a-table-column>
+          <a-table-column field="address" title="配送地址">
+            <a-table-column order="10" field="province" title="省"></a-table-column>
+            <a-table-column order="20" field="city" title="市"></a-table-column>
+            <a-table-column order="15" field="district" title="县"></a-table-column>
           </a-table-column>
         </a-table-column>
-        <a-table-column title="d"></a-table-column>
-      </a-table-column>
-      <a-table-column title="other"></a-table-column>
-      <a-table-column title="other"></a-table-column>
-      <a-table-column title="other"></a-table-column>
-      <a-table-column title="other"></a-table-column>
-      <a-table-column title="other"></a-table-column>
-      <a-table-column title="other"></a-table-column>
-      <a-table-column title="other"></a-table-column>
-      <a-table-column title="other"></a-table-column>
-      <a-table-column title="other"></a-table-column>
-      <a-table-column title="other"></a-table-column>-->
-    </a-table>
+        <a-table-column :order="firstOrder" field="dispatchInfo" title="发货信息">
+          <a-table-column field="dispatchDate" title="发货时间"></a-table-column>
+          <a-table-column field="dispatchAddress" title="发货地址"></a-table-column>
+        </a-table-column>
+        <!--<a-table-column title="a">
+          <a-table-column title="b">
+            <a-table-column title="c">
+            </a-table-column>
+          </a-table-column>
+          <a-table-column title="d"></a-table-column>
+        </a-table-column>
+        <a-table-column title="other"></a-table-column>
+        <a-table-column title="other"></a-table-column>
+        <a-table-column title="other"></a-table-column>
+        <a-table-column title="other"></a-table-column>
+        <a-table-column title="other"></a-table-column>
+        <a-table-column title="other"></a-table-column>
+        <a-table-column title="other"></a-table-column>
+        <a-table-column title="other"></a-table-column>
+        <a-table-column title="other"></a-table-column>
+        <a-table-column title="other"></a-table-column>-->
+      </a-table>
+    </div>
   </div>
 </template>
 
@@ -115,9 +121,6 @@
 
         /*@formatter:off*/
         dataList: [
-          {date: '11', dispatchDate: 'aaa',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
-          {date: '11', dispatchDate: 'aaa',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
-          {date: '11', dispatchDate: 'aaa',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
           {date: '11', dispatchDate: 'aaa',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
           {date: '11', dispatchDate: 'aaa',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
           {date: '11', dispatchDate: 'aaa',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
@@ -153,6 +156,9 @@
 
 <style lang="scss">
   .a-table-example {
+
+    height: 100%;
+
     .operation {
       height: 100px;
       display: flex;

@@ -34,6 +34,7 @@
   import AButtonGroup from "../a-button/a-button-group";
   import AButton from "../a-button/a-button";
   import ATableBody from "./a-table-body";
+  import {removePx} from "../../script/utils";
 
   export default {
     name: "a-table",
@@ -78,6 +79,9 @@
         desc: '每一行的高度',
       },
       tableHeight: {},
+      rowNum: {
+        type: Number
+      },
     },
     data() {
       return {
@@ -118,10 +122,10 @@
     methods: {
       /*初始化表头以及表体高度*/
       _initializedTableHeight() {
-        if (!!this.tableHeight) {
+        if (!!this.tableHeight || !!this.rowNum) {
           let tableHeight = this.$refs.table.offsetHeight
           let headHeight = this.$refs.tableHead.$el.offsetHeight
-          let bodyHeight = tableHeight - headHeight
+          let bodyHeight = !!this.rowNum ? (this.rowNum * (removePx(this.rowHeight) + 8) + 20) : (tableHeight - headHeight)
           this.bodyHeight = bodyHeight
         }
       },
