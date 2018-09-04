@@ -4,7 +4,10 @@
        @scroll="_handleScroll"
        ref="tableBody"
   >
-    <table v-watch-dom="_handleDomChange" ref="table">
+    <table v-watch-dom="_handleDomChange"
+           ref="table"
+           :style="tableStyles"
+           style="table-layout: fixed;word-break: break-all">
       <tr v-for="(row,rowIndex) in dataList" :key="rowIndex">
         <td v-for="(col,colIndex) in columns" :key="colIndex" :style="tdStyles">
           <div :style="{width:col.width,padding,height:rowHeight}" class="a-table-cell">
@@ -28,7 +31,10 @@
         type: Array,
         default: () => []
       },
-
+      fitWidth: {
+        type: Boolean,
+        default: false
+      },
       borderSize: {
         default: 6,
         desc: '边框宽度',
@@ -62,6 +68,11 @@
       scrollLeft: {},
     },
     computed: {
+      tableStyles() {
+        let ret = {}
+        !!this.fitWidth && (ret.width = '100%')
+        return ret
+      },
       tdStyles() {
         return {
           border: `${this.borderStyle} ${this.borderSize}px ${this.borderColor}`,

@@ -15,6 +15,7 @@
     </a-table-head>
     <a-table-body
       ref="tableBody"
+      :fit-width="fitWidth"
       :columns="renderColumns"
       :data-list="list"
       :border-color="borderColor"
