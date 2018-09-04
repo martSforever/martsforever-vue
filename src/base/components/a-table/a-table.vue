@@ -4,7 +4,6 @@
       <a-table-head
         ref="tableHead"
         :fit-width="fitWidth"
-        :border-color="borderColor||headBorderColor"
         :border-size="borderSize"
         :border-style="borderStyle"
         :padding="padding"
@@ -66,11 +65,6 @@
         type: String,
         default: 'solid',
         desc: '边框风格',
-      },
-      headBorderColor: {
-        type: String,
-        default: '#f2f2f2',
-        desc: '标题边框色',
       },
       padding: {
         type: String,

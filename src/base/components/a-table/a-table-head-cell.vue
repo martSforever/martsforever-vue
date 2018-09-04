@@ -40,7 +40,6 @@
       },
       borderColor: {
         type: String,
-        default: '#f2f2f2',
         desc: '边框颜色',
       },
       borderStyle: {
@@ -107,7 +106,7 @@
     computed: {
       tdStyles() {
         return {
-          border: `${this.borderStyle} ${this.borderSize}px transparent`,
+          border: `${this.borderStyle} ${this.borderSize}px ${this.borderColor}`,
         }
       },
       dragIndicatorStyles() {

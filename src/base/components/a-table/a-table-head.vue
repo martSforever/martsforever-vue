@@ -1,17 +1,17 @@
 <template>
-  <div class="a-table-head" ref="tableHead">
+  <div class="a-table-head" ref="tableHead" :class="{'a-table-head-border-bottom':!isMultiLevelHeader}">
     <!--用一个div装下传入的a-table-column，a-table-column实际上没有-->
     <div class="hide-column">
       <slot></slot>
     </div>
     <!--表头-->
-    <div style="display: inline-block;white-space: normal">
+    <div style="display: inline-block;white-space: normal;float: left">
       <table border="1" class="a-table-head-table" :style="tableStyles">
         <tr v-for="(row,trIndex) in headRows" :key="trIndex">
           <a-table-head-cell
             v-for="(column,cellIndex) in row"
             :key="cellIndex"
-            :border-color="borderColor"
+            :border-color="!!isMultiLevelHeader?borderColor:'transparent'"
             :border-size="borderSize"
             :border-style="borderStyle"
             :rowspan="column.rowSpan"
@@ -46,7 +46,7 @@
       },
       borderColor: {
         type: String,
-        default: '#f2f2f2',
+        default: '#ddd',
         desc: '边框颜色',
       },
       borderStyle: {
@@ -83,6 +83,9 @@
         let ret = {}
         !!this.fitWidth && (ret.width = '100%')
         return ret
+      },
+      isMultiLevelHeader() {
+        return !!this.headRows && this.headRows.length > 1
       },
     },
     methods: {
@@ -162,11 +165,15 @@
 
 <style lang="scss">
   .a-table-head {
-    width: 100%;
     overflow-x: hidden;
     overflow-y: hidden;
     white-space: nowrap;
-    border-bottom: solid 1px $table-bottom-color;
+
+    max-width: 100%;
+    display: inline-block;
+    &.a-table-head-border-bottom {
+      border-bottom: solid 1px $table-bottom-color;
+    }
     .hide-column {
       height: 0;
       width: 0;
