@@ -76,17 +76,22 @@
         default: '40px',
         desc: '每一行的高度',
       },
-      tableHeight: {},
+      tableHeight: {
+        desc: '表格高度，与rowNum不可以同时使用，指定tableHeight之后，body的高度会自动计算，内容超长body会出现纵向滚动条',
+      },
       rowNum: {
-        type: Number
+        type: Number,
+        desc: 'body高度，与tableHeight不可以同时使用，指定rowNum之后，body的高度我rowNum*rowHeight'
       },
       bottomLine: {
         type: Boolean,
-        default: true
+        default: true,
+        desc: '每行是否有一条底部下划线',
       },
       striple: {
         type: Boolean,
-        default: true
+        default: true,
+        desc: '斑马纹'
       },
     },
     data() {
