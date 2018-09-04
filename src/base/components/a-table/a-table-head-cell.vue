@@ -51,7 +51,6 @@
       },
       padding: {
         type: String,
-        default: '12px',
         desc: '每个单元格的内边距',
       },
     },
@@ -109,7 +108,7 @@
     computed: {
       tdStyles() {
         return {
-          border: `${this.borderStyle} ${this.borderSize}px ${this.borderColor}`,
+          border: `${this.borderStyle} ${this.borderSize}px transparent`,
         }
       },
       dragIndicatorStyles() {

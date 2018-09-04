@@ -8,10 +8,10 @@
            ref="table"
            :style="tableStyles"
            style="table-layout: fixed;word-break: break-all">
-      <tr v-for="(row,rowIndex) in dataList" :key="rowIndex">
-        <td v-for="(col,colIndex) in columns" :key="colIndex" :style="tdStyles">
+      <tr v-for="(row,rowIndex) in dataList" :key="rowIndex" class="a-table-body-tr">
+        <td v-for="(col,colIndex) in columns" :key="colIndex" :style="tdStyles" class="a-table-body-td">
           <div :style="{width:col.width,padding,height:rowHeight}" class="a-table-cell">
-            {{row[col.field]}}-{{currentBodyHasVerticalScrollbar}}-{{bodyHasVerticalScrollbar}}
+            {{row[col.field]}}
           </div>
         </td>
       </tr>
@@ -51,7 +51,6 @@
       },
       padding: {
         type: String,
-        default: '12px',
         desc: '每个单元格的内边距',
       },
       rowHeight: {
@@ -130,5 +129,15 @@
     display: inline-block;
     overflow-x: auto;
     overflow-y: auto;
+    .a-table-body-tr {
+      &:first-child {
+        .a-table-body-td {
+          border-top-color: #ddd !important;
+        }
+      }
+      .a-table-body-td {
+        border-bottom-color: #ddd !important;
+      }
+    }
   }
 </style>

@@ -73,7 +73,6 @@
       },
       padding: {
         type: String,
-        default: '12px',
         desc: '每个单元格的内边距',
       },
       rowHeight: {
@@ -128,6 +127,7 @@
         if (!!this.tableHeight || !!this.rowNum) {
           let tableHeight = this.$refs.table.offsetHeight
           let headHeight = this.$refs.tableHead.$el.offsetHeight
+          /*8：td莫名其妙的padding；20：底部scrollbar*/
           let bodyHeight = !!this.rowNum ? (this.rowNum * (removePx(this.rowHeight) + 8) + 20) : (tableHeight - headHeight)
           this.bodyHeight = bodyHeight
         }

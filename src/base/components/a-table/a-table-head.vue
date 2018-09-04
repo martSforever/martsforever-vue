@@ -16,6 +16,7 @@
             :border-style="borderStyle"
             :rowspan="column.rowSpan"
             :colspan="column.colSpan"
+            :padding="padding"
             :column="column"/>
         </tr>
       </table>
@@ -56,7 +57,6 @@
       },
       padding: {
         type: String,
-        default: '12px',
         desc: '每个单元格的内边距',
       },
       bodyHasVerticalScrollbar: {

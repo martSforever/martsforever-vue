@@ -58,20 +58,21 @@
                :border-size="borderSize"
                :list="dataList"
                row-height="40px"
+               padding="6px"
                :row-num="5">
         <a-table-column order="15" field="date" title="日期">
           <template slot-scope="data" slot="title">
             slot-scope's content -->> {{title}}
           </template>
         </a-table-column>
-        <!--<a-table-column order="10" field="age" :title="title">
+        <a-table-column order="10" field="age" :title="title">
           <a-table-column field="name" title="姓名" :width.sync="columnWidth"></a-table-column>
           <a-table-column field="address" title="配送地址">
             <a-table-column order="10" field="province" title="省"></a-table-column>
             <a-table-column order="20" field="city" title="市"></a-table-column>
             <a-table-column order="15" field="district" title="县"></a-table-column>
           </a-table-column>
-        </a-table-column>-->
+        </a-table-column>
         <a-table-column :order="firstOrder" field="dispatchInfo" title="发货信息">
           <a-table-column field="dispatchDate" title="发货时间"></a-table-column>
           <a-table-column field="dispatchAddress" title="发货地址"></a-table-column>
@@ -117,7 +118,7 @@
         fitWidth: false,
         firstOrder: '13',
         columnWidth: `1250px`,
-        borderSize: 6,
+        borderSize: 1,
 
         /*@formatter:off*/
         dataList: [
@@ -177,7 +178,6 @@
     }
     .test-cell {
       height: 30px;
-      padding: 12px;
     }
   }
 </style>
