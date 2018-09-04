@@ -49,6 +49,7 @@
     <div>
       <a-button-group>
         <a-button @click="addRow">add row</a-button>
+        <a-button @click="removeRow">remove row</a-button>
       </a-button-group>
     </div>
 
@@ -138,6 +139,9 @@
           city: 'city',
           district: 'district'
         })
+      },
+      removeRow() {
+        this.dataList.pop()
       },
     },
 

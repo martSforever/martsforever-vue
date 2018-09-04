@@ -1,21 +1,27 @@
 <template>
-  <div class="a-table-head">
+  <div class="a-table-head" ref="tableHead">
     <!--用一个div装下传入的a-table-column，a-table-column实际上没有-->
-    <span class="hide-column"><slot></slot></span>
+    <div class="hide-column">
+      <slot></slot>
+    </div>
     <!--表头-->
-    <table border="1" class="a-table-head-table" :style="tableStyles">
-      <tr v-for="(row,trIndex) in headRows" :key="trIndex">
-        <a-table-head-cell
-          v-for="(column,cellIndex) in row"
-          :key="cellIndex"
-          :border-color="borderColor"
-          :border-size="borderSize"
-          :border-style="borderStyle"
-          :rowspan="column.rowSpan"
-          :colspan="column.colSpan"
-          :column="column"/>
-      </tr>
-    </table>
+    <div style="display: inline-block;white-space: normal">
+      <table border="1" class="a-table-head-table" :style="tableStyles">
+        <tr v-for="(row,trIndex) in headRows" :key="trIndex">
+          <a-table-head-cell
+            v-for="(column,cellIndex) in row"
+            :key="cellIndex"
+            :border-color="borderColor"
+            :border-size="borderSize"
+            :border-style="borderStyle"
+            :rowspan="column.rowSpan"
+            :colspan="column.colSpan"
+            :column="column"/>
+        </tr>
+      </table>
+    </div>
+    <div style="display: inline-block;width: 17px;height: 100%;background-color: #0ac2ff"
+         v-show="!!bodyHasVerticalScrollbar"></div>
   </div>
 </template>
 
@@ -53,6 +59,10 @@
         default: '12px',
         desc: '每个单元格的内边距',
       },
+      bodyHasVerticalScrollbar: {
+        type: Boolean,
+      },
+      scrollLeft: {},
     },
     data() {
       return {
@@ -64,6 +74,9 @@
     watch: {
       columns(val) {
         this.$emit('update:columns', val)
+      },
+      scrollLeft(val) {
+        this.$refs.tableHead.scrollLeft = val
       },
     },
     computed: {
@@ -140,17 +153,20 @@
         iterateColumn(this.columns)
         this.headRows = headRows
       },
+
     },
     mounted() {
       this._initializedColumns()
-      // console.log(this.columns, this.headRows)
     },
   }
 </script>
 
 <style lang="scss">
   .a-table-head {
-    width: max-content;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    white-space: nowrap;
     .hide-column {
       height: 0;
       width: 0;

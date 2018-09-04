@@ -1,11 +1,14 @@
 <template>
   <div class="a-table-body"
-       :style="bodyStyles">
-    <table>
+       :style="bodyStyles"
+       @scroll="_handleScroll"
+       ref="tableBody"
+  >
+    <table v-watch-dom="_handleDomChange" ref="table">
       <tr v-for="(row,rowIndex) in dataList" :key="rowIndex">
         <td v-for="(col,colIndex) in columns" :key="colIndex" :style="tdStyles">
           <div :style="{width:col.width,padding,height:rowHeight}" class="a-table-cell">
-            {{row[col.field]}}
+            {{row[col.field]}}-{{currentBodyHasVerticalScrollbar}}-{{bodyHasVerticalScrollbar}}
           </div>
         </td>
       </tr>
@@ -52,6 +55,11 @@
       bodyHeight: {
         type: Number,
       },
+      bodyHasVerticalScrollbar: {
+        type: Boolean,
+        default: null
+      },
+      scrollLeft: {},
     },
     computed: {
       tdStyles() {
@@ -65,12 +73,50 @@
         return ret
       },
     },
+    watch: {
+      currentBodyHasVerticalScrollbar(val) {
+        this.$emit('update:bodyHasVerticalScrollbar', val)
+      },
+      scrollLeft(val) {
+        if (this.currentScrollLeft !== val) this.currentScrollLeft = val;
+      },
+      currentScrollLeft(val) {
+        this.$emit('update:scrollLeft', val)
+      },
+    },
+    data() {
+      return {
+        currentBodyHasVerticalScrollbar: this.bodyHasVerticalScrollbar,
+        currentScrollLeft: this.scrollLeft
+      }
+    },
+    mounted() {
+      setTimeout(() => this._updateHasScrollBar(), 100)
+    },
+    methods: {
+      _handleScroll(e) {
+        this.currentScrollLeft = e.target.scrollLeft
+      },
+      _handleDomChange() {
+        this._updateHasScrollBar()
+        let {scrollLeft, offsetWidth, scrollWidth} = this.$refs.tableBody
+        if ((scrollWidth - offsetWidth - 17 - scrollLeft) < 1) {
+          this.$refs.tableBody.scrollLeft = this.$refs.tableBody.scrollLeft + 17
+        }
+      },
+      _updateHasScrollBar() {
+        let bodyHeight = this.$refs.tableBody.offsetHeight
+        let tableHeight = this.$refs.table.offsetHeight
+        this.currentBodyHasVerticalScrollbar = tableHeight > bodyHeight
+      },
+    },
   }
 </script>
 
 <style lang="scss">
   .a-table-body {
-    width: max-content;
+    width: 100%;
+    overflow-x: auto;
     overflow-y: auto;
   }
 </style>

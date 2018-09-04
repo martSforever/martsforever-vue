@@ -1,30 +1,30 @@
 <template>
   <div class="a-table" :style="tableStyles" ref="table">
-    <div class="a-table-content">
-      <a-table-head
-        ref="tableHead"
-        :fit-width="fitWidth"
-        :border-color="borderColor||headBorderColor"
-        :border-size="borderSize"
-        :border-style="borderStyle"
-        :padding="padding"
-        @update:columns="columns = $event">
-        <slot></slot>
-      </a-table-head>
-      <a-table-body
-        ref="tableBody"
-        :columns="renderColumns"
-        :data-list="list"
-        :border-color="borderColor"
-        :border-size="borderSize"
-        :padding="padding"
-        :border-style="borderStyle"
-        :body-height="bodyHeight"
-        :row-height="rowHeight"/>
-    </div>
-    <div class="a-table-right-side">
-      <div style="height: 1000px;width: 100%;background-color: rebeccapurple">&nbsp;</div>
-    </div>
+    <a-table-head
+      ref="tableHead"
+      :fit-width="fitWidth"
+      :border-color="borderColor||headBorderColor"
+      :border-size="borderSize"
+      :border-style="borderStyle"
+      :padding="padding"
+      @update:columns="columns = $event"
+      :scroll-left="scrollLeft"
+      :body-has-vertical-scrollbar="bodyHasVerticalScrollbar"
+    >
+      <slot></slot>
+    </a-table-head>
+    <a-table-body
+      ref="tableBody"
+      :columns="renderColumns"
+      :data-list="list"
+      :border-color="borderColor"
+      :border-size="borderSize"
+      :padding="padding"
+      :border-style="borderStyle"
+      :body-height="bodyHeight"
+      :row-height="rowHeight"
+      :scroll-left.sync="scrollLeft"
+      :body-has-vertical-scrollbar.sync="bodyHasVerticalScrollbar"/>
   </div>
 </template>
 
@@ -83,14 +83,18 @@
       return {
         columns: null,
         bodyHeight: null,
+        bodyHasVerticalScrollbar: false,
+        scrollLeft: 0
       }
     },
     watch: {},
     computed: {
+      /*获取渲染表头所需要的数据*/
       renderColumns() {
         if (!this.columns || this.columns.length < 1) return []
         let ret = []
 
+        /*递归遍历节点，将列数据收集起来，是一个森林结构*/
         function iterate(column) {
           if (!!column.children && column.children.length > 0) {
             column.children.forEach((child) => {
@@ -112,11 +116,13 @@
       },
     },
     methods: {
+      /*初始化表头以及表体高度*/
       _initializedTableHeight() {
         if (!!this.tableHeight) {
           let tableHeight = this.$refs.table.offsetHeight
           let headHeight = this.$refs.tableHead.$el.offsetHeight
-          this.bodyHeight = tableHeight - headHeight
+          let bodyHeight = tableHeight - headHeight
+          this.bodyHeight = bodyHeight
         }
       },
     },
@@ -130,19 +136,6 @@
   .a-table {
     width: 100%;
     background-color: white;
-    display: flex;
-    flex-direction: row;
-    .a-table-content {
-      flex: 1;
-      overflow-x: auto;
-      overflow-y: hidden;
-    }
-    .a-table-right-side {
-      width: 17px;
-      height: 100%;
-      background-color: white;
-      overflow-y: auto;
-    }
     .a-table-cell {
       box-sizing: border-box;
       display: flex;
