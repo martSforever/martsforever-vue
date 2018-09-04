@@ -52,7 +52,7 @@
       </a-button-group>
     </div>
 
-    <a-table :fit-width="fitWidth" :border-size="borderSize" :list="dataList" row-height="40px">
+    <a-table :fit-width="fitWidth" :border-size="borderSize" :list="dataList" row-height="40px" table-height="550px">
       <a-table-column order="15" field="date" title="日期">
         <template slot-scope="data" slot="title">
           slot-scope's content -->> {{title}}
@@ -129,8 +129,8 @@
     methods: {
       removePx,
       addRow() {
-        this.dataList.push({
-          date: '11',
+        this.dataList.unshift({
+          date: Date.now(),
           dispatchDate: 'aaa',
           dispatchAddress: '22',
           name: 'bbb',
@@ -139,6 +139,10 @@
           district: 'district'
         })
       },
+    },
+
+    mounted() {
+
     },
   }
 </script>

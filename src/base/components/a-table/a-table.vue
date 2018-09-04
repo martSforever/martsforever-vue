@@ -1,20 +1,25 @@
 <template>
-  <div class="a-table">
-    <a-table-head :fit-width="fitWidth"
-                  :border-color="borderColor||headBorderColor"
-                  :border-size="borderSize"
-                  :border-style="borderStyle"
-                  :padding="padding"
-                  @update:columns="columns = $event">
+  <div class="a-table" :style="tableStyles" ref="table">
+    <a-table-head
+      ref="tableHead"
+      :fit-width="fitWidth"
+      :border-color="borderColor||headBorderColor"
+      :border-size="borderSize"
+      :border-style="borderStyle"
+      :padding="padding"
+      @update:columns="columns = $event">
       <slot></slot>
     </a-table-head>
-    <a-table-body :columns="renderColumns"
-                  :data-list="list"
-                  :border-color="borderColor"
-                  :border-size="borderSize"
-                  :padding="padding"
-                  :border-style="borderStyle"
-                  :row-height="rowHeight"/>
+    <a-table-body
+      ref="tableBody"
+      :columns="renderColumns"
+      :data-list="list"
+      :border-color="borderColor"
+      :border-size="borderSize"
+      :padding="padding"
+      :border-style="borderStyle"
+      :body-height="bodyHeight"
+      :row-height="rowHeight"/>
   </div>
 </template>
 
@@ -64,16 +69,18 @@
       },
       rowHeight: {
         type: String,
-        default: '40px'
+        default: '40px',
+        desc: '每一行的高度',
       },
+      tableHeight: {},
     },
     data() {
       return {
-        columns: null
+        columns: null,
+        bodyHeight: null
       }
     },
     watch: {},
-    methods: {},
     computed: {
       renderColumns() {
         if (!this.columns || this.columns.length < 1) return []
@@ -90,8 +97,28 @@
         }
 
         this.columns.forEach((child) => iterate(child))
+        this.$nextTick(() => this._initializedTableHeight())
         return ret
       },
+      tableStyles() {
+        let ret = {}
+        !!this.tableHeight && (ret.height = this.tableHeight)
+        return ret
+      },
+    },
+    methods: {
+      _initializedTableHeight() {
+        if (!!this.tableHeight) {
+          let tableHeight = this.$refs.table.offsetHeight
+          let headHeight = this.$refs.tableHead.$el.offsetHeight
+          let bodyHeight = tableHeight - headHeight
+          this.bodyHeight = bodyHeight
+          console.log(tableHeight, headHeight, bodyHeight)
+        }
+      },
+    },
+    mounted() {
+
     },
   }
 </script>
@@ -99,8 +126,6 @@
 <style lang="scss">
   .a-table {
     width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
     background-color: white;
     .a-table-cell {
       box-sizing: border-box;

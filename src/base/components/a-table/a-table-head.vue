@@ -1,5 +1,5 @@
 <template>
-  <div class="a-table-head" :style="{marginBottom:`${-removePx(padding)/2}px`}">
+  <div class="a-table-head">
     <!--用一个div装下传入的a-table-column，a-table-column实际上没有-->
     <span class="hide-column"><slot></slot></span>
     <!--表头-->
@@ -150,7 +150,8 @@
 
 <style lang="scss">
   .a-table-head {
-    width: max-content;
+    width: 100%;
+    overflow-x: hidden;
 
     .hide-column {
       height: 0;

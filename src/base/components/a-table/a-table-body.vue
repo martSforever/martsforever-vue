@@ -1,5 +1,6 @@
 <template>
-  <div class="a-table-body">
+  <div class="a-table-body"
+       :style="bodyStyles">
     <table>
       <tr v-for="(row,rowIndex) in dataList" :key="rowIndex">
         <td v-for="(col,colIndex) in columns" :key="colIndex" :style="tdStyles">
@@ -48,6 +49,9 @@
         type: String,
         default: '40px'
       },
+      bodyHeight: {
+        type: Number,
+      },
     },
     computed: {
       tdStyles() {
@@ -55,12 +59,20 @@
           border: `${this.borderStyle} ${this.borderSize}px ${this.borderColor}`,
         }
       },
+      bodyStyles() {
+        let ret = {}
+        console.log(this.bodyHeight)
+        !!this.bodyHeight && (ret.height = this.bodyHeight + 'px')
+        return ret
+      },
     },
   }
 </script>
 
 <style lang="scss">
   .a-table-body {
-    width: max-content;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
   }
 </style>
