@@ -126,7 +126,8 @@
 
 <style lang="scss">
   .a-table-body {
-    width: 100%;
+    max-width: 100%;
+    display: inline-block;
     overflow-x: auto;
     overflow-y: auto;
   }

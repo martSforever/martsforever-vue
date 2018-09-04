@@ -1,31 +1,33 @@
 <template>
   <div class="a-table" :style="tableStyles" ref="table">
-    <a-table-head
-      ref="tableHead"
-      :fit-width="fitWidth"
-      :border-color="borderColor||headBorderColor"
-      :border-size="borderSize"
-      :border-style="borderStyle"
-      :padding="padding"
-      @update:columns="columns = $event"
-      :scroll-left="scrollLeft"
-      :body-has-vertical-scrollbar="bodyHasVerticalScrollbar"
-    >
-      <slot></slot>
-    </a-table-head>
-    <a-table-body
-      ref="tableBody"
-      :fit-width="fitWidth"
-      :columns="renderColumns"
-      :data-list="list"
-      :border-color="borderColor"
-      :border-size="borderSize"
-      :padding="padding"
-      :border-style="borderStyle"
-      :body-height="bodyHeight"
-      :row-height="rowHeight"
-      :scroll-left.sync="scrollLeft"
-      :body-has-vertical-scrollbar.sync="bodyHasVerticalScrollbar"/>
+    <div class="a-table-content">
+      <a-table-head
+        ref="tableHead"
+        :fit-width="fitWidth"
+        :border-color="borderColor||headBorderColor"
+        :border-size="borderSize"
+        :border-style="borderStyle"
+        :padding="padding"
+        @update:columns="columns = $event"
+        :scroll-left="scrollLeft"
+        :body-has-vertical-scrollbar="bodyHasVerticalScrollbar"
+      >
+        <slot></slot>
+      </a-table-head>
+      <a-table-body
+        ref="tableBody"
+        :fit-width="fitWidth"
+        :columns="renderColumns"
+        :data-list="list"
+        :border-color="borderColor"
+        :border-size="borderSize"
+        :padding="padding"
+        :border-style="borderStyle"
+        :body-height="bodyHeight"
+        :row-height="rowHeight"
+        :scroll-left.sync="scrollLeft"
+        :body-has-vertical-scrollbar.sync="bodyHasVerticalScrollbar"/>
+    </div>
   </div>
 </template>
 
@@ -141,6 +143,11 @@
   .a-table {
     width: 100%;
     background-color: white;
+    padding-left: 20px;
+    padding-top: 20px;
+    .a-table-content {
+      width: calc(100% - 40px);
+    }
     .a-table-cell {
       box-sizing: border-box;
       display: flex;
