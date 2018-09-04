@@ -36,7 +36,6 @@
       column: null,
 
       borderSize: {
-        default: 6,
         desc: '边框宽度',
       },
       borderColor: {

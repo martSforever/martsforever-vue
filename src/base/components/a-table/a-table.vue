@@ -26,6 +26,7 @@
         :body-height="bodyHeight"
         :row-height="rowHeight"
         :scroll-left.sync="scrollLeft"
+        :bottom-line="bottomLine"
         :body-has-vertical-scrollbar.sync="bodyHasVerticalScrollbar"/>
     </div>
   </div>
@@ -84,6 +85,10 @@
       rowNum: {
         type: Number
       },
+      bottomLine: {
+        type: Boolean,
+        default: true
+      },
     },
     data() {
       return {
@@ -127,8 +132,8 @@
         if (!!this.tableHeight || !!this.rowNum) {
           let tableHeight = this.$refs.table.offsetHeight
           let headHeight = this.$refs.tableHead.$el.offsetHeight
-          /*8：td莫名其妙的padding；20：底部scrollbar*/
-          let bodyHeight = !!this.rowNum ? (this.rowNum * (removePx(this.rowHeight) + 8) + 20) : (tableHeight - headHeight)
+          /*8：td莫名其妙的padding*/
+          let bodyHeight = !!this.rowNum ? (this.rowNum * (removePx(this.rowHeight) + 6 + this.borderSize)) : (tableHeight - headHeight)
           this.bodyHeight = bodyHeight
         }
       },

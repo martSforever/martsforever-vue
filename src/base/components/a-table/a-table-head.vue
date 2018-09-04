@@ -42,7 +42,6 @@
       },
 
       borderSize: {
-        default: 6,
         desc: '边框宽度',
       },
       borderColor: {
@@ -167,6 +166,7 @@
     overflow-x: hidden;
     overflow-y: hidden;
     white-space: nowrap;
+    border-bottom: solid 1px $table-bottom-color;
     .hide-column {
       height: 0;
       width: 0;

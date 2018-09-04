@@ -59,6 +59,7 @@
                :list="dataList"
                row-height="40px"
                padding="6px"
+               :bottom-line="true"
                :row-num="5">
         <a-table-column order="15" field="date" title="日期">
           <template slot-scope="data" slot="title">

@@ -8,7 +8,10 @@
            ref="table"
            :style="tableStyles"
            style="table-layout: fixed;word-break: break-all">
-      <tr v-for="(row,rowIndex) in dataList" :key="rowIndex" class="a-table-body-tr">
+      <tr v-for="(row,rowIndex) in dataList"
+          :key="rowIndex"
+          class="a-table-body-tr"
+          :class="{'a-table-body-tr-bottom-line':!!bottomLine}">
         <td v-for="(col,colIndex) in columns" :key="colIndex" :style="tdStyles" class="a-table-body-td">
           <div :style="{width:col.width,padding,height:rowHeight}" class="a-table-cell">
             {{row[col.field]}}
@@ -36,7 +39,6 @@
         default: false
       },
       borderSize: {
-        default: 6,
         desc: '边框宽度',
       },
       borderColor: {
@@ -65,6 +67,9 @@
         default: null
       },
       scrollLeft: {},
+      bottomLine: {
+        type: Boolean,
+      },
     },
     computed: {
       tableStyles() {
@@ -129,14 +134,9 @@
     display: inline-block;
     overflow-x: auto;
     overflow-y: auto;
-    .a-table-body-tr {
-      &:first-child {
-        .a-table-body-td {
-          border-top-color: #ddd !important;
-        }
-      }
+    .a-table-body-tr.a-table-body-tr-bottom-line {
       .a-table-body-td {
-        border-bottom-color: #ddd !important;
+        border-bottom-color: $table-bottom-color !important;
       }
     }
   }
