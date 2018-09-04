@@ -1,6 +1,6 @@
 <template>
   <div class="a-table" :style="tableStyles" ref="table">
-    <div class="a-table-content" @mousewheel="_handleMouseWheel">
+    <div class="a-table-content">
       <a-table-head
         ref="tableHead"
         :fit-width="fitWidth"
@@ -116,12 +116,8 @@
         if (!!this.tableHeight) {
           let tableHeight = this.$refs.table.offsetHeight
           let headHeight = this.$refs.tableHead.$el.offsetHeight
-          let bodyHeight = tableHeight - headHeight
-          this.bodyHeight = bodyHeight
+          this.bodyHeight = tableHeight - headHeight
         }
-      },
-      _handleMouseWheel(e){
-        console.log(e)
       },
     },
     mounted() {

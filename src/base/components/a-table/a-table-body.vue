@@ -71,5 +71,6 @@
 <style lang="scss">
   .a-table-body {
     width: max-content;
+    overflow-y: auto;
   }
 </style>
