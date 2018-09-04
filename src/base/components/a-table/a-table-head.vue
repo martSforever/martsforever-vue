@@ -150,9 +150,7 @@
 
 <style lang="scss">
   .a-table-head {
-    width: 100%;
-    overflow-x: hidden;
-
+    width: max-content;
     .hide-column {
       height: 0;
       width: 0;

@@ -1,25 +1,30 @@
 <template>
   <div class="a-table" :style="tableStyles" ref="table">
-    <a-table-head
-      ref="tableHead"
-      :fit-width="fitWidth"
-      :border-color="borderColor||headBorderColor"
-      :border-size="borderSize"
-      :border-style="borderStyle"
-      :padding="padding"
-      @update:columns="columns = $event">
-      <slot></slot>
-    </a-table-head>
-    <a-table-body
-      ref="tableBody"
-      :columns="renderColumns"
-      :data-list="list"
-      :border-color="borderColor"
-      :border-size="borderSize"
-      :padding="padding"
-      :border-style="borderStyle"
-      :body-height="bodyHeight"
-      :row-height="rowHeight"/>
+    <div class="a-table-content" @mousewheel="_handleMouseWheel">
+      <a-table-head
+        ref="tableHead"
+        :fit-width="fitWidth"
+        :border-color="borderColor||headBorderColor"
+        :border-size="borderSize"
+        :border-style="borderStyle"
+        :padding="padding"
+        @update:columns="columns = $event">
+        <slot></slot>
+      </a-table-head>
+      <a-table-body
+        ref="tableBody"
+        :columns="renderColumns"
+        :data-list="list"
+        :border-color="borderColor"
+        :border-size="borderSize"
+        :padding="padding"
+        :border-style="borderStyle"
+        :body-height="bodyHeight"
+        :row-height="rowHeight"/>
+    </div>
+    <div class="a-table-right-side">
+      <div style="height: 1000px;width: 100%;background-color: rebeccapurple">&nbsp;</div>
+    </div>
   </div>
 </template>
 
@@ -77,7 +82,7 @@
     data() {
       return {
         columns: null,
-        bodyHeight: null
+        bodyHeight: null,
       }
     },
     watch: {},
@@ -113,8 +118,10 @@
           let headHeight = this.$refs.tableHead.$el.offsetHeight
           let bodyHeight = tableHeight - headHeight
           this.bodyHeight = bodyHeight
-          console.log(tableHeight, headHeight, bodyHeight)
         }
+      },
+      _handleMouseWheel(e){
+        console.log(e)
       },
     },
     mounted() {
@@ -127,6 +134,19 @@
   .a-table {
     width: 100%;
     background-color: white;
+    display: flex;
+    flex-direction: row;
+    .a-table-content {
+      flex: 1;
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+    .a-table-right-side {
+      width: 17px;
+      height: 100%;
+      background-color: white;
+      overflow-y: auto;
+    }
     .a-table-cell {
       box-sizing: border-box;
       display: flex;

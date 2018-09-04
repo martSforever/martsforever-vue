@@ -61,7 +61,6 @@
       },
       bodyStyles() {
         let ret = {}
-        console.log(this.bodyHeight)
         !!this.bodyHeight && (ret.height = this.bodyHeight + 'px')
         return ret
       },
@@ -71,8 +70,6 @@
 
 <style lang="scss">
   .a-table-body {
-    width: 100%;
-    overflow-x: auto;
-    overflow-y: auto;
+    width: max-content;
   }
 </style>
