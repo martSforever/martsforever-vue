@@ -46,6 +46,7 @@
     },
     data() {
       return {
+        isTableColumn: true,
         currentWidth: this.width,
       }
     },
@@ -53,37 +54,46 @@
       getColumn() {
         let _this = this
         let ret = {
+          /*列宽*/
           get width() {
             return _this.currentWidth
           },
+          /*列标题文本*/
           get title() {
             return _this.title
           },
+          /*标题自定义渲染scopedSlot.title*/
           get titleScopedSlots() {
             return _this.$scopedSlots.title
           },
+          /*列内容自定义渲染scopedSlot.default*/
           get colScopedSlots() {
             return _this.$scopedSlots.default
           },
+          /*标题渲染函数*/
           get titleRenderFunc() {
             return _this.titleRenderFunc
           },
+          /*列内容渲染函数*/
           get colRenderFunc() {
             return _this.colRenderFunc
           },
+          /*列位置*/
           get order() {
             return _this.order
           },
+          /*没有scopedSlot.default时，展示的数据row的属性*/
           get field() {
             return _this.field
           },
+          /*更新宽度*/
           updateWidth(width) {
             _this.currentWidth = width
           },
         }
 
         ret.children = this.$children.reduce((ret, child) => {
-          if (child.$options.name === 'a-table-column') ret.push(child.getColumn())
+          if (!!child.isTableColumn) ret.push(child.getColumn())
           return ret
         }, [])
         return ret

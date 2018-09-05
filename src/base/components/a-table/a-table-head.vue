@@ -88,7 +88,7 @@
       _initializedColumns() {
         /*---------------------------------------获取所有column的参数-------------------------------------------*/
         let columns = this.$children.reduce((ret, child) => {
-          (child.$options.name === 'a-table-column') && ret.push(child.getColumn())
+          (!!child.isTableColumn) && ret.push(child.getColumn())
           return ret
         }, [])
         !!this.indexing && columns.push(this._getIndexColumn())
