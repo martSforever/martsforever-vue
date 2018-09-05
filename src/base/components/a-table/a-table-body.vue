@@ -11,6 +11,7 @@
       <tr v-for="(row,rowIndex) in dataList"
           :key="rowIndex"
           class="a-table-body-tr"
+          :style="!!rowStyleFunc?rowStyleFunc(row,rowIndex):null"
           :class="{'a-table-body-tr-bottom-line':!!bottomLine,'a-table-body-tr-striple':!!striple}">
         <td v-for="(col,colIndex) in columns" :key="colIndex" :style="tdStyles" class="a-table-body-td">
           <div :style="{width:col.width,padding,height:rowHeight}" class="a-table-cell">
@@ -72,6 +73,10 @@
       },
       striple: {
         type: Boolean,
+      },
+      rowStyleFunc: {
+        type: Function,
+        desc: '行样式渲染',
       },
     },
     computed: {

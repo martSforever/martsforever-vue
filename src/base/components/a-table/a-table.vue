@@ -27,6 +27,7 @@
         :scroll-left.sync="scrollLeft"
         :bottom-line="bottomLine"
         :striple="striple"
+        :row-style-func="rowStyleFunc"
         :body-has-vertical-scrollbar.sync="bodyHasVerticalScrollbar"/>
     </div>
   </div>
@@ -92,6 +93,10 @@
         type: Boolean,
         default: true,
         desc: '斑马纹'
+      },
+      rowStyleFunc: {
+        type: Function,
+        desc: '行样式渲染',
       },
     },
     data() {

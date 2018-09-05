@@ -149,6 +149,14 @@
       removeRow() {
         this.dataList.pop()
       },
+      rowStyleFunc(row, index) {
+        console.log(row.date, index)
+        if (index % 2 === 0) {
+          return {
+            backgroundColor: 'black'
+          }
+        }
+      },
     },
 
     mounted() {
