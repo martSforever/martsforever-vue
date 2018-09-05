@@ -68,7 +68,7 @@
           <template slot-scope="{column}" slot="title">
             slot-scope's content -->> {{title}}--{{column.title}}
           </template>
-          <template slot-scope="{row,index}" slot="content">
+          <template slot-scope="{row,index}">
             <div>
               slot-scope content: {{title}}-{{index}}- {{row.dispatchDate}}
             </div>

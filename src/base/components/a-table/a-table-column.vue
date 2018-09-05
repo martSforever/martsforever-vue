@@ -1,5 +1,5 @@
 <template>
-  <span><slot></slot></span>
+  <span><slot :row="{}"></slot></span>
 </template>
 
 <script>
@@ -46,7 +46,7 @@
     },
     data() {
       return {
-        currentWidth: this.width
+        currentWidth: this.width,
       }
     },
     methods: {
@@ -63,7 +63,7 @@
             return _this.$scopedSlots.title
           },
           get colScopedSlots() {
-            return _this.$scopedSlots.content
+            return _this.$scopedSlots.default
           },
           get titleRenderFunc() {
             return _this.titleRenderFunc
