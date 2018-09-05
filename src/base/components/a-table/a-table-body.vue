@@ -13,7 +13,10 @@
           class="a-table-body-tr"
           :style="!!rowStyleFunc?rowStyleFunc(row,rowIndex):null"
           :class="{'a-table-body-tr-bottom-line':!!bottomLine,'a-table-body-tr-striple':!!striple}">
-        <td v-for="(col,colIndex) in columns" :key="colIndex" :style="tdStyles" class="a-table-body-td">
+        <td v-for="(col,colIndex) in columns"
+            :key="colIndex"
+            :style="_getTdStyles(col,colIndex,row,rowIndex)"
+            class="a-table-body-td">
           <div :style="{width:col.width,padding,height:rowHeight}" class="a-table-cell">
             {{row[col.field]}}
           </div>
@@ -78,6 +81,10 @@
         type: Function,
         desc: '行样式渲染',
       },
+      cellStyleFunc: {
+        type: Function,
+        desc: '单元格样式渲染'
+      },
     },
     computed: {
       tableStyles() {
@@ -131,6 +138,11 @@
         let bodyHeight = this.$refs.tableBody.offsetHeight
         let tableHeight = this.$refs.table.offsetHeight
         this.currentBodyHasVerticalScrollbar = tableHeight > bodyHeight
+      },
+      _getTdStyles(col, colIndex, row, rowIndex) {
+        let tdStyles = this.tdStyles
+        let cellStyles = !!this.cellStyleFunc ? this.cellStyleFunc(col, colIndex, row, rowIndex) : {}
+        return Object.assign({}, tdStyles, cellStyles)
       },
     },
   }

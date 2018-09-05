@@ -28,6 +28,7 @@
         :bottom-line="bottomLine"
         :striple="striple"
         :row-style-func="rowStyleFunc"
+        :cell-style-func="cellStyleFunc"
         :body-has-vertical-scrollbar.sync="bodyHasVerticalScrollbar"/>
     </div>
   </div>
@@ -97,6 +98,10 @@
       rowStyleFunc: {
         type: Function,
         desc: '行样式渲染',
+      },
+      cellStyleFunc: {
+        type: Function,
+        desc: '单元格样式渲染'
       },
     },
     data() {

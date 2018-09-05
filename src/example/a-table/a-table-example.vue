@@ -157,6 +157,12 @@
           }
         }
       },
+      cellStyleFunc(col, colIndex, row, rowIndex) {
+        console.log(row, col, rowIndex, colIndex, colIndex === 2)
+        let backgroundColor = colIndex === 2 ? 'red' : 'yellow'
+        console.log(backgroundColor)
+        return {backgroundColor}
+      },
     },
 
     mounted() {
