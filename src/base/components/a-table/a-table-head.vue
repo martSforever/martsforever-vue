@@ -1,7 +1,7 @@
 <template>
   <div class="a-table-head" ref="tableHead" :class="{'a-table-head-border-bottom':!isMultiLevelHeader}">
     <!--用一个div装下传入的a-table-column，a-table-column实际上没有-->
-    <div class="hide-column">
+    <div class="hide-column" v-watch-dom="_handleDomChange">
       <slot></slot>
     </div>
     <!--表头-->
@@ -45,7 +45,6 @@
       padding: {},
       bodyHasVerticalScrollbar: {},
       scrollLeft: {},
-      indexing: {},
     },
     data() {
       return {
@@ -61,9 +60,6 @@
       scrollLeft(val) {
         this.$refs.tableHead.scrollLeft = val
       },
-      indexing() {
-        this._initializedColumns()
-      },
     },
     computed: {
       tableStyles() {
@@ -77,13 +73,8 @@
     },
     methods: {
       removePx,
-      _getIndexColumn() {
-        return {
-          width: '36px',
-          order: 9999,
-          titleRenderFunc: (h, {column}) => (<div class="a-table-standard-cell">#</div>),
-          colRenderFunc: (h, {rowIndex}) => (<div class="a-table-standard-cell">{rowIndex + 1}</div>)
-        }
+      _handleDomChange() {
+        this._initializedColumns()
       },
       _initializedColumns() {
         /*---------------------------------------获取所有column的参数-------------------------------------------*/
@@ -91,7 +82,6 @@
           (!!child.isTableColumn) && ret.push(child.getColumn())
           return ret
         }, [])
-        !!this.indexing && columns.push(this._getIndexColumn())
         /*---------------------------------------计算column的rowSpan以及colSpan，以实现多级表头-------------------------------------------*/
         /*最大层数*/
         let maxLevel = 1;

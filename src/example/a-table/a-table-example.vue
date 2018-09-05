@@ -73,6 +73,7 @@
                :cell-style-func="null"
                :indexing="indexing"
                :row-num="5">
+        <a-table-column-index/>
         <a-table-column order="15" field="date" title="日期" :width.sync="columnWidth">
           <template slot-scope="{column}" slot="title">
             slot-scope's content -->> {{title}}--{{column.title}}
@@ -128,10 +129,11 @@
   import {removePx} from "../../base/script/utils";
   import AButtonGroup from "../../base/components/a-button/a-button-group";
   import AButton from "../../base/components/a-button/a-button";
+  import ATableColumnIndex from "../../base/components/a-table/a-table-column-index";
 
   export default {
     name: "a-table-example",
-    components: {AButton, AButtonGroup, AIcon, ASwitch, AInput, ATableColumn, ATable},
+    components: {ATableColumnIndex, AButton, AButtonGroup, AIcon, ASwitch, AInput, ATableColumn, ATable},
     data() {
       return {
         title: '日期',

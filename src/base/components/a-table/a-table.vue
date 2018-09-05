@@ -12,6 +12,7 @@
         :indexing="indexing"
         :body-has-vertical-scrollbar="bodyHasVerticalScrollbar"
       >
+        <a-table-column-index v-if="!!indexing"/>
         <slot></slot>
       </a-table-head>
       <a-table-body
@@ -42,10 +43,11 @@
   import AButton from "../a-button/a-button";
   import ATableBody from "./a-table-body";
   import {removePx} from "../../script/utils";
+  import ATableColumnIndex from "./a-table-column-index";
 
   export default {
     name: "a-table",
-    components: {ATableBody, AButton, AButtonGroup, AScrollbar, ATableHead},
+    components: {ATableColumnIndex, ATableBody, AButton, AButtonGroup, AScrollbar, ATableHead},
     props: {
       fitWidth: {
         type: Boolean,
