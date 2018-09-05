@@ -9,6 +9,7 @@
         :padding="padding"
         @update:columns="columns = $event"
         :scroll-left="scrollLeft"
+        :indexing="indexing"
         :body-has-vertical-scrollbar="bodyHasVerticalScrollbar"
       >
         <slot></slot>
@@ -103,6 +104,10 @@
         type: Function,
         desc: '单元格样式渲染'
       },
+      indexing: {
+        type: Boolean,
+        default: true
+      },
     },
     data() {
       return {
@@ -171,6 +176,9 @@
       box-sizing: border-box;
       display: flex;
       align-items: center;
+      div {
+        width: 100%
+      }
     }
   }
 </style>

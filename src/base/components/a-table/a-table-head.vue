@@ -31,10 +31,11 @@
   import RenderingRenderFunc from "../rendering-render-func";
   import ATableHeadCell from "./a-table-head-cell";
   import {removePx} from "../../script/utils";
+  import ATableColumn from "./a-table-column";
 
   export default {
     name: "a-table-head",
-    components: {ATableHeadCell, RenderingRenderFunc, RenderingScopeSlot},
+    components: {ATableColumn, ATableHeadCell, RenderingRenderFunc, RenderingScopeSlot},
     props: {
       fitWidth: {
         type: Boolean,
@@ -62,6 +63,9 @@
         type: Boolean,
       },
       scrollLeft: {},
+      indexing: {
+        type: Boolean,
+      },
     },
     data() {
       return {
@@ -77,6 +81,9 @@
       scrollLeft(val) {
         this.$refs.tableHead.scrollLeft = val
       },
+      indexing() {
+        this._initializedColumns()
+      },
     },
     computed: {
       tableStyles() {
@@ -90,12 +97,28 @@
     },
     methods: {
       removePx,
+      _getIndexColumn() {
+        return {
+          width: '36px',
+          order: 9999,
+          titleRenderFunc: function (h, {column}) {
+            return (<div style="text-align:center">#</div>)
+          },
+          colRenderFunc: function (h, {rowIndex}) {
+            return (<div style="text-align:center">{rowIndex + 1}</div>)
+          }
+        }
+      },
       _initializedColumns() {
         /*---------------------------------------获取所有column的参数-------------------------------------------*/
         let columns = this.$children.reduce((ret, child) => {
           (child.$options.name === 'a-table-column') && ret.push(child.getColumn())
           return ret
         }, [])
+
+        if (!!this.indexing) {
+          columns.push(this._getIndexColumn())
+        }
         /*---------------------------------------计算column的rowSpan以及colSpan，以实现多级表头-------------------------------------------*/
         /*最大层数*/
         let maxLevel = 1;
@@ -155,7 +178,6 @@
         iterateColumn(this.columns)
         this.headRows = headRows
       },
-
     },
     mounted() {
       this._initializedColumns()

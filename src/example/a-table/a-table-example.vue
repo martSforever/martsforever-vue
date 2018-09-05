@@ -6,6 +6,10 @@
         <a-switch v-model="fitWidth"/>
       </div>
       <div class="item">
+        索引：
+        <a-switch v-model="indexing"/>
+      </div>
+      <div class="item">
         列标题：
         <a-input v-model="title"/>
       </div>
@@ -63,6 +67,7 @@
                :striple="true"
                :row-style-func="null"
                :cell-style-func="null"
+               :indexing="indexing"
                :row-num="5">
         <a-table-column order="15" field="date" title="日期" :width.sync="columnWidth">
           <template slot-scope="{column}" slot="title">
@@ -130,7 +135,7 @@
         firstOrder: '13',
         columnWidth: `1250px`,
         borderSize: 1,
-
+        indexing: true,
         /*@formatter:off*/
         dataList: [
           {date: '11', dispatchDate: 'aaa',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},

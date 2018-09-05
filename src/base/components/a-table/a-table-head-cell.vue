@@ -10,7 +10,7 @@
         v-if="!!column.titleScopedSlots"
         :scope-slot-func="column.titleScopedSlots"
         :data="{column}"/>
-      <rendering-render-func v-if="!!column.titleRenderFunc" :render-func="column.titleRenderFunc"/>
+      <rendering-render-func v-if="!!column.titleRenderFunc" :render-func="column.titleRenderFunc" :data="{column}"/>
       <span v-if="!column.titleScopedSlots && !column.titleRenderFunc">{{column.title}}</span>
     </div>
     <div class="drag-indicator"
