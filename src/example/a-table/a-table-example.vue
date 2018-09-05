@@ -68,9 +68,9 @@
           <template slot-scope="{column}" slot="title">
             slot-scope's content -->> {{title}}--{{column.title}}
           </template>
-          <template slot-scope="{row,index}">
+          <template slot-scope="{row, rowIndex, col, colIndex}">
             <div>
-              slot-scope content: {{title}}-{{index}}- {{row.date}}
+              slot-scope content: {{title}}-{{rowIndex}}- {{row.date}}
             </div>
           </template>
         </a-table-column>
@@ -83,7 +83,9 @@
           </a-table-column>
         </a-table-column>
         <a-table-column :order="firstOrder" field="dispatchInfo" title="发货信息">
-          <a-table-column field="dispatchDate" title="发货时间"></a-table-column>
+          <a-table-column field="dispatchDate" title="发货时间"
+                          :col-render-func="cellRenderFunc"
+                          width="200px"></a-table-column>
           <a-table-column field="dispatchAddress" title="发货地址"></a-table-column>
         </a-table-column>
         <!--<a-table-column title="a">
@@ -176,6 +178,11 @@
         let backgroundColor = colIndex === 2 ? 'red' : 'yellow'
         console.log(backgroundColor)
         return {backgroundColor}
+      },
+      cellRenderFunc(h, {row, rowIndex, col, colIndex}) {
+        return (
+          <div>{row.date}-|||-{rowIndex}--{row[col.field]}--{colIndex}</div>
+        )
       },
     },
 

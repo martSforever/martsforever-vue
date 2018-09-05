@@ -20,10 +20,10 @@
           <div :style="{width:col.width,padding,height:rowHeight}" class="a-table-cell">
             <rendering-scope-slot v-if="!!col.colScopedSlots"
                                   :scope-slot-func="col.colScopedSlots"
-                                  :data="{row:row,index:rowIndex}"/>
+                                  :data="{row,rowIndex,col,colIndex}"/>
             <rendering-render-func v-if="!!col.colRenderFunc"
                                    :render-func="col.colRenderFunc"
-                                   :data="{row:row,index:rowIndex}"/>
+                                   :data="{row,rowIndex,col,colIndex}"/>
             <span v-if="!col.colScopedSlots && !col.colRenderFunc">{{row[col.field]}}</span>
           </div>
         </td>
