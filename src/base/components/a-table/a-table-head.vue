@@ -39,38 +39,15 @@
     name: "a-table-head",
     components: {ARadio, ATableColumn, ATableHeadCell, RenderingRenderFunc, RenderingScopeSlot},
     props: {
-      fitWidth: {
-        type: Boolean,
-        default: false
-      },
-
-      borderSize: {
-        desc: '边框宽度',
-      },
-      borderColor: {
-        type: String,
-        default: '#ddd',
-        desc: '边框颜色',
-      },
-      borderStyle: {
-        type: String,
-        default: 'solid',
-        desc: '边框风格',
-      },
-      padding: {
-        type: String,
-        desc: '每个单元格的内边距',
-      },
-      bodyHasVerticalScrollbar: {
-        type: Boolean,
-      },
+      fitWidth: {},
+      borderSize: {},
+      borderColor: {},
+      borderStyle: {},
+      padding: {},
+      bodyHasVerticalScrollbar: {},
       scrollLeft: {},
-      indexing: {
-        type: Boolean,
-      },
-      singleSelect: {
-        type: Boolean,
-      },
+      indexing: {},
+      singleSelect: {},
     },
     data() {
       return {
