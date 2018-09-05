@@ -1,6 +1,7 @@
 <template>
   <div class="a-table-head" ref="tableHead" :class="{'a-table-head-border-bottom':!isMultiLevelHeader}">
     <!--用一个div装下传入的a-table-column，a-table-column实际上没有-->
+    {{singleSelect}}
     <div class="hide-column">
       <slot></slot>
     </div>
@@ -32,10 +33,11 @@
   import ATableHeadCell from "./a-table-head-cell";
   import {removePx} from "../../script/utils";
   import ATableColumn from "./a-table-column";
+  import ARadio from "../a-radio/a-radio";
 
   export default {
     name: "a-table-head",
-    components: {ATableColumn, ATableHeadCell, RenderingRenderFunc, RenderingScopeSlot},
+    components: {ARadio, ATableColumn, ATableHeadCell, RenderingRenderFunc, RenderingScopeSlot},
     props: {
       fitWidth: {
         type: Boolean,
@@ -66,6 +68,9 @@
       indexing: {
         type: Boolean,
       },
+      singleSelect: {
+        type: Boolean,
+      },
     },
     data() {
       return {
@@ -82,6 +87,9 @@
         this.$refs.tableHead.scrollLeft = val
       },
       indexing() {
+        this._initializedColumns()
+      },
+      singleSelect() {
         this._initializedColumns()
       },
     },
@@ -101,13 +109,19 @@
         return {
           width: '36px',
           order: 9999,
-          titleRenderFunc: function (h, {column}) {
-            return (<div style="text-align:center">#</div>)
-          },
-          colRenderFunc: function (h, {rowIndex}) {
-            return (<div style="text-align:center">{rowIndex + 1}</div>)
-          }
+          titleRenderFunc: (h, {column}) => (<div class="a-table-standard-cell">#</div>),
+          colRenderFunc: (h, {rowIndex}) => (<div class="a-table-standard-cell">{rowIndex + 1}</div>)
         }
+      },
+      _getSingleSelectColumn() {
+        /*@formatter:off*/
+        return {
+          width: '36px',
+          order: 9999,
+          titleRenderFunc: (h, {column}) => (<div class="a-table-standard-cell"><a-radio inactive-icon="fa-dot-circle-o"/></div>),
+          colRenderFunc: (h, {rowIndex}) =>(<div class="a-table-standard-cell"><a-radio/></div>),
+          }
+        /*@formatter:on*/
       },
       _initializedColumns() {
         /*---------------------------------------获取所有column的参数-------------------------------------------*/
@@ -115,10 +129,8 @@
           (child.$options.name === 'a-table-column') && ret.push(child.getColumn())
           return ret
         }, [])
-
-        if (!!this.indexing) {
-          columns.push(this._getIndexColumn())
-        }
+        !!this.indexing && columns.push(this._getIndexColumn())
+        !!this.singleSelect && columns.push(this._getSingleSelectColumn())
         /*---------------------------------------计算column的rowSpan以及colSpan，以实现多级表头-------------------------------------------*/
         /*最大层数*/
         let maxLevel = 1;
@@ -178,10 +190,12 @@
         iterateColumn(this.columns)
         this.headRows = headRows
       },
-    },
+    }
+    ,
     mounted() {
       this._initializedColumns()
-    },
+    }
+    ,
   }
 </script>
 

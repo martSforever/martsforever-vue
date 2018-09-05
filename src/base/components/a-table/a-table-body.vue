@@ -2,8 +2,7 @@
   <div class="a-table-body"
        :style="bodyStyles"
        @scroll="_handleScroll"
-       ref="tableBody"
-  >
+       ref="tableBody">
     <table v-watch-dom="_handleDomChange"
            ref="table"
            :style="tableStyles"
@@ -38,7 +37,7 @@
 
   export default {
     name: "a-table-body",
-    components: {RenderingRenderFunc, RenderingScopeSlot},
+    components: { RenderingRenderFunc, RenderingScopeSlot},
     props: {
       columns: {
         type: Array,

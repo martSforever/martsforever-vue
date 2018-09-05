@@ -49,7 +49,7 @@
       },
       activeIcon: {
         type: String,
-        default: 'fa-circle'
+        default: 'fa-dot-circle-o'
       },
       inactiveIcon: {
         type: String,

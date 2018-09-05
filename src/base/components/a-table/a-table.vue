@@ -10,6 +10,7 @@
         @update:columns="columns = $event"
         :scroll-left="scrollLeft"
         :indexing="indexing"
+        :single-select="singleSelect"
         :body-has-vertical-scrollbar="bodyHasVerticalScrollbar"
       >
         <slot></slot>
@@ -108,6 +109,10 @@
         type: Boolean,
         default: true
       },
+      singleSelect: {
+        type: Boolean,
+        default: false
+      },
     },
     data() {
       return {
@@ -171,6 +176,9 @@
     padding-top: 20px;
     .a-table-content {
       width: calc(100% - 40px);
+    }
+    .a-table-standard-cell {
+      text-align: center;
     }
     .a-table-cell {
       box-sizing: border-box;
