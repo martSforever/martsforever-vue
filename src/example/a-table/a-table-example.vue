@@ -70,7 +70,7 @@
           </template>
           <template slot-scope="{row,index}">
             <div>
-              slot-scope content: {{title}}-{{index}}- {{row.dispatchDate}}
+              slot-scope content: {{title}}-{{index}}- {{row.date}}
             </div>
           </template>
         </a-table-column>
@@ -151,7 +151,7 @@
       removePx,
       addRow() {
         this.dataList.unshift({
-          date: Date.now(),
+          date: new Date().yyyyMMddHHmmss(),
           dispatchDate: 'aaa',
           dispatchAddress: '22',
           name: 'bbb',
