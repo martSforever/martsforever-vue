@@ -1,7 +1,6 @@
 <template>
   <div class="a-table-head" ref="tableHead" :class="{'a-table-head-border-bottom':!isMultiLevelHeader}">
     <!--用一个div装下传入的a-table-column，a-table-column实际上没有-->
-    {{singleSelect}}
     <div class="hide-column">
       <slot></slot>
     </div>
@@ -47,7 +46,6 @@
       bodyHasVerticalScrollbar: {},
       scrollLeft: {},
       indexing: {},
-      singleSelect: {},
     },
     data() {
       return {
@@ -64,9 +62,6 @@
         this.$refs.tableHead.scrollLeft = val
       },
       indexing() {
-        this._initializedColumns()
-      },
-      singleSelect() {
         this._initializedColumns()
       },
     },
@@ -90,16 +85,6 @@
           colRenderFunc: (h, {rowIndex}) => (<div class="a-table-standard-cell">{rowIndex + 1}</div>)
         }
       },
-      _getSingleSelectColumn() {
-        /*@formatter:off*/
-        return {
-          width: '36px',
-          order: 9999,
-          titleRenderFunc: (h, {column}) => (<div class="a-table-standard-cell"><a-radio inactive-icon="fa-dot-circle-o"/></div>),
-          colRenderFunc: (h, {rowIndex}) =>(<div class="a-table-standard-cell"><a-radio/></div>),
-          }
-        /*@formatter:on*/
-      },
       _initializedColumns() {
         /*---------------------------------------获取所有column的参数-------------------------------------------*/
         let columns = this.$children.reduce((ret, child) => {
@@ -107,7 +92,6 @@
           return ret
         }, [])
         !!this.indexing && columns.push(this._getIndexColumn())
-        !!this.singleSelect && columns.push(this._getSingleSelectColumn())
         /*---------------------------------------计算column的rowSpan以及colSpan，以实现多级表头-------------------------------------------*/
         /*最大层数*/
         let maxLevel = 1;

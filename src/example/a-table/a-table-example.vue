@@ -72,7 +72,6 @@
                :row-style-func="null"
                :cell-style-func="null"
                :indexing="indexing"
-               :single-select="singleSelect"
                :row-num="5">
         <a-table-column order="15" field="date" title="日期" :width.sync="columnWidth">
           <template slot-scope="{column}" slot="title">

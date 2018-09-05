@@ -10,7 +10,6 @@
         @update:columns="columns = $event"
         :scroll-left="scrollLeft"
         :indexing="indexing"
-        :single-select="singleSelect"
         :body-has-vertical-scrollbar="bodyHasVerticalScrollbar"
       >
         <slot></slot>
@@ -108,10 +107,6 @@
       indexing: {
         type: Boolean,
         default: true
-      },
-      singleSelect: {
-        type: Boolean,
-        default: false
       },
     },
     data() {
