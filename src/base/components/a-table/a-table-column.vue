@@ -63,7 +63,7 @@
             return _this.$scopedSlots.title
           },
           get colScopedSlots() {
-            return _this.$scopedSlots.default
+            return _this.$scopedSlots.content
           },
           get titleRenderFunc() {
             return _this.titleRenderFunc

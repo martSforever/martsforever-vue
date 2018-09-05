@@ -61,14 +61,21 @@
                padding="6px"
                :bottom-line="true"
                :striple="true"
+               :row-style-func="null"
+               :cell-style-func="null"
                :row-num="5">
-        <a-table-column order="15" field="date" title="日期">
-          <template slot-scope="data" slot="title">
-            slot-scope's content -->> {{title}}
+        <a-table-column order="15" field="date" title="日期" :width.sync="columnWidth">
+          <template slot-scope="{column}" slot="title">
+            slot-scope's content -->> {{title}}--{{column.title}}
+          </template>
+          <template slot-scope="{row,index}" slot="content">
+            <div>
+              slot-scope content: {{title}}-{{index}}- {{row.dispatchDate}}
+            </div>
           </template>
         </a-table-column>
         <a-table-column order="10" field="age" :title="title">
-          <a-table-column field="name" title="姓名" :width.sync="columnWidth"></a-table-column>
+          <a-table-column field="name" title="姓名" width="120px"></a-table-column>
           <a-table-column field="address" title="配送地址">
             <a-table-column order="10" field="province" title="省"></a-table-column>
             <a-table-column order="20" field="city" title="市"></a-table-column>
@@ -125,10 +132,17 @@
         /*@formatter:off*/
         dataList: [
           {date: '11', dispatchDate: 'aaa',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
-          {date: '11', dispatchDate: 'aaa',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
-          {date: '11', dispatchDate: 'aaa',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
-          {date: '11', dispatchDate: 'aaa',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
-          {date: '11', dispatchDate: 'aaa',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
+          {date: '11', dispatchDate: 'bbb',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
+          {date: '11', dispatchDate: 'ccc',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
+          {date: '11', dispatchDate: 'ddd',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
+          {date: '11', dispatchDate: 'eee',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
+          {date: '11', dispatchDate: 'fff',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
+          {date: '11', dispatchDate: 'ggg',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
+          {date: '11', dispatchDate: 'hhh',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
+          {date: '11', dispatchDate: 'iii',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
+          {date: '11', dispatchDate: 'jjj',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
+          {date: '11', dispatchDate: 'kkk',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
+          {date: '11', dispatchDate: 'lll',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
         ],
         /*@formatter:on*/
       }

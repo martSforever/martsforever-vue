@@ -18,7 +18,13 @@
             :style="_getTdStyles(col,colIndex,row,rowIndex)"
             class="a-table-body-td">
           <div :style="{width:col.width,padding,height:rowHeight}" class="a-table-cell">
-            {{row[col.field]}}
+            <rendering-scope-slot v-if="!!col.colScopedSlots"
+                                  :scope-slot-func="col.colScopedSlots"
+                                  :data="{row:row,index:rowIndex}"/>
+            <rendering-render-func v-if="!!col.colRenderFunc"
+                                   :render-func="col.colRenderFunc"
+                                   :data="{row:row,index:rowIndex}"/>
+            <span v-if="!col.colScopedSlots && !col.colRenderFunc">{{row[col.field]}}</span>
           </div>
         </td>
       </tr>
@@ -27,8 +33,12 @@
 </template>
 
 <script>
+  import RenderingScopeSlot from "../rendering-scope-slot";
+  import RenderingRenderFunc from "../rendering-render-func";
+
   export default {
     name: "a-table-body",
+    components: {RenderingRenderFunc, RenderingScopeSlot},
     props: {
       columns: {
         type: Array,

@@ -6,7 +6,10 @@
       :style="tdStyles">
     <!--不能给td设置宽度，当列宽总和大于容器宽度是，table列会被压缩，设置里面的div的宽度即可-->
     <div class="a-table-cell" :style="{width: column.width,padding}">
-      <rendering-scope-slot v-if="!!column.titleScopedSlots" :scope-slot-func="column.titleScopedSlots"/>
+      <rendering-scope-slot
+        v-if="!!column.titleScopedSlots"
+        :scope-slot-func="column.titleScopedSlots"
+        :data="{column}"/>
       <rendering-render-func v-if="!!column.titleRenderFunc" :render-func="column.titleRenderFunc"/>
       <span v-if="!column.titleScopedSlots && !column.titleRenderFunc">{{column.title}}</span>
     </div>
