@@ -58,6 +58,8 @@
       <a-button-group>
         <a-button @click="addRow">add row</a-button>
         <a-button @click="removeRow">remove row</a-button>
+        <a-button @click="getMultiSelected">getMultiSelected</a-button>
+        <a-button @click="getSingleSelected">getSingleSelected</a-button>
       </a-button-group>
     </div>
 
@@ -74,6 +76,8 @@
                :indexing="indexing"
                :row-num="5">
         <a-table-column-index/>
+        <a-table-column-select ref="multiSelect" :multi-select="true"/>
+        <a-table-column-select ref="singleSelect"/>
         <a-table-column order="15" field="date" title="日期" :width.sync="columnWidth">
           <template slot-scope="{column}" slot="title">
             slot-scope's content -->> {{title}}--{{column.title}}
@@ -130,10 +134,14 @@
   import AButtonGroup from "../../base/components/a-button/a-button-group";
   import AButton from "../../base/components/a-button/a-button";
   import ATableColumnIndex from "../../base/components/a-table/a-table-column-index";
+  import ATableColumnSelect from "../../base/components/a-table/a-table-column-select";
 
   export default {
     name: "a-table-example",
-    components: {ATableColumnIndex, AButton, AButtonGroup, AIcon, ASwitch, AInput, ATableColumn, ATable},
+    components: {
+      ATableColumnSelect,
+      ATableColumnIndex, AButton, AButtonGroup, AIcon, ASwitch, AInput, ATableColumn, ATable
+    },
     data() {
       return {
         title: '日期',
@@ -195,6 +203,17 @@
         return (
           <div>{row.date}-|||-{rowIndex}--{row[col.field]}--{colIndex}</div>
         )
+      },
+
+      getMultiSelected() {
+        let rows = this.$refs.multiSelect.getSelected()
+        rows.forEach((row) => {
+          console.log(row.dispatchDate)
+        })
+      },
+      getSingleSelected() {
+        let row = this.$refs.singleSelect.getSelected()
+        console.log(row.dispatchDate)
       },
     },
 

@@ -74,6 +74,7 @@
     },
     methods: {
       _handleClick(e) {
+        this.$emit('click')
         if (!!this.disabled) return
         this.currentValue = !this.currentValue;
         this.$emit('change', this.currentValue)
