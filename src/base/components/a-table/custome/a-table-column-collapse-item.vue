@@ -30,21 +30,15 @@
         trEl: null,
       }
     },
-    mounted() {
-      let trEl = this.$refs.radio.$el
-      this.$nextTick(() => {
-        while (!!trEl && trEl.tagName !== 'TR') {
-          trEl = trEl.parentNode
-        }
-        this.trEl = trEl
-      })
-    },
     methods: {
       _handleClick(e) {
-        this[!!this.currentValue ? 'close' : 'open']()
-        this.currentValue = !this.currentValue
+        this.toggle(!this.currentValue)
+      },
+      toggle(flag = false) {
+        this[!!flag ? 'open' : 'close']()
       },
       open() {
+        if (!!this.currentValue) return
         let tempFunc = this.scopeSlotFunc
         let {row, rowIndex} = this
         let component = {
@@ -59,18 +53,30 @@
         const vueComponent = new Vue(component)
         this.instance = vueComponent.$mount()
         insertAfter(this.instance.$el, this.trEl)
+        this.currentValue = true
+        this.$emit('open', this)
       },
       close() {
+        if (!this.currentValue) return
         this.trEl.parentNode.removeChild(this.instance.$el)
         this.instance.$destroy()
+        this.currentValue = false
+        this.$emit('close', this)
       },
     },
     destroyed() {
       this.close()
+      this.$emit('destroyed', this)
+    },
+    mounted() {
+      this.$emit('mounted', this)
+      let trEl = this.$refs.radio.$el
+      this.$nextTick(() => {
+        while (!!trEl && trEl.tagName !== 'TR') {
+          trEl = trEl.parentNode
+        }
+        this.trEl = trEl
+      })
     },
   }
 </script>
-
-<style lang="scss">
-
-</style>
