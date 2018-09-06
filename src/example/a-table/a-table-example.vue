@@ -87,7 +87,7 @@
         <a-table-column-collapse>
           <template slot-scope="{row,rowIndex}">
             <div style="background-color: cadetblue;color: white;height: 72px">
-              {{row.dispatchDate}}--{{rowIndex}}---bbb
+              this is another collapse col-->>{{row.dispatchDate}}--{{rowIndex}}---bbb
             </div>
           </template>
         </a-table-column-collapse>
