@@ -76,7 +76,21 @@
                :indexing="indexing"
                :row-num="5">
         <a-table-column-index/>
-        <a-table-column-collapse/>
+        <a-table-column-collapse>
+          <template slot-scope="{row,rowIndex}">
+            <div style="background-color: cadetblue;color: white;height: 72px">
+              {{row.dispatchDate}}--{{rowIndex}}---aaa
+            </div>
+          </template>
+        </a-table-column-collapse>
+
+        <a-table-column-collapse>
+          <template slot-scope="{row,rowIndex}">
+            <div style="background-color: cadetblue;color: white;height: 72px">
+              {{row.dispatchDate}}--{{rowIndex}}---bbb
+            </div>
+          </template>
+        </a-table-column-collapse>
         <a-table-column-select ref="multiSelect" :multi-select="true"/>
         <a-table-column-select ref="singleSelect"/>
         <a-table-column order="15" field="date" title="日期" :width.sync="columnWidth">
