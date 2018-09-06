@@ -133,8 +133,8 @@
   import {removePx} from "../../base/script/utils";
   import AButtonGroup from "../../base/components/a-button/a-button-group";
   import AButton from "../../base/components/a-button/a-button";
-  import ATableColumnIndex from "../../base/components/a-table/a-table-column-index";
-  import ATableColumnSelect from "../../base/components/a-table/a-table-column-select";
+  import ATableColumnIndex from "../../base/components/a-table/custome/a-table-column-index";
+  import ATableColumnSelect from "../../base/components/a-table/custome/a-table-column-select";
 
   export default {
     name: "a-table-example",

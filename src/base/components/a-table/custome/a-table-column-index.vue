@@ -10,7 +10,7 @@
 </template>
 
 <script>
-  import ATableColumn from "./a-table-column";
+  import ATableColumn from "../a-table-column";
 
   export default {
     name: "a-table-column-index",
