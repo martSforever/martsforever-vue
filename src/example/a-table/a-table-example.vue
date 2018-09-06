@@ -76,6 +76,7 @@
                :indexing="indexing"
                :row-num="5">
         <a-table-column-index/>
+        <a-table-column-collapse/>
         <a-table-column-select ref="multiSelect" :multi-select="true"/>
         <a-table-column-select ref="singleSelect"/>
         <a-table-column order="15" field="date" title="日期" :width.sync="columnWidth">
@@ -135,10 +136,12 @@
   import AButton from "../../base/components/a-button/a-button";
   import ATableColumnIndex from "../../base/components/a-table/custome/a-table-column-index";
   import ATableColumnSelect from "../../base/components/a-table/custome/a-table-column-select";
+  import ATableColumnCollapse from "../../base/components/a-table/custome/a-table-column-collapse";
 
   export default {
     name: "a-table-example",
     components: {
+      ATableColumnCollapse,
       ATableColumnSelect,
       ATableColumnIndex, AButton, AButtonGroup, AIcon, ASwitch, AInput, ATableColumn, ATable
     },

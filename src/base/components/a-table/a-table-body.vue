@@ -37,7 +37,7 @@
 
   export default {
     name: "a-table-body",
-    components: { RenderingRenderFunc, RenderingScopeSlot},
+    components: {RenderingRenderFunc, RenderingScopeSlot},
     props: {
       columns: {
         type: Array,

@@ -57,7 +57,7 @@
       },
       iconColor: {
         type: String,
-        default: '#e03636'
+        default: '#999'
       },
       label: {},
       iconSize: {
