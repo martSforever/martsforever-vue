@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import {insertAfter} from "../../../../script/dom";
+  import {getParentTrEl, insertAfter} from "../../../../script/dom";
   import Vue from 'vue'
   import ACollapseTransition from "../../../a-collapse-transition/a-collapse-transition";
 
@@ -90,13 +90,7 @@
     },
     mounted() {
       this.$emit('mounted', this)
-      let trEl = this.$refs.radio.$el
-      this.$nextTick(() => {
-        while (!!trEl && trEl.tagName !== 'TR') {
-          trEl = trEl.parentNode
-        }
-        this.trEl = trEl
-      })
+      this.trEl = getParentTrEl(this.$refs.radio.$el)
     },
   }
 </script>

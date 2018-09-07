@@ -102,6 +102,8 @@
         <a-table-column-select ref="multiSelect" :multi-select="true"/>
         <a-table-column-select ref="singleSelect"/>
 
+        <a-table-column-input :order="17" field="dispatchDate"/>
+
         <a-table-column order="15" field="date" title="日期" :width.sync="columnWidth">
           <template slot-scope="{column}" slot="title">
             slot-scope's content -->> {{title}}--{{column.title}}
@@ -162,10 +164,12 @@
   import ATableColumnSelect from "../../base/components/a-table/custome/select/a-table-column-select";
   import ATableColumnCollapse from "../../base/components/a-table/custome/collapse/a-table-column-collapse";
   import ATableExampleTestCol from "./a-table-example-test-col";
+  import ATableColumnInput from "../../base/components/a-table/custome/input/a-table-column-input";
 
   export default {
     name: "a-table-example",
     components: {
+      ATableColumnInput,
       ATableExampleTestCol,
       ATableColumnCollapse,
       ATableColumnSelect,

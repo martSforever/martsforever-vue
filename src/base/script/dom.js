@@ -182,3 +182,12 @@ export function insertAfter(newEl, targetEl) {
     parentEl.insertBefore(newEl, targetEl.nextSibling);
   }
 }
+
+export function getParentTrEl(el) {
+  let trEl = el
+  while (!!trEl && trEl.tagName !== 'TR') {
+    trEl = trEl.parentNode
+  }
+  if (trEl === el) throw new Error("can't find tr el")
+  return trEl === el ? null : trEl
+}
