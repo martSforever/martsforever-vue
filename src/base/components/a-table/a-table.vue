@@ -167,9 +167,25 @@
           this.bodyHeight = bodyHeight
         }
       },
-    },
-    mounted() {
 
+      /*通知所有节点保存编辑的数据*/
+      saveEdit() {
+        const editItems = this._findTableEditItemComponentDownward(this)
+        editItems.forEach((item) => item.$emit('save-edit'))
+      },
+      /*通知所有节点取消编辑的数据*/
+      cancelEdit() {
+        const editItems = this._findTableEditItemComponentDownward(this)
+        editItems.forEach((item) => item.$emit('cancel-edit'))
+      },
+
+      _findTableEditItemComponentDownward(context) {
+        return context.$children.reduce((ret, item) => {
+          if (!!item.isTableEditItem) ret.push(item)
+          const foundChildren = this._findTableEditItemComponentDownward(item)
+          return ret.concat(foundChildren)
+        }, [])
+      },
     },
   }
 </script>

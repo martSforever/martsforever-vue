@@ -61,22 +61,32 @@
         <a-button @click="getMultiSelected">getMultiSelected</a-button>
         <a-button @click="getSingleSelected">getSingleSelected</a-button>
       </a-button-group>
+      <a-button-group>
+        <a-button @click="saveTableEditData">save edit</a-button>
+        <a-button @click="cancelEdit">cancel edit</a-button>
+      </a-button-group>
     </div>
 
     <div style="height: 800px;background-color: transparent">
-      <a-table :fit-width="fitWidth"
-               :border-size="borderSize"
-               :list="dataList"
-               row-height="40px"
-               padding="6px"
-               :bottom-line="true"
-               :striple="true"
-               :row-style-func="null"
-               :cell-style-func="null"
-               :indexing="indexing"
-               :last-row="{dispatchDate:'wowowowowowowowowowo'}"
-               :row-num="7">
+      <a-table
+        ref="table"
+        :fit-width="fitWidth"
+        :border-size="borderSize"
+        :list="dataList"
+        row-height="40px"
+        padding="6px"
+        :bottom-line="true"
+        :striple="true"
+        :row-style-func="null"
+        :cell-style-func="null"
+        :indexing="indexing"
+        :last-row="{dispatchDate:'wowowowowowowowowowo'}"
+        :row-num="7">
+
+        <!--自己手动添加的索引列-->
         <a-table-column-index/>
+
+        <!--折叠列：默认多选-->
         <a-table-column-collapse>
           <template slot-scope="{row,rowIndex}">
             <div style="background-color: cadetblue;color: white;height: 72px">
@@ -84,7 +94,7 @@
             </div>
           </template>
         </a-table-column-collapse>
-
+        <!--折叠列：默认多选-->
         <a-table-column-collapse>
           <template slot-scope="{row,rowIndex}">
             <div style="background-color: seagreen;color: white;height: 72px">
@@ -92,6 +102,7 @@
             </div>
           </template>
         </a-table-column-collapse>
+        <!--折叠列：单选-->
         <a-table-column-collapse :multiple="false">
           <template slot-scope="{row,rowIndex}">
             <div style="background-color: greenyellow;color: white;height: 72px">
@@ -99,11 +110,18 @@
             </div>
           </template>
         </a-table-column-collapse>
+
+        <!--多选列-->
         <a-table-column-select ref="multiSelect" :multi-select="true"/>
+        <!--单选列-->
         <a-table-column-select ref="singleSelect"/>
 
+        <!--文本输入列-->
         <a-table-column-input :order="17" field="dispatchDate"/>
 
+
+        <!--以下为多级表头列-->
+        <a-table-column title="简单文本" field="dispatchDate" order="21"/>
         <a-table-column order="15" field="date" title="日期" :width.sync="columnWidth">
           <template slot-scope="{column}" slot="title">
             slot-scope's content -->> {{title}}--{{column.title}}
@@ -180,7 +198,7 @@
         title: '日期',
         fitWidth: false,
         firstOrder: '13',
-        columnWidth: `1250px`,
+        columnWidth: `700px`,
         borderSize: 2,
         indexing: true,
         singleSelect: true,
@@ -244,6 +262,13 @@
       getSingleSelected() {
         let row = this.$refs.singleSelect.getSelected()
         console.log(row.dispatchDate)
+      },
+
+      saveTableEditData() {
+        this.$refs.table.saveEdit()
+      },
+      cancelEdit() {
+        this.$refs.table.cancelEdit()
       },
     },
 
