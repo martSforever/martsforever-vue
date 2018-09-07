@@ -19,6 +19,27 @@
             :padding="padding"
             :column="column"/>
         </tr>
+
+        <tr v-if="!!lastRow && !!headRows"
+            :key="lastRowIndex"
+            class="a-table-body-tr"
+            :style="!!rowStyleFunc?rowStyleFunc(lastRow,lastRowIndex):null"
+            :class="{'a-table-body-tr-bottom-line':!!bottomLine,'a-table-body-tr-striple':!!striple}">
+          <td v-for="(col,colIndex) in renderColumns"
+              :key="colIndex"
+              :style="_getTdStyles(col,colIndex,lastRow,lastRowIndex)"
+              class="a-table-body-td">
+            <div :style="{width:col.width,padding,height:rowHeight}" class="a-table-cell">
+              <rendering-scope-slot v-if="!!col.colScopedSlots"
+                                    :scope-slot-func="col.colScopedSlots"
+                                    :data="{row:lastRow,rowIndex:lastRowIndex,col,colIndex}"/>
+              <rendering-render-func v-if="!!col.colRenderFunc"
+                                     :render-func="col.colRenderFunc"
+                                     :data="{row:lastRow,rowIndex:lastRowIndex,col,colIndex}"/>
+              <span v-if="!col.colScopedSlots && !col.colRenderFunc">{{lastRow[col.field]}}</span>
+            </div>
+          </td>
+        </tr>
       </table>
     </div>
     <div style="display: inline-block;width: 17px;height: 100%;background-color: #0ac2ff"
@@ -47,6 +68,30 @@
       padding: {},
       bodyHasVerticalScrollbar: {},
       scrollLeft: {},
+      renderColumns: {
+        type: Array,
+        default: () => []
+      },
+      rowStyleFunc: {
+        type: Function,
+        desc: '行样式渲染',
+      },
+      cellStyleFunc: {
+        type: Function,
+        desc: '单元格样式渲染'
+      },
+      lastRow: {},
+      bottomLine: {
+        type: Boolean,
+      },
+      striple: {
+        type: Boolean,
+      },
+      rowHeight: {
+        type: String,
+        desc: '每一行的高度',
+      },
+      dataList: {},
     },
     data() {
       return {
@@ -71,6 +116,9 @@
       },
       isMultiLevelHeader() {
         return !!this.headRows && this.headRows.length > 1
+      },
+      lastRowIndex() {
+        return this.dataList.length
       },
     },
     methods: {
@@ -143,12 +191,14 @@
         iterateColumn(this.columns)
         this.headRows = headRows
       },
-    }
-    ,
+      _getTdStyles(col, colIndex, row, rowIndex) {
+        let cellStyles = !!this.cellStyleFunc ? this.cellStyleFunc(col, colIndex, row, rowIndex) : {}
+        return Object.assign({}, {border: `${this.borderStyle} ${this.borderSize}px ${this.borderColor}`}, cellStyles)
+      },
+    },
     mounted() {
       this._initializedColumns()
-    }
-    ,
+    },
   }
 </script>
 

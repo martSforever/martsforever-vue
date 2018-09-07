@@ -12,7 +12,7 @@
           class="a-table-body-tr"
           :style="!!rowStyleFunc?rowStyleFunc(row,rowIndex):null"
           :class="{'a-table-body-tr-bottom-line':!!bottomLine,'a-table-body-tr-striple':!!striple}">
-        <td v-for="(col,colIndex) in columns"
+        <td v-for="(col,colIndex) in renderColumns"
             :key="colIndex"
             :style="_getTdStyles(col,colIndex,row,rowIndex)"
             class="a-table-body-td">
@@ -39,7 +39,7 @@
     name: "a-table-body",
     components: {RenderingRenderFunc, RenderingScopeSlot},
     props: {
-      columns: {
+      renderColumns: {
         type: Array,
         default: () => []
       },
@@ -70,7 +70,6 @@
       },
       rowHeight: {
         type: String,
-        default: '40px'
       },
       bodyHeight: {
         type: Number,

@@ -10,6 +10,14 @@
         @update:columns="columns = $event"
         :scroll-left="scrollLeft"
         :indexing="indexing"
+        :row-style-func="rowStyleFunc"
+        :cell-style-func="cellStyleFunc"
+        :render-columns="renderColumns"
+        :bottom-line="bottomLine"
+        :striple="striple"
+        :row-height="rowHeight"
+        :last-row="lastRow"
+        :data-list="list"
         :body-has-vertical-scrollbar="bodyHasVerticalScrollbar"
       >
         <a-table-column-index v-if="!!indexing"/>
@@ -18,7 +26,7 @@
       <a-table-body
         ref="tableBody"
         :fit-width="fitWidth"
-        :columns="renderColumns"
+        :render-columns="renderColumns"
         :data-list="list"
         :border-color="borderColor"
         :border-size="borderSize"
@@ -110,6 +118,7 @@
         type: Boolean,
         default: true
       },
+      lastRow: {},
     },
     data() {
       return {

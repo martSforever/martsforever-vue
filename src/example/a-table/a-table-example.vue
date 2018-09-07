@@ -74,7 +74,8 @@
                :row-style-func="null"
                :cell-style-func="null"
                :indexing="indexing"
-               :row-num="5">
+               :last-row="{dispatchDate:'wowowowowowowowowowo'}"
+               :row-num="7">
         <a-table-column-index/>
         <a-table-column-collapse>
           <template slot-scope="{row,rowIndex}">
