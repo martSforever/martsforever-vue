@@ -158,10 +158,12 @@
   import ATableColumnIndex from "../../base/components/a-table/custome/a-table-column-index";
   import ATableColumnSelect from "../../base/components/a-table/custome/a-table-column-select";
   import ATableColumnCollapse from "../../base/components/a-table/custome/a-table-column-collapse";
+  import ATableExampleTestCol from "./a-table-example-test-col";
 
   export default {
     name: "a-table-example",
     components: {
+      ATableExampleTestCol,
       ATableColumnCollapse,
       ATableColumnSelect,
       ATableColumnIndex, AButton, AButtonGroup, AIcon, ASwitch, AInput, ATableColumn, ATable

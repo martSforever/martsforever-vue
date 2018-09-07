@@ -82,7 +82,11 @@
       /*点击列表头动作*/
       _handleClick() {
         this.totalChecked = !this.totalChecked
-        this.changeAll(this.totalChecked)
+        if (!!this.multiple) {
+          this.changeAll(this.totalChecked)
+        } else if (!this.totalChecked) {
+          this.changeAll(false)
+        }
       },
     },
   }
