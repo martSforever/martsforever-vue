@@ -28,6 +28,7 @@
       return {
         currentValue: false,
         trEl: null,
+        show: false,
       }
     },
     methods: {
@@ -39,29 +40,48 @@
       },
       open() {
         if (!!this.currentValue) return
-        let tempFunc = this.scopeSlotFunc
-        let {row, rowIndex} = this
-        let component = {
-          render(h) {
-            return (<tr>
-              <td colSpan="99">
-                <div>{tempFunc({row, rowIndex})}</div>
-              </td>
-            </tr>)
-          },
-        }
-        const vueComponent = new Vue(component)
-        this.instance = vueComponent.$mount()
-        insertAfter(this.instance.$el, this.trEl)
+        this.instance = this._getInstance()
         this.currentValue = true
         this.$emit('open', this)
       },
       close() {
         if (!this.currentValue) return
-        this.trEl.parentNode.removeChild(this.instance.$el)
-        this.instance.$destroy()
-        this.currentValue = false
-        this.$emit('close', this)
+        this.show = false
+        this.instance.$on('close-transition-end', () => {
+          this.trEl.parentNode.removeChild(this.instance.$el)
+          this.instance.$destroy()
+          this.currentValue = false
+          this.$emit('close', this)
+        })
+      },
+      _getInstance() {
+        const vueComponent = new Vue({
+          props: {parent: {default: () => this}},
+          render(h) {
+            return (<tr>
+              <td colSpan="99">
+                <a-collapse-transition onAfterLeave={this.handleTransitionEnd}>
+                  <div v-show={this.parent.show}>
+                    {this.parent.scopeSlotFunc({row: this.parent.row, rowIndex: this.parent.rowIndex})}
+                  </div>
+                </a-collapse-transition>
+              </td>
+            </tr>)
+          },
+          mounted() {
+            /*组件挂载之后，触发折叠动画*/
+            this.parent.show = true
+          },
+          methods: {
+            handleTransitionEnd() {
+              /*收起动画结束之后，对外发出结束事件*/
+              if (!this.parent.show) this.$emit('close-transition-end')
+            },
+          },
+        })
+        const instance = vueComponent.$mount()
+        insertAfter(instance.$el, this.trEl)
+        return instance
       },
     },
     destroyed() {

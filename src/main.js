@@ -9,10 +9,13 @@ import spreadPlugin from 'src/base/vue-plugin/spread' //自定义向上广播，
 import i18n from './base/locale'
 
 import ARadio from 'src/base/components/a-radio/a-radio'
+import ACollapseTransition from 'src/base/components/a-collapse-transition/a-collapse-transition'
+
 import 'src/base/style/index.scss';
 import 'src/index.js';
 
 Vue.component('a-radio', ARadio)
+Vue.component('a-collapse-transition', ACollapseTransition)
 
 Vue.config.productionTip = false;
 Vue.use(spreadPlugin)

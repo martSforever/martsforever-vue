@@ -81,6 +81,8 @@
         el.style.overflow = el.dataset.oldOverflow
         el.style.paddingTop = el.dataset.oldPaddingTop
         el.style.paddingBottom = el.dataset.oldPaddingBottom
+
+        this.$emit('afterLeave')
       }
     }
   }

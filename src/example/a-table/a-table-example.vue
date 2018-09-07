@@ -79,7 +79,7 @@
         <a-table-column-collapse>
           <template slot-scope="{row,rowIndex}">
             <div style="background-color: cadetblue;color: white;height: 72px">
-              {{row.dispatchDate}}--{{rowIndex}}---aaa
+              {{row.dispatchDate}}--{{rowIndex}}---xxxxxxxxxx
             </div>
           </template>
         </a-table-column-collapse>
@@ -87,14 +87,14 @@
         <a-table-column-collapse>
           <template slot-scope="{row,rowIndex}">
             <div style="background-color: seagreen;color: white;height: 72px">
-              this is another collapse col-->>{{row.dispatchDate}}--{{rowIndex}}---bbb
+              this is another collapse col-->>{{row.dispatchDate}}--{{rowIndex}}---yyyyyyyyyy
             </div>
           </template>
         </a-table-column-collapse>
         <a-table-column-collapse :multiple="false">
           <template slot-scope="{row,rowIndex}">
             <div style="background-color: seagreen;color: white;height: 72px">
-              this is another collapse col-->>{{row.dispatchDate}}--{{rowIndex}}---bbb
+              this is another collapse col-->>{{row.dispatchDate}}--{{rowIndex}}---zzzzzzz
             </div>
           </template>
         </a-table-column-collapse>
