@@ -60,7 +60,7 @@
         desc: '列表数据',
       },
       borderSize: {
-        default: 6,
+        default: 2,
         desc: '边框宽度',
       },
       borderColor: {

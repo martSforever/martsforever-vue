@@ -33,7 +33,7 @@
     components: {ATableColumnSelectItem, ATableColumn},
     props: {
       order: {
-        default: 9999
+        default: 9998
       },
       multiSelect: {
         type: Boolean,

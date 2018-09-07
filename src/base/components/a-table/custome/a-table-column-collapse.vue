@@ -34,7 +34,7 @@
     components: {RenderingScopeSlot, ATableColumnCollapseItem, AIcon, ATableColumn},
     props: {
       order: {
-        default: 9999
+        default: 9997
       },
       multiple: {
         type: Boolean,

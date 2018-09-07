@@ -40,7 +40,9 @@
     props: {
       fitWidth: {},
       borderSize: {},
-      borderColor: {},
+      borderColor: {
+        default: '#f2f2f2'
+      },
       borderStyle: {},
       padding: {},
       bodyHasVerticalScrollbar: {},

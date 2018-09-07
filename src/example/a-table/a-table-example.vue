@@ -93,13 +93,14 @@
         </a-table-column-collapse>
         <a-table-column-collapse :multiple="false">
           <template slot-scope="{row,rowIndex}">
-            <div style="background-color: seagreen;color: white;height: 72px">
+            <div style="background-color: greenyellow;color: white;height: 72px">
               this is another collapse col-->>{{row.dispatchDate}}--{{rowIndex}}---zzzzzzz
             </div>
           </template>
         </a-table-column-collapse>
         <a-table-column-select ref="multiSelect" :multi-select="true"/>
         <a-table-column-select ref="singleSelect"/>
+
         <a-table-column order="15" field="date" title="日期" :width.sync="columnWidth">
           <template slot-scope="{column}" slot="title">
             slot-scope's content -->> {{title}}--{{column.title}}
@@ -124,14 +125,15 @@
                           width="200px"></a-table-column>
           <a-table-column field="dispatchAddress" title="发货地址"></a-table-column>
         </a-table-column>
-        <!--<a-table-column title="a">
+        <a-table-column title="a">
           <a-table-column title="b">
             <a-table-column title="c">
             </a-table-column>
           </a-table-column>
           <a-table-column title="d"></a-table-column>
         </a-table-column>
-        <a-table-column title="other"></a-table-column>
+
+        <!--<a-table-column title="other"></a-table-column>
         <a-table-column title="other"></a-table-column>
         <a-table-column title="other"></a-table-column>
         <a-table-column title="other"></a-table-column>
@@ -174,7 +176,7 @@
         fitWidth: false,
         firstOrder: '13',
         columnWidth: `1250px`,
-        borderSize: 1,
+        borderSize: 2,
         indexing: true,
         singleSelect: true,
         /*@formatter:off*/
