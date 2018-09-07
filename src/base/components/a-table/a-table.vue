@@ -50,8 +50,9 @@
   import AButtonGroup from "../a-button/a-button-group";
   import AButton from "../a-button/a-button";
   import ATableBody from "./a-table-body";
-  import {removePx} from "../../script/utils";
+  import {findComponentsDownward, removePx} from "../../script/utils";
   import ATableColumnIndex from "./custome/index/a-table-column-index";
+  import {findTableEditItemComponentDownward} from "./custome";
 
   export default {
     name: "a-table",
@@ -170,21 +171,11 @@
 
       /*通知所有节点保存编辑的数据*/
       saveEdit() {
-        const editItems = this._findTableEditItemComponentDownward(this)
-        editItems.forEach((item) => item.$emit('save-edit'))
+        findComponentsDownward(this, 'a-table-row').forEach(item => item.saveEdit())
       },
       /*通知所有节点取消编辑的数据*/
       cancelEdit() {
-        const editItems = this._findTableEditItemComponentDownward(this)
-        editItems.forEach((item) => item.$emit('cancel-edit'))
-      },
-
-      _findTableEditItemComponentDownward(context) {
-        return context.$children.reduce((ret, item) => {
-          if (!!item.isTableEditItem) ret.push(item)
-          const foundChildren = this._findTableEditItemComponentDownward(item)
-          return ret.concat(foundChildren)
-        }, [])
+        findComponentsDownward(this, 'a-table-row').forEach(item => item.disableEdit())
       },
     },
   }

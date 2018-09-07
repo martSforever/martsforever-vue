@@ -118,6 +118,7 @@
 
         <!--文本输入列-->
         <a-table-column-input :order="17" field="dispatchDate"/>
+        <a-table-column-input :order="17" field="dispatchAddress"/>
 
 
         <!--以下为多级表头列-->
@@ -204,18 +205,18 @@
         singleSelect: true,
         /*@formatter:off*/
         dataList: [
-          {date: '11', dispatchDate: 'aaa',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
+          {date: '11', dispatchDate: 'aaa',dispatchAddress:'11',name:'bbb',province:'sheng',city:'city',district:'district'},
           {date: '11', dispatchDate: 'bbb',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
-          {date: '11', dispatchDate: 'ccc',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
-          {date: '11', dispatchDate: 'ddd',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
-          {date: '11', dispatchDate: 'eee',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
-          {date: '11', dispatchDate: 'fff',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
-          {date: '11', dispatchDate: 'ggg',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
-          {date: '11', dispatchDate: 'hhh',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
-          {date: '11', dispatchDate: 'iii',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
-          {date: '11', dispatchDate: 'jjj',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
-          {date: '11', dispatchDate: 'kkk',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
-          {date: '11', dispatchDate: 'lll',dispatchAddress:'22',name:'bbb',province:'sheng',city:'city',district:'district'},
+          {date: '11', dispatchDate: 'ccc',dispatchAddress:'33',name:'bbb',province:'sheng',city:'city',district:'district'},
+          {date: '11', dispatchDate: 'ddd',dispatchAddress:'44',name:'bbb',province:'sheng',city:'city',district:'district'},
+          {date: '11', dispatchDate: 'eee',dispatchAddress:'55',name:'bbb',province:'sheng',city:'city',district:'district'},
+          {date: '11', dispatchDate: 'fff',dispatchAddress:'66',name:'bbb',province:'sheng',city:'city',district:'district'},
+          {date: '11', dispatchDate: 'ggg',dispatchAddress:'77',name:'bbb',province:'sheng',city:'city',district:'district'},
+          {date: '11', dispatchDate: 'hhh',dispatchAddress:'88',name:'bbb',province:'sheng',city:'city',district:'district'},
+          {date: '11', dispatchDate: 'iii',dispatchAddress:'99',name:'bbb',province:'sheng',city:'city',district:'district'},
+          {date: '11', dispatchDate: 'jjj',dispatchAddress:'1010',name:'bbb',province:'sheng',city:'city',district:'district'},
+          {date: '11', dispatchDate: 'kkk',dispatchAddress:'1111',name:'bbb',province:'sheng',city:'city',district:'district'},
+          {date: '11', dispatchDate: 'lll',dispatchAddress:'1212',name:'bbb',province:'sheng',city:'city',district:'district'},
         ],
         /*@formatter:on*/
       }

@@ -124,8 +124,6 @@
         currentValue: this.value,
       }
     },
-    created() {
-    },
     methods: {
       setCurrentValue(value) {
         if (value === this.currentValue) return;

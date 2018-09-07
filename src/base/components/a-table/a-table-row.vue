@@ -1,7 +1,9 @@
 <template>
-  <tr class="a-table-body-tr"
-      :style="!!rowStyleFunc?rowStyleFunc(row,rowIndex):null"
-      :class="{'a-table-body-tr-bottom-line':!!bottomLine,'a-table-body-tr-striple':!!striple}">
+  <tr
+    class="a-table-body-tr"
+    @dblclick="_handleDblClick"
+    :style="!!rowStyleFunc?rowStyleFunc(row,rowIndex):null"
+    :class="{'a-table-body-tr-bottom-line':!!bottomLine,'a-table-body-tr-striple':!!striple}">
     <td v-for="(col,colIndex) in renderColumns"
         :key="colIndex"
         :style="_getTdStyles(col,colIndex,row,rowIndex)"
@@ -22,6 +24,7 @@
 <script>
   import RenderingScopeSlot from "../rendering-scope-slot";
   import RenderingRenderFunc from "../rendering-render-func";
+  import {findTableEditItemComponentDownward} from "./custome";
 
   export default {
     name: "a-table-row",
@@ -46,12 +49,51 @@
       renderColumns: {},
       padding: {},
       rowHeight: {},
+
+      borderSize: {
+        desc: '边框宽度',
+      },
+      borderColor: {
+        type: String,
+        desc: '边框颜色',
+      },
+      borderStyle: {
+        type: String,
+        desc: '边框风格',
+      },
+    },
+    data() {
+      return {
+        currentEditable: false
+      }
+    },
+    watch: {
+      currentEditable(val) {
+        this._changeEditable(val)
+      },
     },
     methods: {
       _getTdStyles(col, colIndex, row, rowIndex) {
-        let tdStyles = this.tdStyles
+        let tdStyles = {border: `${this.borderStyle} ${this.borderColor} ${this.borderSize}px`}
         let cellStyles = !!this.cellStyleFunc ? this.cellStyleFunc(col, colIndex, row, rowIndex) : {}
         return Object.assign({}, tdStyles, cellStyles)
+      },
+      _handleDblClick() {
+        !this.currentEditable && (this.currentEditable = true)
+      },
+      enableEdit() {
+        this.currentEditable = true
+      },
+      disableEdit() {
+        this.currentEditable = false
+      },
+      saveEdit() {
+        if (!this.currentEditable) return
+        findTableEditItemComponentDownward(this).forEach(item => item.handleSave())
+        this._changeEditable(false)
+      },
+      _changeEditable(flag) {
+        findTableEditItemComponentDownward(this).forEach(item => item[!!flag ? 'enableEdit' : 'disableEdit']())
       },
     },
   }

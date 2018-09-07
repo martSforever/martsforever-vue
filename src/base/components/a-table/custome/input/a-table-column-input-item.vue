@@ -1,7 +1,9 @@
 <template>
   <div ref="wrapper">
-    <a-input v-model="currentValue" v-if="!!editable && !!currentEditable"/>
-    <span v-else>{{row[field]}}</span>
+    <keep-alive>
+      <a-input v-model="currentValue" v-if="!!editable && !!currentEditable"/>
+      <span v-else>{{row[field]}}</span>
+    </keep-alive>
   </div>
 </template>
 

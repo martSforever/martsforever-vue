@@ -19,6 +19,9 @@
         :render-columns="renderColumns"
         :padding="padding"
         :row-height="rowHeight"
+        :border-size="borderSize"
+        :border-color="borderColor"
+        :border-style="borderStyle"
       />
     </table>
   </div>
