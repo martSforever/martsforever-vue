@@ -24,10 +24,10 @@
 </template>
 
 <script>
-  import ATableColumn from "../a-table-column";
-  import AIcon from "../../a-icon/a-icon";
+  import ATableColumn from "../../a-table-column";
+  import AIcon from "../../../a-icon/a-icon";
   import ATableColumnCollapseItem from "./a-table-column-collapse-item";
-  import RenderingScopeSlot from "../../rendering-scope-slot";
+  import RenderingScopeSlot from "../../../rendering-scope-slot";
 
   export default {
     name: "a-table-column-collapse",

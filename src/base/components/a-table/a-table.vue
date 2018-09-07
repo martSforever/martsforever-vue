@@ -51,7 +51,7 @@
   import AButton from "../a-button/a-button";
   import ATableBody from "./a-table-body";
   import {removePx} from "../../script/utils";
-  import ATableColumnIndex from "./custome/a-table-column-index";
+  import ATableColumnIndex from "./custome/index/a-table-column-index";
 
   export default {
     name: "a-table",

@@ -25,7 +25,7 @@
 </template>
 
 <script>
-  import ATableColumn from "../a-table-column";
+  import ATableColumn from "../../a-table-column";
   import ATableColumnSelectItem from "./a-table-column-select-item";
 
   export default {

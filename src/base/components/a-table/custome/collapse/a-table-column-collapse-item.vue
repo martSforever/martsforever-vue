@@ -7,9 +7,9 @@
 </template>
 
 <script>
-  import {insertAfter} from "../../../script/dom";
+  import {insertAfter} from "../../../../script/dom";
   import Vue from 'vue'
-  import ACollapseTransition from "../../a-collapse-transition/a-collapse-transition";
+  import ACollapseTransition from "../../../a-collapse-transition/a-collapse-transition";
 
   export default {
     name: "a-table-column-collapse-item",

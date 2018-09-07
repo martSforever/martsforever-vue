@@ -158,9 +158,9 @@
   import {removePx} from "../../base/script/utils";
   import AButtonGroup from "../../base/components/a-button/a-button-group";
   import AButton from "../../base/components/a-button/a-button";
-  import ATableColumnIndex from "../../base/components/a-table/custome/a-table-column-index";
-  import ATableColumnSelect from "../../base/components/a-table/custome/a-table-column-select";
-  import ATableColumnCollapse from "../../base/components/a-table/custome/a-table-column-collapse";
+  import ATableColumnIndex from "../../base/components/a-table/custome/index/a-table-column-index";
+  import ATableColumnSelect from "../../base/components/a-table/custome/select/a-table-column-select";
+  import ATableColumnCollapse from "../../base/components/a-table/custome/collapse/a-table-column-collapse";
   import ATableExampleTestCol from "./a-table-example-test-col";
 
   export default {
