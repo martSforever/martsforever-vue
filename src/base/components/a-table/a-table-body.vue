@@ -22,6 +22,7 @@
         :border-size="borderSize"
         :border-color="borderColor"
         :border-style="borderStyle"
+        :multi-editable="multiEditable"
       />
     </table>
   </div>
@@ -90,6 +91,7 @@
         type: Function,
         desc: '单元格样式渲染'
       },
+      multiEditable: {},
     },
     computed: {
       tableStyles() {

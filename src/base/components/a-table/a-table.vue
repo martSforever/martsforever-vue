@@ -39,7 +39,8 @@
         :striple="striple"
         :row-style-func="rowStyleFunc"
         :cell-style-func="cellStyleFunc"
-        :body-has-vertical-scrollbar.sync="bodyHasVerticalScrollbar"/>
+        :body-has-vertical-scrollbar.sync="bodyHasVerticalScrollbar"
+        :multi-editable="multiEditable"/>
     </div>
   </div>
 </template>
@@ -120,6 +121,10 @@
         default: true
       },
       lastRow: {},
+      multiEditable: {
+        type: Boolean,
+        default: false
+      },
     },
     data() {
       return {

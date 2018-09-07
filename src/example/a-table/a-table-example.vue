@@ -14,6 +14,10 @@
         <a-switch v-model="singleSelect"/>
       </div>
       <div class="item">
+        单行编辑：
+        <a-switch v-model="multiEditable"/>
+      </div>
+      <div class="item">
         列标题：
         <a-input v-model="title"/>
       </div>
@@ -81,6 +85,7 @@
         :cell-style-func="null"
         :indexing="indexing"
         :last-row="{dispatchDate:'wowowowowowowowowowo'}"
+        :multi-editable="multiEditable"
         :row-num="7">
 
         <!--自己手动添加的索引列-->
@@ -203,6 +208,7 @@
         borderSize: 2,
         indexing: true,
         singleSelect: true,
+        multiEditable: true,
         /*@formatter:off*/
         dataList: [
           {date: '11', dispatchDate: 'aaa',dispatchAddress:'11',name:'bbb',province:'sheng',city:'city',district:'district'},

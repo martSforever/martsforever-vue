@@ -25,6 +25,7 @@
   import RenderingScopeSlot from "../rendering-scope-slot";
   import RenderingRenderFunc from "../rendering-render-func";
   import {findTableEditItemComponentDownward} from "./custome";
+  import {findComponentUpward} from "../../script/utils";
 
   export default {
     name: "a-table-row",
@@ -61,10 +62,12 @@
         type: String,
         desc: '边框风格',
       },
+      multiEditable: {},
     },
     data() {
       return {
-        currentEditable: false
+        currentEditable: false,
+        table: null
       }
     },
     watch: {
@@ -79,6 +82,7 @@
         return Object.assign({}, tdStyles, cellStyles)
       },
       _handleDblClick() {
+        if (!this.multiEditable) this.table.cancelEdit()
         !this.currentEditable && (this.currentEditable = true)
       },
       enableEdit() {
@@ -95,6 +99,9 @@
       _changeEditable(flag) {
         findTableEditItemComponentDownward(this).forEach(item => item[!!flag ? 'enableEdit' : 'disableEdit']())
       },
+    },
+    mounted() {
+      this.table = findComponentUpward(this, 'a-table')
     },
   }
 </script>
