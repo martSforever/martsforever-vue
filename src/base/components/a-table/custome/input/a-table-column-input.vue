@@ -1,5 +1,5 @@
 <template>
-  <a-table-column ref="tableColumn" :order="order" :title="title">
+  <a-table-column ref="tableColumn" :order="order" :title="title" :width="width">
     <template slot-scope="{row,rowIndex}">
       <a-table-column-input-item :row="row" :row-index="rowIndex" :field="field"/>
     </template>
@@ -24,6 +24,9 @@
       field: {
         type: String,
         required: true
+      },
+      width: {
+        default: '160px'
       },
     },
     data() {

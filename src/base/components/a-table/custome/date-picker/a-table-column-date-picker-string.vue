@@ -1,5 +1,5 @@
 <template>
-  <a-table-column :title="title" ref="tableColumn">
+  <a-table-column :title="title" ref="tableColumn" :width="width">
     <template slot-scope="{row,rowIndex}">
       <a-table-column-date-picker-string-item :row="row" :row-index="rowIndex" :field="field"/>
     </template>
@@ -25,6 +25,9 @@
       field: {
         type: String,
         required: true
+      },
+      width: {
+        default: '160px'
       },
     },
     data() {
