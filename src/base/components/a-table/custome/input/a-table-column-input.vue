@@ -1,7 +1,7 @@
 <template>
   <a-table-column ref="tableColumn" :order="order">
     <template slot-scope="{column}" slot="title">
-      <div class="a-table-standard-cell">{{title}}</div>
+      <div>{{title}}</div>
     </template>
     <template slot-scope="{row,rowIndex}">
       <a-table-column-input-item :row="row" :row-index="rowIndex" :field="field"/>

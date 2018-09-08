@@ -154,7 +154,7 @@
 <style lang="scss">
   .a-table-body {
     max-width: 100%;
-    display: inline-block;
+    display: block;
     overflow-x: auto;
     overflow-y: auto;
     .a-table-body-tr {

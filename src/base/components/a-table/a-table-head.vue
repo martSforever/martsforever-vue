@@ -209,7 +209,7 @@
     white-space: nowrap;
 
     max-width: 100%;
-    display: inline-block;
+    display: block;
     &.a-table-head-border-bottom {
       border-bottom: solid 1px $table-bottom-color;
     }
