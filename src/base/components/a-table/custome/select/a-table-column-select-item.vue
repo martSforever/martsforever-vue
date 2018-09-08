@@ -8,7 +8,7 @@
         :options-value-key="optionsValueKey"
         v-model="currentValue"
         v-if="!!editable && !!currentEditable"/>
-      <span v-else>{{row[field]}}--{{labels}}</span>
+      <span v-else>{{labels}}</span>
     </keep-alive>
   </div>
 </template>
@@ -32,11 +32,25 @@
       },
     },
     mixins: [TableEditMixin],
-    methods: {},
-    computed: {
-      labels() {
-        return !!this.$refs.select ? this.$refs.select.labels : ''
+    data() {
+      return {labels: ''}
+    },
+    methods: {
+      updateLabel() {
+        this.labels = ''
+        this.options.forEach((option) => {
+          if (option[this.optionsValueKey] === this.row[this.field]) {
+            this.labels = option[this.optionsShowKey]
+          }
+        })
       },
+      afterSave() {
+        console.log('afterSave')
+        this.updateLabel()
+      },
+    },
+    mounted() {
+      this.updateLabel()
     },
   }
 </script>

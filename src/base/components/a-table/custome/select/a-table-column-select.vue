@@ -7,6 +7,7 @@
         :options-value-key="optionsValueKey"
         :row="row"
         :row-index="rowIndex"
+        :field="field"
       >
         <slot></slot>
       </a-table-column-select-item>
@@ -56,6 +57,7 @@
         return this.$refs.tableColumn.getColumn()
       },
     },
+
   }
 </script>
 

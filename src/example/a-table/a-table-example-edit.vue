@@ -46,7 +46,7 @@
         <a-table-column-date-picker-string field="date" title="出生日期"/>
 
         <!--下拉选择列-->
-        <a-table-column-select field="type" title="喜好食品"
+        <a-table-column-select field="food" title="喜好食品"
                                :options="selectOptions"
                                options-show-key="label"
                                options-value-key="val"/>
@@ -85,15 +85,15 @@
         multiEditable: false,
         fit: false,
         dataList: [
-          {name: '渣渣辉', code: '0x001', date: '2018-09-01'},
-          {name: '刘德华', code: '0x002', date: '2018-09-02'},
-          {name: '刘青云', code: '0x003', date: '2018-09-03'},
-          {name: '赵又廷', code: '0x004', date: '2018-09-04'},
-          {name: '黄渤', code: '0x005', date: '2018-09-05'},
-          {name: '古天乐', code: '0x006', date: '2018-09-06'},
-          {name: '吴彦祖', code: '0x007', date: '2018-09-07'},
-          {name: '小李子', code: '0x008', date: '2018-09-08'},
-          {name: '杰森斯坦', code: '0x010', date: '2018-09-09'},
+          {name: '渣渣辉', code: '0x001', date: '2018-09-01', food: ''},
+          {name: '刘德华', code: '0x002', date: '2018-09-02', food: ''},
+          {name: '刘青云', code: '0x003', date: '2018-09-03', food: 'v1'},
+          {name: '赵又廷', code: '0x004', date: '2018-09-04', food: 'v2'},
+          {name: '黄渤', code: '0x005', date: '2018-09-05', food: 'v3'},
+          {name: '古天乐', code: '0x006', date: '2018-09-06', food: 'v4'},
+          {name: '吴彦祖', code: '0x007', date: '2018-09-07', food: 'v5'},
+          {name: '小李子', code: '0x008', date: '2018-09-08', food: 'v6'},
+          {name: '杰森斯坦', code: '0x010', date: '2018-09-09', food: 'v1'},
         ],
         selectOptions: [
           {label: '蛋糕', val: 'v1'},
