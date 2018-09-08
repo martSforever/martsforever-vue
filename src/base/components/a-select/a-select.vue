@@ -6,11 +6,18 @@
     <a-popover
       reference-name="input"
       parent-name="a-select"
+      background-color="white"
       :size-equal="true"
       ref="popover"
       v-model="currentShow">
       <div class="a-select-options">
         <slot></slot>
+        <a-select-option v-if="!!options && !!optionsShowKey && !!optionsValueKey && options.length>0"
+                         v-for="(option,index) in options"
+                         :key="index"
+                         :label="option[optionsShowKey]"
+                         :value="option[optionsValueKey]"
+        />
       </div>
     </a-popover>
   </div>
@@ -20,10 +27,11 @@
   import AInput from "../a-input/a-input";
   import APopover from "../a-popover/a-popover";
   import {findComponentsDownward} from "../../script/utils";
+  import ASelectOption from "./a-select-option";
 
   export default {
     name: "a-select",
-    components: {APopover, AInput},
+    components: {ASelectOption, APopover, AInput},
     props: {
       value: null,
       show: {
@@ -33,6 +41,16 @@
       multiple: {
         type: Boolean,
         default: false
+      },
+      options: {
+        type: Array,
+      },
+      optionsShowKey: {
+        type: String,
+
+      },
+      optionsValueKey: {
+        type: String,
       },
     },
     watch: {
@@ -84,6 +102,11 @@
         }
         this.labels = ret.join(',')
       },
+    },
+    mounted() {
+      if (!!this.options && (!this.optionsShowKey || !this.optionsValueKey))
+        console.error('当使用options属性时，optionsValueKey以及optionsValueKey不能为空!')
+
     },
   }
 </script>

@@ -20,6 +20,14 @@
                        :value="item.value"/>
     </a-select>
 
+    <a-title>自动渲染列选项</a-title>
+    <div>value:{{selectMultiValue}}</div>
+    <a-select
+      v-model="selectMultiValue"
+      :options="options"
+      options-show-key="name"
+      options-value-key="value"/>
+
   </div>
 </template>
 
