@@ -42,12 +42,14 @@
         <a-table-column field="name" title="姓名(不可编辑)"/>
         <a-table-column field="code" title="编码(不可编辑)"/>
 
+        <!--日期选择列-->
+        <a-table-column-date-picker-string field="date" title="出生日期"/>
+
         <!--文本输入列-->
         <a-table-column-input field="name" title="姓名"/>
         <a-table-column-input field="code" title="编码"/>
 
-        <!--日期选择列-->
-        <a-table-column-date-picker-string field="date" title="出生日期"/>
+
 
       </a-table>
     </div>
@@ -72,7 +74,7 @@
     data() {
       return {
         multiEditable: false,
-        fit: true,
+        fit: false,
         dataList: [
           {name: '渣渣辉', code: '0x001', date: '2018-09-01'},
           {name: '刘德华', code: '0x002', date: '2018-09-02'},
