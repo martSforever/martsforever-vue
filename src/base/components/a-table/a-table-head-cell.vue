@@ -135,7 +135,7 @@
 
 <style lang="scss">
   .a-table-head-cell {
-    color: black;
+    color: #666;
     /*不在支持cellspacing，使用border替代*/
     position: relative;
     .a-table-cell {

@@ -7,11 +7,22 @@
           单行编辑：
           <a-switch v-model="multiEditable"/>
         </div>
+        <div class="item">
+          宽度自适应：
+          <a-switch v-model="fit"/>
+        </div>
 
         <a-button-group>
           <a-button-group>
             <a-button @click="saveTableEditData">save edit</a-button>
             <a-button @click="cancelEdit">cancel edit</a-button>
+          </a-button-group>
+        </a-button-group>
+        &nbsp;
+        <a-button-group>
+          <a-button-group>
+            <a-button @click="addRow">add row</a-button>
+            <a-button @click="deleteRow">delete row</a-button>
           </a-button-group>
         </a-button-group>
       </div>
@@ -25,6 +36,7 @@
         :multi-editable="multiEditable"
         border-size="9"
         :row-num="6"
+        :fit-width="fit"
       >
         <!--常规列-->
         <a-table-column field="name" title="姓名(不可编辑)"/>
@@ -52,6 +64,7 @@
   import ATableColumn from "../../base/components/a-table/a-table-column";
   import ATableColumnDatePickerString
     from "../../base/components/a-table/custome/date-picker/a-table-column-date-picker-string";
+  import {deepCopy} from "../../base/script/utils";
 
   export default {
     name: "a-table-example-edit",
@@ -59,6 +72,7 @@
     data() {
       return {
         multiEditable: false,
+        fit: true,
         dataList: [
           {name: '渣渣辉', code: '0x001', date: '2018-09-01'},
           {name: '刘德华', code: '0x002', date: '2018-09-02'},
@@ -78,6 +92,13 @@
       },
       cancelEdit() {
         this.$refs.table.cancelEdit()
+      },
+
+      addRow() {
+        this.dataList.unshift(deepCopy(this.dataList.last()))
+      },
+      deleteRow() {
+        this.dataList.shift()
       },
     },
   }

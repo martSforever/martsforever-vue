@@ -5,7 +5,7 @@
       <slot></slot>
     </div>
     <!--表头-->
-    <div style="display: inline-block;white-space: normal;float: left">
+    <div style="display: inline-block;white-space: normal;float: left;flex: 1">
       <table border="1" class="a-table-head-table" :style="tableStyles">
         <tr v-for="(row,trIndex) in headRows" :key="trIndex">
           <a-table-head-cell
@@ -42,7 +42,7 @@
         </tr>
       </table>
     </div>
-    <div style="display: inline-block;width: 17px;height: 100%;background-color: #0ac2ff"
+    <div style="display: inline-block;width: 17px;height: 100%;background-color: transparent;height: 1px"
          v-show="!!bodyHasVerticalScrollbar"></div>
   </div>
 </template>
@@ -209,7 +209,8 @@
     white-space: nowrap;
 
     max-width: 100%;
-    display: inline-block;
+    display: inline-flex;
+    flex-direction: row;
     &.a-table-head-border-bottom {
       border-bottom: solid 1px $table-bottom-color;
     }

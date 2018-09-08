@@ -204,9 +204,6 @@
       box-sizing: border-box;
       display: flex;
       align-items: center;
-      div {
-        width: 100%
-      }
     }
   }
 </style>
