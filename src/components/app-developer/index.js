@@ -147,6 +147,12 @@ export const router = {
       component: resolve => require(['src/example/a-collapse/a-collapse-example.vue'], resolve),
       name: 'collapse'
     },
+    {
+      path: '/table-edit',
+      component: resolve => require(['src/example/a-table/a-table-example-edit.vue'], resolve),
+      name: 'table-edit'
+    },
+
   ]
 };
 export default {

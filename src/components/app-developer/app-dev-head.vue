@@ -48,6 +48,7 @@
           {name: 'notice', url: 'notice'},
           {name: 'scopedslot', url: 'scopedslot'},
           {name: 'table', url: 'table'},
+          {name: 'table-edit', url: 'table-edit'},
           {name: 'parent-child', url: 'parent-child'},
         ],
         name: 'a-icon'
