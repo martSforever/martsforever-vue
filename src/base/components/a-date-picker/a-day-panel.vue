@@ -199,6 +199,7 @@
       width: 100%;
       padding-top: 3px;
       user-select: none;
+      text-align: center;
       .row {
         width: 100%;
         .col {
