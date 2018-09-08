@@ -15,6 +15,10 @@
       <div>{{date.yyyyMMddHHmmss()}}</div>
       <a-date-picker v-model="date" type="date"/>
       <a-date-picker v-model="date" type="date"/>
+      <div>
+        -{{dateString}}-
+        <a-date-picker-string v-model="dateString"/>
+      </div>
     </div>
   </div>
 </template>
@@ -24,10 +28,11 @@
   import AYearPanel from "../../base/components/a-date-picker/a-year-panel";
   import AMonthPanel from "../../base/components/a-date-picker/a-month-panel";
   import ADayPanel from "../../base/components/a-date-picker/a-day-panel";
+  import ADatePickerString from "../../base/components/a-date-picker/a-date-picker-string";
 
   export default {
     name: "a-date-picker-example",
-    components: {ADayPanel, AMonthPanel, AYearPanel, ADatePicker},
+    components: {ADatePickerString, ADayPanel, AMonthPanel, AYearPanel, ADatePicker},
     data() {
       return {
         year: 2018,
@@ -37,7 +42,8 @@
         pickYear: 2018,
         pickMonth: 8,
 
-        date: new Date()
+        date: new Date(),
+        dateString: new Date().yyyyMMdd()
       }
     },
   }

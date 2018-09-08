@@ -206,6 +206,14 @@ Object.defineProperty(Date.prototype, 'yyyyMMddHHmmss', {
     return this.format('yyyy-MM-dd HH:mm:ss')
   }
 })
+Object.defineProperty(Date.prototype, 'yyyyMMdd', {
+  writable: false,
+  enumerable: false,
+  configurable: true,
+  value: function () {
+    return this.format('yyyy-MM-dd')
+  }
+})
 
 
 /*
