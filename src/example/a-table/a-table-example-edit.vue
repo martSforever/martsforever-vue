@@ -23,6 +23,8 @@
         ref="table"
         :list="dataList"
         :multi-editable="multiEditable"
+        border-size="9"
+        :row-num="6"
       >
         <!--文本输入列-->
         <a-table-column-input field="name" title="姓名"/>

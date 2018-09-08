@@ -94,7 +94,7 @@
       saveEdit() {
         if (!this.currentEditable) return
         findTableEditItemComponentDownward(this).forEach(item => item.handleSave())
-        this._changeEditable(false)
+        this.currentEditable = false
       },
       _changeEditable(flag) {
         findTableEditItemComponentDownward(this).forEach(item => item[!!flag ? 'enableEdit' : 'disableEdit']())

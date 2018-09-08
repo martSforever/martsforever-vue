@@ -77,7 +77,7 @@
         /*拖拽的indicator的样式*/
         this.indicator = document.createElement('div')
         this.indicator.style.width = `${e.target.offsetWidth}px`
-        this.indicator.style.backgroundColor = this.borderColor
+        this.indicator.style.backgroundColor = '#f2f2f2'
         this.indicator.style.zIndex = 1
         this.indicator.style.height = `${this.table.$el.offsetHeight}px`
         this.indicator.style.display = 'inline-block'

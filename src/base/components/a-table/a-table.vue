@@ -76,6 +76,7 @@
       borderColor: {
         type: String,
         desc: '边框颜色',
+        default: 'transparent'
       },
       borderStyle: {
         type: String,
@@ -100,7 +101,7 @@
       },
       bottomLine: {
         type: Boolean,
-        default: true,
+        default: false,
         desc: '每行是否有一条底部下划线',
       },
       striple: {
@@ -169,7 +170,7 @@
           let tableHeight = this.$refs.table.offsetHeight
           let headHeight = this.$refs.tableHead.$el.offsetHeight
           /*8：td莫名其妙的padding*/
-          let bodyHeight = !!this.rowNum ? (this.rowNum * (removePx(this.rowHeight) + 6 + this.borderSize)) : (tableHeight - headHeight)
+          let bodyHeight = !!this.rowNum ? (this.rowNum * (removePx(this.rowHeight) + 6 + (this.borderSize - 0))) : (tableHeight - headHeight)
           this.bodyHeight = bodyHeight
         }
       },
