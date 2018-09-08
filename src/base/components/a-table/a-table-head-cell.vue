@@ -140,6 +140,9 @@
     position: relative;
     .a-table-cell {
       width: 100%;
+      height: 36px;
+      font-weight: bold;
+      font-size: 16px;
       .rendering-scope-slot, .rendering-render-func {
         display: inline-block;
       }

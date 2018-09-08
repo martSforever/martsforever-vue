@@ -23,6 +23,7 @@
         <a-table-column-index v-if="!!indexing"/>
         <slot></slot>
       </a-table-head>
+      <br>
       <a-table-body
         ref="tableBody"
         :fit-width="fitWidth"
