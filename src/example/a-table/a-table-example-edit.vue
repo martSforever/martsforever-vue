@@ -34,6 +34,8 @@
         <a-table-column-input field="name" title="姓名"/>
         <a-table-column-input field="code" title="编码"/>
 
+        <!--日期选择列-->
+        <a-table-column-date-picker-string field="date" title="出生日期"/>
 
       </a-table>
     </div>
@@ -48,23 +50,25 @@
   import ATableColumnInput from "../../base/components/a-table/custome/input/a-table-column-input";
   import ASwitch from "../../base/components/a-switch/a-switch";
   import ATableColumn from "../../base/components/a-table/a-table-column";
+  import ATableColumnDatePickerString
+    from "../../base/components/a-table/custome/date-picker/a-table-column-date-picker-string";
 
   export default {
     name: "a-table-example-edit",
-    components: {ATableColumn, ASwitch, ATableColumnInput, ATable, AButton, AButtonGroup},
+    components: {ATableColumnDatePickerString, ATableColumn, ASwitch, ATableColumnInput, ATable, AButton, AButtonGroup},
     data() {
       return {
         multiEditable: false,
         dataList: [
-          {name: '渣渣辉', code: '0x001'},
-          {name: '刘德华', code: '0x002'},
-          {name: '刘青云', code: '0x003'},
-          {name: '赵又廷', code: '0x004'},
-          {name: '黄渤', code: '0x005'},
-          {name: '古天乐', code: '0x006'},
-          {name: '吴彦祖', code: '0x007'},
-          {name: '小李子', code: '0x008'},
-          {name: '杰森斯坦', code: '0x010'},
+          {name: '渣渣辉', code: '0x001', date: '2018-09-01'},
+          {name: '刘德华', code: '0x002', date: '2018-09-02'},
+          {name: '刘青云', code: '0x003', date: '2018-09-03'},
+          {name: '赵又廷', code: '0x004', date: '2018-09-04'},
+          {name: '黄渤', code: '0x005', date: '2018-09-05'},
+          {name: '古天乐', code: '0x006', date: '2018-09-06'},
+          {name: '吴彦祖', code: '0x007', date: '2018-09-07'},
+          {name: '小李子', code: '0x008', date: '2018-09-08'},
+          {name: '杰森斯坦', code: '0x010', date: '2018-09-09'},
         ]
       }
     },

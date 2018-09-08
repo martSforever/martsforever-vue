@@ -1,22 +1,23 @@
 <template>
-  <a-table-column ref="tableColumn" :order="order" :title="title">
+  <a-table-column :title="title" ref="tableColumn">
     <template slot-scope="{row,rowIndex}">
-      <a-table-column-input-item :row="row" :row-index="rowIndex" :field="field"/>
+      <a-table-column-date-picker-string-item :row="row" :row-index="rowIndex" :field="field"/>
     </template>
   </a-table-column>
 </template>
 
 <script>
   import ATableColumn from "../../a-table-column";
-  import AInput from "../../../a-input/a-input";
-  import ATableColumnInputItem from "./a-table-column-input-item";
+  import TableEditMixin from "../table-edit-mixin";
+  import ADatePickerString from "../../../a-date-picker/a-date-picker-string";
+  import ATableColumnDatePickerStringItem from "./a-table-column-date-picker-string-item";
 
   export default {
-    name: "a-table-column-input",
-    components: {ATableColumnInputItem, AInput, ATableColumn},
+    name: "a-table-column-date-picker-string",
+    components: {ATableColumnDatePickerStringItem, ADatePickerString, ATableColumn},
     props: {
       title: {
-        default: '输入列'
+        default: '选择日期'
       },
       order: {
         default: 0
