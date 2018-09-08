@@ -175,4 +175,23 @@
       user-select: none;
     }
   }
+  .pick-panel-head {
+    height: 40px;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .highlight-label {
+      cursor: pointer;
+      padding: 3px 6px;
+      border-radius: $border-fillet;
+      font-size: 12px;
+      height: 18px;
+      line-height: 18px;
+      &:hover {
+        color: white;
+        background-color: $text-color-main;
+      }
+    }
+  }
 </style>
