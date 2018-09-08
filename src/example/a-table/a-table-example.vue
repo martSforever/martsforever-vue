@@ -117,10 +117,9 @@
         </a-table-column-collapse>
 
         <!--多选列-->
-        <a-table-column-select ref="multiSelect" :multi-select="true"/>
+        <a-table-column-check ref="multiSelect" :multi-select="true"/>
         <!--单选列-->
-        <a-table-column-select ref="singleSelect"/>
-
+        <a-table-column-check ref="singleSelect"/>
         <!--文本输入列-->
         <a-table-column-input :order="17" field="dispatchDate"/>
         <a-table-column-input :order="17" field="dispatchAddress"/>
@@ -185,18 +184,18 @@
   import AButtonGroup from "../../base/components/a-button/a-button-group";
   import AButton from "../../base/components/a-button/a-button";
   import ATableColumnIndex from "../../base/components/a-table/custome/index/a-table-column-index";
-  import ATableColumnSelect from "../../base/components/a-table/custome/select/a-table-column-select";
   import ATableColumnCollapse from "../../base/components/a-table/custome/collapse/a-table-column-collapse";
   import ATableExampleTestCol from "./a-table-example-test-col";
   import ATableColumnInput from "../../base/components/a-table/custome/input/a-table-column-input";
+  import ATableColumnCheck from "../../base/components/a-table/custome/check/a-table-column-check";
 
   export default {
     name: "a-table-example",
     components: {
+      ATableColumnCheck,
       ATableColumnInput,
       ATableExampleTestCol,
       ATableColumnCollapse,
-      ATableColumnSelect,
       ATableColumnIndex, AButton, AButtonGroup, AIcon, ASwitch, AInput, ATableColumn, ATable
     },
     data() {

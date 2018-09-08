@@ -7,7 +7,7 @@
 
 <script>
   export default {
-    name: "a-table-column-select-item",
+    name: "a-table-column-check-item",
     props: {
       row: {},
       multiSelect: {

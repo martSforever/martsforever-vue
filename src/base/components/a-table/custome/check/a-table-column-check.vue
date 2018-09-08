@@ -10,7 +10,7 @@
     </template>
     <template slot-scope="{row,rowIndex}">
       <div class="a-table-standard-cell">
-        <a-table-column-select-item :row="row"
+        <a-table-column-check-item :row="row"
                                     @join="_handleJoin"
                                     @quit="_handleQuit"
                                     @mounted="_handleMounted"
@@ -25,12 +25,12 @@
 </template>
 
 <script>
-  import ATableColumn from "../../a-table-column";
-  import ATableColumnSelectItem from "./a-table-column-select-item";
 
+  import ATableColumnCheckItem from "./a-table-column-check-item";
+  import ATableColumn from "../../a-table-column";
   export default {
-    name: "a-table-column-select",
-    components: {ATableColumnSelectItem, ATableColumn},
+    name: "a-table-column-check",
+    components: {ATableColumn, ATableColumnCheckItem},
     props: {
       order: {
         default: 9998
