@@ -45,10 +45,15 @@
         <!--日期选择列-->
         <a-table-column-date-picker-string field="date" title="出生日期"/>
 
+        <!--下拉选择列-->
+        <a-table-column-select field="type" title="喜好食品"
+                               :options="selectOptions"
+                               options-show-key="label"
+                               options-value-key="val"/>
+
         <!--文本输入列-->
         <a-table-column-input field="name" title="姓名"/>
         <a-table-column-input field="code" title="编码"/>
-
 
 
       </a-table>
@@ -67,10 +72,14 @@
   import ATableColumnDatePickerString
     from "../../base/components/a-table/custome/date-picker/a-table-column-date-picker-string";
   import {deepCopy} from "../../base/script/utils";
+  import ATableColumnSelect from "../../base/components/a-table/custome/select/a-table-column-select";
 
   export default {
     name: "a-table-example-edit",
-    components: {ATableColumnDatePickerString, ATableColumn, ASwitch, ATableColumnInput, ATable, AButton, AButtonGroup},
+    components: {
+      ATableColumnSelect,
+      ATableColumnDatePickerString, ATableColumn, ASwitch, ATableColumnInput, ATable, AButton, AButtonGroup
+    },
     data() {
       return {
         multiEditable: false,
@@ -85,7 +94,15 @@
           {name: '吴彦祖', code: '0x007', date: '2018-09-07'},
           {name: '小李子', code: '0x008', date: '2018-09-08'},
           {name: '杰森斯坦', code: '0x010', date: '2018-09-09'},
-        ]
+        ],
+        selectOptions: [
+          {label: '蛋糕', val: 'v1'},
+          {label: '南瓜', val: 'v2'},
+          {label: '冰糖', val: 'v3'},
+          {label: '甜筒', val: 'v4'},
+          {label: '米其林', val: 'v5'},
+          {label: '曲奇饼干', val: 'v6'},
+        ],
       }
     },
     methods: {

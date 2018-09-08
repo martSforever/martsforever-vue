@@ -1,17 +1,26 @@
 <template>
   <a-table-column :title="title" ref="tableColumn" :width="width">
     <template slot-scope="{row,rowIndex}">
-
+      <a-table-column-select-item
+        :options="options"
+        :options-show-key="optionsShowKey"
+        :options-value-key="optionsValueKey"
+        :row="row"
+        :row-index="rowIndex"
+      >
+        <slot></slot>
+      </a-table-column-select-item>
     </template>
   </a-table-column>
 </template>
 
 <script>
   import ATableColumn from "../../a-table-column";
+  import ATableColumnSelectItem from "./a-table-column-select-item";
 
   export default {
     name: "a-table-column-select",
-    components: {ATableColumn},
+    components: {ATableColumnSelectItem, ATableColumn},
     props: {
       title: {
         default: '选择日期'
@@ -25,6 +34,16 @@
       },
       width: {
         default: '160px'
+      },
+      options: {
+        type: Array,
+      },
+      optionsShowKey: {
+        type: String,
+
+      },
+      optionsValueKey: {
+        type: String,
       },
     },
     data() {
