@@ -26,9 +26,15 @@
         border-size="9"
         :row-num="6"
       >
+        <!--常规列-->
+        <a-table-column field="name" title="姓名(不可编辑)"/>
+        <a-table-column field="code" title="编码(不可编辑)"/>
+
         <!--文本输入列-->
         <a-table-column-input field="name" title="姓名"/>
         <a-table-column-input field="code" title="编码"/>
+
+
       </a-table>
     </div>
 
@@ -41,10 +47,11 @@
   import ATable from "../../base/components/a-table/a-table";
   import ATableColumnInput from "../../base/components/a-table/custome/input/a-table-column-input";
   import ASwitch from "../../base/components/a-switch/a-switch";
+  import ATableColumn from "../../base/components/a-table/a-table-column";
 
   export default {
     name: "a-table-example-edit",
-    components: {ASwitch, ATableColumnInput, ATable, AButton, AButtonGroup},
+    components: {ATableColumn, ASwitch, ATableColumnInput, ATable, AButton, AButtonGroup},
     data() {
       return {
         multiEditable: false,
