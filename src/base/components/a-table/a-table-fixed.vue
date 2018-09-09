@@ -1,5 +1,5 @@
 <template>
-  <div class="a-table-fixed" :style="styles">
+  <div class="a-table-fixed" :style="styles" :class="classes">
     <a-table-head
       ref="tableHead"
       :fit-width="fitWidth"
@@ -154,10 +154,21 @@
           }
         }
       },
+      classes() {
+        return {
+          'a-table-fixed-true': this.fixedPosition !== 'center'
+        }
+      },
     },
   }
 </script>
 
 <style lang="scss">
-
+  .a-table-fixed {
+    &.a-table-fixed-true {
+      .a-table-body {
+        overflow-y: hidden;
+      }
+    }
+  }
 </style>
