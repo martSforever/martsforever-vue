@@ -1,9 +1,6 @@
 <template>
   <div class="a-table" :style="tableStyles" ref="table">
-    <a-table-column-handler
-      :columns.sync="columns"
-      :head-columns.sync="headColumns"
-    >
+    <a-table-column-handler :columns.sync="columns" :head-columns.sync="headColumns">
       <a-table-column-index v-if="!!indexing"/>
       <slot></slot>
     </a-table-column-handler>
