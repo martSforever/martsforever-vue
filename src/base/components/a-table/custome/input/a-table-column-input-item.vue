@@ -1,7 +1,7 @@
 <template>
   <div ref="wrapper">
     <keep-alive>
-      <a-input v-model="currentValue" v-if="!!editable && !!currentEditable"/>
+      <a-input v-model="currentValue" v-if="!!editable && !!currentEditable" icon="fa-pencil"/>
       <span v-else>{{row[field]}}</span>
     </keep-alive>
   </div>

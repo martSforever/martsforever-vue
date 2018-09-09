@@ -1,7 +1,7 @@
 <template>
   <div class="a-select">
     <div ref="input" class="a-select-input-wrapper">
-      <a-input @click="_handleClickInput" :value="labels"/>
+      <a-input @click.native="_handleClickInput" :value="labels" :icon="icon"/>
     </div>
     <a-popover
       reference-name="input"
@@ -80,6 +80,11 @@
         currentValue: this.value || (!!this.multiple ? [] : null),
         labels: '',
       }
+    },
+    computed: {
+      icon() {
+        return !!this.currentShow ? 'fa-angle-up' : 'fa-angle-down'
+      },
     },
     methods: {
       _handleClickInput(e) {

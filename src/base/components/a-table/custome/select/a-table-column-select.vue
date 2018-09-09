@@ -34,7 +34,7 @@
         required: true
       },
       width: {
-        default: '160px'
+        default: '180px'
       },
       options: {
         type: Array,

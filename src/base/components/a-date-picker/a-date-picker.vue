@@ -2,7 +2,7 @@
   <div class="a-date-picker">
 
     <div ref="reference" class="input-wrapper">
-      <a-input @click="_handleClickInput" :value="showLabel"/>
+      <a-input @click.native="_handleClickInput" :value="showLabel" icon="fa-calendar"/>
     </div>
 
     <a-popover
@@ -175,6 +175,7 @@
       user-select: none;
     }
   }
+
   .pick-panel-head {
     height: 40px;
     padding: 0 12px;
