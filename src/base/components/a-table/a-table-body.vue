@@ -96,7 +96,7 @@
       },
       multiEditable: {},
 
-      fixedPosition:{},
+      fixedPosition: {},
     },
     computed: {
       tableStyles() {
@@ -120,10 +120,16 @@
         this.$emit('update:bodyHasVerticalScrollbar', val)
       },
       scrollLeft(val) {
-        if (this.currentScrollLeft !== val) this.currentScrollLeft = val;
+        if (this.currentScrollLeft !== val) {
+          this.currentScrollLeft = val;
+          this.$refs.tableBody.scrollLeft = val
+        }
       },
       scrollTop(val) {
-        if (this.currentScrollTop !== val) this.currentScrollTop = val;
+        if (this.currentScrollTop !== val) {
+          this.currentScrollTop = val;
+          this.$refs.tableBody.scrollTop = val
+        }
       },
       currentScrollLeft(val) {
         this.$emit('update:scrollLeft', val)

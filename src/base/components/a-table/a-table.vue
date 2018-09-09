@@ -31,6 +31,31 @@
         :border-color="borderColor"
       />
 
+      <a-table-fixed
+        ref="left"
+        fixed-position="left"
+
+        :fit-width="fitWidth"
+        :data-list="dataList"
+        :border-size="borderSize"
+        :border-style="borderStyle"
+        :padding="padding"
+        :row-height="rowHeight"
+        :bottom-line="bottomLine"
+        :striple="striple"
+        :row-style-func="rowStyleFunc"
+        :cell-style-func="cellStyleFunc"
+        :render-columns="renderColumns"
+        :scroll-top.sync="scrollTop"
+
+        :indexing="indexing"
+        :last-row="lastRow"
+        :head-columns="headColumns"
+
+        :body-height="bodyHeight"
+        :multi-editable="multiEditable"
+        :border-color="borderColor"
+      />
     </div>
   </div>
 </template>
@@ -195,6 +220,7 @@
     padding-top: 20px;
     .a-table-content {
       width: calc(100% - 40px);
+      position: relative;
     }
     .a-table-standard-cell {
       text-align: center;

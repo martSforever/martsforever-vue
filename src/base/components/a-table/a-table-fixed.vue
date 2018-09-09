@@ -1,5 +1,5 @@
 <template>
-  <div class="a-table-fixed">
+  <div class="a-table-fixed" :style="styles">
     <a-table-head
       ref="tableHead"
       :fit-width="fitWidth"
@@ -139,6 +139,21 @@
       return {
         bodyHasVerticalScrollbar: false,
       }
+    },
+    computed: {
+      styles() {
+        if (this.fixedPosition === 'center') return {}
+        else {
+          return {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            height: '100%',
+            width: '200px',
+            backgroundColor: 'white',
+          }
+        }
+      },
     },
   }
 </script>
