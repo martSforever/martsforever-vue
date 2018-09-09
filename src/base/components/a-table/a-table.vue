@@ -1,5 +1,13 @@
 <template>
   <div class="a-table" :style="tableStyles" ref="table">
+    <a-table-column-handler
+      :columns.sync="columns"
+      :head-columns.sync="headColumns"
+    >
+      <a-table-column-index v-if="!!indexing"/>
+      <slot></slot>
+    </a-table-column-handler>
+
     <div class="a-table-content">
       <a-table-head
         ref="tableHead"
@@ -20,11 +28,8 @@
         @update:columns="columns = $event"
         :indexing="indexing"
         :last-row="lastRow"
-      >
-        <a-table-column-index v-if="!!indexing"/>
-        <slot></slot>
-      </a-table-head>
-      <br>
+        :head-columns="headColumns"
+      />
       <a-table-body
         ref="tableBody"
         :fit-width="fitWidth"
@@ -58,10 +63,11 @@
   import {findComponentsDownward, removePx} from "../../script/utils";
   import ATableColumnIndex from "./custome/index/a-table-column-index";
   import {findTableEditItemComponentDownward} from "./custome";
+  import ATableColumnHandler from "./a-table-column-handler";
 
   export default {
     name: "a-table",
-    components: {ATableColumnIndex, ATableBody, AButton, AButtonGroup, AScrollbar, ATableHead},
+    components: {ATableColumnHandler, ATableColumnIndex, ATableBody, AButton, AButtonGroup, AScrollbar, ATableHead},
     props: {
       fitWidth: {
         type: Boolean,
@@ -135,10 +141,12 @@
     },
     data() {
       return {
-        columns: null,
+        columns: [],
+        headColumns: [],
+
         bodyHeight: null,
         bodyHasVerticalScrollbar: false,
-        scrollLeft: 0
+        scrollLeft: 0,
       }
     },
     watch: {},
