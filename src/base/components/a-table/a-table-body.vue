@@ -77,6 +77,7 @@
         default: null
       },
       scrollLeft: {},
+      scrollTop: {},
       bottomLine: {
         type: Boolean,
       },
@@ -117,14 +118,21 @@
       scrollLeft(val) {
         if (this.currentScrollLeft !== val) this.currentScrollLeft = val;
       },
+      scrollTop(val) {
+        if (this.currentScrollTop !== val) this.currentScrollTop = val;
+      },
       currentScrollLeft(val) {
         this.$emit('update:scrollLeft', val)
+      },
+      currentScrollTop(val) {
+        this.$emit('update:scrollTop', val)
       },
     },
     data() {
       return {
         currentBodyHasVerticalScrollbar: this.bodyHasVerticalScrollbar,
-        currentScrollLeft: this.scrollLeft
+        currentScrollLeft: this.scrollLeft,
+        currentScrollTop: this.scrollTop,
       }
     },
     mounted() {
@@ -133,6 +141,7 @@
     methods: {
       _handleScroll(e) {
         this.currentScrollLeft = e.target.scrollLeft
+        this.currentScrollTop = e.target.scrollTop
       },
       _handleDomChange() {
         this._updateHasScrollBar()

@@ -1,12 +1,39 @@
 <template>
   <div class="a-table" :style="tableStyles" ref="table">
+    <div>scrollLeft:{{scrollLeft}}-----------scrollTop:{{scrollTop}}</div>
     <a-table-column-handler :columns.sync="columns" :head-columns.sync="headColumns">
       <a-table-column-index v-if="!!indexing"/>
       <slot></slot>
     </a-table-column-handler>
 
     <div class="a-table-content">
-      <a-table-head
+
+      <a-table-fixed
+        ref="center"
+        :fit-width="fitWidth"
+        :data-list="dataList"
+        :border-size="borderSize"
+        :border-style="borderStyle"
+        :padding="padding"
+        :row-height="rowHeight"
+        :bottom-line="bottomLine"
+        :striple="striple"
+        :row-style-func="rowStyleFunc"
+        :cell-style-func="cellStyleFunc"
+        :render-columns="renderColumns"
+        :scroll-left.sync="scrollLeft"
+        :scroll-top.sync="scrollTop"
+
+        :indexing="indexing"
+        :last-row="lastRow"
+        :head-columns="headColumns"
+
+        :body-height="bodyHeight"
+        :multi-editable="multiEditable"
+        :border-color="borderColor"
+      />
+
+      <!--<a-table-head
         ref="tableHead"
         :fit-width="fitWidth"
         :data-list="dataList"
@@ -46,7 +73,7 @@
         :body-height="bodyHeight"
         :multi-editable="multiEditable"
         :border-color="borderColor"
-      />
+      />-->
     </div>
   </div>
 </template>
@@ -61,10 +88,14 @@
   import ATableColumnIndex from "./custome/index/a-table-column-index";
   import {findTableEditItemComponentDownward} from "./custome";
   import ATableColumnHandler from "./a-table-column-handler";
+  import ATableFixed from "./a-table-fixed";
 
   export default {
     name: "a-table",
-    components: {ATableColumnHandler, ATableColumnIndex, ATableBody, AButton, AButtonGroup, AScrollbar, ATableHead},
+    components: {
+      ATableFixed,
+      ATableColumnHandler, ATableColumnIndex, ATableBody, AButton, AButtonGroup, AScrollbar, ATableHead
+    },
     props: {
       fitWidth: {
         type: Boolean,
@@ -144,6 +175,7 @@
         bodyHeight: null,
         bodyHasVerticalScrollbar: false,
         scrollLeft: 0,
+        scrollTop: 0,
       }
     },
     watch: {},
@@ -179,7 +211,7 @@
       _initializedTableHeight() {
         if (!!this.tableHeight || !!this.rowNum) {
           let tableHeight = this.$refs.table.offsetHeight
-          let headHeight = this.$refs.tableHead.$el.offsetHeight
+          let headHeight = this.$refs.center.$refs.tableHead.$el.offsetHeight
           /*8：td莫名其妙的padding*/
           let bodyHeight = !!this.rowNum ? (this.rowNum * (removePx(this.rowHeight) + 6 + (this.borderSize - 0))) : (tableHeight - headHeight)
           this.bodyHeight = bodyHeight
