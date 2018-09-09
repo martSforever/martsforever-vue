@@ -142,17 +142,18 @@
     },
     computed: {
       styles() {
-        if (this.fixedPosition === 'center') return {}
-        else {
+        if (this.fixedPosition === 'center')
+          return {}
+        else
           return {
             position: 'absolute',
             top: 0,
             left: 0,
+            // height: 'calc(100% - 20px)',
             height: '100%',
             width: '200px',
-            backgroundColor: 'white',
           }
-        }
+
       },
       classes() {
         return {
@@ -166,8 +167,13 @@
 <style lang="scss">
   .a-table-fixed {
     &.a-table-fixed-true {
+      overflow-y: hidden;
+      .a-table-head, .a-table-body {
+        background-color: white;
+      }
       .a-table-body {
         overflow-y: hidden;
+        overflow-x: hidden;
       }
     }
   }

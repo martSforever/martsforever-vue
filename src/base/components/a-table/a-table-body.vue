@@ -110,8 +110,13 @@
         }
       },
       bodyStyles() {
+        console.log('reset bodyStyles')
         let ret = {}
-        !!this.bodyHeight && (ret.height = this.bodyHeight + 'px')
+        if (!!this.bodyHeight) {
+          ret.height = (!!this.hasHorizontalScrollbar ? this.bodyHeight - 17 : this.bodyHeight) + 'px'
+        } else {
+          ret.height = !!this.hasHorizontalScrollbar ? 'calc(100% -17px)' : '100%'
+        }
         return ret
       },
     },
@@ -137,12 +142,20 @@
       currentScrollTop(val) {
         this.$emit('update:scrollTop', val)
       },
+      renderColumns: {
+        handler(val) {
+          this._hasHorizontalScrollbar()
+        },
+        deep: true
+      },
     },
     data() {
       return {
         currentBodyHasVerticalScrollbar: this.bodyHasVerticalScrollbar,
         currentScrollLeft: this.scrollLeft,
         currentScrollTop: this.scrollTop,
+
+        hasHorizontalScrollbar: false,
       }
     },
     mounted() {
@@ -165,7 +178,13 @@
         let tableHeight = this.$refs.table.offsetHeight
         this.currentBodyHasVerticalScrollbar = tableHeight > bodyHeight
       },
-
+      _hasHorizontalScrollbar() {
+        let bodyWidth = this.$refs.tableBody.offsetWidth
+        let tableWidth = this.$refs.table.offsetWidth
+        if (this.hasHorizontalScrollbar === tableWidth > bodyWidth) return
+        console.log(this.hasHorizontalScrollbar, tableWidth, bodyWidth)
+        this.hasHorizontalScrollbar = tableWidth > bodyWidth
+      },
     },
   }
 </script>
@@ -184,9 +203,6 @@
         .a-table-body-td {
           border-bottom-color: $table-bottom-color !important;
         }
-      }
-      &:hover {
-        background-color: darken($table-bottom-color, 3) !important;
       }
     }
   }
