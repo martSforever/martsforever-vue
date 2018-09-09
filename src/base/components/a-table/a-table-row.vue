@@ -9,13 +9,15 @@
         :style="_getTdStyles(col,colIndex,row,rowIndex)"
         class="a-table-body-td">
       <div :style="{width:col.width,padding,height:rowHeight}" class="a-table-cell">
-        <rendering-scope-slot v-if="!!col.colScopedSlots"
-                              :scope-slot-func="col.colScopedSlots"
-                              :data="{row,rowIndex,col,colIndex}"/>
-        <rendering-render-func v-if="!!col.colRenderFunc"
-                               :render-func="col.colRenderFunc"
-                               :data="{row,rowIndex,col,colIndex}"/>
-        <span v-if="!col.colScopedSlots && !col.colRenderFunc">{{row[col.field]}}</span>
+        <div v-if="fixedPosition === col.fixed">
+          <rendering-scope-slot v-if="!!col.colScopedSlots"
+                                :scope-slot-func="col.colScopedSlots"
+                                :data="{row,rowIndex,col,colIndex}"/>
+          <rendering-render-func v-if="!!col.colRenderFunc"
+                                 :render-func="col.colRenderFunc"
+                                 :data="{row,rowIndex,col,colIndex}"/>
+          <span v-if="!col.colScopedSlots && !col.colRenderFunc">{{row[col.field]}}</span>
+        </div>
       </div>
     </td>
   </tr>
@@ -63,6 +65,8 @@
         desc: '边框风格',
       },
       multiEditable: {},
+
+      fixedPosition: {},
     },
     data() {
       return {

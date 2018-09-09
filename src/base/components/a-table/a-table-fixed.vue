@@ -19,6 +19,8 @@
       :indexing="indexing"
       :last-row="lastRow"
       :head-columns="headColumns"
+
+      :fixed-position="fixedPosition"
     />
     <a-table-body
       ref="tableBody"
@@ -42,6 +44,8 @@
       :body-height="bodyHeight"
       :multi-editable="multiEditable"
       :border-color="borderColor"
+
+      :fixed-position="fixedPosition"
     />
   </div>
 </template>
@@ -49,6 +53,7 @@
 <script>
   import ATableHead from "./a-table-head";
   import ATableBody from "./a-table-body";
+  import {oneOf} from "../../script/utils";
 
   export default {
     name: "a-table-fixed",
@@ -121,6 +126,14 @@
 
       bodyHeight: {},
       headColumns: {},
+
+      fixedPosition: {
+        type: String,
+        default: 'center',
+        validator(val) {
+          return oneOf(val, ['left', 'right', 'center'])
+        },
+      },
     },
     data() {
       return {

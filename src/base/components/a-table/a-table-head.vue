@@ -13,7 +13,8 @@
             :rowspan="column.rowSpan"
             :colspan="column.colSpan"
             :padding="padding"
-            :column="column"/>
+            :column="column"
+            :fixed-position="fixedPosition"/>
         </tr>
 
         <tr v-if="!!lastRow && !!headColumns && headColumns.length>0"
@@ -26,13 +27,15 @@
               :style="_getTdStyles(col,colIndex,lastRow,lastRowIndex)"
               class="a-table-body-td">
             <div :style="{width:col.width,padding,height:rowHeight}" class="a-table-cell">
-              <rendering-scope-slot v-if="!!col.colScopedSlots"
-                                    :scope-slot-func="col.colScopedSlots"
-                                    :data="{row:lastRow,rowIndex:lastRowIndex,col,colIndex}"/>
-              <rendering-render-func v-if="!!col.colRenderFunc"
-                                     :render-func="col.colRenderFunc"
-                                     :data="{row:lastRow,rowIndex:lastRowIndex,col,colIndex}"/>
-              <span v-if="!col.colScopedSlots && !col.colRenderFunc">{{lastRow[col.field]}}</span>
+              <div v-if="fixedPosition === col.fixed">
+                <rendering-scope-slot v-if="!!col.colScopedSlots"
+                                      :scope-slot-func="col.colScopedSlots"
+                                      :data="{row:lastRow,rowIndex:lastRowIndex,col,colIndex}"/>
+                <rendering-render-func v-if="!!col.colRenderFunc"
+                                       :render-func="col.colRenderFunc"
+                                       :data="{row:lastRow,rowIndex:lastRowIndex,col,colIndex}"/>
+                <span v-if="!col.colScopedSlots && !col.colRenderFunc">{{lastRow[col.field]}}</span>
+              </div>
             </div>
           </td>
         </tr>
@@ -91,6 +94,8 @@
         type: Array,
         default: () => []
       },
+
+      fixedPosition: {},
     },
     data() {
       return {

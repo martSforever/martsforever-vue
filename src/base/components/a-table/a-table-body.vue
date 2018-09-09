@@ -23,6 +23,8 @@
         :border-color="borderColor"
         :border-style="borderStyle"
         :multi-editable="multiEditable"
+
+        :fixed-position="fixedPosition"
       />
     </table>
   </div>
@@ -93,6 +95,8 @@
         desc: '单元格样式渲染'
       },
       multiEditable: {},
+
+      fixedPosition:{},
     },
     computed: {
       tableStyles() {

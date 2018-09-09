@@ -32,10 +32,11 @@
         default: 0,
         desc: '列排序'
       },
-      fix: {
+      fixed: {
         type: String,
+        default: 'center',
         validator(val) {
-          return oneOf(val, ['left', 'right'])
+          return oneOf(val, ['left', 'right', 'center'])
         },
       },
     },
@@ -88,11 +89,22 @@
           },
           /*列位置*/
           get order() {
+            switch (_this.fixed) {
+              case 'center':
+                return _this.order
+              case 'left':
+                return (_this.order - 0) + 99999
+              case 'right':
+                return (_this.order - 0) - 9999
+            }
             return _this.order
           },
           /*没有scopedSlot.default时，展示的数据row的属性*/
           get field() {
             return _this.field
+          },
+          get fixed() {
+            return _this.fixed
           },
           /*更新宽度*/
           updateWidth(width) {

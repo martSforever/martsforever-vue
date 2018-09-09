@@ -126,7 +126,9 @@
 
 
         <!--以下为多级表头列-->
-        <a-table-column title="简单文本" field="dispatchDate" order="21" fix="left"/>
+        <a-table-column title="简单文本" field="dispatchDate" order="21" fixed="left"/>
+        <a-table-column title="简单文本" field="dispatchDate" order="21" fixed="right"/>
+        <a-table-column title="简单文本" field="dispatchDate" order="21" fixed="center"/>
 
         <a-table-column order="15" field="date" title="日期" :width.sync="columnWidth">
           <template slot-scope="{column}" slot="title">
