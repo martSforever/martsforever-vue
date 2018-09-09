@@ -42,7 +42,7 @@
     watch: {
       order(newval, oldval) {
         if (newval !== oldval) {
-          this.$parent._updateHeadRows()
+          this.$parent.collectHeadColumns()
         }
       },
       width(val) {
