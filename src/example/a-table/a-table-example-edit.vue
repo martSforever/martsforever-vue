@@ -32,7 +32,7 @@
     <div>
       <a-table
         ref="table"
-        :list="dataList"
+        :data-list="dataList"
         :multi-editable="multiEditable"
         border-size="9"
         :row-num="6"

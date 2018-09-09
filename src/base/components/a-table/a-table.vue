@@ -4,21 +4,22 @@
       <a-table-head
         ref="tableHead"
         :fit-width="fitWidth"
+        :data-list="dataList"
         :border-size="borderSize"
         :border-style="borderStyle"
         :padding="padding"
-        @update:columns="columns = $event"
-        :scroll-left="scrollLeft"
-        :indexing="indexing"
+        :row-height="rowHeight"
+        :bottom-line="bottomLine"
+        :striple="striple"
         :row-style-func="rowStyleFunc"
         :cell-style-func="cellStyleFunc"
         :render-columns="renderColumns"
-        :bottom-line="bottomLine"
-        :striple="striple"
-        :row-height="rowHeight"
-        :last-row="lastRow"
-        :data-list="list"
+        :scroll-left="scrollLeft"
         :body-has-vertical-scrollbar="bodyHasVerticalScrollbar"
+
+        @update:columns="columns = $event"
+        :indexing="indexing"
+        :last-row="lastRow"
       >
         <a-table-column-index v-if="!!indexing"/>
         <slot></slot>
@@ -27,21 +28,23 @@
       <a-table-body
         ref="tableBody"
         :fit-width="fitWidth"
-        :render-columns="renderColumns"
-        :data-list="list"
-        :border-color="borderColor"
+        :data-list="dataList"
         :border-size="borderSize"
-        :padding="padding"
         :border-style="borderStyle"
-        :body-height="bodyHeight"
+        :padding="padding"
         :row-height="rowHeight"
-        :scroll-left.sync="scrollLeft"
         :bottom-line="bottomLine"
         :striple="striple"
         :row-style-func="rowStyleFunc"
         :cell-style-func="cellStyleFunc"
+        :render-columns="renderColumns"
+        :scroll-left.sync="scrollLeft"
         :body-has-vertical-scrollbar.sync="bodyHasVerticalScrollbar"
-        :multi-editable="multiEditable"/>
+
+        :body-height="bodyHeight"
+        :multi-editable="multiEditable"
+        :border-color="borderColor"
+      />
     </div>
   </div>
 </template>
@@ -65,7 +68,7 @@
         default: false,
         desc: '表格宽度是否自适应，当列宽不够需要自动拉伸以填充容器宽度的时候，该选项建议为true',
       },
-      list: {
+      dataList: {
         type: Array,
         default: () => [],
         desc: '列表数据',
@@ -92,13 +95,6 @@
         type: String,
         default: '40px',
         desc: '每一行的高度',
-      },
-      tableHeight: {
-        desc: '表格高度，与rowNum不可以同时使用，指定tableHeight之后，body的高度会自动计算，内容超长body会出现纵向滚动条',
-      },
-      rowNum: {
-        type: Number,
-        desc: 'body高度，与tableHeight不可以同时使用，指定rowNum之后，body的高度我rowNum*rowHeight'
       },
       bottomLine: {
         type: Boolean,
@@ -127,6 +123,15 @@
         type: Boolean,
         default: false
       },
+
+      rowNum: {
+        type: Number,
+        desc: 'body高度，与tableHeight不可以同时使用，指定rowNum之后，body的高度我rowNum*rowHeight'
+      },
+      tableHeight: {
+        desc: '表格高度，与rowNum不可以同时使用，指定tableHeight之后，body的高度会自动计算，内容超长body会出现纵向滚动条',
+      },
+
     },
     data() {
       return {

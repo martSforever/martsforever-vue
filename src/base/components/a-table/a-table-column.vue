@@ -3,6 +3,8 @@
 </template>
 
 <script>
+  import {oneOf} from "../../script/utils";
+
   export default {
     name: "a-table-column",
     props: {
@@ -29,6 +31,12 @@
       order: {
         default: 0,
         desc: '列排序'
+      },
+      fix: {
+        type: String,
+        validator(val) {
+          return oneOf(val, ['left', 'right'])
+        },
       },
     },
     watch: {

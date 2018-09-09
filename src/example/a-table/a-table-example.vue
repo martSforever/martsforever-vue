@@ -76,7 +76,7 @@
         ref="table"
         :fit-width="fitWidth"
         :border-size="borderSize"
-        :list="dataList"
+        :data-list="dataList"
         row-height="40px"
         padding="6px"
         :bottom-line="true"
@@ -86,7 +86,7 @@
         :indexing="indexing"
         :last-row="{dispatchDate:'wowowowowowowowowowo'}"
         :multi-editable="multiEditable"
-        :row-num="7">
+        :row-num="5">
 
         <!--自己手动添加的索引列-->
         <a-table-column-index/>
@@ -126,7 +126,8 @@
 
 
         <!--以下为多级表头列-->
-        <a-table-column title="简单文本" field="dispatchDate" order="21"/>
+        <a-table-column title="简单文本" field="dispatchDate" order="21" fix="left"/>
+
         <a-table-column order="15" field="date" title="日期" :width.sync="columnWidth">
           <template slot-scope="{column}" slot="title">
             slot-scope's content -->> {{title}}--{{column.title}}
