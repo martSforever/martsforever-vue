@@ -5,9 +5,7 @@
       <a-table-column-index v-if="!!indexing"/>
       <slot></slot>
     </a-table-column-handler>
-
     <div class="a-table-content">
-
       <a-table-fixed
         ref="center"
         :fit-width="fitWidth"
@@ -33,47 +31,6 @@
         :border-color="borderColor"
       />
 
-      <!--<a-table-head
-        ref="tableHead"
-        :fit-width="fitWidth"
-        :data-list="dataList"
-        :border-size="borderSize"
-        :border-style="borderStyle"
-        :padding="padding"
-        :row-height="rowHeight"
-        :bottom-line="bottomLine"
-        :striple="striple"
-        :row-style-func="rowStyleFunc"
-        :cell-style-func="cellStyleFunc"
-        :render-columns="renderColumns"
-        :scroll-left="scrollLeft"
-        :body-has-vertical-scrollbar="bodyHasVerticalScrollbar"
-
-        @update:columns="columns = $event"
-        :indexing="indexing"
-        :last-row="lastRow"
-        :head-columns="headColumns"
-      />
-      <a-table-body
-        ref="tableBody"
-        :fit-width="fitWidth"
-        :data-list="dataList"
-        :border-size="borderSize"
-        :border-style="borderStyle"
-        :padding="padding"
-        :row-height="rowHeight"
-        :bottom-line="bottomLine"
-        :striple="striple"
-        :row-style-func="rowStyleFunc"
-        :cell-style-func="cellStyleFunc"
-        :render-columns="renderColumns"
-        :scroll-left.sync="scrollLeft"
-        :body-has-vertical-scrollbar.sync="bodyHasVerticalScrollbar"
-
-        :body-height="bodyHeight"
-        :multi-editable="multiEditable"
-        :border-color="borderColor"
-      />-->
     </div>
   </div>
 </template>
