@@ -9,7 +9,8 @@
            style="table-layout: fixed;word-break: break-all">
       <a-table-row
         v-for="(row,rowIndex) in dataList"
-        :key="rowIndex"
+        :key="'row'+uuid()"
+        :uuid="'row'+uuid()"
         :row="row"
         :row-index="rowIndex"
         :row-style-func="rowStyleFunc"
@@ -34,6 +35,7 @@
   import RenderingScopeSlot from "../rendering-scope-slot";
   import RenderingRenderFunc from "../rendering-render-func";
   import ATableRow from "./a-table-row";
+  import {uuid} from "../../script/utils";
 
   export default {
     name: "a-table-body",
@@ -169,6 +171,7 @@
       setTimeout(() => this._updateHasScrollBar(), 300)
     },
     methods: {
+      uuid,
       _handleScroll(e) {
         this.currentScrollLeft = e.target.scrollLeft
         this.currentScrollTop = e.target.scrollTop
