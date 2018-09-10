@@ -168,12 +168,13 @@
   .a-table-fixed {
     &.a-table-fixed-true {
       overflow-y: hidden;
+      overflow-x: hidden;
       .a-table-head, .a-table-body {
         background-color: white;
       }
       .a-table-body {
         overflow-y: hidden;
-        overflow-x: hidden;
+        overflow-x: auto;
       }
     }
   }

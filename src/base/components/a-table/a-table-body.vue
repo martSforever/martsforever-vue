@@ -112,10 +112,17 @@
       bodyStyles() {
         console.log('reset bodyStyles')
         let ret = {}
-        if (!!this.bodyHeight) {
-          ret.height = (!!this.hasHorizontalScrollbar ? this.bodyHeight - 17 : this.bodyHeight) + 'px'
+        !!this.bodyWidth && (ret.width = this.bodyWidth + 'px')
+
+        if (this.fixedPosition === 'center') {
+          ret.height = !!this.bodyHeight ? `${this.bodyHeight}px` : '100%'
         } else {
-          ret.height = !!this.hasHorizontalScrollbar ? 'calc(100% -17px)' : '100%'
+          ret.overflowX = 'hidden'
+          if (!!this.bodyHeight) {
+            ret.height = (!!this.hasHorizontalScrollbar ? this.bodyHeight - 17 : this.bodyHeight) + 'px'
+          } else {
+            ret.height = !!this.hasHorizontalScrollbar ? 'calc(100% -17px)' : '100%'
+          }
         }
         return ret
       },
@@ -156,6 +163,7 @@
         currentScrollTop: this.scrollTop,
 
         hasHorizontalScrollbar: false,
+        bodyWidth: null,
       }
     },
     mounted() {
@@ -179,11 +187,13 @@
         this.currentBodyHasVerticalScrollbar = tableHeight > bodyHeight
       },
       _hasHorizontalScrollbar() {
-        let bodyWidth = this.$refs.tableBody.offsetWidth
-        let tableWidth = this.$refs.table.offsetWidth
-        if (this.hasHorizontalScrollbar === tableWidth > bodyWidth) return
-        console.log(this.hasHorizontalScrollbar, tableWidth, bodyWidth)
-        this.hasHorizontalScrollbar = tableWidth > bodyWidth
+        setTimeout(() => {
+          this.bodyWidth = this.$refs.tableBody.parentNode.parentNode.offsetWidth
+          let tableWidth = this.$refs.table.offsetWidth
+          if (this.hasHorizontalScrollbar === tableWidth > this.bodyWidth) return
+          // console.log(this.hasHorizontalScrollbar, tableWidth, this.bodyWidth)
+          this.hasHorizontalScrollbar = tableWidth > this.bodyWidth
+        }, 300)
       },
     },
   }
@@ -191,9 +201,7 @@
 
 <style lang="scss">
   .a-table-body {
-    max-width: 100%;
     display: inline-block;
-    overflow-x: auto;
     overflow-y: auto;
     .a-table-body-tr {
       &.a-table-body-tr-striple:nth-child(even) {

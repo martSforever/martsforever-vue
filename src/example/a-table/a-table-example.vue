@@ -121,7 +121,7 @@
         <!--单选列-->
         <a-table-column-check ref="singleSelect"/>
         <!--文本输入列-->
-        <a-table-column-input :order="17" field="dispatchDate"/>
+        <a-table-column-input :order="17" field="dispatchDate" fixed="left"/>
         <a-table-column-input :order="17" field="dispatchAddress"/>
 
 
