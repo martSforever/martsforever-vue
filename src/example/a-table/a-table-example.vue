@@ -140,7 +140,7 @@
             </div>
           </template>
         </a-table-column>
-        <!--<a-table-column order="10" field="age" :title="title">
+        <a-table-column order="10" field="age" :title="title">
           <a-table-column field="name" title="姓名" width="120px"></a-table-column>
           <a-table-column field="address" title="配送地址">
             <a-table-column order="10" field="province" title="省"></a-table-column>
@@ -148,7 +148,7 @@
             <a-table-column order="15" field="district" title="县"></a-table-column>
           </a-table-column>
         </a-table-column>
-        <a-table-column :order="firstOrder" field="dispatchInfo" title="发货信息">
+        <!--<a-table-column :order="firstOrder" field="dispatchInfo" title="发货信息">
           <a-table-column field="dispatchDate" title="发货时间"
                           :col-render-func="cellRenderFunc"
                           width="200px"></a-table-column>
