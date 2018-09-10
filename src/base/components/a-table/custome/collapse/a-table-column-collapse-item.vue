@@ -42,8 +42,8 @@
       },
       open() {
         if (!!this.currentValue) return
-        this.centerInstance = this._getInstance('center')
-        this.leftInstance = this._getInstance('left')
+        this.centerCollapse = this._getInstance('center')
+        this.leftCollapse = this._getInstance('left')
 
         this.currentValue = true
         this.$emit('open', this)
@@ -52,13 +52,13 @@
         if (!this.currentValue) return
         this.show = false
 
-        this.centerInstance.$on('close-transition-end', () => {
-          this.table.tableRow.center[this.rowIndex].$refs.tr.parentNode.removeChild(this.centerInstance.$el)
-          this.centerInstance.$destroy()
-          if (!!this.leftInstance) {
-            this.leftInstance.$on('close-transition-end', () => {
-              this.table.tableRow.left[this.rowIndex].$refs.tr.parentNode.removeChild(this.leftInstance.$el)
-              this.leftInstance.$destroy()
+        this.centerCollapse.instance.$on('close-transition-end', () => {
+          this.centerCollapse.parentNode.removeChild(this.centerCollapse.instance.$el)
+          this.centerCollapse.instance.$destroy()
+          if (!!this.leftCollapse) {
+            this.leftCollapse.instance.$on('close-transition-end', () => {
+              this.leftCollapse.parentNode.removeChild(this.leftCollapse.instance.$el)
+              this.leftCollapse.instance.$destroy()
               this.currentValue = false
               this.$emit('close', this)
             })
@@ -97,13 +97,18 @@
           })
           const instance = vueComponent.$mount()
           insertAfter(instance.$el, this.table.tableRow[fixedPosition][this.rowIndex].$refs.tr)
-          return instance
+          return {
+            instance,
+            parentNode: this.table.tableRow[fixedPosition][this.rowIndex].$refs.tr.parentNode
+          }
         }
         return null
       },
     },
-    destroyed() {
+    beforeDestroy() {
       this.close()
+    },
+    destroyed() {
       this.$emit('destroyed', this)
     },
     mounted() {

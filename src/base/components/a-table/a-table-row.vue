@@ -108,7 +108,7 @@
       this.table = findComponentUpward(this, 'a-table')
       this.table.addTableRow(this.fixedPosition, this)
     },
-    destroyed() {
+    beforeDestroy() {
       this.table.removeTableRow(this.fixedPosition, this)
     },
   }

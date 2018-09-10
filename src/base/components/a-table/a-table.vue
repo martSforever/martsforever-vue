@@ -214,6 +214,7 @@
         findComponentsDownward(this, 'a-table-row').forEach(item => item.disableEdit())
       },
 
+      /*列初始化时，调用该函数，将列component实例添加到数组中，方便对主体table以及固定table的列做统一处理，比如在双击固定table或者主体table的时候，都触发双方的列的dblclick事件*/
       addTableRow(fixedPosition, rowComponent) {
         if (!this.tableRow[fixedPosition]) this.tableRow[fixedPosition] = {}
         this.tableRow[fixedPosition][rowComponent.rowIndex] = rowComponent
@@ -225,9 +226,10 @@
         }
         rowComponent.$el.addEventListener('dblclick', rowComponent.$el.handleDblClick)
       },
+      /*列销毁的时候，调用该甘薯，将列component对象移除出数组*/
       removeTableRow(fixedPosition, rowComponent) {
         rowComponent.$el.removeEventListener('dblclick', rowComponent.$el.handleDblClick)
-        this.tableRow[fixedPosition].remove(rowComponent)
+        delete this.tableRow[fixedPosition][rowComponent.rowIndex]
       },
     },
   }
