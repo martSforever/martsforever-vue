@@ -18,7 +18,6 @@
         </tr>
 
         <tr v-if="!!lastRow && !!headColumns && headColumns.length>0"
-            :key="lastRowIndex"
             class="a-table-body-tr"
             :style="!!rowStyleFunc?rowStyleFunc(lastRow,lastRowIndex):null"
             :class="{'a-table-body-tr-bottom-line':!!bottomLine,'a-table-body-tr-striple':!!striple}">

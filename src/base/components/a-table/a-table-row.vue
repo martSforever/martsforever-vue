@@ -1,7 +1,6 @@
 <template>
   <tr
     class="a-table-body-tr"
-    @dblclick="_handleDblClick"
     :style="!!rowStyleFunc?rowStyleFunc(row,rowIndex):null"
     :class="{'a-table-body-tr-bottom-line':!!bottomLine,'a-table-body-tr-striple':!!striple}">
     <td v-for="(col,colIndex) in renderColumns"
@@ -85,7 +84,7 @@
         let cellStyles = !!this.cellStyleFunc ? this.cellStyleFunc(col, colIndex, row, rowIndex) : {}
         return Object.assign({}, tdStyles, cellStyles)
       },
-      _handleDblClick() {
+      handleDblClick() {
         if (!this.multiEditable) this.table.cancelEdit()
         !this.currentEditable && (this.currentEditable = true)
       },
@@ -106,6 +105,10 @@
     },
     mounted() {
       this.table = findComponentUpward(this, 'a-table')
+      this.table.addTableRow(this.fixedPosition, this)
+    },
+    destroyed() {
+      this.table.removeTableRow(this.fixedPosition, this)
     },
   }
 </script>

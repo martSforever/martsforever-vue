@@ -158,6 +158,11 @@
         bodyHasVerticalScrollbar: false,
         scrollLeft: 0,
         scrollTop: 0,
+
+        tableRow: {
+          'left': [],
+          'center': [],
+        }
       }
     },
     watch: {},
@@ -207,6 +212,21 @@
       /*通知所有节点取消编辑的数据*/
       cancelEdit() {
         findComponentsDownward(this, 'a-table-row').forEach(item => item.disableEdit())
+      },
+
+      addTableRow(fixedPosition, rowComponent) {
+        this.tableRow[fixedPosition].push(rowComponent)
+        rowComponent.$el.handleDblClick = (e) => {
+          this.tableRow['center'][rowComponent.rowIndex].handleDblClick()
+          if (this.tableRow['left'].length > 0) {
+            this.tableRow['left'][rowComponent.rowIndex].handleDblClick()
+          }
+        }
+        rowComponent.$el.addEventListener('dblclick', rowComponent.$el.handleDblClick)
+      },
+      removeTableRow(fixedPosition, rowComponent) {
+        rowComponent.$el.removeEventListener('dblclick', rowComponent.$el.handleDblClick)
+        this.tableRow[fixedPosition].remove(rowComponent)
       },
     },
   }
