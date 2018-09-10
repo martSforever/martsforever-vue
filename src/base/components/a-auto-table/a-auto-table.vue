@@ -4,10 +4,10 @@
       <div class="search-wrapper">
         <a-select color="info"
                   placeholder="搜索类型"
-                  :options="searchTypes"
+                  :options="searchColumns"
                   options-show-key="title"
                   options-value-key="field"
-                  v-model="selectType"
+                  :value="!!searchColumn?searchColumn.field:null"
         />
         <a-input icon="fa-search" color="info" placeholder="搜索关键字..."/>
       </div>
@@ -46,19 +46,20 @@
       return {
         dataList: [],
         renderColumns: null,
-        selectType: null,
+        searchColumn: null,
       }
     },
+    watch: {},
     computed: {
-      searchTypes() {
+      searchColumns() {
         if (!this.renderColumns) return []
         else {
-          console.log(this.renderColumns)
-          return this.renderColumns.reduce((ret, column) => {
-            let {title, field} = column
-            ret.push({title, field})
+          let ret = this.renderColumns.reduce((ret, column) => {
+            !!column.searchable && ret.push(column)
             return ret
           }, [])
+          !!ret.length > 0 && (this.searchColumn = ret[0])
+          return ret
         }
       },
     },

@@ -21,6 +21,7 @@
       @focus="handleFocus"
       @blur="handleBlur"
       @click="handleClick"
+      @keyup.enter="handleKeyUpEnter"
     />
     <div :class="appendClass">
       <slot name="append"></slot>
@@ -148,6 +149,9 @@
       },
       handleClick(e) {
         this.$emit('click', e)
+      },
+      handleKeyUpEnter() {
+        this.$emit('auto-table-search-confirm', this.currentValue)
       },
     },
     watch: {

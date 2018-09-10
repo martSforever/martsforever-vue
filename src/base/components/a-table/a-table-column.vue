@@ -41,6 +41,14 @@
           return oneOf(val, ['left', 'right', 'center'])
         },
       },
+      searchComponent: {
+        type: String,
+        default: 'a-input'
+      },
+      searchable: {
+        type: Boolean,
+        default: true
+      },
     },
     watch: {
       order(newval, oldval) {
@@ -107,6 +115,10 @@
           },
           get fixed() {
             return _this.fixed
+          },
+
+          get searchable() {
+            return _this.searchable
           },
           /*更新宽度*/
           updateWidth(width) {

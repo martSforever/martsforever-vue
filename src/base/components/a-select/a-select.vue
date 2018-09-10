@@ -66,10 +66,14 @@
         this.$emit('update:show', val)
       },
 
-      value(val) {
-        if (this.currentValue !== val) {
-          this.currentValue = val
-        }
+      value: {
+        handler(val) {
+          if (this.currentValue !== val) {
+            this.currentValue = val
+            this._updateLabels()
+          }
+        },
+        immediate: true
       },
       currentValue(val) {
         this.$emit('input', val)
@@ -94,21 +98,23 @@
         this.currentShow = true
       },
       _updateLabels() {
-        let ret = []
-        let optionComponents = findComponentsDownward(this, 'a-select-option')
-        for (let i = 0; i < optionComponents.length; i++) {
-          let optionComponent = optionComponents[i];
-          if (!!this.multiple) {
-            if (this.currentValue.indexOf(optionComponent.value) > -1) {
-              ret.push(optionComponent.label)
-            }
-          } else {
-            if (this.currentValue === optionComponent.value) {
-              ret.push(optionComponent.label)
+        this.$nextTick(() => {
+          let ret = []
+          let optionComponents = findComponentsDownward(this, 'a-select-option')
+          for (let i = 0; i < optionComponents.length; i++) {
+            let optionComponent = optionComponents[i];
+            if (!!this.multiple) {
+              if (this.currentValue.indexOf(optionComponent.value) > -1) {
+                ret.push(optionComponent.label)
+              }
+            } else {
+              if (this.currentValue === optionComponent.value) {
+                ret.push(optionComponent.label)
+              }
             }
           }
-        }
-        this.labels = ret.join(',')
+          this.labels = ret.join(',')
+        })
       },
     },
     mounted() {
