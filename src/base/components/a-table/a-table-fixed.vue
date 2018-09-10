@@ -1,5 +1,5 @@
 <template>
-  <div class="a-table-fixed" :style="styles" :class="classes">
+  <div class="a-table-fixed" :style="styles" :class="classes" v-if="fixedExist">
     <a-table-head
       ref="tableHead"
       :fit-width="fitWidth"
@@ -172,6 +172,15 @@
           'a-table-fixed-true': this.fixedPosition !== 'center',
           'a-table-fixed-box-shadow': !!this.centerTableScrollLeft
         }
+      },
+
+      fixedExist() {
+        if (!this.renderColumns || this.renderColumns.length < 1) return true
+        for (let i = 0; i < this.renderColumns.length; i++) {
+          const renderColumn = this.renderColumns[i];
+          if (renderColumn.fixed === this.fixedPosition) return true
+        }
+        return false
       },
     },
     methods: {
