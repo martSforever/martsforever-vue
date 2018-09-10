@@ -1,7 +1,8 @@
 <template>
   <div class="a-select">
     <div ref="input" class="a-select-input-wrapper">
-      <a-input @click.native="_handleClickInput" :value="labels" :icon="icon"/>
+      <a-input @click.native="_handleClickInput" :value="labels" :icon="icon" :color="color"
+               :placeholder="placeholder"/>
     </div>
     <a-popover
       reference-name="input"
@@ -52,6 +53,8 @@
       optionsValueKey: {
         type: String,
       },
+      color: {},
+      placeholder: {},
     },
     watch: {
       show(val) {
@@ -118,6 +121,7 @@
 
 <style lang="scss">
   .a-select {
+    display: inline-block;
     .a-select-input-wrapper {
       display: inline-block;
     }

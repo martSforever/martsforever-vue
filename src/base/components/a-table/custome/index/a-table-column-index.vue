@@ -1,5 +1,5 @@
 <template>
-  <a-table-column :order="order" title="#" :width="width" ref="tableColumn">
+  <a-table-column :order="order" title="#" :width="width" ref="tableColumn" field="_index">
     <template slot-scope="{}" slot="title">
       <div class="a-table-standard-cell">#</div>
     </template>

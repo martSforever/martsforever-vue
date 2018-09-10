@@ -10,10 +10,12 @@
     props: {
       field: {
         type: String,
+        required: true,
         desc: '标志字段',
       },
       title: {
         type: String,
+        required: true,
         desc: '列标题，当没有titleRenderFunc以及没有$scopedSlots.title时，显示该文本',
       },
       titleRenderFunc: {

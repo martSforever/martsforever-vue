@@ -185,6 +185,7 @@
 
         this.columns.forEach((child) => iterate(child))
         this.$nextTick(() => this._initializedTableHeight())
+        this.$emit('update:renderColumns', ret)
         return ret
       },
       tableStyles() {
@@ -241,7 +242,6 @@
     width: 100%;
     background-color: white;
     padding-left: 20px;
-    padding-top: 20px;
     .a-table-content {
       width: calc(100% - 40px);
       position: relative;
