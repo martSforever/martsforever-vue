@@ -124,7 +124,7 @@
       removePx,
       _getTdStyles(col, colIndex, row, rowIndex) {
         let cellStyles = !!this.cellStyleFunc ? this.cellStyleFunc(col, colIndex, row, rowIndex) : {}
-        return Object.assign({}, {border: `${this.borderStyle} ${this.borderSize}px ${this.borderColor}`}, cellStyles)
+        return Object.assign({}, {border: `${this.borderStyle} ${this.borderSize}px ${!!this.isMultiLevelHeader ? this.borderColor : 'transparent'}`}, cellStyles)
       },
     },
   }

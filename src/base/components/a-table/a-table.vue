@@ -1,6 +1,5 @@
 <template>
   <div class="a-table" :style="tableStyles" ref="table">
-    <div>scrollLeft:{{scrollLeft}}-----------scrollTop:{{scrollTop}}</div>
     <a-table-column-handler :columns.sync="columns" :head-columns.sync="headColumns">
       <a-table-column-index v-if="!!indexing"/>
       <slot></slot>
