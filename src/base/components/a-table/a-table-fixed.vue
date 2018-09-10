@@ -134,6 +134,7 @@
           return oneOf(val, ['left', 'right', 'center'])
         },
       },
+      centerTableScrollLeft: {},
     },
     watch: {
       renderColumns: {
@@ -168,7 +169,8 @@
       },
       classes() {
         return {
-          'a-table-fixed-true': this.fixedPosition !== 'center'
+          'a-table-fixed-true': this.fixedPosition !== 'center',
+          'a-table-fixed-box-shadow': !!this.centerTableScrollLeft
         }
       },
     },
@@ -198,6 +200,9 @@
         overflow-y: hidden;
         overflow-x: auto;
       }
+    }
+    &.a-table-fixed-box-shadow {
+      box-shadow: 0 0 10px rgba(0, 0, 0, .12);
     }
   }
 </style>

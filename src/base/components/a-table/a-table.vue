@@ -54,6 +54,7 @@
         :body-height="bodyHeight"
         :multi-editable="multiEditable"
         :border-color="borderColor"
+        :center-table-scroll-left="scrollLeft"
       />
     </div>
   </div>
