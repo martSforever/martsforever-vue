@@ -1,10 +1,11 @@
 <template>
-  <div class="a-tag">
+  <div class="a-tag" :style="styles">
     <div class="a-tag-item" v-for="(str,index) in strings" :key="index" @click="_handleClickItem(str,index)">
       <span class="str">{{str}}</span>
       <a-icon icon="fa-times-circle" @click="_removeItem(index)"/>
     </div>
-    <input class="a-tag-input a-tag-item" @keyup.enter="_handleEnter" v-model="text" :style="inputStyles"/>
+    <input class="a-tag-input a-tag-item" @keyup.enter="_handleEnter" v-model="text" :style="inputStyles"
+           v-if="!!inputable"/>
   </div>
 </template>
 
@@ -18,7 +19,12 @@
       strings: {
         type: Array,
         default: () => []
-      }
+      },
+      width: {},
+      inputable: {
+        type: Boolean,
+        default: true
+      },
     },
     data() {
       return {
@@ -27,7 +33,7 @@
     },
     methods: {
       _handleClickItem(item, index) {
-
+        this.$emit('click-item', {item, index})
       },
       _removeItem(index) {
         this.strings.splice(index, 1)
@@ -45,6 +51,11 @@
           width: `${2 + this.text.length}em`
         }
       },
+      styles() {
+        let ret = {}
+        !!this.width && (ret.width = this.width)
+        return ret
+      },
     },
     mounted() {
       console.log(this.strings)
@@ -55,7 +66,6 @@
 <style lang="scss">
   .a-tag {
     padding: 0px 3px;
-    width: 200px;
     display: inline-block;
     background-color: $text-color-main;
     border-radius: $border-fillet;

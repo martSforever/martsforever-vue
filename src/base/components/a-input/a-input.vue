@@ -151,7 +151,7 @@
         this.$emit('click', e)
       },
       handleKeyUpEnter() {
-        this.$emit('auto-table-search-confirm', this.currentValue)
+        this.$emit('auto-table-search-confirm', {operator: '=', value: this.currentValue})
       },
     },
     watch: {

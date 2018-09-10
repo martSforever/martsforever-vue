@@ -120,6 +120,9 @@
           get searchable() {
             return _this.searchable
           },
+          get searchComponent() {
+            return _this.searchComponent
+          },
           /*更新宽度*/
           updateWidth(width) {
             _this.currentWidth = width
