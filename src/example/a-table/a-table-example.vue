@@ -117,7 +117,7 @@
         </a-table-column-collapse>
 
         <!--多选列-->
-        <a-table-column-check ref="multiSelect" :multi-select="true"/>
+        <a-table-column-check ref="multiSelect" :multi-select="true" fixed="left"/>
         <!--单选列-->
         <a-table-column-check ref="singleSelect"/>
         <!--文本输入列-->

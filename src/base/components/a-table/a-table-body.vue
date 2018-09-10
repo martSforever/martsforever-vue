@@ -110,7 +110,6 @@
         }
       },
       bodyStyles() {
-        console.log('reset bodyStyles')
         let ret = {}
         !!this.bodyWidth && (ret.width = this.bodyWidth + 'px')
 

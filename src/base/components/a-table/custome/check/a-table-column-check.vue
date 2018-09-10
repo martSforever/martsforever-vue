@@ -1,5 +1,5 @@
 <template>
-  <a-table-column width="36px" ref="tableColumn" :order="order">
+  <a-table-column width="36px" ref="tableColumn" :order="order" :fixed="fixed">
     <template slot-scope="{}" slot="title">
       <div class="a-table-standard-cell">
         <a-radio inactive-icon="fa-dot-circle-o"
@@ -11,14 +11,14 @@
     <template slot-scope="{row,rowIndex}">
       <div class="a-table-standard-cell">
         <a-table-column-check-item :row="row"
-                                    @join="_handleJoin"
-                                    @quit="_handleQuit"
-                                    @mounted="_handleMounted"
-                                    :multi-select="multiSelect"
-                                    :active-icon="activeIcon"
-                                    :inactive-icon="inactiveIcon"
-                                    @destroyed="(val)=>allItems.remove(val)"
-                                    @change-all="changeAll"/>
+                                   @join="_handleJoin"
+                                   @quit="_handleQuit"
+                                   @mounted="_handleMounted"
+                                   :multi-select="multiSelect"
+                                   :active-icon="activeIcon"
+                                   :inactive-icon="inactiveIcon"
+                                   @destroyed="(val)=>allItems.remove(val)"
+                                   @change-all="changeAll"/>
       </div>
     </template>
   </a-table-column>
@@ -28,6 +28,7 @@
 
   import ATableColumnCheckItem from "./a-table-column-check-item";
   import ATableColumn from "../../a-table-column";
+
   export default {
     name: "a-table-column-check",
     components: {ATableColumn, ATableColumnCheckItem},
@@ -39,6 +40,7 @@
         type: Boolean,
         default: false
       },
+      fixed: {},
     },
     data() {
       return {

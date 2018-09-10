@@ -53,7 +53,7 @@
 <script>
   import ATableHead from "./a-table-head";
   import ATableBody from "./a-table-body";
-  import {oneOf} from "../../script/utils";
+  import {oneOf, removePx} from "../../script/utils";
 
   export default {
     name: "a-table-fixed",
@@ -135,30 +135,52 @@
         },
       },
     },
+    watch: {
+      renderColumns: {
+        handler(val) {
+          this.updateFixedWidth()
+        },
+        deep: true,
+        immediate: true,
+      }
+    },
     data() {
       return {
         bodyHasVerticalScrollbar: false,
+        fixedWidth: null,
       }
     },
     computed: {
       styles() {
+        let ret = {};
         if (this.fixedPosition === 'center')
-          return {}
-        else
-          return {
+          ret = {}
+        else {
+          ret = {
             position: 'absolute',
             top: 0,
             left: 0,
-            // height: 'calc(100% - 20px)',
             height: '100%',
-            width: '200px',
           }
-
+          !!this.fixedWidth && (ret.width = this.fixedWidth)
+        }
+        return ret
       },
       classes() {
         return {
           'a-table-fixed-true': this.fixedPosition !== 'center'
         }
+      },
+    },
+    methods: {
+      updateFixedWidth() {
+        let width = this.renderColumns.reduce((ret, column) => {
+          if (column.fixed === this.fixedPosition) {
+            ret += removePx(column.width) + this.borderSize
+          }
+          return ret
+        }, 0)
+        this.fixedWidth = (width + this.borderSize) + 'px'
       },
     },
   }
