@@ -166,7 +166,7 @@
       }
     },
     mounted() {
-      setTimeout(() => this._updateHasScrollBar(), 100)
+      setTimeout(() => this._updateHasScrollBar(), 300)
     },
     methods: {
       _handleScroll(e) {
@@ -181,9 +181,11 @@
         }
       },
       _updateHasScrollBar() {
-        let bodyHeight = this.$refs.tableBody.offsetHeight
-        let tableHeight = this.$refs.table.offsetHeight
-        this.currentBodyHasVerticalScrollbar = tableHeight > bodyHeight
+        if (this.fixedPosition === 'center') {
+          let bodyHeight = this.$refs.tableBody.offsetHeight
+          let tableHeight = this.$refs.table.offsetHeight
+          this.currentBodyHasVerticalScrollbar = tableHeight > bodyHeight
+        }
       },
       _hasHorizontalScrollbar() {
         setTimeout(() => {

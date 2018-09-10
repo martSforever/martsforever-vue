@@ -220,7 +220,8 @@
         this.tableRow[fixedPosition][rowComponent.rowIndex] = rowComponent
         rowComponent.$el.handleDblClick = (e) => {
           this.tableRow['center'][rowComponent.rowIndex].handleDblClick()
-          if (!!this.tableRow['left']) {
+          if (!!this.tableRow['left'] && Object.keys(this.tableRow['left']).length > 0) {
+            console.log(this.tableRow)
             this.tableRow['left'][rowComponent.rowIndex].handleDblClick()
           }
         }
