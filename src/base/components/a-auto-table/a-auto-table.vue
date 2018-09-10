@@ -9,7 +9,12 @@
                   options-value-key="field"
                   :value="!!searchColumn?searchColumn.field:null"
         />
-        <a-input icon="fa-search" color="info" placeholder="搜索关键字..."/>
+        <div v-if="!!searchColumn"
+             :is="searchColumn.searchComponent"
+             v-model="searchValue"
+             placeholder="搜索关键字..."
+             @auto-table-search-confirm="handleSearchConfirm">
+        </div>
       </div>
       &nbsp;
       <div class="button-wrapper">
@@ -17,6 +22,10 @@
           <a-button type="primary">新增</a-button>
           <a-button type="error">删除</a-button>
         </a-button-group>
+      </div>
+      &nbsp;
+      <div class="filter-options">
+        <a-tag :strings="filterStrings" @click-item="handleRemoveFilterOption" :inputable="false"/>
       </div>
     </div>
     <a-table
@@ -35,18 +44,22 @@
   import AButton from "../a-button/a-button";
   import AInput from "../a-input/a-input";
   import ASelect from "../a-select/a-select";
+  import ATag from "../a-tag/a-tag";
 
   export default {
     name: "a-auto-table",
-    components: {ASelect, AInput, AButton, AButtonGroup, ATableColumn, ATable},
+    components: {ATag, ASelect, AInput, AButton, AButtonGroup, ATableColumn, ATable},
     props: {
       rowNum: {},
     },
     data() {
       return {
-        dataList: [],
-        renderColumns: null,
-        searchColumn: null,
+        dataList: [],                 //列数据
+        renderColumns: null,          //渲染的列信息
+        searchColumn: null,           //搜索列信息
+        searchValue: 'hello',            //当前搜索输入框值
+
+        filterOptions: [],            //筛选信息
       }
     },
     watch: {},
@@ -61,6 +74,25 @@
           !!ret.length > 0 && (this.searchColumn = ret[0])
           return ret
         }
+      },
+      filterStrings() {
+        return this.filterOptions.reduce((ret, option) => {
+          ret.push(`${option.title}${option.operator}${option.value}`)
+          return ret
+        }, [])
+      },
+    },
+    methods: {
+      handleSearchConfirm(val) {
+        let filterOption = Object.assign({}, val, {
+          field: this.searchColumn.field,
+          title: this.searchColumn.title
+        })
+        this.filterOptions.push(filterOption)
+        this.searchValue = null
+      },
+      handleRemoveFilterOption(val) {
+        this.filterOptions.splice(val.index, 1)
       },
     },
   }
