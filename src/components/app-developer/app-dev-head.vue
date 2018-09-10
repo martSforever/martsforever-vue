@@ -49,6 +49,7 @@
           {name: 'scopedslot', url: 'scopedslot'},
           {name: 'table', url: 'table'},
           {name: 'table-edit', url: 'table-edit'},
+          {name: 'auto-table', url: 'auto-table'},
           {name: 'parent-child', url: 'parent-child'},
         ],
         name: 'a-icon'

@@ -148,6 +148,11 @@ export const router = {
       name: 'collapse'
     },
     {
+      path: '/auto-table',
+      component: resolve => require(['src/example/a-auto-table/a-auto-table-example.vue'], resolve),
+      name: 'auto-table'
+    },
+    {
       path: '/table-edit',
       component: resolve => require(['src/example/a-table/a-table-example-edit.vue'], resolve),
       name: 'table-edit'
