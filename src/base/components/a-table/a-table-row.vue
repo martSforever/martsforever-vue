@@ -1,5 +1,6 @@
 <template>
   <tr
+    ref="tr"
     class="a-table-body-tr"
     :style="!!rowStyleFunc?rowStyleFunc(row,rowIndex):null"
     :class="{'a-table-body-tr-bottom-line':!!bottomLine,'a-table-body-tr-striple':!!striple}">

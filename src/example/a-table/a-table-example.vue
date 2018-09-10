@@ -95,7 +95,7 @@
         <a-table-column-collapse>
           <template slot-scope="{row,rowIndex}">
             <div style="background-color: cadetblue;color: white;height: 72px">
-              {{row.dispatchDate}}--{{rowIndex}}---xxxxxxxxxx
+              {{row.dispatchDate}}--{{rowIndex}}---xxxxxxxxxx---{{row.dispatchDate}}1111---------{{row.dispatchDate}}2222-----------{{row.dispatchDate}}3333----------{{row.dispatchDate}}4444
             </div>
           </template>
         </a-table-column-collapse>

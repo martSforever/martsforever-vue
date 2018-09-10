@@ -160,8 +160,8 @@
         scrollTop: 0,
 
         tableRow: {
-          'left': [],
-          'center': [],
+          'left': null,
+          'center': null,
         }
       }
     },
@@ -215,10 +215,11 @@
       },
 
       addTableRow(fixedPosition, rowComponent) {
-        this.tableRow[fixedPosition].push(rowComponent)
+        if (!this.tableRow[fixedPosition]) this.tableRow[fixedPosition] = {}
+        this.tableRow[fixedPosition][rowComponent.rowIndex] = rowComponent
         rowComponent.$el.handleDblClick = (e) => {
           this.tableRow['center'][rowComponent.rowIndex].handleDblClick()
-          if (this.tableRow['left'].length > 0) {
+          if (!!this.tableRow['left']) {
             this.tableRow['left'][rowComponent.rowIndex].handleDblClick()
           }
         }
