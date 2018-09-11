@@ -219,19 +219,21 @@
       addTableRow(fixedPosition, rowComponent) {
         if (!this.tableRow[fixedPosition]) this.tableRow[fixedPosition] = {}
         this.tableRow[fixedPosition][rowComponent.rowIndex] = rowComponent
-        rowComponent.$el.handleDblClick = (e) => {
-          this.tableRow['center'][rowComponent.rowIndex].handleDblClick()
-          if (!!this.tableRow['left'] && Object.keys(this.tableRow['left']).length > 0) {
-            console.log(this.tableRow)
-            this.tableRow['left'][rowComponent.rowIndex].handleDblClick()
-          }
-        }
+        rowComponent.$el.handleDblClick = (e) => this.trigDblClick(rowComponent.rowIndex)
         rowComponent.$el.addEventListener('dblclick', rowComponent.$el.handleDblClick)
       },
       /*列销毁的时候，调用该甘薯，将列component对象移除出数组*/
       removeTableRow(fixedPosition, rowComponent) {
         rowComponent.$el.removeEventListener('dblclick', rowComponent.$el.handleDblClick)
         delete this.tableRow[fixedPosition][rowComponent.rowIndex]
+      },
+
+      trigDblClick(rowIndex) {
+        this.tableRow['center'][rowIndex].handleDblClick()
+        if (!!this.tableRow['left'] && Object.keys(this.tableRow['left']).length > 0) {
+          console.log(this.tableRow)
+          this.tableRow['left'][rowIndex].handleDblClick()
+        }
       },
     },
   }

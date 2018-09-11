@@ -19,8 +19,11 @@
       &nbsp;
       <div class="button-wrapper">
         <a-button-group>
-          <a-button type="primary">新增</a-button>
+          <a-button type="primary" @click="handleAdd">新增</a-button>
           <a-button type="error">删除</a-button>
+        </a-button-group>
+        <a-button-group>
+          <a-button type="primary" @click="handleCancelEdit">取消编辑</a-button>
         </a-button-group>
       </div>
       &nbsp;
@@ -29,6 +32,7 @@
       </div>
     </div>
     <a-table
+      ref="table"
       @update:renderColumns="val=> renderColumns = val"
       :data-list="dataList"
       :row-num="rowNum">
@@ -93,6 +97,12 @@
       },
       handleRemoveFilterOption(val) {
         this.filterOptions.splice(val.index, 1)
+      },
+      handleAdd() {
+        this.dataList.unshift({})
+      },
+      handleCancelEdit() {
+        this.$refs.table.cancelEdit()
       },
     },
   }
